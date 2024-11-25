@@ -1,6 +1,6 @@
 import FontRow from "../Elements/FontRow";
 
-function Table({sortedFonts, action}) {
+function Table({sortedFonts, action, primaryFont}) {
 
 
   // Render
@@ -10,14 +10,14 @@ function Table({sortedFonts, action}) {
 
   const tableContainer = document.createElement('div');
   tableContainer.className = "flex flex-col";
-  
-  sortedFonts.map((font, index) => {
-    tableContainer.appendChild(FontRow({font: font, action: action}));
-  });
 
   const render = () => {
     table.innerHTML = '';
     table.appendChild(tableContainer);
+  
+    sortedFonts.map((font, index) => {
+      tableContainer.appendChild(FontRow({font: font, action: action, parent: "table"}));
+    });
   }
 
   render();

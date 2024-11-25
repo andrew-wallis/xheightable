@@ -2,14 +2,13 @@ import getFontFamily from "../../utils/getFontFamily";
 import getFontSize from "../../utils/getFontSize";
 import loadFont from "../../utils/loadFont";
 
-function FontRow({font, action}) {
-
-  let activeFont = false;
+function FontRow({font, action, parent}) {
 
   // Render
 
   const fontRow = document.createElement('a');
-  fontRow.className = `block px-4 py-3 flex items-baseline gap-4 border-b border-b-black/10 ${activeFont ? "bg-black/5" : "" } active:bg-black/5 hover:bg-black/5 `;
+  fontRow.id = `${parent}-${font.name.replace(/\W/g,'_')}`;
+  fontRow.className = `${parent}-fontrow block px-4 py-3 flex items-baseline gap-4 border-b border-b-black/10 active:bg-black/5 hover:bg-black/5 `;
   fontRow.href = '#';
 
   fontRow.addEventListener('click', function(e) {

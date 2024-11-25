@@ -22,7 +22,7 @@ function App({data}) {
 
   // Screens
 
-  const screens = ["Pair", "Test", "Get Fonts"];
+  const screens = ["Table", "Pair", "Test", "Get Fonts"];
   let activeScreen = "Table";
 
 
@@ -32,6 +32,15 @@ function App({data}) {
     primaryFont = font;
     changePairings(font);
     changeScreen("Pair");
+    render();
+    const rows = document.querySelectorAll('.table-fontrow');
+    rows.forEach(row => {
+      if(row.id === `table-${font.name.replace(/\W/g,'_')}`) {
+        row.classList.add("active-row");
+      } else {
+        row.classList.remove("active-row");
+      }
+    });
   }
 
   const changeSecondary = (font) => {
@@ -48,9 +57,12 @@ function App({data}) {
     changeScreen("Table");
   }
 
-  const changeScreen = (screen) => {
-    activeScreen = screen;
-    setDisplayConditions();
+  const changeScreen = (newScreen) => {
+    activeScreen = newScreen;
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(screen => {
+      screen.style.display = screen.id === newScreen.toLowerCase() ? "block" : "none";
+    });
   }
 
 
@@ -63,39 +75,39 @@ function App({data}) {
   main.className = "px-6 pb-6";
 
   const tableContainer = document.createElement('div');
-  main.appendChild(tableContainer);
-
-  const table = Table({
-    sortedFonts: sortedFonts, 
-    action: changePrimary,
-    primaryFont: primaryFont
-  });
-  tableContainer.appendChild(table);
-
+  tableContainer.id = "table";
+  tableContainer.className = "screen";
+  tableContainer.style.display = activeScreen === "Table" ? "block" : "none";
+  
   const pairContainer = document.createElement('div');
-  main.appendChild(pairContainer);
-
-  const pair = Pair({
-    primaryFont: primaryFont,
-    secondaryFont: secondaryFont,
-    changeSecondary: changeSecondary,
-    pairings: pairings,
-    back: back
-  });
-  pairContainer.appendChild(pair);
-
-  const setDisplayConditions = () => {
-    tableContainer.style.display = activeScreen === "Table" ? "block" : "none";
-    pairContainer.style.display = activeScreen === "Pair" ? "block" : "none";
-    //testContainer.style.display = activeScreen === "Test" ? "block" : "none";
-    //getFontsContainer.style.display = activeScreen === "Pair" ? "block" : "none";
-  }
-
-  setDisplayConditions();
+  pairContainer.id = "pair";
+  pairContainer.className = "screen";
+  pairContainer.style.display = activeScreen === "Pair" ? "block" : "none";
 
   const render = () => {
     app.innerHTML = '';
+
     app.appendChild(main);
+    
+    tableContainer.innerHTML = '';
+    const table = Table({
+      sortedFonts: sortedFonts, 
+      action: changePrimary,
+      primaryFont: primaryFont
+    });
+    tableContainer.appendChild(table);
+    main.appendChild(tableContainer);
+
+    pairContainer.innerHTML = '';
+    const pair = Pair({
+      primaryFont: primaryFont,
+      secondaryFont: secondaryFont,
+      changeSecondary: changeSecondary,
+      pairings: pairings,
+      back: back
+    });
+    pairContainer.appendChild(pair);
+    main.appendChild(pairContainer);
   }
 
   render();
