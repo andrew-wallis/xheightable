@@ -1,15 +1,17 @@
 import getFontFamily from "../../utils/getFontFamily";
 import getFontSize from "../../utils/getFontSize";
 import loadFont from "../../utils/loadFont";
+import Icons from "./Icons";
+import Icon from "./Icons";
 
-function FontRow({font, action, parent}) {
+function FontRow({font, action}) {
 
   // Render
 
   const fontRow = document.createElement('a');
-  fontRow.id = `${parent}-${font.name.replace(/\W/g,'_')}`;
-  fontRow.className = `${parent}-fontrow block px-4 py-3 flex items-baseline gap-4 border-b border-b-black/10 active:bg-black/5 hover:bg-black/5 `;
+  fontRow.className = `fontrow block px-4 py-3 flex items-baseline gap-4 border-b border-b-black/10 active:bg-black/5 hover:bg-black/5 `;
   fontRow.href = '#';
+  fontRow.dataset.name = font.name;
 
   fontRow.addEventListener('click', function(e) {
     e.preventDefault();
@@ -18,6 +20,7 @@ function FontRow({font, action, parent}) {
 
   const iconDiv = document.createElement('div');
   iconDiv.className = "shrink-0 icon w-6 h-6 flex items-center justify-center";
+  iconDiv.appendChild(Icons(font.distribution));
 
   const labelDiv = document.createElement('div');
   labelDiv.className = "grow";

@@ -1,26 +1,21 @@
-import FontRow from "../Elements/FontRow";
+function Table() {
 
-function Table({sortedFonts, action, primaryFont}) {
-
-
-  // Render
-
-  const table = document.createElement('div');
-  table.className = "flex flex-col pt-6 gap-4";
-
-  const tableContainer = document.createElement('div');
-  tableContainer.className = "flex flex-col";
-
-  const render = () => {
-    table.innerHTML = '';
-    table.appendChild(tableContainer);
   
-    sortedFonts.map((font, index) => {
-      tableContainer.appendChild(FontRow({font: font, action: action, parent: "table"}));
-    });
-  }
+  const table = document.createElement('div');
+  table.id = "table";
+  table.className = "screen";
+  table.style.display = "block";
 
-  render();
+  /* html */
+  table.innerHTML = `
+    <div class="flex flex-col pt-6 gap-4">
+      <div data-element="table-input">
+        <!-- Input -->
+      </div>
+      <div id="table-container" className="flex flex-col">
+      </div>
+    </div>
+  `;
 
   return table;
 

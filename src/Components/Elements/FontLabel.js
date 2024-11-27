@@ -5,8 +5,8 @@ function FontLabel({font}) {
 
   /* html */
   fontLabel.innerHTML = `
-    <div className="grow whitespace-nowrap overflow-hidden text-sm leading-4">${font.label}</div>
-    <div className="shrink-0 text-xs leading-4">${font.xHeightPct}</div>
+    <div class="grow whitespace-nowrap overflow-hidden text-sm leading-4">${font.label}</div>
+    <div class="shrink-0 text-xs leading-4">${font.xHeightPct}</div>
   `;
 
   return fontLabel;
