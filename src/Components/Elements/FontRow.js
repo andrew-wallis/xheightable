@@ -9,6 +9,7 @@ function FontRow({font, action}) {
   fontRow.className = `fontrow block px-4 py-3 flex items-baseline gap-4 border-b border-b-black/10 active:bg-black/5 hover:bg-black/5 `;
   fontRow.href = '#';
   fontRow.dataset.name = font.name;
+  fontRow.dataset.label = font.label;
   fontRow.dataset.element = "fontrow";
 
   fontRow.addEventListener('click', function(e) {

@@ -40,10 +40,11 @@ function App({store}) {
 
   store.setData({primaryFont: {}});
   store.setData({secondaryFont: {}});
-  store.setData({sortedFonts: []});
-  store.setData({pairings: []});
   store.setData({search: ""});
+  store.setData({sort: "A-Z"});
   store.setData({activeScreen: "Table"});
+  store.setData({tableScroll: 0});
+  store.setData({pairScroll: 0});
   
 
   // Screens
@@ -56,7 +57,7 @@ function App({store}) {
 
   const backLinks = app.querySelectorAll('[data-element="back-link"]');
   backLinks.forEach((backLink) => {
-    backLink.appendChild(BackLink({action: changeScreen}))
+    backLink.appendChild(BackLink({action: changeScreen}));
   });
 
   const navButtons = ["Pair", "Test", "Get Fonts"];
@@ -71,28 +72,21 @@ function App({store}) {
     const activeScreen = store.getData().activeScreen;
 
     if(currentScreen !== activeScreen) {
-
+  
       const screens = app.querySelectorAll('[data-element="screen"]');
       screens.forEach(screen => {
         screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "block" : "none";
       });
 
-      let font;
+      let pos = 0;
 
       if(activeScreen === "Table") {
-        font = app.querySelector(`[data-name="${store.getData().primaryFont.label}"]`);
+        pos = store.getData().tableScroll;
       } else if(activeScreen === "Pair") {
-        font = app.querySelector(`[data-name="${store.getData().secondaryFont.label}"]`);
+        pos = store.getData().pairScroll;
       }
 
-      if(font) {
-        const viewPort = (window.innerHeight);
-        const offset = font.offsetTop;
-        let pos = offset > (viewPort / 2) ? offset - (viewPort / 2) : 0;
-        window.scrollTo(0, pos);
-      } else {
-        window.scrollTo(0, 0);
-      }
+      window.scrollTo(0, pos);
 
       const navBar = app.querySelector('[data-element="navbar-container"]');
       if(activeScreen === "Table") {
@@ -110,6 +104,16 @@ function App({store}) {
   updateScreen();
 
   function changeScreen(screen) {
+
+    const currentScreen = main.getAttribute('data-active');
+    const scroll = window.scrollY;
+
+    if(currentScreen === "Table") {
+      store.setData({tableScroll: scroll})
+    } else if (currentScreen === "Pair") {
+      store.setData({pairScroll: scroll});
+    }
+
     store.setData({activeScreen: screen});
   }
 

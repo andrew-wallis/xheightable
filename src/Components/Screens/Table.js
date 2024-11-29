@@ -2,6 +2,7 @@ import FontRow from "../Elements/FontRow";
 import SearchInput from "../Elements/SearchInput";
 import highlightRows from "../../utils/highlightRows";
 import sortAndFilterFonts from "../../utils/sortAndFilterFonts";
+import TableSelect from "../Elements/TableSelect";
 
 function Table(store) {
 
@@ -15,8 +16,8 @@ function Table(store) {
   /* html */
   table.innerHTML = `
     <div class="flex flex-col pt-6 gap-4">
-      <div class="flex gap-4" data-element="table-search">
-        <!-- Table Search -->
+      <div class="flex gap-4" data-element="table-header">
+        <!-- Table Header -->
       </div>
       <div data-element="table-list" className="flex flex-col">
         <!-- Table List -->
@@ -24,28 +25,45 @@ function Table(store) {
     </div>
   `;
 
-  const tableSearch = table.querySelector('[data-element="table-search"');
-  tableSearch.appendChild(SearchInput(store));
+  const tableHeader = table.querySelector('[data-element="table-header"');
+  tableHeader.appendChild(SearchInput(store));
+  tableHeader.appendChild(TableSelect(store));
 
   function updateTableList() {
     
     const fonts = store.getData().fonts;
     const search = store.getData().search;
+    const sort = store.getData().sort;
 
-    const sortedFonts = store.getData().sortedFonts;
-    let updateSortedFonts = sortAndFilterFonts(fonts, search);
+    const tableList = table.querySelector('[data-element="table-list"]');
 
-    if(JSON.stringify(sortedFonts) !== JSON.stringify(updateSortedFonts)) {
+    if(tableList.dataset.sort !== sort || tableList.dataset.search !== search) {
+      
+      const sortedFonts = sortAndFilterFonts(fonts, search, sort);
 
-      const tableList = table.querySelector('[data-element="table-list"]');
       tableList.innerHTML = '';
 
-      updateSortedFonts.map((font, index) => {
+      sortedFonts.map((font, index) => {
         tableList.appendChild(FontRow({font: font, action: changePrimary}));
       });
 
-      store.setData({sortedFonts: updateSortedFonts});
+      tableList.dataset.sort = sort;
     }
+
+/*     if(tableList.dataset.search !== search) {
+
+      const rows = tableList.querySelectorAll('[data-element="fontrow"]');
+
+      rows.forEach((row) => {
+        if(search && !row.dataset.label.toLowerCase().includes(search)) {
+          row.style.display = "none";
+        } else {
+          row.style.display = "";
+        }
+      });
+
+      tableList.dataset.search = search;
+    } */
   }
 
   store.subscribe(updateTableList);
@@ -54,6 +72,8 @@ function Table(store) {
   function changePrimary(font) {
     const tableList = table.querySelector('[data-element="table-list"]');
     highlightRows(tableList, font);
+    store.setData({tableScroll: window.scrollY});
+    store.setData({pairScroll: window.scrollY});
     store.setData({primaryFont: font});
     store.setData({activeScreen: "Pair"});
   }

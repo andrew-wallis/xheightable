@@ -103,19 +103,18 @@ function Pair(store) {
     const pairList = pair.querySelector('[data-element="pair-list"]');
     const primary = store.getData().primaryFont;
     const fonts = store.getData().fonts;
-    const pairings = store.getData().pairings;
 
-    const updatePairings = findPairings(primary, fonts);
-
-    if(Object.keys(primary).length > 0 && JSON.stringify(pairings) !== JSON.stringify(updatePairings)) {
+    if(Object.keys(primary).length > 0 && pairList.dataset.primary !== primary.name) {
 
       pairList.innerHTML = '';
-      updatePairings.map((font, index) => {
+      const pairings = findPairings(primary, fonts);
+      pairings.map((font, index) => {
         pairList.appendChild(FontRow({font: font, action: changeSecondary}));
       });
 
-      store.setData({pairings: updatePairings});
-      changeSecondary(updatePairings[0]);
+      pairList.dataset.primary = primary.name;
+      changeSecondary(pairings[0]);
+
     }
   }
 
