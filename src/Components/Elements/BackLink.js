@@ -7,7 +7,7 @@ function BackLink({action}) {
 
   backLink.addEventListener('click', function(e) {
     e.preventDefault();
-    action();
+    action("Table");
   })
 
   return backLink;

@@ -1,6 +1,7 @@
 function Icons(name) {
 
   const icon = document.createElement('div');
+  icon.dataset.icon = name;
   icon.innerHTML = getSvg();
   return icon;
 
@@ -29,7 +30,7 @@ function Icons(name) {
       case "Cross":
         return `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 1L7 7M7 7L13 13M7 7L1 1M7 7L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>`
 
-      case "GetFonts":
+      case "Get Fonts":
         return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clipPath="url#clip0_1487_1212">  <path d="M21 7.5H23L19.5 4L16 7.5H18C18 11.1923 16 13.5 16 13.5C16 13.5 21 11.1923 21 7.5Z" fill="currentColor"/>  <path d="M5.32478 19H2.99524L8.22961 4.45459H10.7651L15.9995 19H13.67L9.55774 7.09663H9.4441L5.32478 19ZM5.71541 13.304H13.2722V15.1506H5.71541V13.304Z" fill="currentColor"/></g></svg>`
 
       case "Filter":

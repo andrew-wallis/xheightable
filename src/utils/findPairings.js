@@ -63,14 +63,11 @@ function findPairings(font, fonts) {
     if(subclassA !== subclassB) {
       return subclassB - subclassA;
     } else {
-      return b.Rating - a.Rating;
+      return b.Score - a.Score;
     }
   });
 
-  return {
-    pairingList: fontList,
-    pairingDefault: fontList[0]
-  };
+  return fontList;
 
 }
 

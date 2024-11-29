@@ -1,7 +1,7 @@
-import { data } from 'autoprefixer';
 import App from './App.js';
 import './style.css'
 import { fetchAppData } from './utils/fetchAppData.js'
+import createStore from './store.js';
 
 async function renderApp() {
 
@@ -9,10 +9,11 @@ async function renderApp() {
     'fonts'
   ]
 
-  const appData = await fetchAppData(csvFiles);
+  const initialData = await fetchAppData(csvFiles);
+  const store = createStore(initialData);
 
   const root = document.querySelector('#app');
-  root.appendChild(App({data: appData}));
+  root.appendChild(App({data: initialData, store: store}));
 
 }
 
