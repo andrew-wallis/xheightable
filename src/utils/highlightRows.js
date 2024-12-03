@@ -1,5 +1,5 @@
 function highlightRows(container, font) {
-  const rows = container.querySelectorAll('[data-element="fontrow"]');
+  const rows = container.querySelectorAll('[data-element="font-link"]');
   rows.forEach(row => {
     if(row.dataset.name === font.name) {
       row.classList.add("active-row");

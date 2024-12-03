@@ -1,11 +1,12 @@
-import Icon from "./Icons";
+import Icon from "../../Elements/Icons";
+import styles from "./NavBar.module.css";
 
-function IconButton({icon, action}) {
+function NavBarButton({icon, action}) {
 
   const iconButton = document.createElement('a');
 
   iconButton.href = "#";
-  iconButton.className = "block h-12 text-center text-xs leading-none flex flex-col gap-1 items-center justify-center";
+  iconButton.className = `${styles.button} secondary-text`;
   iconButton.appendChild(Icon(icon));
   
   const iconButtonLabel = document.createElement('div');
@@ -21,4 +22,4 @@ function IconButton({icon, action}) {
 
 }
 
-export default IconButton;
+export default NavBarButton;

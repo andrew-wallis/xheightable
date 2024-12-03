@@ -1,6 +1,15 @@
+// postcss.config.js
+import autoprefixer from 'autoprefixer';
+import postcssPresetEnv from 'postcss-preset-env';
+
 export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
-}
+  plugins: [
+    autoprefixer,
+    postcssPresetEnv({
+      stage: 1,
+      features: {
+        'nesting-rules': true
+      }
+    })
+  ]
+};

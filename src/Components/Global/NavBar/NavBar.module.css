@@ -1,0 +1,45 @@
+:root {
+  --position: sticky;
+  --right: auto;
+  --grid-cols: 3;
+  --padding: var(--spacing-xs);
+}
+
+.container {
+  position: var(--position);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 3rem;
+  bottom: calc(3rem + env(safe-area-inset-bottom));
+  margin: 2rem;
+}
+
+.navbar {
+  max-width: var(--container);
+  margin: var(--margin-center);
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: 1rem;
+  border-radius: var(--radius-full);
+  background-color: var(--bg-white);
+  padding: var(--padding);
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xs);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --position: absolute;
+    --right: 0;
+    --grid-cols: 1;
+    --padding: var(--spacing-md);
+  }
+}

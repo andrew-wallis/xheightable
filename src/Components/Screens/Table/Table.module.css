@@ -1,0 +1,36 @@
+.table {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--spacing-lg);
+  gap: var(--spacing-md);
+}
+
+.header {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchContainer {
+  position: relative;
+  flex-grow: 1;
+}
+
+.search,
+.select {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--form-border);
+  line-height: 1.25;
+  padding: var(--form-element-padding) var(--spacing-xs);
+}
+
+.selectContainer {
+  width: 33%;
+  flex-shrink: 0;
+}
+

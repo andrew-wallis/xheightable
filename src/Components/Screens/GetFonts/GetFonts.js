@@ -1,36 +1,37 @@
-import FontData from "../Elements/FontData";
-import FontDataAdobe from "../Elements/FontDataAdobe";
-import FontDataGoogle from "../Elements/FontDataGoogle";
-import Icons from "../Elements/Icons";
-import setFontStyles from "../../utils/setFontStyles";
+
+import setFontStyles from "../../../utils/setFontStyles";
+import Icons from "../../Elements/Icons";
+import GetFont from "./GetFont";
+import GetFontAdobe from "./GetFontAdobe";
+import GetFontGoogle from "./GetFontGoogle";
+import styles from "./GetFonts.module.css";
 
 function GetFonts(store) {
 
   const getFonts = document.createElement('div');
   getFonts.id = "getfonts";
+  getFonts.className = "screen";
   getFonts.style.display = "none";
   getFonts.dataset.screen = "Get Fonts";
   getFonts.dataset.element = "screen";
   
   /* html */
   getFonts.innerHTML = `
-    <div class="relative" >
-      <div data-element="back-link" class="pb-8 sticky top-12 left-0 z-10 h-6 bg-white">
-        <!-- Back Link -->
-      </div>
-      <div data-element="font-data" class="mt-8">
-        <!-- Get Fonts -->
-      </div>
+    <div data-element="back-link" class=${styles.header}>
+      <!-- Back Link -->
+    </div>
+    <div data-element="get-fonts" class=${styles.getFonts}>
+      <!-- Get Fonts -->
     </div>
   `;
 
-  const primaryFontData = FontData();
-  const secondaryFontData = FontData();
+  const primaryFontData = GetFont();
+  const secondaryFontData = GetFont();
 
   const divider = document.createElement('hr');
-  divider.className = "hr my-8 border-t-gray-100";
+  divider.className = styles.divider;
 
-  const fontDataContainer = getFonts.querySelector('[data-element="font-data"]');
+  const fontDataContainer = getFonts.querySelector('[data-element="get-fonts"]');
 
   fontDataContainer.appendChild(primaryFontData);
   fontDataContainer.appendChild(divider);
@@ -72,9 +73,9 @@ function GetFonts(store) {
         details.innerHTML = '';
 
         if(font.distribution === "Google") {
-          details.appendChild(FontDataGoogle(font));
+          details.appendChild(GetFontAdobe(font));
         } else {
-          details.appendChild(FontDataAdobe(font));
+          details.appendChild(GetFontGoogle(font));
         }
 
         element.dataset.label = font.label;

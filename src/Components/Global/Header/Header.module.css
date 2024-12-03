@@ -1,0 +1,31 @@
+:root {
+  --header-position: sticky;
+}
+
+.header {
+  position: var(--header-position);
+  background-color: var(--bg-white);
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  max-width: var(--container);
+  margin: var(--margin-center);
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.sitename {
+  grid-column: span 2 / span 2;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --element-position: static;
+  }
+}

@@ -1,51 +1,53 @@
-import FontLabel from "../Elements/FontLabel";
-import FontRow from "../Elements/FontRow";
-import FontSample from "../Elements/FontSample";
-import findPairings from "../../utils/findPairings";
-import highlightRows from "../../utils/highlightRows";
-import setFontStyles from "../../utils/setFontStyles";
+import PairLabel from "./PairLabel";
+import PairSample from "./PairSample";
+import findPairings from "../../../utils/findPairings";
+import highlightRows from "../../../utils/highlightRows";
+import setFontStyles from "../../../utils/setFontStyles";
+import FontLink from "../../Elements/FontLink/FontLink";
+import styles from "./Pair.module.css";
 
 function Pair(store) {
 
   const pair = document.createElement('div');
   pair.id = "pair";
+  pair.className = "screen";
   pair.style.display = "none";
   pair.dataset.screen = "Pair";
   pair.dataset.element = "screen";
   
   /* html */
   pair.innerHTML = `
-    <div class="flex flex-col relative">
-      <div id="pair-header" class="flex flex-col gap-2 pb-8 sticky top-12 left-0 z-10 bg-white">
-        <div data-element="back-link" class="mb-2">
+    <div class=${styles.pair}>
+      <div data-element="pair-header" class=${styles.header}>
+        <div data-element="back-link" class="${styles.back}">
           <!-- Back Link -->
         </div>
-        <div data-element="pair-labels" class="flex gap-4 w-full">
+        <div data-element="pair-labels" class=${styles.labels}>
           <!-- Pair Labels -->
         </div>
-        <div class="flex items-center w-full">
-        <div class="flex items-baseline text-5xl w-full">
-          <div data-element="pair-samples" data-label="" class="flex items-baseline gap-4 w-full h-16">
-            <!-- Pair Samples -->
+        <div class=${styles.samplesOuter}>
+          <div class=${styles.samplesMid}>
+            <div data-element="pair-samples" data-label="" class=${styles.samplesInner}>
+              <!-- Pair Samples -->
+            </div>
           </div>
         </div>
       </div>
-      </div>
-      <div data-element="pair-list" class="flex flex-col">
+      <div data-element="pair-list" ${styles.list}>
         <!-- Pair List -->
       </div>
     </div>
   `;
   
-  const primaryLabel = FontLabel();
-  const secondaryLabel = FontLabel();
+  const primaryLabel = PairLabel();
+  const secondaryLabel = PairLabel();
 
   const pairLabels = pair.querySelector('[data-element="pair-labels"]');
   pairLabels.appendChild(primaryLabel);
   pairLabels.appendChild(secondaryLabel);
 
-  const primarySample = FontSample();
-  const secondarySample = FontSample(true);
+  const primarySample = PairSample();
+  const secondarySample = PairSample(true);
 
   const pairSamples = pair.querySelector('[data-element="pair-samples"]');
   pairSamples.appendChild(primarySample);
@@ -109,7 +111,7 @@ function Pair(store) {
       pairList.innerHTML = '';
       const pairings = findPairings(primary, fonts);
       pairings.map((font, index) => {
-        pairList.appendChild(FontRow({font: font, action: changeSecondary}));
+        pairList.appendChild(FontLink({font: font, action: changeSecondary}));
       });
 
       pairList.dataset.primary = primary.name;

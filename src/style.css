@@ -1,13 +1,32 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './preflight.css';
 
-.nav-position {
-  bottom: 3rem;
-  bottom: calc(3rem + env(safe-area-inset-bottom));
+:root {
+  --spacing-2xs: 0.25rem;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --form-element-padding: 0.625rem;
+  --container: 72rem;
+  --margin-center: 0 auto;
+  --radius-md: var(--spacing-xs);
+  --radius-full: 9999px;
+  --text: #000;
+  --bg-white: #fff;
+  --form-border: rgba(0, 0, 0, 0.075);
+  --table-link: rgba(0, 0, 0, 0.075);
+  --table-border: rgba(0, 0, 0, 0.1);
+  --bg-well: rgba(0, 0, 0, 0.075);
 }
 
-.body-padding {
+html {
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  position: relative;
   padding-top:  0;
   padding-top:  env(safe-area-inset-top);
   padding-right:  0;
@@ -18,7 +37,58 @@
   padding-left:  env(safe-area-inset-left);
 }
 
-
 .active-row {
   background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Global */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--spacing-lg);
+  gap: var(--spacing-md);
+}
+
+
+/* Typography */
+
+.label {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.button-text {
+  font-size: 0.875rem;
+  line-height: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.secondary-text {
+  font-size: 0.875rem;
+  line-height: 1rem;
+}
+
+.small-text {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+/* Utilities */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

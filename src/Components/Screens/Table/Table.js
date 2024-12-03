@@ -1,32 +1,32 @@
-import FontRow from "../Elements/FontRow";
-import SearchInput from "../Elements/SearchInput";
-import highlightRows from "../../utils/highlightRows";
-import sortAndFilterFonts from "../../utils/sortAndFilterFonts";
-import TableSelect from "../Elements/TableSelect";
+import TableSearch from "./TableSearch";
+import TableSelect from "./TableSelect";
+import FontLink from "../../Elements/FontLink/FontLink";
+import highlightRows from "../../../utils/highlightRows";
+import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
+import styles from "./Table.module.css";
 
 function Table(store) {
 
   
   const table = document.createElement('div');
   table.id = "table";
-  table.style.display = "block";
+  table.className = "screen";
+  table.style.display = "flex";
   table.dataset.screen = "Table";
   table.dataset.element = "screen";
 
   /* html */
   table.innerHTML = `
-    <div class="flex flex-col pt-6 gap-4">
-      <div class="flex gap-4" data-element="table-header">
-        <!-- Table Header -->
-      </div>
-      <div data-element="table-list" className="flex flex-col">
-        <!-- Table List -->
-      </div>
+    <div class=${styles.header} data-element="table-header">
+      <!-- Table Header -->
+    </div>
+    <div class=${styles.list} data-element="table-list">
+      <!-- Table List -->
     </div>
   `;
 
   const tableHeader = table.querySelector('[data-element="table-header"');
-  tableHeader.appendChild(SearchInput(store));
+  tableHeader.appendChild(TableSearch(store));
   tableHeader.appendChild(TableSelect(store));
 
   function updateTableList() {
@@ -44,7 +44,7 @@ function Table(store) {
       tableList.innerHTML = '';
 
       sortedFonts.map((font, index) => {
-        tableList.appendChild(FontRow({font: font, action: changePrimary}));
+        tableList.appendChild(FontLink({font: font, action: changePrimary}));
       });
 
       tableList.dataset.sort = sort;
@@ -52,7 +52,7 @@ function Table(store) {
 
 /*     if(tableList.dataset.search !== search) {
 
-      const rows = tableList.querySelectorAll('[data-element="fontrow"]');
+      const rows = tableList.querySelectorAll('[data-element="font-link"]');
 
       rows.forEach((row) => {
         if(search && !row.dataset.label.toLowerCase().includes(search)) {
@@ -70,12 +70,12 @@ function Table(store) {
   updateTableList();
 
   function changePrimary(font) {
-    const tableList = table.querySelector('[data-element="table-list"]');
-    highlightRows(tableList, font);
     store.setData({tableScroll: window.scrollY});
     store.setData({pairScroll: window.scrollY});
     store.setData({primaryFont: font});
     store.setData({activeScreen: "Pair"});
+    const tableList = table.querySelector('[data-element="table-list"]');
+    highlightRows(tableList, font);
   }
 
   return table;

@@ -1,39 +1,14 @@
 import BackLink from "./Components/Elements/BackLink";
-import IconButton from "./Components/Elements/IconButton";
-import GetFonts from "./Components/Screens/GetFonts";
-import Pair from "./Components/Screens/Pair";
-import Table from "./Components/Screens/Table";
-import Test from "./Components/Screens/Test";
+import IconButton from "./Components/Global/NavBar/NavBarButton";
+import Header from "./Components/Global/Header/Header";
+import Main from "./Components/Global/Main/Main";
+import NavBar from "./Components/Global/NavBar/NavBar";
+import GetFonts from "./Components/Screens/GetFonts/GetFonts";
+import Pair from "./Components/Screens/Pair/Pair";
+import Table from "./Components/Screens/Table/Table";
+import Test from "./Components/Screens/Test/Test";
 
 function App({store}) {
-
-
-  // Template
-
-  const app = document.createElement('div');
-  app.className = "relative"
-
-  /* html */
-  app.innerHTML = `
-    <header class="sticky md:static z-[200] top-0 inset-x-0 bg-white">
-      <div class="max-w-6xl mx-auto grid grid-cols-4 gap-2 py-4 px-6">
-        <div></div>
-        <h1 class="col-span-2 text-center uppercase tracking-wider font-semibold text-xs leading-4">
-          xHeightable 4.1.1
-        </h1>
-        <div class="text-xs leading-4 font-medium tracking-wider uppercase justify-end flex gap-2 items-center">
-        </div>
-      </div>
-    </header>
-    <main data-element="main" class="px-6 pb-6">
-      <!-- main -->
-    </main>
-    <nav data-element="navbar-container" class="sticky md:absolute md:right-0 mx-8 nav-position" style="display: none">
-      <div data-element="navbar" class="max-w-lg mx-auto grid grid-cols-3 md:grid-cols-1 justify-between p-2 md:p-4 gap-4 rounded-full bg-white">
-        <!-- navbar -->
-      </div>
-    </nav>
-  `
 
 
   // Initial
@@ -47,9 +22,21 @@ function App({store}) {
   store.setData({pairScroll: 0});
   
 
-  // Screens
+  // Containers
 
-  const main = app.querySelector('[data-element="main"]');
+  const app = document.createElement('div');
+
+  const header =  Header();
+  const main = Main();
+  const navBar = NavBar();
+
+  app.appendChild(header);
+  app.appendChild(main);
+  app.appendChild(navBar)
+
+
+  // Screens
+  
   main.appendChild(Table(store));
   main.appendChild(Pair(store));
   main.appendChild(Test(store));
@@ -61,9 +48,9 @@ function App({store}) {
   });
 
   const navButtons = ["Pair", "Test", "Get Fonts"];
-  const navBar = app.querySelector('[data-element="navbar"]');
+  const nav = app.querySelector('[data-element="navbar"]');
   navButtons.map(button => {
-    navBar.appendChild(IconButton({icon: button, action: changeScreen}));
+    nav.appendChild(IconButton({icon: button, action: changeScreen}));
   });
 
   function updateScreen() {
@@ -75,7 +62,7 @@ function App({store}) {
   
       const screens = app.querySelectorAll('[data-element="screen"]');
       screens.forEach(screen => {
-        screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "block" : "none";
+        screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "flex" : "none";
       });
 
       let pos = 0;
@@ -88,7 +75,6 @@ function App({store}) {
 
       window.scrollTo(0, pos);
 
-      const navBar = app.querySelector('[data-element="navbar-container"]');
       if(activeScreen === "Table") {
         navBar.style.display = "none";
       } else {
