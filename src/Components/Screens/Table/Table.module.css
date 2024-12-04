@@ -1,7 +1,3 @@
-.controlsWrapper {
-  background-color: var(--background);
-}
-
 .controls {
   display: flex;
   gap: var(--space-s);

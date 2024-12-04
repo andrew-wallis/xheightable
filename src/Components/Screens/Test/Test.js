@@ -12,10 +12,17 @@ function Test(store) {
   
   /* html */
   test.innerHTML = `
-    <div>
-      <div data-element="back-link" class="pb-8 sticky top-12 left-0 z-10 h-6 bg-white">
-        <!-- Back Link -->
+    <header data-element="pair-header">
+      <div data-element="top-bar">
+        <!-- Table Topbar -->
       </div>
+      <div class="wrap insulate stack">
+        <div data-element="back-link">
+          <!-- Back Link -->
+        </div>
+      </div>
+    </header>
+    <main class="wrap">
       <h1 data-element="title" class=${styles.title}>Font Trends in 2024</h1>
       <p data-element="lede" class=${styles.lede}>2024 sees fonts as dynamic tools, shaping design trends and reflecting digital evolution.</p>
       <ul data-element="small" class=${styles.small}>
@@ -41,7 +48,7 @@ function Test(store) {
       <p data-element="paragraph" class=${styles.paragraph}>Fuelled by innovation and artistic expression, experimental typography transcends traditional constraints, blurring the lines between art and design. By embracing risk-taking and pushing the limits of typographic expression, designers breathe life into static content, transforming words into dynamic visual narratives that resonate with audiences on a deeper level. From interactive installations to multimedia presentations, experimental typography offers a glimpse into the boundless possibilities of creative expression in the digital age.</p>
       <p data-element="paragraph" class=${styles.paragraph}>As we embrace the spirit of experimentation, experimental typography serves as a catalyst for innovation, paving the way for new forms of visual storytelling and creative expression.</p>
       <p data-element="paragraph" class=${styles.paragraph}>In the dynamic landscape of design, fonts serve as the cornerstone of visual communication, shaping the way we perceive and interact with content. As we traverse the typography trends of 2024, from the elegant simplicity of minimalist fonts to the dynamic versatility of variable fonts and the daring experimentation of avant-garde typography, one thing remains clear: the power of typography to captivate, inspire, and evoke emotion knows no bounds. As we embark on this typographic journey, let us embrace the endless possibilities of creative expression, forging a path towards a more vibrant and visually engaging future.</p>
-    </div>
+    </main>
   `;
 
   function updateTestScreen() {

@@ -74,6 +74,7 @@ body {
 header {
   position: sticky;
   top: 0;
+  background-color: var(--background);
 }
 
 /* Layout Utilities */
@@ -89,6 +90,20 @@ header {
 .insulate {
   padding-top: var(--space-s);
   padding-bottom: var(--space-s);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack > * {
+  margin-block: 0;
+}
+
+.stack > * + * {
+  margin-block-start: var(--space-s);
 }
 
 .clickable {
@@ -121,7 +136,6 @@ td:not(:first-child):not(:nth-child(2)) {
   width: var(--space-5xl-6xl);
   text-align: right;
 }
-
 
 th {
   font-size: var(--step--1);

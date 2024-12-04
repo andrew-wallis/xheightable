@@ -17,9 +17,12 @@ function Pair(store) {
   
   /* html */
   pair.innerHTML = `
-    <div class=${styles.pair}>
-      <div data-element="pair-header" class=${styles.header}>
-        <div data-element="back-link" class="${styles.back}">
+    <header data-element="pair-header">
+      <div data-element="top-bar">
+        <!-- Table Topbar -->
+      </div>
+      <div class="wrap insulate stack">
+        <div data-element="back-link">
           <!-- Back Link -->
         </div>
         <div data-element="pair-labels" class=${styles.labels}>
@@ -33,10 +36,22 @@ function Pair(store) {
           </div>
         </div>
       </div>
-      <div data-element="pair-list" ${styles.list}>
-        <!-- Pair List -->
-      </div>
-    </div>
+    </header>
+    <main class="wrap">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Font</th>
+            <th class="additional-data">Cap Height</th>
+            <th>xHeight</th>
+          </tr>
+        </thead>
+        <tbody data-element="pair-list">
+          <!-- Pair List -->
+        </tbody>
+      </table>
+    </main>
   `;
   
   const primaryLabel = PairLabel();
@@ -80,7 +95,7 @@ function Pair(store) {
         text.innerText = font.label;
   
         const xHeight = label.querySelector('[data-element="label-xHeight"]');
-        xHeight.innerText = font.xHeightPct;
+        xHeight.innerText = `x ${Math.round(font.xHeightPct * 100)}%`;
   
         const capLine = sample.querySelector('[data-element="cap-line"]');
         capLine.style.verticalAlign = `${capHeight}rem`;

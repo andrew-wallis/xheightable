@@ -7,6 +7,7 @@ import GetFonts from "./Components/Screens/GetFonts/GetFonts";
 import Pair from "./Components/Screens/Pair/Pair";
 import Table from "./Components/Screens/Table/Table";
 import Test from "./Components/Screens/Test/Test";
+import TopBar from "./Components/Global/TopBar/TopBar";
 
 function App({store}) {
 
@@ -24,17 +25,21 @@ function App({store}) {
 
   // Containers
 
-  const header =  Header();
-  const main = Main();
   const app = document.createElement('div');
 
-  const navBar = NavBar();
-  app.appendChild(navBar);
 
   app.appendChild(Table(store));
   app.appendChild(Pair(store));
   app.appendChild(Test(store));
   app.appendChild(GetFonts(store));
+
+  const navBar = NavBar();
+  app.appendChild(navBar);
+
+  const topBars = app.querySelectorAll('[data-element="top-bar"]');
+  topBars.forEach((topBar) => {
+    topBar.appendChild(TopBar());
+  });
 
   const backLinks = app.querySelectorAll('[data-element="back-link"]');
   backLinks.forEach((backLink) => {

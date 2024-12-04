@@ -17,12 +17,19 @@ function GetFonts(store) {
   
   /* html */
   getFonts.innerHTML = `
-    <div data-element="back-link" class=${styles.header}>
-      <!-- Back Link -->
-    </div>
-    <div data-element="get-fonts" class=${styles.getFonts}>
+    <header data-element="pair-header">
+      <div data-element="top-bar">
+        <!-- Table Topbar -->
+      </div>
+      <div class="wrap insulate stack">
+        <div data-element="back-link">
+          <!-- Back Link -->
+        </div>
+      </div>
+    </header>
+    <main class="wrap" data-element="get-fonts">
       <!-- Get Fonts -->
-    </div>
+    </main>
   `;
 
   const primaryFontData = GetFont();

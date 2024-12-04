@@ -4,7 +4,6 @@ import FontLink from "../../Elements/FontLink/FontLink";
 import highlightRows from "../../../utils/highlightRows";
 import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
 import styles from "./Table.module.css";
-import TopBar from "../../Global/TopBar/TopBar";
 
 function Table(store) {
 
@@ -18,11 +17,11 @@ function Table(store) {
 
   /* html */
   table.innerHTML = `
-    <header class=${styles.header} data-element="table-header">
-      <div data-element="table-topbar">
+    <header data-element="table-header">
+      <div data-element="top-bar">
         <!-- Table Topbar -->
       </div>
-      <div class="${styles.controlsWrapper}">
+      <div>
         <div class="${styles.controls} insulate wrap" data-element="table-controls">
           <!-- Table Controls -->
         </div>
@@ -44,9 +43,6 @@ function Table(store) {
       </table>
     </main>
   `;
-
-  const topBar = table.querySelector('[data-element="table-topbar"]');
-  topBar.appendChild(TopBar());
 
   const tableControls = table.querySelector('[data-element="table-controls"]');
   tableControls.appendChild(TableSearch(store));
