@@ -1,6 +1,6 @@
 import BackLink from "./Components/Elements/BackLink";
 import IconButton from "./Components/Global/NavBar/NavBarButton";
-import Header from "./Components/Global/Header/Header";
+import Header from "./Components/Global/TopBar/TopBar";
 import Main from "./Components/Global/Main/Main";
 import NavBar from "./Components/Global/NavBar/NavBar";
 import GetFonts from "./Components/Screens/GetFonts/GetFonts";
@@ -24,23 +24,17 @@ function App({store}) {
 
   // Containers
 
-  const app = document.createElement('div');
-
   const header =  Header();
   const main = Main();
+  const app = document.createElement('div');
+
   const navBar = NavBar();
+  app.appendChild(navBar);
 
-  app.appendChild(header);
-  app.appendChild(main);
-  app.appendChild(navBar)
-
-
-  // Screens
-  
-  main.appendChild(Table(store));
-  main.appendChild(Pair(store));
-  main.appendChild(Test(store));
-  main.appendChild(GetFonts(store));
+  app.appendChild(Table(store));
+  app.appendChild(Pair(store));
+  app.appendChild(Test(store));
+  app.appendChild(GetFonts(store));
 
   const backLinks = app.querySelectorAll('[data-element="back-link"]');
   backLinks.forEach((backLink) => {
@@ -55,14 +49,14 @@ function App({store}) {
 
   function updateScreen() {
 
-    const currentScreen = main.getAttribute('data-active');
+    const currentScreen = app.getAttribute('data-active');
     const activeScreen = store.getData().activeScreen;
 
     if(currentScreen !== activeScreen) {
   
       const screens = app.querySelectorAll('[data-element="screen"]');
       screens.forEach(screen => {
-        screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "flex" : "none";
+        screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "block" : "none";
       });
 
       let pos = 0;
@@ -81,7 +75,7 @@ function App({store}) {
         navBar.style.display = "block";
       }
 
-      main.dataset.active = activeScreen;
+      app.dataset.active = activeScreen;
 
     }
   }
@@ -91,7 +85,7 @@ function App({store}) {
 
   function changeScreen(screen) {
 
-    const currentScreen = main.getAttribute('data-active');
+    const currentScreen = app.getAttribute('data-active');
     const scroll = window.scrollY;
 
     if(currentScreen === "Table") {

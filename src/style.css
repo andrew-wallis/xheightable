@@ -1,5 +1,7 @@
 @import './preflight.css';
 
+/* @link https://utopia.fyi/type/calculator?c=375,16,1.2,1240,18,1.25,5,2,&s=0.75|0.5|0.25,1.125|1.25|1.5|2|3|4|6,s-xl&g=xl,xl,2xl,12 */
+
 :root {
   --spacing-2xs: 0.25rem;
   --spacing-xs: 0.5rem;
@@ -15,17 +17,49 @@
   --radius-full: 9999px;
   --text: #000;
   --bg-white: #fff;
-  --form-border: rgba(0, 0, 0, 0.075);
   --table-link: rgba(0, 0, 0, 0.075);
-  --table-border: rgba(0, 0, 0, 0.1);
   --bg-well: rgba(0, 0, 0, 0.075);
+
+  --background: #FAFAFA;
+  --header-background: #FFF;
+  --table-highlight: #EDEDED;
+  --table-border: #D9D9D9;
+  --form-border: #CCC;
+
+  --step--2: clamp(0.6944rem, 0.6834rem + 0.0473vw, 0.72rem);
+  --step--1: clamp(0.8333rem, 0.8044rem + 0.1233vw, 0.9rem);
+  --step-0: clamp(1rem, 0.9458rem + 0.2312vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1106rem + 0.3815vw, 1.4063rem);
+  --step-2: clamp(1.44rem, 1.3022rem + 0.5879vw, 1.7578rem);
+  --step-3: clamp(1.728rem, 1.5246rem + 0.868vw, 2.1973rem);
+  --step-4: clamp(2.0736rem, 1.7818rem + 1.2448vw, 2.7466rem);
+  --step-5: clamp(2.4883rem, 2.0787rem + 1.7478vw, 3.4332rem);
+
+  --space-3xs: clamp(0.25rem, 0.2229rem + 0.1156vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4729rem + 0.1156vw, 0.5625rem);
+  --space-xs: clamp(0.75rem, 0.6958rem + 0.2312vw, 0.875rem);
+  --space-s: clamp(1rem, 0.9458rem + 0.2312vw, 1.125rem);
+  --space-m: clamp(1.125rem, 1.0708rem + 0.2312vw, 1.25rem);
+  --space-l: clamp(1.25rem, 1.1687rem + 0.3468vw, 1.4375rem);
+  --space-xl: clamp(1.5rem, 1.4187rem + 0.3468vw, 1.6875rem);
+  --space-2xl: clamp(2rem, 1.8916rem + 0.4624vw, 2.25rem);
+  --space-3xl: clamp(3rem, 2.8374rem + 0.6936vw, 3.375rem);
+  --space-4xl: clamp(4rem, 3.7832rem + 0.9249vw, 4.5rem);
+  --space-5xl: clamp(6rem, 5.6749rem + 1.3873vw, 6.75rem);
+  --space-6xl: clamp(8rem, 7.5665rem + 1.8497vw, 9rem);
+
+  --space-5xl-6xl: clamp(6rem, 4.6994rem + 5.5491vw, 9rem);
+
 }
+
+/* Layout */
 
 html {
   font-family: system-ui, sans-serif;
 }
 
 body {
+  background-color: var(--background);
   position: relative;
   padding-top:  0;
   padding-top:  env(safe-area-inset-top);
@@ -37,29 +71,101 @@ body {
   padding-left:  env(safe-area-inset-left);
 }
 
+header {
+  position: sticky;
+  top: 0;
+}
+
+/* Layout Utilities */
+
+.wrap {
+  max-width: 64rem;
+  width: 100%;
+  padding: 0 var(--space-xl);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.insulate {
+  padding-top: var(--space-s);
+  padding-bottom: var(--space-s);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+/* Tables */
+
+th,
+td {
+  padding-top: var(--space-s);
+  padding-right: var(--space-xl);
+  padding-bottom: var(--space-s);
+  vertical-align: middle;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: var(--space-xl);
+  width: var(--space-3xl);
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: auto;
+}
+
+th:not(:first-child):not(:nth-child(2)),
+td:not(:first-child):not(:nth-child(2)) {
+  width: var(--space-5xl-6xl);
+  text-align: right;
+}
+
+
+th {
+  font-size: var(--step--1);
+  line-height: 1.2;
+  text-align: left;
+  font-weight: 600;
+}
+
+tr {
+  border-bottom: 1px solid var(--table-border);
+}
+
+tr.clickable:is(:hover, :focus) {
+  background-color: var(--table-highlight);
+}
+
+.additional-data {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .additional-data {
+    display: table-cell;
+  }
+}
+
+/* Forms */
+
+select,
+input {
+  width: 100%;
+  border: 1px solid var(--form-border);
+  line-height: 1.25;
+  padding: var(--space-xs) var(--space-s);
+}
+
+
 .active-row {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Global */
 
-.screen {
-  display: flex;
-  flex-direction: column;
-  padding-top: var(--spacing-lg);
-  gap: var(--spacing-md);
-}
-
-
 /* Typography */
-
-.label {
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-}
 
 .button-text {
   font-size: 0.875rem;
@@ -70,8 +176,8 @@ body {
 }
 
 .secondary-text {
-  font-size: 0.875rem;
-  line-height: 1rem;
+  font-size: var(--step--1);
+  line-height: 1.2;
 }
 
 .small-text {

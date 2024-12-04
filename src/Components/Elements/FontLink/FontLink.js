@@ -5,9 +5,8 @@ import styles from "./FontLink.module.css";
 
 function FontLink({font, action}) {
   
-  const FontLink = document.createElement('a');
-  FontLink.href = '#';
-  FontLink.className = styles.link;
+  const FontLink = document.createElement('tr');
+  FontLink.className = "clickable";
   FontLink.dataset.name = font.name;
   FontLink.dataset.label = font.label;
   FontLink.dataset.element = "font-link";
@@ -19,15 +18,18 @@ function FontLink({font, action}) {
 
   /* html */
   FontLink.innerHTML = `
-    <div class=${styles.icon} data-element="font-icon" class="shrink-0 icon w-6 h-6 flex items-center justify-center">
+    <td data-element="font-icon">
       <!-- Font Icon -->
-    </div>
-    <div class=${styles.label} data-element="font-label" class="grow">
+    </td>
+    <td data-element="font-label">
       ${font.label}
-    </div>
-    <div class=${styles.xHeight} data-element="font-xHeight" class="shrink-0 w-8">
-      ${font.xHeightPct}
-    </div>
+    </td>
+    <td class="additional-data" data-element="font-capHeight">
+      ${Math.round(font.capHeightPct * 100)}%
+    </td>
+    <td data-element="font-xHeight">
+      ${Math.round(font.xHeightPct * 100)}%
+    </td>
   `;
 
   const icon = FontLink.querySelector('[data-element="font-icon"]');
@@ -36,7 +38,7 @@ function FontLink({font, action}) {
   const label = FontLink.querySelector('[data-element="font-label"]');
   label.style.fontFamily = 'system-ui';
   label.style.fontSize = "1.125rem";
-  label.style.leading = "1.125rem";
+  label.style.lineHeight = "1";
 
   if(!('IntersectionObserver' in window)) {
     console.log('IntersectionObserver not supported');

@@ -17,7 +17,7 @@ function GetFont() {
           <!-- Data-Designers -->
         </span>
         <span data-element="data-year" class=${styles.year}>
-          <!-- Data-Designers -->
+          <!-- Data-Year -->
         </span>
       </div>
     </div>

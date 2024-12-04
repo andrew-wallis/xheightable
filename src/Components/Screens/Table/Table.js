@@ -4,6 +4,7 @@ import FontLink from "../../Elements/FontLink/FontLink";
 import highlightRows from "../../../utils/highlightRows";
 import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
 import styles from "./Table.module.css";
+import TopBar from "../../Global/TopBar/TopBar";
 
 function Table(store) {
 
@@ -11,23 +12,45 @@ function Table(store) {
   const table = document.createElement('div');
   table.id = "table";
   table.className = "screen";
-  table.style.display = "flex";
+  table.style.display = "block";
   table.dataset.screen = "Table";
   table.dataset.element = "screen";
 
   /* html */
   table.innerHTML = `
-    <div class=${styles.header} data-element="table-header">
-      <!-- Table Header -->
-    </div>
-    <div class=${styles.list} data-element="table-list">
-      <!-- Table List -->
-    </div>
+    <header class=${styles.header} data-element="table-header">
+      <div data-element="table-topbar">
+        <!-- Table Topbar -->
+      </div>
+      <div class="${styles.controlsWrapper}">
+        <div class="${styles.controls} insulate wrap" data-element="table-controls">
+          <!-- Table Controls -->
+        </div>
+      </div>
+    </header>
+    <main class="wrap" >
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Font</th>
+            <th class="additional-data">Cap Height</th>
+            <th>xHeight</th>
+          </tr>
+        </thead>
+        <tbody data-element="table-list">
+          <!-- Table List -->
+        </tbody>
+      </table>
+    </main>
   `;
 
-  const tableHeader = table.querySelector('[data-element="table-header"');
-  tableHeader.appendChild(TableSearch(store));
-  tableHeader.appendChild(TableSelect(store));
+  const topBar = table.querySelector('[data-element="table-topbar"]');
+  topBar.appendChild(TopBar());
+
+  const tableControls = table.querySelector('[data-element="table-controls"]');
+  tableControls.appendChild(TableSearch(store));
+  tableControls.appendChild(TableSelect(store));
 
   function updateTableList() {
     
@@ -48,22 +71,8 @@ function Table(store) {
       });
 
       tableList.dataset.sort = sort;
-    }
-
-/*     if(tableList.dataset.search !== search) {
-
-      const rows = tableList.querySelectorAll('[data-element="font-link"]');
-
-      rows.forEach((row) => {
-        if(search && !row.dataset.label.toLowerCase().includes(search)) {
-          row.style.display = "none";
-        } else {
-          row.style.display = "";
-        }
-      });
-
       tableList.dataset.search = search;
-    } */
+    }
   }
 
   store.subscribe(updateTableList);
