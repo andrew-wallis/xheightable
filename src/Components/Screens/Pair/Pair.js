@@ -5,6 +5,8 @@ import highlightRows from "../../../utils/highlightRows";
 import setFontStyles from "../../../utils/setFontStyles";
 import FontLink from "../../Elements/FontLink/FontLink";
 import styles from "./Pair.module.css";
+import AppHeader from "../../Global/AppHeader/AppHeader";
+import NavBar from "../../Global/NavBar/NavBar";
 
 function Pair(store) {
 
@@ -19,12 +21,9 @@ function Pair(store) {
   pair.innerHTML = `
     <header data-element="pair-header">
       <div data-element="top-bar">
-        <!-- Table Topbar -->
+        <!-- Pair Topbar -->
       </div>
       <div class="wrap insulate stack">
-        <div data-element="back-link">
-          <!-- Back Link -->
-        </div>
         <div data-element="pair-labels" class=${styles.labels}>
           <!-- Pair Labels -->
         </div>
@@ -37,7 +36,7 @@ function Pair(store) {
         </div>
       </div>
     </header>
-    <main class="wrap">
+    <main class="wrap insulate stack">
       <table>
         <thead>
           <tr>
@@ -53,6 +52,10 @@ function Pair(store) {
       </table>
     </main>
   `;
+
+  const topBar = pair.querySelector('[data-element="top-bar"]');
+  topBar.appendChild(AppHeader());
+  topBar.appendChild(NavBar());
   
   const primaryLabel = PairLabel();
   const secondaryLabel = PairLabel();

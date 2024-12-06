@@ -2,7 +2,7 @@ import styles from "./Pair.module.css";
 
 function PairSample(referenceFont) {
 
-  const referenceLineColor = referenceFont ? "red" : "transparent";
+  const referenceLineColor = referenceFont ? "#d02c04" : "transparent";
   
   const fontSample = document.createElement('div');
   fontSample.className = styles.sample;
@@ -18,16 +18,16 @@ function PairSample(referenceFont) {
       </span>
     </div>
     <div class="${styles.sampleWrapper}">
-      <hr data-element="cap-line" class=${styles.sampleLine} style="border-color: blue;">
+      <hr data-element="cap-line" class=${styles.sampleLine} style="border-color: #D7BCA0;">
     </div>
     <div class="${styles.sampleWrapper} ${styles.sampleReference}">
       <hr data-element="reference-line" class=${styles.sampleLine} style="border-color: ${referenceLineColor};">
     </div>
     <div class="${styles.sampleWrapper}">
-      <hr data-element="xHeight-line" class=${styles.sampleLine} style="border-color: green;">
+      <hr data-element="xHeight-line" class=${styles.sampleLine} style="border-color: #D7BCA0;">
     </div>
     <div class="${styles.sampleWrapper}">
-      <hr data-element="base-line" class=${styles.sampleLine} style="border-color: magenta;">
+      <hr data-element="base-line" class=${styles.sampleLine} style="border-color: #D7BCA0;">
     </div>
   `
 

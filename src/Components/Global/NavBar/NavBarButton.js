@@ -6,8 +6,10 @@ function NavBarButton({icon, action}) {
   const iconButton = document.createElement('a');
 
   iconButton.href = "#";
-  iconButton.className = `${styles.button} secondary-text`;
+  iconButton.className = `${styles.button} button secondary-text`;
   iconButton.appendChild(Icon(icon));
+  iconButton.dataset.element = "nav-button";
+  iconButton.dataset.target = icon;
   
   const iconButtonLabel = document.createElement('div');
   iconButtonLabel.innerText = icon;

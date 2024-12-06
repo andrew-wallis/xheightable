@@ -3,14 +3,18 @@ import styles from "./NavBar.module.css";
 function NavBar() {
 
   const navBar = document.createElement('div');
-  navBar.style.display = "none";
-  navBar.dataset.element = "navbar-container";
-  navBar.className = styles.container;
+  navBar.className = `wrap insulate ${styles.container}`;
 
   /* html */
   navBar.innerHTML = `
-    <div data-element="navbar" class=${styles.navbar}>
+    <div data-element="back-link">
+      <!-- TopBar Back Link -->
+    </div>
+    <div class="${styles.navbar}" data-element="navbar">
       <!-- navbar -->
+    </div>
+    <div>
+      <!-- TopBar Void -->
     </div>
   `;
 

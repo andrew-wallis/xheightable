@@ -1,6 +1,8 @@
 
 import setFontStyles from "../../../utils/setFontStyles";
 import Icons from "../../Elements/Icons";
+import AppHeader from "../../Global/AppHeader/AppHeader";
+import NavBar from "../../Global/NavBar/NavBar";
 import GetFont from "./GetFont";
 import GetFontAdobe from "./GetFontAdobe";
 import GetFontGoogle from "./GetFontGoogle";
@@ -12,25 +14,26 @@ function GetFonts(store) {
   getFonts.id = "getfonts";
   getFonts.className = "screen";
   getFonts.style.display = "none";
-  getFonts.dataset.screen = "Get Fonts";
+  getFonts.dataset.screen = "Import";
   getFonts.dataset.element = "screen";
   
   /* html */
   getFonts.innerHTML = `
     <header data-element="pair-header">
-      <div data-element="top-bar">
-        <!-- Table Topbar -->
-      </div>
-      <div class="wrap insulate stack">
-        <div data-element="back-link">
-          <!-- Back Link -->
+      <div class="header-container">
+        <div class="wrap insulate stack" data-element="top-bar">
+          <!-- Table Topbar -->
         </div>
       </div>
     </header>
-    <main class="wrap" data-element="get-fonts">
+    <main class="wrap insulate stack" data-element="get-fonts">
       <!-- Get Fonts -->
     </main>
   `;
+
+  const topBar = getFonts.querySelector('[data-element="top-bar"]');
+  topBar.appendChild(AppHeader());
+  topBar.appendChild(NavBar());
 
   const primaryFontData = GetFont();
   const secondaryFontData = GetFont();
@@ -43,7 +46,7 @@ function GetFonts(store) {
   fontDataContainer.appendChild(primaryFontData);
   fontDataContainer.appendChild(divider);
   fontDataContainer.appendChild(secondaryFontData);
-
+  
   function updateGetFontsScreen() {
 
     const primaryFont = store.getData().primaryFont;
@@ -80,9 +83,9 @@ function GetFonts(store) {
         details.innerHTML = '';
 
         if(font.distribution === "Google") {
-          details.appendChild(GetFontAdobe(font));
-        } else {
           details.appendChild(GetFontGoogle(font));
+        } else {
+          details.appendChild(GetFontAdobe(font));
         }
 
         element.dataset.label = font.label;

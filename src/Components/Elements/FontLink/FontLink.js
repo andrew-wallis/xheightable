@@ -6,7 +6,7 @@ import styles from "./FontLink.module.css";
 function FontLink({font, action}) {
   
   const FontLink = document.createElement('tr');
-  FontLink.className = "clickable";
+  FontLink.className = "clickable primary-text";
   FontLink.dataset.name = font.name;
   FontLink.dataset.label = font.label;
   FontLink.dataset.element = "font-link";
@@ -24,7 +24,7 @@ function FontLink({font, action}) {
     <td data-element="font-label">
       ${font.label}
     </td>
-    <td class="additional-data" data-element="font-capHeight">
+    <td class="data additional-data" data-element="font-capHeight">
       ${Math.round(font.capHeightPct * 100)}%
     </td>
     <td data-element="font-xHeight">
@@ -37,7 +37,7 @@ function FontLink({font, action}) {
 
   const label = FontLink.querySelector('[data-element="font-label"]');
   label.style.fontFamily = 'system-ui';
-  label.style.fontSize = "1.125rem";
+  label.style.fontSize = "1rem";
   label.style.lineHeight = "1";
 
   if(!('IntersectionObserver' in window)) {
@@ -47,7 +47,7 @@ function FontLink({font, action}) {
       entries.forEach((entry) => {
         if(entry.isIntersecting) {
           loadFont(font).then(() => {
-            setFontStyles({element: label, font: font, size: 1.125});
+            setFontStyles({element: label, font: font, size: 1});
           });
           observer.disconnect();
         }

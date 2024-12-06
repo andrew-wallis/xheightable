@@ -1,36 +1,27 @@
-:root {
-  --position: sticky;
-  --right: auto;
-  --grid-cols: 3;
-  --padding: var(--spacing-xs);
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-.container {
-  position: var(--position);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 3rem;
-  bottom: calc(3rem + env(safe-area-inset-bottom));
-  margin: 2rem;
+.container > div:not(.navbar) {
+  width: var(--space-4xl);
+  flex-shrink: 0;
 }
 
 .navbar {
-  max-width: var(--container);
-  margin: var(--margin-center);
+  max-width: 32rem;
+  width: 100%;
+  flex-shrink: 0;
   display: grid;
-  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
-  gap: 1rem;
-  border-radius: var(--radius-full);
-  background-color: var(--bg-white);
-  padding: var(--padding);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-s);
 }
 
 .button {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2xs);
+  gap: var(--space-3xs);
   justify-content: center;
   align-items: center;
-  text-align: center;
+  border-bottom: 2px solid transparent;
 }

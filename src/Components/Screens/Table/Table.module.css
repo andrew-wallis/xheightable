@@ -9,7 +9,7 @@
 }
 
 .selectContainer {
-  width: 33%;
+  width: var(--fluid-112-224);
   flex-shrink: 0;
 }
 

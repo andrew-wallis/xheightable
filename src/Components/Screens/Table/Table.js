@@ -4,6 +4,7 @@ import FontLink from "../../Elements/FontLink/FontLink";
 import highlightRows from "../../../utils/highlightRows";
 import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
 import styles from "./Table.module.css";
+import AppHeader from "../../Global/AppHeader/AppHeader";
 
 function Table(store) {
 
@@ -27,12 +28,12 @@ function Table(store) {
         </div>
       </div>
     </header>
-    <main class="wrap" >
+    <main class="wrap insulate stack">
       <table>
         <thead>
           <tr>
-            <th></th>
-            <th>Font</th>
+          <th><span class="sr-only">Licence</span></th>
+            <th><span class="sr-only">Font</span></th>
             <th class="additional-data">Cap Height</th>
             <th>xHeight</th>
           </tr>
@@ -43,6 +44,9 @@ function Table(store) {
       </table>
     </main>
   `;
+
+  const topBar = table.querySelector('[data-element="top-bar"]');
+  topBar.appendChild(AppHeader());
 
   const tableControls = table.querySelector('[data-element="table-controls"]');
   tableControls.appendChild(TableSearch(store));

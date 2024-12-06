@@ -1,4 +1,6 @@
 import setFontStyles from "../../../utils/setFontStyles";
+import AppHeader from "../../Global/AppHeader/AppHeader";
+import NavBar from "../../Global/NavBar/NavBar";
 import styles from "./Test.module.css";
 
 function Test(store) {
@@ -13,16 +15,13 @@ function Test(store) {
   /* html */
   test.innerHTML = `
     <header data-element="pair-header">
-      <div data-element="top-bar">
-        <!-- Table Topbar -->
-      </div>
-      <div class="wrap insulate stack">
-        <div data-element="back-link">
-          <!-- Back Link -->
+      <div class="header-container">
+        <div class="wrap insulate stack" data-element="top-bar">
+          <!-- Table Topbar -->
         </div>
       </div>
     </header>
-    <main class="wrap">
+    <main class="wrap insulate stack">
       <h1 data-element="title" class=${styles.title}>Font Trends in 2024</h1>
       <p data-element="lede" class=${styles.lede}>2024 sees fonts as dynamic tools, shaping design trends and reflecting digital evolution.</p>
       <ul data-element="small" class=${styles.small}>
@@ -50,6 +49,10 @@ function Test(store) {
       <p data-element="paragraph" class=${styles.paragraph}>In the dynamic landscape of design, fonts serve as the cornerstone of visual communication, shaping the way we perceive and interact with content. As we traverse the typography trends of 2024, from the elegant simplicity of minimalist fonts to the dynamic versatility of variable fonts and the daring experimentation of avant-garde typography, one thing remains clear: the power of typography to captivate, inspire, and evoke emotion knows no bounds. As we embark on this typographic journey, let us embrace the endless possibilities of creative expression, forging a path towards a more vibrant and visually engaging future.</p>
     </main>
   `;
+
+  const topBar = test.querySelector('[data-element="top-bar"]');
+  topBar.appendChild(AppHeader());
+  topBar.appendChild(NavBar());
 
   function updateTestScreen() {
     

@@ -1,13 +1,9 @@
 import BackLink from "./Components/Elements/BackLink";
 import IconButton from "./Components/Global/NavBar/NavBarButton";
-import Header from "./Components/Global/TopBar/TopBar";
-import Main from "./Components/Global/Main/Main";
-import NavBar from "./Components/Global/NavBar/NavBar";
 import GetFonts from "./Components/Screens/GetFonts/GetFonts";
 import Pair from "./Components/Screens/Pair/Pair";
 import Table from "./Components/Screens/Table/Table";
 import Test from "./Components/Screens/Test/Test";
-import TopBar from "./Components/Global/TopBar/TopBar";
 
 function App({store}) {
 
@@ -33,23 +29,18 @@ function App({store}) {
   app.appendChild(Test(store));
   app.appendChild(GetFonts(store));
 
-  const navBar = NavBar();
-  app.appendChild(navBar);
-
-  const topBars = app.querySelectorAll('[data-element="top-bar"]');
-  topBars.forEach((topBar) => {
-    topBar.appendChild(TopBar());
-  });
-
   const backLinks = app.querySelectorAll('[data-element="back-link"]');
   backLinks.forEach((backLink) => {
     backLink.appendChild(BackLink({action: changeScreen}));
   });
 
-  const navButtons = ["Pair", "Test", "Get Fonts"];
-  const nav = app.querySelector('[data-element="navbar"]');
-  navButtons.map(button => {
-    nav.appendChild(IconButton({icon: button, action: changeScreen}));
+  const navButtons = ["Pair", "Test", "Import"];
+  const navBars = app.querySelectorAll('[data-element="navbar"]');
+
+  navBars.forEach((navBar) => {
+    navButtons.map(button => {
+      navBar.appendChild(IconButton({icon: button, action: changeScreen}));
+    });
   });
 
   function updateScreen() {
@@ -64,6 +55,11 @@ function App({store}) {
         screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "block" : "none";
       });
 
+      const buttons = app.querySelectorAll('[data-element="nav-button"]');
+      buttons.forEach(button => {
+        button.getAttribute('data-target') === activeScreen ? button.classList.add("active-button") : button.classList.remove("active-button");
+      });
+
       let pos = 0;
 
       if(activeScreen === "Table") {
@@ -73,13 +69,6 @@ function App({store}) {
       }
 
       window.scrollTo(0, pos);
-
-      if(activeScreen === "Table") {
-        navBar.style.display = "none";
-      } else {
-        navBar.style.display = "block";
-      }
-
       app.dataset.active = activeScreen;
 
     }
