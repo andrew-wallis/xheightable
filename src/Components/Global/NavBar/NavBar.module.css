@@ -1,6 +1,12 @@
+.background {
+  margin-bottom: var(--space-s-l);
+  background-color: var(--background);
+}
+
 .container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
 }
 
@@ -10,18 +16,21 @@
 }
 
 .navbar {
-  max-width: 32rem;
+  max-width: 28rem;
   width: 100%;
   flex-shrink: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-s);
+  padding: var(--space-2xs);
+  background-color: var(--navbar-background);
+  border-radius: var(--radius-full);
 }
 
 .button {
   display: flex;
-  gap: var(--space-3xs);
+  gap: var(--space-2xs);
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid transparent;
+  border-radius: var(--radius-full);
 }

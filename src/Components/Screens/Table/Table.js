@@ -22,7 +22,7 @@ function Table(store) {
       <div data-element="top-bar">
         <!-- Table Topbar -->
       </div>
-      <div>
+      <div class="${styles.controlsBackground}">
         <div class="${styles.controls} insulate wrap" data-element="table-controls">
           <!-- Table Controls -->
         </div>
@@ -34,8 +34,8 @@ function Table(store) {
           <tr>
           <th><span class="sr-only">Licence</span></th>
             <th><span class="sr-only">Font</span></th>
-            <th class="additional-data">Cap Height</th>
-            <th>xHeight</th>
+            <th>x height</th>
+            <th>Cap height</th>
           </tr>
         </thead>
         <tbody data-element="table-list">

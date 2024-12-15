@@ -24,20 +24,24 @@ function FontLink({font, action}) {
     <td data-element="font-label">
       ${font.label}
     </td>
-    <td class="data additional-data" data-element="font-capHeight">
-      ${Math.round(font.capHeightPct * 100)}%
-    </td>
     <td data-element="font-xHeight">
       ${Math.round(font.xHeightPct * 100)}%
+    </td>
+    <td data-element="font-capHeight">
+      ${Math.round(font.capHeightPct * 100)}%
     </td>
   `;
 
   const icon = FontLink.querySelector('[data-element="font-icon"]');
   icon.appendChild(Icons(font.distribution));
 
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const fontSize = isMobile ? 1 : 1.125;
+
   const label = FontLink.querySelector('[data-element="font-label"]');
   label.style.fontFamily = 'system-ui';
-  label.style.fontSize = "1rem";
+  label.style.fontSize = `${fontSize}rem`;
   label.style.lineHeight = "1";
 
   if(!('IntersectionObserver' in window)) {
@@ -47,7 +51,7 @@ function FontLink({font, action}) {
       entries.forEach((entry) => {
         if(entry.isIntersecting) {
           loadFont(font).then(() => {
-            setFontStyles({element: label, font: font, size: 1});
+            setFontStyles({element: label, font: font, size: fontSize});
           });
           observer.disconnect();
         }

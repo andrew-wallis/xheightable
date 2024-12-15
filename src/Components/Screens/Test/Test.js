@@ -14,14 +14,12 @@ function Test(store) {
   
   /* html */
   test.innerHTML = `
-    <header data-element="pair-header">
-      <div class="header-container">
-        <div class="wrap insulate stack" data-element="top-bar">
-          <!-- Table Topbar -->
-        </div>
+    <header data-element="test-header">
+      <div data-element="top-bar">
+        <!-- Test Topbar -->
       </div>
     </header>
-    <main class="wrap insulate stack">
+    <main class="insulate stack ${styles.container}">
       <h1 data-element="title" class=${styles.title}>Font Trends in 2024</h1>
       <p data-element="lede" class=${styles.lede}>2024 sees fonts as dynamic tools, shaping design trends and reflecting digital evolution.</p>
       <ul data-element="small" class=${styles.small}>

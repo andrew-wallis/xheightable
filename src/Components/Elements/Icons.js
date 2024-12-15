@@ -1,7 +1,7 @@
-function Icons(name) {
+function Icons(name, classes) {
 
   const icon = document.createElement('div');
-  icon.className = "icon";
+  icon.className = classes ? classes : "icon";
   icon.dataset.icon = name;
   icon.innerHTML = getSvg();
   return icon;
@@ -17,7 +17,7 @@ function Icons(name) {
         return `<svg width="100%" height="100%" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M0 16V15.998L6.68715 0H11.4145L18.0963 15.998L18.1017 16H0ZM13.3126 15.998L9.05085 5.88543L6.12611 12.7776H9.24475L10.5193 15.998H13.3126Z" fill="currentColor"/></svg>`
 
       case "Arrow Down":
-        return `<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 1L1 5L5 9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/></svg>`
+        return `<svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6L8 10L4 6" stroke="currentColor" stroke-width="1.5"/></svg>`
 
       case "Arrow Left":
         return `<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.6" d="M5 1L1 5L5 9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/></svg>`
@@ -29,7 +29,7 @@ function Icons(name) {
         return `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="2.5" width="6" height="9" rx="1" stroke="currentColor"/><path d="M4 4.5V12.5C4 13.0523 4.44772 13.5 5 13.5H10" stroke="currentColor" strokeLinecap="round"/></svg>`
 
       case "Cross":
-        return `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 1L7 7M7 7L13 13M7 7L1 1M7 7L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>`
+        return `<svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.7703 4L7.77026 8M7.77026 8L3.77026 4M7.77026 8L11.7703 12M7.77026 8L3.77026 12" stroke="currentColor" stroke-width="1.5"/></svg>`
 
       case "Import":
         return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.7457 20L14.8537 15.578H9.1777L7.2857 20H4.7337L12.0157 4.04999L19.2757 20H16.7457ZM10.0577 13.51H13.9517L12.0157 8.97799L10.0577 13.51Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19.5303 8.46967L23.0607 12L19.5303 15.5303L18.4697 14.4697L20.9393 12L18.4697 9.53033L19.5303 8.46967Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M3.06065 12L5.53032 9.53033L4.46966 8.46967L0.939331 12L4.46966 15.5303L5.53032 14.4697L3.06065 12Z" fill="currentColor"/></svg>`
@@ -53,7 +53,7 @@ function Icons(name) {
         return `<svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.83557 12.9984C4.07515 12.9984 3.39026 12.863 2.78088 12.5922C2.17672 12.3161 1.69755 11.9099 1.34338 11.3734C0.994425 10.837 0.819946 10.1755 0.819946 9.38904C0.819946 8.71195 0.944946 8.15206 1.19495 7.70935C1.44495 7.26664 1.78609 6.91248 2.21838 6.64685C2.65068 6.38123 3.13765 6.1807 3.67932 6.04529C4.2262 5.90466 4.7913 5.8031 5.37463 5.7406C6.07776 5.66768 6.64807 5.60258 7.08557 5.54529C7.52307 5.48279 7.84078 5.38904 8.0387 5.26404C8.24182 5.13383 8.34338 4.93331 8.34338 4.66248V4.6156C8.34338 4.02706 8.1689 3.57133 7.81995 3.24841C7.47099 2.9255 6.96838 2.76404 6.31213 2.76404C5.61943 2.76404 5.06995 2.91508 4.6637 3.21716C4.26265 3.51925 3.99182 3.87602 3.8512 4.28748L1.21057 3.91248C1.4189 3.18331 1.76265 2.57393 2.24182 2.08435C2.72099 1.58956 3.30693 1.21977 3.99963 0.974976C4.69234 0.724976 5.45797 0.599976 6.29651 0.599976C6.87463 0.599976 7.45015 0.667684 8.02307 0.803101C8.59599 0.938517 9.11943 1.16247 9.59338 1.47497C10.0673 1.78227 10.4476 2.20154 10.734 2.73279C11.0257 3.26404 11.1715 3.9281 11.1715 4.72497V12.7562H8.45276V11.1078H8.35901C8.18713 11.4411 7.94495 11.7536 7.63245 12.0453C7.32515 12.3317 6.93713 12.5635 6.46838 12.7406C6.00484 12.9125 5.46057 12.9984 4.83557 12.9984ZM5.56995 10.9203C6.13765 10.9203 6.62984 10.8083 7.04651 10.5844C7.46318 10.3552 7.78349 10.0531 8.00745 9.6781C8.23661 9.3031 8.3512 8.89425 8.3512 8.45154V7.03748C8.26265 7.11039 8.11161 7.1781 7.89807 7.2406C7.68974 7.3031 7.45536 7.35779 7.19495 7.40466C6.93453 7.45154 6.67672 7.4932 6.42151 7.52966C6.1663 7.56612 5.94495 7.59737 5.75745 7.62341C5.33557 7.6807 4.95797 7.77445 4.62463 7.90466C4.2913 8.03487 4.02828 8.21716 3.83557 8.45154C3.64286 8.6807 3.54651 8.97758 3.54651 9.34216C3.54651 9.863 3.73661 10.2562 4.11682 10.5219C4.49703 10.7875 4.9814 10.9203 5.56995 10.9203Z" fill="currentColor"/></svg>`
 
       case "Search":
-        return `<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 17H17V15.5L13 11.5L11.5 13L15.5 17Z" fill="currentColor"/><circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" strokeWidth="2"/></svg>`
+        return `<svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="7" r="6.25" stroke="currentColor" stroke-width="1.5"/><path d="M12 12L15 15" stroke="currentColor"stroke-width="1.5" stroke-linecap="round"/></svg>`
 
       case "Serif":
         return `<svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.37202 4.375L9.16902 8.899C9.08202 10.581 9.51702 11.451 10.561 11.451C11.054 11.451 11.46 11.132 11.547 11.132C11.692 11.132 11.895 11.451 11.808 11.712C11.228 12.524 9.80702 12.988 8.90802 12.988C8.18302 12.988 7.37102 12.785 6.82002 12.176C6.61702 11.973 6.50103 11.828 6.35602 11.828C6.21102 11.828 6.00802 11.973 5.57302 12.234C5.02202 12.582 4.15202 12.988 3.10802 12.988C1.13602 12.988 0.150024 11.625 0.150024 10.175C0.150024 9.131 0.556025 8.174 2.55702 7.478C3.57202 7.13 4.67402 6.724 5.74702 6.318C6.32702 6.115 6.41402 5.854 6.41402 5.564L6.44302 4.81C6.50102 3.331 6.09502 2.055 4.67402 2.055C3.86202 2.055 3.25302 2.49 3.13702 3.331C3.07902 3.882 2.90502 4.172 2.58602 4.375C2.18002 4.636 1.36802 4.897 0.730024 4.897C0.353024 4.897 0.179024 4.694 0.179024 4.433C0.179024 4.085 0.353024 3.476 1.31002 2.577C2.20902 1.736 4.29702 0.75 5.77602 0.75C8.06702 0.75 9.48802 1.823 9.37202 4.375ZM6.26902 10.001L6.32702 7.913C6.32702 7.594 6.24002 7.42 6.09503 7.42C5.86303 7.42 5.34102 7.565 4.81902 7.768C4.00702 8.058 3.25303 8.464 3.25303 9.711C3.25303 10.465 3.77502 11.393 4.87702 11.393C5.92102 11.393 6.24002 10.697 6.26902 10.001Z" fill="currentColor"/></svg>`

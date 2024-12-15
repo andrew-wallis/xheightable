@@ -1,15 +1,45 @@
+.controlsBackground {
+  margin-bottom: var(--space-s-l);
+  background-color: var(--background);
+}
+
 .controls {
   display: flex;
   gap: var(--space-s);
 }
 
+.search {
+  padding-left: var(--space-2-5xl);
+  padding-right: var(--space-2-5xl);
+}
+
+.select {
+  padding-right: var(--space-2-5xl);
+}
+
 .searchContainer {
   position: relative;
   flex-grow: 1;
+  padding: var(--space-2xs) 0;
 }
 
 .selectContainer {
+  position: relative;
   width: var(--fluid-112-224);
   flex-shrink: 0;
+  padding: var(--space-2xs) 0;
 }
 
+.searchIcon {
+  position: absolute;
+  top: var(--space-l);
+  left: var(--space-xs);
+}
+
+.resetIcon,
+.selectIcon {
+  position: absolute;
+  display: block;
+  top: var(--space-l);
+  right: var(--space-xs);
+}

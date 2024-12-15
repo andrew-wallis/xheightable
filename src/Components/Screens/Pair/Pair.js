@@ -42,8 +42,8 @@ function Pair(store) {
           <tr>
             <th></th>
             <th>Font</th>
-            <th class="additional-data">Cap Height</th>
-            <th>xHeight</th>
+            <th>x height</th>
+            <th>Cap height</th>
           </tr>
         </thead>
         <tbody data-element="pair-list">
@@ -95,7 +95,7 @@ function Pair(store) {
       if(Object.keys(font).length > 0) {
     
         const text = label.querySelector('[data-element="label-text"]');
-        text.innerText = font.label;
+        text.innerText = font.shortlabel;
   
         const xHeight = label.querySelector('[data-element="label-xHeight"]');
         xHeight.innerText = `x ${Math.round(font.xHeightPct * 100)}%`;

@@ -1,4 +1,5 @@
-import BackLink from "./Components/Elements/BackLink";
+
+import BackLink from "./Components/Elements/BackLink/BackLink";
 import IconButton from "./Components/Global/NavBar/NavBarButton";
 import GetFonts from "./Components/Screens/GetFonts/GetFonts";
 import Pair from "./Components/Screens/Pair/Pair";

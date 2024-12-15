@@ -19,11 +19,9 @@ function GetFonts(store) {
   
   /* html */
   getFonts.innerHTML = `
-    <header data-element="pair-header">
-      <div class="header-container">
-        <div class="wrap insulate stack" data-element="top-bar">
-          <!-- Table Topbar -->
-        </div>
+    <header data-element="import-header">
+      <div data-element="top-bar">
+        <!-- Import Topbar -->
       </div>
     </header>
     <main class="wrap insulate stack" data-element="get-fonts">

@@ -1,6 +1,6 @@
 @import './preflight.css';
 
-/* @link https://utopia.fyi/type/calculator?c=375,16,1.2,1240,18,1.25,5,2,&s=0.75|0.5|0.25,1.125|1.25|1.5|2|3|4|6,s-xl&g=xl,xl,2xl,12 */
+/* @link https://utopia.fyi/space/calculator?c=375,14,1.125,1240,16,1.125,5,2,&s=0.75%7C0.5%7C0.25,1.125%7C1.25%7C1.5%7C2%7C3%7C4%7C6,s-xl%7C3xl-5xl%7Cs-l&g=xl,xl,2xl,12 */
 
 :root {
   --spacing-2xs: 0.25rem;
@@ -26,64 +26,75 @@
   --table-border: #D9D9D9;
   --form-border: #CCC;
 
-  --white: #FFFFFF;
-  --grey-30: #B8B7B6;
-  --grey-50: #9D9995;
-  --grey-70: #686766;
-  --black: #262524;
+  --black: #0C0C12;
+  --grey-5: #111117;
+  --grey-10: #18181E;
+  --grey-15: #242429;
+  --grey-25: #3D3D41;
+  --grey-35: #545459;
+  --grey-50: #7A7A7D;
+  --grey-65: #9E9EA0;
+  --white: #DBDBDC;
 
   --copper: #B87333;
-  --terracota: #D7BCA0;
-  --peach: #F7F5F2;
+  --terracota: #D6CCC1;
+  --stone: #F0EFED;
+  --peach: #F7F7F7;
 
-  --background: var(--white);
-  --highlight: var(--peach);
-  --border: var(--grey-30);
-  --border-header: var(--terracota);
-  --text: var(--black);
-  --secondary: var(--grey-70);
+  --background: var(--black);
+  --highlight: var(--grey-10);
+  --highlight-overlay: var(--grey-15);
+  --border-primary: var(--grey-25);
+  --border-secondary: var(--grey-15);
+  --text: var(--white);
+  --secondary: var(--grey-65);
+  --navbar-background: var(--grey-10);
 
   --accent: var(--copper);
-  --icon: var(--grey-50);
-  --§ve-icon: var(--terracota);
+  --icon: var(--grey-35);
+  --active-icon: var(--terracota);
+  --accent-icon: var(--copper);
 
-  --step--2: clamp(0.6944rem, 0.6791rem + 0.0654vw, 0.72rem);
-  --step--1: clamp(0.8333rem, 0.7933rem + 0.1707vw, 0.9rem);
-  --step-0: clamp(1rem, 0.925rem + 0.32vw, 1.125rem);
-  --step-1: clamp(1.2rem, 1.0763rem + 0.528vw, 1.4063rem);
-  --step-2: clamp(1.44rem, 1.2493rem + 0.8136vw, 1.7578rem);
-  --step-3: clamp(1.728rem, 1.4464rem + 1.2013vw, 2.1973rem);
-  --step-4: clamp(2.0736rem, 1.6698rem + 1.7228vw, 2.7466rem);
-  --step-5: clamp(2.4883rem, 1.9214rem + 2.419vw, 3.4332rem);
+  --step--2: clamp(0.6914rem, 0.6485rem + 0.1827vw, 0.7901rem);
+  --step--1: clamp(0.7778rem, 0.7296rem + 0.2055vw, 0.8889rem);
+  --step-0: clamp(0.875rem, 0.8208rem + 0.2312vw, 1rem);
+  --step-1: clamp(0.9844rem, 0.9234rem + 0.2601vw, 1.125rem);
+  --step-2: clamp(1.1074rem, 1.0388rem + 0.2926vw, 1.2656rem);
+  --step-3: clamp(1.2458rem, 1.1687rem + 0.3292vw, 1.4238rem);
+  --step-4: clamp(1.4016rem, 1.3148rem + 0.3704vw, 1.6018rem);
+  --step-5: clamp(1.5768rem, 1.4791rem + 0.4167vw, 1.802rem);
 
-  --space-3xs: clamp(0.25rem, 0.2125rem + 0.16vw, 0.3125rem);
-  --space-2xs: clamp(0.5rem, 0.4625rem + 0.16vw, 0.5625rem);
-  --space-xs: clamp(0.75rem, 0.675rem + 0.32vw, 0.875rem);
-  --space-s: clamp(1rem, 0.925rem + 0.32vw, 1.125rem);
-  --space-m: clamp(1.125rem, 1.05rem + 0.32vw, 1.25rem);
-  --space-l: clamp(1.25rem, 1.1375rem + 0.48vw, 1.4375rem);
-  --space-xl: clamp(1.5rem, 1.3875rem + 0.48vw, 1.6875rem);
-  --space-2xl: clamp(2rem, 1.85rem + 0.64vw, 2.25rem);
-  --space-3xl: clamp(3rem, 2.775rem + 0.96vw, 3.375rem);
-  --space-4xl: clamp(4rem, 3.7rem + 1.28vw, 4.5rem);
-  --space-5xl: clamp(6rem, 5.55rem + 1.92vw, 6.75rem);
+  --space-3xs: clamp(0.25rem, 0.25rem + 0vw, 0.25rem);
+  --space-2xs: clamp(0.4375rem, 0.4104rem + 0.1156vw, 0.5rem);
+  --space-xs: clamp(0.6875rem, 0.6604rem + 0.1156vw, 0.75rem);
+  --space-s: clamp(0.875rem, 0.8208rem + 0.2312vw, 1rem);
+  --space-m: clamp(1rem, 0.9458rem + 0.2312vw, 1.125rem);
+  --space-l: clamp(1.125rem, 1.0708rem + 0.2312vw, 1.25rem);
+  --space-xl: clamp(1.3125rem, 1.2312rem + 0.3468vw, 1.5rem);
+  --space-2xl: clamp(1.75rem, 1.6416rem + 0.4624vw, 2rem);
+  --space-2-5xl: clamp(2.1875rem, 2.052rem + 0.578vw, 2.5rem);
+  --space-3xl: clamp(2.625rem, 2.4624rem + 0.6936vw, 3rem);
+  --space-4xl: clamp(3.5rem, 3.2832rem + 0.9249vw, 4rem);
+  --space-5xl: clamp(5.25rem, 4.9249rem + 1.3873vw, 6rem);
+  --space-6xl: clamp(7rem, 6.5665rem + 1.8497vw, 8rem);
 
   /* One-up pairs */
-  --space-3xs-2xs: clamp(0.25rem, 0.0625rem + 0.8vw, 0.5625rem);
-  --space-2xs-xs: clamp(0.5rem, 0.275rem + 0.96vw, 0.875rem);
-  --space-xs-s: clamp(0.75rem, 0.525rem + 0.96vw, 1.125rem);
-  --space-s-m: clamp(1rem, 0.85rem + 0.64vw, 1.25rem);
-  --space-m-l: clamp(1.125rem, 0.9375rem + 0.8vw, 1.4375rem);
-  --space-l-xl: clamp(1.25rem, 0.9875rem + 1.12vw, 1.6875rem);
-  --space-xl-2xl: clamp(1.5rem, 1.05rem + 1.92vw, 2.25rem);
-  --space-2xl-3xl: clamp(2rem, 1.175rem + 3.52vw, 3.375rem);
-  --space-3xl-4xl: clamp(3rem, 2.1rem + 3.84vw, 4.5rem);
-  --space-4xl-5xl: clamp(4rem, 2.35rem + 7.04vw, 6.75rem);
+  --space-3xs-2xs: clamp(0.25rem, 0.1416rem + 0.4624vw, 0.5rem);
+  --space-2xs-xs: clamp(0.4375rem, 0.302rem + 0.578vw, 0.75rem);
+  --space-xs-s: clamp(0.6875rem, 0.552rem + 0.578vw, 1rem);
+  --space-s-m: clamp(0.875rem, 0.7666rem + 0.4624vw, 1.125rem);
+  --space-m-l: clamp(1rem, 0.8916rem + 0.4624vw, 1.25rem);
+  --space-l-xl: clamp(1.125rem, 0.9624rem + 0.6936vw, 1.5rem);
+  --space-xl-2xl: clamp(1.3125rem, 1.0145rem + 1.2717vw, 2rem);
+  --space-2xl-3xl: clamp(1.75rem, 1.2081rem + 2.3121vw, 3rem);
+  --space-3xl-4xl: clamp(2.625rem, 2.0289rem + 2.5434vw, 4rem);
+  --space-4xl-5xl: clamp(3.5rem, 2.4162rem + 4.6243vw, 6rem);
+  --space-5xl-6xl: clamp(5.25rem, 4.0578rem + 5.0867vw, 8rem);
 
   /* Custom pairs */
-  --space-s-xl: clamp(1rem, 0.5875rem + 1.76vw, 1.6875rem);
-  --space-3xl-5xl: clamp(3rem, 0.75rem + 9.6vw, 6.75rem);
-  --space-s-l: clamp(1rem, 0.7375rem + 1.12vw, 1.4375rem);
+  --space-s-xl: clamp(0.875rem, 0.604rem + 1.1561vw, 1.5rem);
+  --space-3xl-5xl: clamp(2.625rem, 1.1618rem + 6.2428vw, 6rem);
+  --space-s-l: clamp(0.875rem, 0.7124rem + 0.6936vw, 1.25rem);
   
   --fluid-112-224: clamp(7rem, 3.9653rem + 12.948vw, 14rem);
 
@@ -92,7 +103,8 @@
 /* Layout */
 
 html {
-  font-family: "Jost", sans-serif;
+  font-family: "Inter", sans-serif;
+  color: var(--text);
 }
 
 body {
@@ -143,20 +155,19 @@ header {
   margin-block-start: var(--space-s-l);
 }
 
-.clickable {
-  cursor: pointer;
+.stack > h2 {
+  margin-top: var(--space-2xl-3xl);
 }
 
-@media (min-width: 48rem) {
-  .navbar-button {
-  }
+.clickable {
+  cursor: pointer;
 }
 
 /* Tables */
 
 th,
 td {
-  padding-right: var(--space-s);
+  padding-right: var(--space-s-xl);
   padding-bottom: var(--space-s);
   vertical-align: middle;
 }
@@ -178,8 +189,20 @@ td:nth-child(2) {
 
 th:not(:first-child):not(:nth-child(2)),
 td:not(:first-child):not(:nth-child(2)) {
-  width: var(--space-5xl-6xl);
+  width: var(--space-6xl);
   text-align: right;
+}
+
+th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)),
+td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)) {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)),
+  td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)) {
+    display: table-cell;
+  }
 }
 
 th {
@@ -190,13 +213,20 @@ th {
   font-size: var(--step--1);
 }
 
-tr {
-  border-bottom: 1px solid var(--border);
+thead > tr,
+tbody > tr:not(:last-child) {
+  border-bottom: 1px solid var(--border-secondary);
 }
 
 tr.clickable:is(:hover, :focus),
+td:nth-child(3),
 tr.active-row {
   background-color: var(--highlight);
+}
+
+tr.clickable:is(:hover, :focus) > td:nth-child(3),
+tr.active-row > td:nth-child(3) {
+  background-color: var(--highlight-overlay);
 }
 
 .button {
@@ -204,19 +234,13 @@ tr.active-row {
   padding: var(--space-xs) var(--space-s);
 }
 
+.button .icon {
+  color: var(--accent-icon);
+}
+
 .active-button {
-  border-bottom: 2px solid var(--copper);
+  background-color: var(--background);
   font-weight: 500;
-}
-
-.additional-data {
-  display: none;
-}
-
-@media (min-width: 48rem) {
-  .additional-data {
-    display: table-cell;
-  }
 }
 
 /* Forms */
@@ -225,12 +249,12 @@ select,
 input {
   width: 100%;
   padding: var(--space-xs) var(--space-s);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-primary);
   border-radius: 0;
   font-weight: 500;
   color: var(--secondary);
   line-height: var(--space-s);
-  font-size: var(--step--1);
+  background-color: var(--background);
 }
 
 .icon {
@@ -240,6 +264,16 @@ input {
   align-items: center;
   justify-content: center;
   color: var(--icon);
+}
+
+.form-icon {
+  display: flex;
+  width: var(--space-s);
+  height: var(--space-s);
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-icon);
+  opacity: 0.75;
 }
 
 /* Global */

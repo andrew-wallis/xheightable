@@ -24,11 +24,11 @@ function sortAndFilterFonts(fonts, search, sort) {
       fonts = fonts.sort((a, b) => Number(a.xHeightPct) - Number(b.xHeightPct));
       break;
     
-    case "RatingHiLo":
+    case "PopularityHiLo":
       fonts = fonts.sort((a, b) => Number(b.Score) - Number(a.Score));
       break;
 
-    case "RatingLoHi":
+    case "PopularityLoHi":
       fonts = fonts.sort((a, b) => Number(a.Score) - Number(b.Score));
       break;
 

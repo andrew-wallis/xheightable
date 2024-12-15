@@ -1,3 +1,4 @@
+import Icons from "../../Elements/Icons";
 import styles from "./Table.module.css";
 
 function TableSelect(store) {
@@ -13,17 +14,21 @@ function TableSelect(store) {
       <option value="Z-A">Z-A</option>
       <option value="xHiLo">x Height (High/Low)</option>
       <option value="xLoHi">x Height (Low/High)</option>
-      <option value="RatingHiLo">Rating (High/Low)</option>
-      <option value="RatingLoHi">Rating (Low/High)</option>
+      <option value="PopularityHiLo">Popularity (High/Low)</option>
+      <option value="PopularityLoHi">Popularity (Low/High)</option>
     </select>
+    <div data-element="select-icon" class=${styles.selectIcon}>
+      <!-- Search Icon -->
+    </div>
   `;
 
   const select = tableSelect.querySelector('[data-element="table-select"]');
-
   tableSelect.addEventListener('change', function () {
     store.setData({sort: select.value});
   });
 
+  const selectIcon = tableSelect.querySelector('[data-element="select-icon"]');
+  selectIcon.appendChild(Icons("Arrow Down", "form-icon"));
 
   return tableSelect;
 
