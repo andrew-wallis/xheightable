@@ -28,7 +28,7 @@ function TableSelect(store) {
   });
 
   const selectIcon = tableSelect.querySelector('[data-element="select-icon"]');
-  selectIcon.appendChild(Icons("Arrow Down", "form-icon"));
+  selectIcon.appendChild(Icons("Arrow Down", "icon"));
 
   return tableSelect;
 

@@ -1,128 +1,112 @@
 @import './preflight.css';
 
-/* @link https://utopia.fyi/space/calculator?c=375,14,1.125,1240,16,1.125,5,2,&s=0.75%7C0.5%7C0.25,1.125%7C1.25%7C1.5%7C2%7C3%7C4%7C6,s-xl%7C3xl-5xl%7Cs-l&g=xl,xl,2xl,12 */
+/* @link https://utopia.fyi/type/calculator?c=375,16,1.125,1240,18,1.125,8,2,&s=0.75|0.5|0.25,1.5|2|2.5|3|4|6|8,&g=xl,xl,2xl,12 */
 
 :root {
-  --spacing-2xs: 0.25rem;
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 0.75rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --form-element-padding: 0.625rem;
-  --container: 72rem;
-  --margin-center: 0 auto;
-  --radius-md: var(--spacing-xs);
-  --radius-full: 9999px;
-  --text: #000;
-  --bg-white: #fff;
-  --table-link: rgba(0, 0, 0, 0.075);
-  --bg-well: rgba(0, 0, 0, 0.075);
 
-  --background: #FAFAFA;
-  --header-background: #FFF;
-  --table-highlight: #EDEDED;
-  --table-border: #D9D9D9;
-  --form-border: #CCC;
+  --primary-font: "DM Sans", sans-serif;
+  --accent-font: "DM Mono", monospace;
 
-  --black: #0C0C12;
-  --grey-5: #111117;
-  --grey-10: #18181E;
-  --grey-15: #242429;
-  --grey-25: #3D3D41;
-  --grey-35: #545459;
-  --grey-50: #7A7A7D;
+  --black: #070712;
+  --grey-5: #0F0F19;
+  --grey-10: #14141E;
+  --grey-15: #1F1F29;
+  --grey-25: #393941;
+  --grey-35: #515159;
+  --grey-50: #77777D;
   --grey-65: #9E9EA0;
-  --white: #DBDBDC;
+  --white: #DADADC;
 
-  --copper: #B87333;
-  --terracota: #D6CCC1;
-  --stone: #F0EFED;
-  --peach: #F7F7F7;
+  --accent1: #A39483;
+  --accent2: #8C7C69;
+  --accent3: #736350;
 
   --background: var(--black);
-  --highlight: var(--grey-10);
-  --highlight-overlay: var(--grey-15);
+  --highlight: var(--grey-5);
+  --highlight-overlay: var(--grey-10);
   --border-primary: var(--grey-25);
   --border-secondary: var(--grey-15);
   --text: var(--white);
   --secondary: var(--grey-65);
-  --navbar-background: var(--grey-10);
 
-  --accent: var(--copper);
-  --icon: var(--grey-35);
-  --active-icon: var(--terracota);
-  --accent-icon: var(--copper);
+  --icon: var(--grey-50);
+  --active-icon: var(--accent1);
 
-  --step--2: clamp(0.6914rem, 0.6485rem + 0.1827vw, 0.7901rem);
-  --step--1: clamp(0.7778rem, 0.7296rem + 0.2055vw, 0.8889rem);
-  --step-0: clamp(0.875rem, 0.8208rem + 0.2312vw, 1rem);
-  --step-1: clamp(0.9844rem, 0.9234rem + 0.2601vw, 1.125rem);
-  --step-2: clamp(1.1074rem, 1.0388rem + 0.2926vw, 1.2656rem);
-  --step-3: clamp(1.2458rem, 1.1687rem + 0.3292vw, 1.4238rem);
-  --step-4: clamp(1.4016rem, 1.3148rem + 0.3704vw, 1.6018rem);
-  --step-5: clamp(1.5768rem, 1.4791rem + 0.4167vw, 1.802rem);
+  --radius-full: 9999px;
 
-  --space-3xs: clamp(0.25rem, 0.25rem + 0vw, 0.25rem);
-  --space-2xs: clamp(0.4375rem, 0.4104rem + 0.1156vw, 0.5rem);
-  --space-xs: clamp(0.6875rem, 0.6604rem + 0.1156vw, 0.75rem);
-  --space-s: clamp(0.875rem, 0.8208rem + 0.2312vw, 1rem);
-  --space-m: clamp(1rem, 0.9458rem + 0.2312vw, 1.125rem);
-  --space-l: clamp(1.125rem, 1.0708rem + 0.2312vw, 1.25rem);
-  --space-xl: clamp(1.3125rem, 1.2312rem + 0.3468vw, 1.5rem);
-  --space-2xl: clamp(1.75rem, 1.6416rem + 0.4624vw, 2rem);
-  --space-2-5xl: clamp(2.1875rem, 2.052rem + 0.578vw, 2.5rem);
-  --space-3xl: clamp(2.625rem, 2.4624rem + 0.6936vw, 3rem);
-  --space-4xl: clamp(3.5rem, 3.2832rem + 0.9249vw, 4rem);
-  --space-5xl: clamp(5.25rem, 4.9249rem + 1.3873vw, 6rem);
-  --space-6xl: clamp(7rem, 6.5665rem + 1.8497vw, 8rem);
+/*   --step--2: 0.7901rem;
+  --step--1: 0.8889rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: 1.2656rem;
+  --step-3: 1.4238rem;
+  --step-4: 1.6018rem;
+  --step-5: 1.802rem;
+  --step-6: 2.0273rem;
+  --step-7: 2.2807rem;
+  --step-8: 2.5658rem;
+ */
+  --step--2: clamp(0.7901rem, 0.7473rem + 0.1827vw, 0.8889rem);
+  --step--1: clamp(0.8889rem, 0.8407rem + 0.2055vw, 1rem);
+  --step-0: clamp(1rem, 0.9458rem + 0.2312vw, 1.125rem);
+  --step-1: clamp(1.125rem, 1.064rem + 0.2601vw, 1.2656rem);
+  --step-2: clamp(1.2656rem, 1.197rem + 0.2926vw, 1.4238rem);
+  --step-3: clamp(1.4238rem, 1.3467rem + 0.3292vw, 1.6018rem);
+  --step-4: clamp(1.6018rem, 1.515rem + 0.3704vw, 1.802rem);
+  --step-5: clamp(1.802rem, 1.7044rem + 0.4167vw, 2.0273rem);
+  --step-6: clamp(2.0273rem, 1.9174rem + 0.4687vw, 2.2807rem);
+  --step-7: clamp(2.2807rem, 2.1571rem + 0.5273vw, 2.5658rem);
+  --step-8: clamp(2.5658rem, 2.4267rem + 0.5932vw, 2.8865rem);
+
+  --space-3xs: clamp(0.25rem, 0.2229rem + 0.1156vw, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4729rem + 0.1156vw, 0.5625rem);
+  --space-xs: clamp(0.75rem, 0.6958rem + 0.2312vw, 0.875rem);
+  --space-s: clamp(1rem, 0.9458rem + 0.2312vw, 1.125rem);
+  --space-m: clamp(1.25rem, 1.1687rem + 0.3468vw, 1.4375rem);
+  --space-l: clamp(1.5rem, 1.4187rem + 0.3468vw, 1.6875rem);
+  --space-xl: clamp(2rem, 1.8916rem + 0.4624vw, 2.25rem);
+  --space-2xl: clamp(2.5rem, 2.3645rem + 0.578vw, 2.8125rem);
+  --space-3xl: clamp(3rem, 2.8374rem + 0.6936vw, 3.375rem);
+  --space-4xl: clamp(4rem, 3.7832rem + 0.9249vw, 4.5rem);
+  --space-5xl: clamp(6rem, 5.6749rem + 1.3873vw, 6.75rem);
+  --space-6xl: clamp(8rem, 7.5665rem + 1.8497vw, 9rem);
 
   /* One-up pairs */
-  --space-3xs-2xs: clamp(0.25rem, 0.1416rem + 0.4624vw, 0.5rem);
-  --space-2xs-xs: clamp(0.4375rem, 0.302rem + 0.578vw, 0.75rem);
-  --space-xs-s: clamp(0.6875rem, 0.552rem + 0.578vw, 1rem);
-  --space-s-m: clamp(0.875rem, 0.7666rem + 0.4624vw, 1.125rem);
-  --space-m-l: clamp(1rem, 0.8916rem + 0.4624vw, 1.25rem);
-  --space-l-xl: clamp(1.125rem, 0.9624rem + 0.6936vw, 1.5rem);
-  --space-xl-2xl: clamp(1.3125rem, 1.0145rem + 1.2717vw, 2rem);
-  --space-2xl-3xl: clamp(1.75rem, 1.2081rem + 2.3121vw, 3rem);
-  --space-3xl-4xl: clamp(2.625rem, 2.0289rem + 2.5434vw, 4rem);
-  --space-4xl-5xl: clamp(3.5rem, 2.4162rem + 4.6243vw, 6rem);
-  --space-5xl-6xl: clamp(5.25rem, 4.0578rem + 5.0867vw, 8rem);
+  --space-3xs-2xs: clamp(0.25rem, 0.1145rem + 0.578vw, 0.5625rem);
+  --space-2xs-xs: clamp(0.5rem, 0.3374rem + 0.6936vw, 0.875rem);
+  --space-xs-s: clamp(0.75rem, 0.5874rem + 0.6936vw, 1.125rem);
+  --space-s-m: clamp(1rem, 0.8103rem + 0.8092vw, 1.4375rem);
+  --space-m-l: clamp(1.25rem, 1.0603rem + 0.8092vw, 1.6875rem);
+  --space-l-xl: clamp(1.5rem, 1.1749rem + 1.3873vw, 2.25rem);
+  --space-xl-2xl: clamp(2rem, 1.6478rem + 1.5029vw, 2.8125rem);
+  --space-2xl-3xl: clamp(2.5rem, 2.1207rem + 1.6185vw, 3.375rem);
+  --space-3xl-4xl: clamp(3rem, 2.3497rem + 2.7746vw, 4.5rem);
+  --space-4xl-5xl: clamp(4rem, 2.8078rem + 5.0867vw, 6.75rem);
+  --space-5xl-6xl: clamp(6rem, 4.6994rem + 5.5491vw, 9rem);
 
   /* Custom pairs */
-  --space-s-xl: clamp(0.875rem, 0.604rem + 1.1561vw, 1.5rem);
-  --space-3xl-5xl: clamp(2.625rem, 1.1618rem + 6.2428vw, 6rem);
-  --space-s-l: clamp(0.875rem, 0.7124rem + 0.6936vw, 1.25rem);
-  
-  --fluid-112-224: clamp(7rem, 3.9653rem + 12.948vw, 14rem);
-
+  --space-s-l: clamp(1rem, 0.702rem + 1.2717vw, 1.6875rem);
 }
 
 /* Layout */
 
 html {
-  font-family: "Inter", sans-serif;
+  font-family: var(--primary-font);
   color: var(--text);
 }
 
 body {
-  background-color: var(--background);
   position: relative;
-  padding-top:  0;
-  padding-top:  env(safe-area-inset-top);
-  padding-right:  0;
-  padding-right:  env(safe-area-inset-right);
-  padding-bottom: 3rem;
-  padding-bottom:  calc(3rem + env(safe-area-inset-bottom));
-  padding-left:  0;
-  padding-left:  env(safe-area-inset-left);
 }
 
 header {
   position: sticky;
   top: 0;
+}
+
+body,
+header,
+.background {
   background-color: var(--background);
 }
 
@@ -131,43 +115,26 @@ header {
 .wrap {
   max-width: 64rem;
   width: 100%;
-  padding: 0 var(--space-xl);
+  padding: 0 var(--space-s-l);
   margin-left: auto;
   margin-right: auto;
 }
 
 .insulate {
-  padding-top: var(--space-s-l);
-  padding-bottom: var(--space-s-l);
-}
-
-.stack {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.stack > * {
-  margin-block: 0;
-}
-
-.stack > * + * {
-  margin-block-start: var(--space-s-l);
-}
-
-.stack > h2 {
-  margin-top: var(--space-2xl-3xl);
+  padding-top: var(--space-s-m);
+  padding-bottom: var(--space-s-m);
 }
 
 .clickable {
   cursor: pointer;
 }
 
+
 /* Tables */
 
 th,
 td {
-  padding-right: var(--space-s-xl);
+  padding-right: var(--space-s-l);
   padding-bottom: var(--space-s);
   vertical-align: middle;
 }
@@ -189,8 +156,13 @@ td:nth-child(2) {
 
 th:not(:first-child):not(:nth-child(2)),
 td:not(:first-child):not(:nth-child(2)) {
-  width: var(--space-6xl);
+  width: var(--space-5xl-6xl);
   text-align: right;
+}
+
+td:not(:first-child):not(:nth-child(2)) {
+  font-family: var(--accent-font);
+  color: var(--secondary);
 }
 
 th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)),
@@ -206,11 +178,12 @@ td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)) {
 }
 
 th {
-  line-height: 1.2;
   text-align: left;
   font-weight: 600;
   color: var(--secondary);
-  font-size: var(--step--1);
+  font-size: var(--step--2);
+  letter-spacing: .05em;
+  text-transform: uppercase;
 }
 
 thead > tr,
@@ -229,20 +202,6 @@ tr.active-row > td:nth-child(3) {
   background-color: var(--highlight-overlay);
 }
 
-.button {
-  display: flex;
-  padding: var(--space-xs) var(--space-s);
-}
-
-.button .icon {
-  color: var(--accent-icon);
-}
-
-.active-button {
-  background-color: var(--background);
-  font-weight: 500;
-}
-
 /* Forms */
 
 select,
@@ -253,9 +212,16 @@ input {
   border-radius: 0;
   font-weight: 500;
   color: var(--secondary);
-  line-height: var(--space-s);
+  font-size: var(--step-0);
   background-color: var(--background);
 }
+
+input[type="search"] {
+  padding-left: var(--space-xl);
+  padding-right: var(--space-xl);
+}
+
+/* Components */
 
 .icon {
   width: 0.75em;
@@ -266,27 +232,35 @@ input {
   color: var(--icon);
 }
 
-.form-icon {
+.button {
   display: flex;
-  width: var(--space-s);
-  height: var(--space-s);
-  align-items: center;
+  gap: var(--space-2xs);
   justify-content: center;
-  color: var(--accent-icon);
-  opacity: 0.75;
+  padding: var(--space-xs) var(--space-s);
+  align-items: center;
+  border-radius: var(--radius-full);
+  font-size: var(--step--1);
+  line-height: var(--space-s);
+  color: var(--secondary);
+}
+
+.button.active {
+  background-color: var(--background);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.button.active > .icon {
+  color: var(--accent1);
+}
+
+.back-button {
+  padding-left: 0;
 }
 
 /* Global */
 
 /* Typography */
-
-.button-text {
-  font-size: 0.875rem;
-  line-height: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .05em;
-}
 
 .primary-text {
   font-size: var(--step-0);
@@ -296,11 +270,6 @@ input {
 .secondary-text {
   font-size: var(--step--1);
   line-height: 1.2;
-}
-
-.small-text {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 
 /* Utilities */

@@ -3,7 +3,7 @@ import styles from "./NavBar.module.css";
 function NavBar() {
 
   const navBar = document.createElement('div');
-  navBar.className = styles.background;
+  navBar.className = "background";
 
   /* html */
   navBar.innerHTML = `

@@ -23,14 +23,6 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-s);
   padding: var(--space-2xs);
-  background-color: var(--navbar-background);
-  border-radius: var(--radius-full);
-}
-
-.button {
-  display: flex;
-  gap: var(--space-2xs);
-  justify-content: center;
-  align-items: center;
+  background-color: var(--highlight);
   border-radius: var(--radius-full);
 }

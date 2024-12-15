@@ -1,7 +1,6 @@
 import loadFont from "../../../utils/loadFont";
 import setFontStyles from "../../../utils/setFontStyles";
 import Icons from "../Icons";
-import styles from "./FontLink.module.css";
 
 function FontLink({font, action}) {
   

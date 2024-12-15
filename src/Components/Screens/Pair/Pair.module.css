@@ -4,6 +4,7 @@
   display: flex;
   gap: var(--space-s-l);
   width: 100%;
+  margin-bottom: var(--space-s);
 }
 
 .label {
@@ -19,6 +20,8 @@
 
 .xHeight {
   flex-shrink: 0;
+  color: var(--secondary);
+  font-family: var(--accent-font);
 }
 
 
@@ -78,4 +81,13 @@
   width: 100%;
   margin: 0;
   border-top: 1px;
+  border-color: var(--grey-35);
+}
+
+.xHeightLine {
+  border-color: var(--accent2);
+}
+
+.referenceLine {
+  background-color: #d02c04;
 }

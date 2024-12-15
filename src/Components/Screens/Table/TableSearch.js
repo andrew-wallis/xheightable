@@ -9,7 +9,7 @@ function TableSearch(store) {
 
   /* html */
   searchContainer.innerHTML = `
-    <input data-element="search" class=${styles.search} type="text" placeholder="Search"/>
+    <input data-element="search" type="search" placeholder="Search"/>
     <div data-element="search-icon" class=${styles.searchIcon}>
       <!-- Search Icon -->
     </div>
@@ -27,8 +27,8 @@ function TableSearch(store) {
   const searchIcon = searchContainer.querySelector('[data-element="search-icon"]');
   const resetIcon = searchContainer.querySelector('[data-element="reset-icon"]');
 
-  searchIcon.appendChild(Icons("Search", "form-icon"));
-  resetIcon.appendChild(Icons("Cross", "form-icon"));
+  searchIcon.appendChild(Icons("Search", "icon"));
+  resetIcon.appendChild(Icons("Cross", "icon"));
 
   resetIcon.addEventListener('click', function(e) {
     e.preventDefault();

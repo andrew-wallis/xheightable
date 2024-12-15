@@ -18,16 +18,16 @@ function PairSample(referenceFont) {
       </span>
     </div>
     <div class="${styles.sampleWrapper}">
-      <hr data-element="cap-line" class=${styles.sampleLine} style="border-color: #D7BCA0;">
+      <hr data-element="cap-line" class=${styles.sampleLine} style="border-color: #515159;">
     </div>
     <div class="${styles.sampleWrapper} ${styles.sampleReference}">
       <hr data-element="reference-line" class=${styles.sampleLine} style="border-color: ${referenceLineColor};">
     </div>
     <div class="${styles.sampleWrapper}">
-      <hr data-element="xHeight-line" class=${styles.sampleLine} style="border-color: #D7BCA0;">
+      <hr data-element="xHeight-line" class=${styles.sampleLine} style="border-color: #8C7C69;">
     </div>
     <div class="${styles.sampleWrapper}">
-      <hr data-element="base-line" class=${styles.sampleLine} style="border-color: #D7BCA0;">
+      <hr data-element="base-line" class=${styles.sampleLine} style="border-color: #515159;">
     </div>
   `
 

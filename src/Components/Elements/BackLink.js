@@ -1,12 +1,10 @@
-import styles from "./BackLink.module.css";
-
-import Icons from "../Icons";
+import Icons from "./Icons";
 
 function BackLink({action}) {
 
   const backLink = document.createElement('a');
   backLink.href = "#";
-  backLink.className = `${styles.button} secondary-text`;
+  backLink.className = "button back-button";
   backLink.appendChild(Icons("Arrow Left"));
   
   const backLinkLabel = document.createElement('div');

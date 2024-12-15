@@ -22,8 +22,8 @@ function Table(store) {
       <div data-element="top-bar">
         <!-- Table Topbar -->
       </div>
-      <div class="${styles.controlsBackground}">
-        <div class="${styles.controls} insulate wrap" data-element="table-controls">
+      <div class="background">
+        <div class="${styles.container} insulate wrap" data-element="table-controls">
           <!-- Table Controls -->
         </div>
       </div>
@@ -32,8 +32,8 @@ function Table(store) {
       <table>
         <thead>
           <tr>
-          <th><span class="sr-only">Licence</span></th>
-            <th><span class="sr-only">Font</span></th>
+            <th><span class="sr-only">Licence</span></th>
+            <th>Font</th>
             <th>x height</th>
             <th>Cap height</th>
           </tr>

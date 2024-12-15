@@ -17,7 +17,7 @@ function Icons(name, classes) {
         return `<svg width="100%" height="100%" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M0 16V15.998L6.68715 0H11.4145L18.0963 15.998L18.1017 16H0ZM13.3126 15.998L9.05085 5.88543L6.12611 12.7776H9.24475L10.5193 15.998H13.3126Z" fill="currentColor"/></svg>`
 
       case "Arrow Down":
-        return `<svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6L8 10L4 6" stroke="currentColor" stroke-width="1.5"/></svg>`
+        return `<svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 5L8 11L2 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 
       case "Arrow Left":
         return `<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity="0.6" d="M5 1L1 5L5 9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/></svg>`
@@ -29,7 +29,7 @@ function Icons(name, classes) {
         return `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="2.5" width="6" height="9" rx="1" stroke="currentColor"/><path d="M4 4.5V12.5C4 13.0523 4.44772 13.5 5 13.5H10" stroke="currentColor" strokeLinecap="round"/></svg>`
 
       case "Cross":
-        return `<svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.7703 4L7.77026 8M7.77026 8L3.77026 4M7.77026 8L11.7703 12M7.77026 8L3.77026 12" stroke="currentColor" stroke-width="1.5"/></svg>`
+        return `<svg width="100%" height="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2L8 8L2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 14L8.00001 8L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`
 
       case "Import":
         return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.7457 20L14.8537 15.578H9.1777L7.2857 20H4.7337L12.0157 4.04999L19.2757 20H16.7457ZM10.0577 13.51H13.9517L12.0157 8.97799L10.0577 13.51Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19.5303 8.46967L23.0607 12L19.5303 15.5303L18.4697 14.4697L20.9393 12L18.4697 9.53033L19.5303 8.46967Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M3.06065 12L5.53032 9.53033L4.46966 8.46967L0.939331 12L4.46966 15.5303L5.53032 14.4697L3.06065 12Z" fill="currentColor"/></svg>`

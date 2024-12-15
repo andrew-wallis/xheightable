@@ -1,5 +1,5 @@
 
-import BackLink from "./Components/Elements/BackLink/BackLink";
+import BackLink from "./Components/Elements/BackLink";
 import IconButton from "./Components/Global/NavBar/NavBarButton";
 import GetFonts from "./Components/Screens/GetFonts/GetFonts";
 import Pair from "./Components/Screens/Pair/Pair";
@@ -58,7 +58,7 @@ function App({store}) {
 
       const buttons = app.querySelectorAll('[data-element="nav-button"]');
       buttons.forEach(button => {
-        button.getAttribute('data-target') === activeScreen ? button.classList.add("active-button") : button.classList.remove("active-button");
+        button.getAttribute('data-target') === activeScreen ? button.classList.add("active") : button.classList.remove("active");
       });
 
       let pos = 0;

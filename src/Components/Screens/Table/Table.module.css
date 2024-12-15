@@ -1,45 +1,37 @@
-.controlsBackground {
-  margin-bottom: var(--space-s-l);
-  background-color: var(--background);
-}
-
-.controls {
+.container {
   display: flex;
-  gap: var(--space-s);
-}
-
-.search {
-  padding-left: var(--space-2-5xl);
-  padding-right: var(--space-2-5xl);
-}
-
-.select {
-  padding-right: var(--space-2-5xl);
+  gap: var(--space-m);
 }
 
 .searchContainer {
   position: relative;
-  flex-grow: 1;
-  padding: var(--space-2xs) 0;
+  flex-grow: 0;
+  width: 100%;
 }
 
 .selectContainer {
   position: relative;
-  width: var(--fluid-112-224);
   flex-shrink: 0;
-  padding: var(--space-2xs) 0;
+  width: var(--space-6xl);
+}
+
+.searchIcon,
+.resetIcon,
+.selectIcon {
+  position: absolute;
+  top: calc(var(--space-xs) + 1px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--space-s);
+  width: var(--space-s);
 }
 
 .searchIcon {
-  position: absolute;
-  top: var(--space-l);
-  left: var(--space-xs);
+  left: var(--space-2xs);
 }
 
 .resetIcon,
 .selectIcon {
-  position: absolute;
-  display: block;
-  top: var(--space-l);
-  right: var(--space-xs);
+  right: var(--space-2xs);
 }
