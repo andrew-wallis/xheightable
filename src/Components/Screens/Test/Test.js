@@ -1,6 +1,6 @@
 import setFontStyles from "../../../utils/setFontStyles";
-import AppHeader from "../../Global/AppHeader/AppHeader";
-import NavBar from "../../Global/NavBar/NavBar";
+import Branding from "../../Elements/Branding";
+import Navigation from "../../Global/Navigation";
 import styles from "./Test.module.css";
 
 function Test(store) {
@@ -49,8 +49,8 @@ function Test(store) {
   `;
 
   const topBar = test.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(AppHeader());
-  topBar.appendChild(NavBar());
+  topBar.appendChild(Branding());
+  topBar.appendChild(Navigation());
 
   function updateTestScreen() {
     

@@ -1,8 +1,8 @@
 
 import setFontStyles from "../../../utils/setFontStyles";
+import Branding from "../../Elements/Branding";
 import Icons from "../../Elements/Icons";
-import AppHeader from "../../Global/AppHeader/AppHeader";
-import NavBar from "../../Global/NavBar/NavBar";
+import Navigation from "../../Global/Navigation";
 import GetFont from "./GetFont";
 import GetFontAdobe from "./GetFontAdobe";
 import GetFontGoogle from "./GetFontGoogle";
@@ -30,8 +30,8 @@ function GetFonts(store) {
   `;
 
   const topBar = getFonts.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(AppHeader());
-  topBar.appendChild(NavBar());
+  topBar.appendChild(Branding());
+  topBar.appendChild(Navigation());
 
   const primaryFontData = GetFont();
   const secondaryFontData = GetFont();

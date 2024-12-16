@@ -1,13 +1,9 @@
-import TableSearch from "./TableSearch";
-import TableSelect from "./TableSelect";
-import FontLink from "../../Elements/FontLink/FontLink";
+import TableRow from "../../Elements/TableRow";
 import highlightRows from "../../../utils/highlightRows";
 import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
-import styles from "./Table.module.css";
-import AppHeader from "../../Global/AppHeader/AppHeader";
+import Branding from "../../Elements/Branding";
 
 function Table(store) {
-
   
   const table = document.createElement('div');
   table.id = "table";
@@ -21,11 +17,6 @@ function Table(store) {
     <header data-element="table-header">
       <div data-element="top-bar">
         <!-- Table Topbar -->
-      </div>
-      <div class="background">
-        <div class="${styles.container} insulate wrap" data-element="table-controls">
-          <!-- Table Controls -->
-        </div>
       </div>
     </header>
     <main class="wrap insulate stack">
@@ -46,11 +37,7 @@ function Table(store) {
   `;
 
   const topBar = table.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(AppHeader());
-
-  const tableControls = table.querySelector('[data-element="table-controls"]');
-  tableControls.appendChild(TableSearch(store));
-  tableControls.appendChild(TableSelect(store));
+  topBar.appendChild(Branding());
 
   function updateTableList() {
     
@@ -67,7 +54,7 @@ function Table(store) {
       tableList.innerHTML = '';
 
       sortedFonts.map((font, index) => {
-        tableList.appendChild(FontLink({font: font, action: changePrimary}));
+        tableList.appendChild(TableRow({font: font, action: changePrimary}));
       });
 
       tableList.dataset.sort = sort;

@@ -1,6 +1,5 @@
 
-import BackLink from "./Components/Elements/BackLink";
-import IconButton from "./Components/Global/NavBar/NavBarButton";
+import Button from "./Components/Elements/NavigationButton";
 import GetFonts from "./Components/Screens/GetFonts/GetFonts";
 import Pair from "./Components/Screens/Pair/Pair";
 import Table from "./Components/Screens/Table/Table";
@@ -32,7 +31,7 @@ function App({store}) {
 
   const backLinks = app.querySelectorAll('[data-element="back-link"]');
   backLinks.forEach((backLink) => {
-    backLink.appendChild(BackLink({action: changeScreen}));
+    backLink.appendChild(Button({label: "Back", icon: "Arrow Left", type: "back-button", action: backToTable}));
   });
 
   const navButtons = ["Pair", "Test", "Import"];
@@ -40,7 +39,7 @@ function App({store}) {
 
   navBars.forEach((navBar) => {
     navButtons.map(button => {
-      navBar.appendChild(IconButton({icon: button, action: changeScreen}));
+      navBar.appendChild(Button({label: button, icon: button, type: "nav-button", action: changeScreen}));
     });
   });
 
@@ -90,6 +89,10 @@ function App({store}) {
     }
 
     store.setData({activeScreen: screen});
+  }
+
+  function backToTable() {
+    changeScreen("Table");
   }
 
   return app;

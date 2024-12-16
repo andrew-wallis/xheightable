@@ -1,13 +1,40 @@
 import _ from "lodash";
 
 function findPairings(font, fonts) {
+
+  function roundToTwoDecimals(number) {
+    return Math.round(number * 100) / 100;
+  }
   
   let fontList = _.cloneDeep(fonts);
   const thisFont = font;
   
   fontList = fontList.filter(font => font.id !== thisFont.id);
+
+  const exactMatch = fontList.filter(font => font.xHeightPct === thisFont.xHeightPct);
+
+  const closeMatch = fontList.filter(font => 
+    roundToTwoDecimals(Math.abs(font.xHeightPct - thisFont.xHeightPct)) === 0.02
+  );
+
+  const nearMatch = fontList.filter(font => 
+    roundToTwoDecimals(Math.abs(font.xHeightPct - thisFont.xHeightPct)) === 0.04
+  );
+
+  const distantMatch = fontList.filter(font => 
+    roundToTwoDecimals(Math.abs(font.xHeightPct - thisFont.xHeightPct)) > 0.04
+  );
+
+  const renderArray = [
+    exactMatch,
+    closeMatch,
+    nearMatch,
+    distantMatch
+  ];
   
-  fontList = fontList.sort((a, b) => {
+  return renderArray;
+  
+/*   fontList = fontList.sort((a, b) => {
 
     // Sort by xHeights
     const diffA = Math.abs(a.xHeightPct - thisFont.xHeightPct);
@@ -67,7 +94,7 @@ function findPairings(font, fonts) {
     }
   });
 
-  return fontList;
+  return fontList; */
 
 }
 

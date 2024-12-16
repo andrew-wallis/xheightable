@@ -1,27 +1,26 @@
-import Icon from "../../Elements/Icons";
-import styles from "./NavBar.module.css";
+import Icon from "./Icons";
 
-function NavBarButton({icon, action}) {
+function NavigationButton({label, icon, type, action}) {
 
   const iconButton = document.createElement('a');
 
   iconButton.href = "#";
-  iconButton.className = `button`;
+  iconButton.className = `button ${type}`;
   iconButton.appendChild(Icon(icon));
-  iconButton.dataset.element = "nav-button";
-  iconButton.dataset.target = icon;
+  iconButton.dataset.element = type;
+  iconButton.dataset.target = label;
   
   const iconButtonLabel = document.createElement('div');
-  iconButtonLabel.innerText = icon;
+  iconButtonLabel.innerText = label;
   iconButton.appendChild(iconButtonLabel);
 
   iconButton.addEventListener('click', function(e) {
     e.preventDefault();
-    action(icon);
+    action(label);
   });
 
   return iconButton;
 
 }
 
-export default NavBarButton;
+export default NavigationButton;

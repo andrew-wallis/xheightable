@@ -3,10 +3,10 @@ import PairSample from "./PairSample";
 import findPairings from "../../../utils/findPairings";
 import highlightRows from "../../../utils/highlightRows";
 import setFontStyles from "../../../utils/setFontStyles";
-import FontLink from "../../Elements/FontLink/FontLink";
-import styles from "./Pair.module.css";
-import AppHeader from "../../Global/AppHeader/AppHeader";
-import NavBar from "../../Global/NavBar/NavBar";
+import TableRow from "../../Elements/TableRow";
+import Branding from "../../Elements/Branding";
+import Navigation from "../../Global/Navigation";
+import HtmlTable from "../../Elements/HtmlTable";
 
 function Pair(store) {
 
@@ -24,38 +24,26 @@ function Pair(store) {
         <!-- Pair Topbar -->
       </div>
       <div class="wrap insulate stack">
-        <div data-element="pair-labels" class=${styles.labels}>
+        <div data-element="pair-labels" class="labels">
           <!-- Pair Labels -->
         </div>
-        <div class=${styles.samplesOuter}>
-          <div class=${styles.samplesMid}>
-            <div data-element="pair-samples" data-label="" class=${styles.samplesInner}>
+        <div class="samplesOuter">
+          <div class="samplesMid">
+            <div data-element="pair-samples" data-label="" class="samplesInner">
               <!-- Pair Samples -->
             </div>
           </div>
         </div>
       </div>
     </header>
-    <main class="wrap insulate stack">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Font</th>
-            <th>x height</th>
-            <th>Cap height</th>
-          </tr>
-        </thead>
-        <tbody data-element="pair-list">
-          <!-- Pair List -->
-        </tbody>
-      </table>
+    <main data-element="pair-main" class="wrap insulate stack">
+      <!-- Pair Main -->
     </main>
   `;
 
   const topBar = pair.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(AppHeader());
-  topBar.appendChild(NavBar());
+  topBar.appendChild(Branding());
+  topBar.appendChild(Navigation());
   
   const primaryLabel = PairLabel();
   const secondaryLabel = PairLabel();
@@ -120,29 +108,50 @@ function Pair(store) {
 
   function updatePairingList() {
     
-    const pairList = pair.querySelector('[data-element="pair-list"]');
+    const main = pair.querySelector('[data-element="pair-main"]');
     const primary = store.getData().primaryFont;
     const fonts = store.getData().fonts;
 
-    if(Object.keys(primary).length > 0 && pairList.dataset.primary !== primary.name) {
+    if(Object.keys(primary).length > 0 && main.dataset.primary !== primary.name) {
 
-      pairList.innerHTML = '';
+      main.innerHTML = '';
+      main.dataset.primary = primary.name;
+      
       const pairings = findPairings(primary, fonts);
-      pairings.map((font, index) => {
-        pairList.appendChild(FontLink({font: font, action: changeSecondary}));
+      let secondary = {};
+
+      pairings.map((matches, index) => {
+        if(matches.length > 0) {
+          const htmlTable = HtmlTable();
+          main.appendChild(htmlTable);
+          const pairList = htmlTable.querySelector('[data-element="pair-list"]');
+
+          matches.map((font, index) => {
+            pairList.appendChild(TableRow({font: font, action: changeSecondary}));
+          });
+
+          if(Object.keys(secondary).length === 0) {
+            secondary = matches[0]; 
+          }
+        }
       });
 
-      pairList.dataset.primary = primary.name;
-      changeSecondary(pairings[0]);
-
+      changeSecondary(secondary);
     }
   }
 
   store.subscribe(updatePairingList);
 
   function changeSecondary(font) {
-    const pairList = pair.querySelector('[data-element="pair-list"]');
-    highlightRows(pairList, font);
+    const pairLists = pair.querySelectorAll('[data-element="pair-list"]');
+
+    if(pairLists.length > 0) {
+      pairLists.forEach((list) => {
+        highlightRows(list, font);
+      });
+    }
+
+
     store.setData({secondaryFont: font});
   }
 
