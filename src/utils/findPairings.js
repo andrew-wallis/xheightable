@@ -11,7 +11,7 @@ function findPairings(font, fonts) {
   
   fontList = fontList.filter(font => font.id !== thisFont.id);
 
-  const exactMatch = fontList.filter(font => font.xHeightPct === thisFont.xHeightPct);
+/*   const exactMatch = fontList.filter(font => font.xHeightPct === thisFont.xHeightPct);
 
   const closeMatch = fontList.filter(font => 
     roundToTwoDecimals(Math.abs(font.xHeightPct - thisFont.xHeightPct)) === 0.02
@@ -32,9 +32,18 @@ function findPairings(font, fonts) {
     distantMatch
   ];
   
-  return renderArray;
+  return renderArray; */
+
+  fontList.forEach(font => {
+    font.xHeightDiff = Math.abs(font.xHeightPct - thisFont.xHeightPct);
+  });
+
+  fontList.forEach(font => {
+    font.capHeightDiff = 1 - (thisFont.capHeightPct / font.capHeightPct);
+  });
+
   
-/*   fontList = fontList.sort((a, b) => {
+  fontList = fontList.sort((a, b) => {
 
     // Sort by xHeights
     const diffA = Math.abs(a.xHeightPct - thisFont.xHeightPct);
@@ -94,7 +103,7 @@ function findPairings(font, fonts) {
     }
   });
 
-  return fontList; */
+  return fontList;
 
 }
 

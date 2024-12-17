@@ -8,7 +8,7 @@ function PairLabel() {
     <div data-element="label-text" class="secondary-text label">
       <!-- Label Text -->
     </div>
-    <div data-element="label-xHeight" class="secondary-text data">
+    <div data-element="label-xHeight" class="secondary-text">
       <!-- Label xHeight -->
     </div>
   `;

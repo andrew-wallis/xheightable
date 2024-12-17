@@ -6,7 +6,6 @@ import setFontStyles from "../../../utils/setFontStyles";
 import TableRow from "../../Elements/TableRow";
 import Branding from "../../Elements/Branding";
 import Navigation from "../../Global/Navigation";
-import HtmlTable from "../../Elements/HtmlTable";
 
 function Pair(store) {
 
@@ -36,8 +35,22 @@ function Pair(store) {
         </div>
       </div>
     </header>
-    <main data-element="pair-main" class="wrap insulate stack">
-      <!-- Pair Main -->
+    <main class="wrap insulate stack">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Font</th>
+            <th>X-Height Diff</th>
+            <th>Cap Height Diff</th>
+            <th>X-Height</th>
+            <th>Cap Height</th>
+          </tr>
+        </thead>
+        <tbody data-element="pair-list">
+          <!-- Pair List -->
+        </tbody>
+      </table>
     </main>
   `;
 
@@ -62,6 +75,7 @@ function Pair(store) {
   function updatePairingSample() {
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     const capHeight = 33.5 / 16;
 
@@ -72,8 +86,6 @@ function Pair(store) {
     if(secondaryFont.label !== secondaryLabel.dataset.label) {
       updateFont(secondaryFont, secondaryLabel, secondarySample);
     }
-
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
     const sampleText = pair.querySelectorAll('[data-element="font-sample"]');
     sampleText.forEach((text) => {
       text.innerText = isMobile ? "ABC abc" : "ABCEFG abcefg 123";
@@ -86,7 +98,7 @@ function Pair(store) {
         text.innerText = font.shortlabel;
   
         const xHeight = label.querySelector('[data-element="label-xHeight"]');
-        xHeight.innerText = `x ${Math.round(font.xHeightPct * 100)}%`;
+        xHeight.innerHTML = `<span class="deweight">${isMobile ? "x" : "x-height"}</span> <span class="data">${Math.round(font.xHeightPct * 100)}<span class="deweight">%</span></span>`;
   
         const capLine = sample.querySelector('[data-element="cap-line"]');
         capLine.style.verticalAlign = `${capHeight}rem`;
@@ -108,50 +120,29 @@ function Pair(store) {
 
   function updatePairingList() {
     
-    const main = pair.querySelector('[data-element="pair-main"]');
+    const pairList = pair.querySelector('[data-element="pair-list"]');
     const primary = store.getData().primaryFont;
     const fonts = store.getData().fonts;
 
-    if(Object.keys(primary).length > 0 && main.dataset.primary !== primary.name) {
+    if(Object.keys(primary).length > 0 && pairList.dataset.primary !== primary.name) {
 
-      main.innerHTML = '';
-      main.dataset.primary = primary.name;
-      
+      pairList.innerHTML = '';
       const pairings = findPairings(primary, fonts);
-      let secondary = {};
-
-      pairings.map((matches, index) => {
-        if(matches.length > 0) {
-          const htmlTable = HtmlTable();
-          main.appendChild(htmlTable);
-          const pairList = htmlTable.querySelector('[data-element="pair-list"]');
-
-          matches.map((font, index) => {
-            pairList.appendChild(TableRow({font: font, action: changeSecondary}));
-          });
-
-          if(Object.keys(secondary).length === 0) {
-            secondary = matches[0]; 
-          }
-        }
+      pairings.map((font, index) => {
+        pairList.appendChild(TableRow({font: font, action: changeSecondary, fields: ["xHeightDiff", "capHeightDiff", "xHeightPct", "capHeightPct"]}));
       });
 
-      changeSecondary(secondary);
+      pairList.dataset.primary = primary.name;
+      changeSecondary(pairings[0]);
+
     }
   }
 
   store.subscribe(updatePairingList);
 
   function changeSecondary(font) {
-    const pairLists = pair.querySelectorAll('[data-element="pair-list"]');
-
-    if(pairLists.length > 0) {
-      pairLists.forEach((list) => {
-        highlightRows(list, font);
-      });
-    }
-
-
+    const pairList = pair.querySelector('[data-element="pair-list"]');
+    highlightRows(pairList, font);
     store.setData({secondaryFont: font});
   }
 

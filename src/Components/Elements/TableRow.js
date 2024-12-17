@@ -3,7 +3,7 @@ import loadFont from "../../utils/loadFont";
 import setFontStyles from "../../utils/setFontStyles";
 import Icons from "./Icons";
 
-function TableRow({font, action}) {
+function TableRow({font, action, fields}) {
   
   const tableRow = document.createElement('tr');
   tableRow.className = "clickable primary-text";
@@ -24,17 +24,10 @@ function TableRow({font, action}) {
     <td data-element="font-label">
       ${font.label}
     </td>
-    <td data-element="font-xHeight">
-      ${Math.round(font.xHeightPct * 100)}%
-    </td>
-    <td data-element="font-capHeight">
-      ${Math.round(font.capHeightPct * 100)}%
-    </td>
   `;
 
   const icon = tableRow.querySelector('[data-element="font-icon"]');
   icon.appendChild(Icons(font.distribution));
-
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   const fontSize = isMobile ? 1 : 1.125;
@@ -43,6 +36,13 @@ function TableRow({font, action}) {
   label.style.fontFamily = 'system-ui';
   label.style.fontSize = `${fontSize}rem`;
   label.style.lineHeight = "1";
+
+  fields.forEach((field) => {
+    const cell = document.createElement("td");
+    cell.dataset.element = `font-${font[field]}`;
+    cell.innerHTML = `${Math.round(font[field] * 100)}<span class="deweight">%</span>`;
+    tableRow.appendChild(cell);
+  });
 
   if(!('IntersectionObserver' in window)) {
     console.log('IntersectionObserver not supported');

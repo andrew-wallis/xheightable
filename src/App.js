@@ -1,5 +1,5 @@
 
-import Button from "./Components/Elements/NavigationButton";
+import Button from "./Components/Elements/Button";
 import GetFonts from "./Components/Screens/GetFonts/GetFonts";
 import Pair from "./Components/Screens/Pair/Pair";
 import Table from "./Components/Screens/Table/Table";
@@ -13,7 +13,7 @@ function App({store}) {
   store.setData({primaryFont: {}});
   store.setData({secondaryFont: {}});
   store.setData({search: ""});
-  store.setData({sort: "A-Z"});
+  store.setData({sort: "Font"});
   store.setData({activeScreen: "Table"});
   store.setData({tableScroll: 0});
   store.setData({pairScroll: 0});
@@ -22,7 +22,6 @@ function App({store}) {
   // Containers
 
   const app = document.createElement('div');
-
 
   app.appendChild(Table(store));
   app.appendChild(Pair(store));
@@ -94,6 +93,29 @@ function App({store}) {
   function backToTable() {
     changeScreen("Table");
   }
+
+  function setTheme() {
+
+  }
+
+  setTheme();
+
+  function adjustStickyHeaderOffset() {
+    const screen = store.getData().activeScreen;
+
+    if(screen === "Table" || screen === "Pair") {
+      const thisScreen = app.querySelector(`[data-screen="${screen}"]`);
+      const header = thisScreen.querySelector('header');
+      const thead = thisScreen.querySelector('thead');
+      const headerHeight = header.offsetHeight;
+
+      if(thead.style.top !== headerHeight) {
+        thead.style.top = `${headerHeight - 2}px`;
+      }
+    }
+  }
+
+  window.onscroll = function() {adjustStickyHeaderOffset()};
 
   return app;
 

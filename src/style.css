@@ -4,7 +4,7 @@
 
 :root {
 
-  --primary-font: "DM Sans", sans-serif;
+  --primary-font: "SF Pro", sans-serif;
   --accent-font: "DM Mono", monospace;
 
 /*   --white: #FFFFFF;
@@ -78,7 +78,7 @@
 
 html[data-theme="dark"] {
   --background: #0A0A1B;
-  --highlight: #111121;
+  --highlight: #141425;
   --highlight-overlay: #141425;
   --border-secondary: #1F1F2E;
   --border-primary: #343442;
@@ -102,6 +102,7 @@ body {
 
 header {
   position: sticky;
+  z-index: 100;
   top: 0;
   max-height: 50vh;
   overflow-y: auto;
@@ -111,7 +112,6 @@ body,
 header {
   background-color: var(--background);
 }
-
 
 .branding {
   border-bottom: 1px solid var(--border-primary);
@@ -126,7 +126,6 @@ header {
   width: auto;
   height: var(--space-s);
 }
-
 
 nav {
   display: flex;
@@ -158,9 +157,24 @@ nav > div:not(.navbar) {
 th,
 td {
   padding-top: var(--space-s);
-  padding-right: var(--space-s-l);
   padding-bottom: var(--space-s);
   vertical-align: middle;
+}
+
+th {
+  vertical-align: bottom;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 75;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border-primary);
+}
+
+td {
+  padding-right: var(--space-s-l);
 }
 
 th:first-child,
@@ -174,9 +188,8 @@ td:nth-child(2) {
   width: auto;
 }
 
-th:not(:first-child):not(:nth-child(2)),
 td:not(:first-child):not(:nth-child(2)) {
-  width: var(--space-5xl-6xl);
+  width: var(--space-6xl);
   text-align: right;
 }
 
@@ -184,6 +197,11 @@ td:not(:first-child):not(:nth-child(2)) {
   font-family: var(--accent-font);
   color: var(--secondary);
   border-left: 1px solid var(--border-secondary);
+}
+
+th:not(:first-child):not(:nth-child(2)),
+td:not(:first-child):not(:nth-child(2)) {
+  padding-left: var(--space-s);
 }
 
 th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)),
@@ -204,10 +222,11 @@ th {
   font-size: var(--step--2);
   letter-spacing: .05em;
   text-transform: uppercase;
+  color: var(--secondary);
 }
 
-thead > tr {
-  border-bottom: 1px solid var(--border-primary);
+th.active {
+  color: var(--primary);
 }
 
 tbody > tr:not(:last-child) {
@@ -217,6 +236,25 @@ tbody > tr:not(:last-child) {
 tr.clickable:is(:hover, :focus),
 tr.active-row {
   background-color: var(--highlight);
+}
+
+th > a {
+  position: relative;
+  display: block;
+}
+
+.table-arrow {
+  position: absolute;
+  right: 0;
+  top: var(--space-3xs);
+}
+
+.table-arrow > .icon {
+  color: var(--font-secondary);
+}
+
+.table-arrow.reverse {
+  transform: rotate(180deg);
 }
 
 
@@ -391,4 +429,8 @@ tr.active-row {
 .data {
   color: var(--secondary);
   font-family: var(--accent-font);
+}
+
+.deweight {
+  opacity: 0.8;
 }
