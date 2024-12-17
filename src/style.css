@@ -120,6 +120,7 @@ header {
 .branding > div {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .branding > div > svg {

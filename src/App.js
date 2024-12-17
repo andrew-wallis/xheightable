@@ -42,6 +42,11 @@ function App({store}) {
     });
   });
 
+  const brandingControls = app.querySelectorAll('[data-element="branding-controls"]');
+  brandingControls.forEach((control) => {
+    control.appendChild(Button({label: "Theme", icon: "", type: "theme-switch", action: setTheme}))
+  });
+
   function updateScreen() {
 
     const currentScreen = app.getAttribute('data-active');
@@ -95,7 +100,17 @@ function App({store}) {
   }
 
   function setTheme() {
+    
+    const html = document.documentElement;
+    const theme = html.getAttribute("data-theme");
 
+    if(theme) {
+      const newTheme = (theme === "dark") ? "light" : "dark"
+      html.setAttribute("data-theme", newTheme);
+      localStorage.setItem('theme', newTheme);
+    } else {
+      html.setAttribute("data-theme", localStorage.getItem('theme'));
+    }
   }
 
   setTheme();

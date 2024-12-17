@@ -6,7 +6,11 @@ function NavigationButton({label, icon, type, action}) {
 
   iconButton.href = "#";
   iconButton.className = `button ${type}`;
-  iconButton.appendChild(Icon(icon));
+
+  if(icon) {
+    iconButton.appendChild(Icon(icon));
+  }
+  
   iconButton.dataset.element = type;
   iconButton.dataset.target = label;
   
