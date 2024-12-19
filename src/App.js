@@ -21,7 +21,6 @@ function App({store}) {
   store.setData({adjustCap: true});
   store.setData({base: 16});
   store.setData({scale: "1.125"});
-  store.setData({unit: "rem"});
   
 
   // Containers

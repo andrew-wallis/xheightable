@@ -130,6 +130,10 @@ header {
   height: var(--space-s);
 }
 
+.branding-controls > .button {
+  padding: 0;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -368,6 +372,7 @@ code {
 }
 
 .tab.active {
+  font-weight: 600;
   background-color: var(--background);
 }
 
@@ -573,9 +578,8 @@ select {
   flex-shrink: 0;
 }
 
-.control-element > input,
-.control-element > select {
-  max-width: 7rem;
+.control-element > input {
+  max-width: var(--space-4xl);
 }
 
 @media (min-width: 48rem) {

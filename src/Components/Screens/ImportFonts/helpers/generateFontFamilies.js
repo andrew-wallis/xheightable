@@ -4,23 +4,23 @@ function generateFontFamilies(primary, secondary, format) {
 
   const primaryFont = getFontFamily(primary);
   const secondaryFont = getFontFamily(secondary);
-  const returnArray = [];
+  const fontFamilies = [];
 
   if(format === "Variables") {
-    returnArray.push(`  --primary-font: ${primaryFont};`);
-    returnArray.push(`  --secondary-font: ${secondaryFont};`);
+    fontFamilies.push(`  --primary-font: ${primaryFont};`);
+    fontFamilies.push(`  --secondary-font: ${secondaryFont};`);
   } else {
-    returnArray.push(`.primary-font {`);
-    returnArray.push(`  font-family: ${primaryFont};`);
-    returnArray.push(`}`);
-    returnArray.push("");
-    returnArray.push(`.secondary-font {`);
-    returnArray.push(`  font-family: ${secondaryFont};`);
-    returnArray.push(`}`);
-    returnArray.push("");
+    fontFamilies.push(`.primary-font {`);
+    fontFamilies.push(`  font-family: ${primaryFont};`);
+    fontFamilies.push(`}`);
+    fontFamilies.push("");
+    fontFamilies.push(`.secondary-font {`);
+    fontFamilies.push(`  font-family: ${secondaryFont};`);
+    fontFamilies.push(`}`);
+    fontFamilies.push("");
   }
 
-  return returnArray;
+  return fontFamilies;
 
 }
 
