@@ -1,6 +1,6 @@
 
 import Button from "./Components/Elements/Button";
-import GetFonts from "./Components/Screens/GetFonts/GetFonts";
+import ImportFonts from "./Components/Screens/ImportFonts/ImportFonts";
 import Pair from "./Components/Screens/Pair/Pair";
 import Table from "./Components/Screens/Table/Table";
 import Test from "./Components/Screens/Test/Test";
@@ -17,6 +17,11 @@ function App({store}) {
   store.setData({activeScreen: "Table"});
   store.setData({tableScroll: 0});
   store.setData({pairScroll: 0});
+  store.setData({fontSizes: false});
+  store.setData({adjustCap: true});
+  store.setData({base: 16});
+  store.setData({scale: "1.125"});
+  store.setData({unit: "rem"});
   
 
   // Containers
@@ -26,7 +31,7 @@ function App({store}) {
   app.appendChild(Table(store));
   app.appendChild(Pair(store));
   app.appendChild(Test(store));
-  app.appendChild(GetFonts(store));
+  app.appendChild(ImportFonts(store));
 
   const backLinks = app.querySelectorAll('[data-element="back-link"]');
   backLinks.forEach((backLink) => {
@@ -87,7 +92,7 @@ function App({store}) {
     const scroll = window.scrollY;
 
     if(currentScreen === "Table") {
-      store.setData({tableScroll: scroll})
+      store.setData({tableScroll: scroll});
     } else if (currentScreen === "Pair") {
       store.setData({pairScroll: scroll});
     }

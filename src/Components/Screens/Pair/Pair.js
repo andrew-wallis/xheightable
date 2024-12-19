@@ -42,7 +42,7 @@ function Pair(store) {
             <th></th>
             <th>Font</th>
             <th>X-Height Diff</th>
-            <th>Cap Height Diff</th>
+            <th>Cap Height Adjust</th>
             <th>X-Height</th>
             <th>Cap Height</th>
           </tr>

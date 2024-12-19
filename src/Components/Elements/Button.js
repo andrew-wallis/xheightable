@@ -1,6 +1,6 @@
 import Icon from "./Icons";
 
-function NavigationButton({label, icon, type, action}) {
+function Button({label, icon, type, action}) {
 
   const iconButton = document.createElement('a');
 
@@ -27,4 +27,4 @@ function NavigationButton({label, icon, type, action}) {
 
 }
 
-export default NavigationButton;
+export default Button;

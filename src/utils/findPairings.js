@@ -39,7 +39,7 @@ function findPairings(font, fonts) {
   });
 
   fontList.forEach(font => {
-    font.capHeightDiff = 1 - (thisFont.capHeightPct / font.capHeightPct);
+    font.capHeightDiff = 1 - (font.capHeightPct / thisFont.capHeightPct);
   });
 
   
