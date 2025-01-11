@@ -111,7 +111,7 @@ function ImportFonts(store) {
 
         const label = element.querySelector('[data-element="data-label"]');
         label.innerText = font.label;
-        setFontStyles({element: label, font: font, size: isMobile ? 1.3 : 1.5, leading: 1.5});
+        setFontStyles({element: label, font: font, size: isMobile ? 1.3 : 1.5, leading: 1.5, weight: "bold"});
 
         const details = element.querySelector('[data-element="data-details"]');
         details.innerHTML = '';

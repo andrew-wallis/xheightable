@@ -17,8 +17,7 @@ function App({store}) {
   store.setData({activeScreen: "Table"});
   store.setData({tableScroll: 0});
   store.setData({pairScroll: 0});
-  store.setData({fontSizes: false});
-  store.setData({adjustCap: true});
+  store.setData({fontSizes: true});
   store.setData({base: 16});
   store.setData({scale: "1.125"});
   

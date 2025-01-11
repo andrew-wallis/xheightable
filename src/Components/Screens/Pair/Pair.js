@@ -109,7 +109,7 @@ function Pair(store) {
         const xHeightLine = sample.querySelector('[data-element="xHeight-line"]');
         xHeightLine.style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
 
-        setFontStyles({element: sample, font: font, size: "3", leading: "3"});
+        setFontStyles({element: sample, font: font, size: "3", leading: "3rem", weight: "normal"});
 
         label.dataset.label = font.label;
       }

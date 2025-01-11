@@ -36,7 +36,7 @@ function Table(store) {
   topBar.appendChild(Branding());
 
   const tableHeader = table.querySelector('[data-element="table-fields');
-  tableHeader.appendChild(TableHeader({fields: ["Licence", "Font", "X-Height", "Cap Height"], action: changeSort}));
+  tableHeader.appendChild(TableHeader({fields: ["Licence", "Font", "X-Height", "Cap Height", "Line Heights"], action: changeSort}));
 
   function updateTableList() {
     
@@ -53,7 +53,7 @@ function Table(store) {
       tableList.innerHTML = '';
 
       sortedFonts.map((font, index) => {
-        tableList.appendChild(TableRow({font: font, action: changePrimary, fields: ["xHeightPct", "capHeightPct"]}));
+        tableList.appendChild(TableRow({font: font, action: changePrimary, fields: ["xHeightPct", "capHeightPct", "lineRange"]}));
       });
 
       highlightRows(tableList, store.getData().primaryFont);

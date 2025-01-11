@@ -1,12 +1,12 @@
 function getFontStylesheet(font) {
 
   if(font.distribution === "Google") {
-    const weightVar = (font["rg"].includes("i") ? "ital,wght" : "wght");
-    const weightArray = font["rg"].split(";");
+    const weightVar = (font["weight"].includes("i") ? "ital,wght" : "wght");
+    const weightArray = font["weight"].split(";");
     const processedArray = [];
 
     weightArray.forEach((val) => {
-      if(font.rg.includes("i")) {
+      if(font.weight.includes("i")) {
         if(!val.includes("i")) {
           processedArray.push(`0,${val}`);
         }

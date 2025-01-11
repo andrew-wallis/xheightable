@@ -20,6 +20,7 @@
 
   --background: #FFFFFF;
   --highlight: #F7F7F8;
+  --well: #F7F7F8;
   --highlight-overlay: #F2F2F3;
   --border-secondary: #E7E7E9;
   --border-primary: #CECED1;
@@ -79,6 +80,7 @@
 }
 
 html[data-theme="dark"] {
+  --well: #03030A;
   --background: #0A0A1B;
   --highlight: #141425;
   --highlight-overlay: #141425;
@@ -154,7 +156,7 @@ nav > div:not(.navbar) {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-s);
   padding: var(--space-2xs);
-  background-color: var(--highlight);
+  background-color: var(--well);
   border-radius: var(--radius-full);
 }
 
@@ -296,6 +298,24 @@ th > a {
   border-width: 0;
 }
 
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.stack-m {
+  gap: var(--space-m);
+}
+
+.stack-l {
+  gap: var(--space-l);
+}
+
+.stack-xl {
+  gap: var(--space-xl);
+}
+
 
 /* Elements */
 
@@ -337,7 +357,7 @@ th > a {
 }
 
 .cta-button {
-  border: 1px solid var(--border-secondary);
+  border: 1px solid var(--border-primary);
   border-radius: 0;
   font-weight: 600;
   font-size: var(--step--2);
@@ -382,18 +402,25 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+select {
+  appearance: none;
+}
+
 input,
 select {
+  display: block;
   border: 1px solid var(--border-primary);
+  border-radius: 0;
   padding: var(--space-xs) var(--space-s);
   font-family: var(--accent-font);
-  line-height: var(--space-s);
-  vertical-align: middle;
+  font-size: 1rem;
+  line-height: var(--space-m);
+  background-color: var(--background);
+  color: var(--text);
 }
 
 [type="checkbox"], 
-[type="radio"],
-select {
+[type="radio"] {
   appearance: auto;
 }
 
@@ -477,6 +504,136 @@ select {
   border-top: 1px;
 }
 
+/* Test Screen */
+
+.test-wrapper {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--space-s-xl);
+}
+
+.test-wrapper hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--border-secondary);
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  .test-wrapper {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.test-example {
+  cursor: pointer;
+}
+
+.test-section {
+  grid-column: 1 / 3;
+}
+
+.test-title {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.test-lede {
+  font-style: italic;
+  color: var(--secondary);
+}
+
+.test-byline {
+  display: flex;
+  gap: var(--space-s);
+  color: var(--secondary);
+}
+
+.test-heading {
+  margin-top: var(--space-m);
+}
+
+.test-subheading {
+  margin-top: var(--space-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.test-list {
+  margin-left: var(--space-s);
+}
+
+.test-list > li {
+  list-style-type: disc;
+}
+
+.test-quote {
+  text-align: center;
+  font-style: italic;
+}
+
+.test-citation {
+  text-align: right;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.test-form {
+  padding: var(--space-l);
+  background-color: var(--highlight);
+}
+
+.test-form-title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.test-input {
+  border: 1px solid var(--border-primary);
+  padding: var(--space-xs) var(--space-s);
+}
+
+.test-checkbox-wrapper {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.test-checkbox {
+  border: 1px solid var(--border-primary);
+  width: var(--space-s);
+  height: var(--space-s);
+}
+
+.test-button {
+  border: 1px solid var(--icon-secondary);
+  background-color: var(--icon-secondary);
+  padding: var(--space-xs) var(--space-s);
+  color: var(--background);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.test-highlighted {
+  background-color: var(--highlight);
+  outline-width: var(--space-3xs);
+  outline-color: var(--highlight);
+  color: var(--text);
+}
+
+.test-form .test-highlighted {
+  background-color: var(--highlight-overlay);
+}
+
+.test-form .test-button.test-highlighted {
+  background-color: var(--icon);
+  color: var(--background);
+}
+
+
 /* Import Screen */
 
 .embed-wrapper {
@@ -495,7 +652,7 @@ select {
 .embed {
   display: flex;
   flex-direction: column;
-  gap: var(--space-l);
+  gap: var(--space-s);
   flex-shrink: 0;
   flex-grow: 0;
 }
@@ -547,7 +704,7 @@ select {
   flex-direction: column;
   gap: var(--space-s);
   padding: var(--space-s);
-  background-color: var(--highlight);
+  background-color: var(--well);
 }
 
 .control-panel {
@@ -608,7 +765,7 @@ select {
 
 /* Typography */
 
-h2 {
+strong {
   font-weight: 600;
 }
 
@@ -640,7 +797,12 @@ h2 {
   opacity: 0.8;
 }
 
-input:disabled,
 .disabled {
   opacity: 0.4;
+}
+
+input:disabled,
+select:disabled {
+  opacity: 1;
+  color: var(--text);
 }

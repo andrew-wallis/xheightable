@@ -40,7 +40,11 @@ function TableRow({font, action, fields}) {
   fields.forEach((field) => {
     const cell = document.createElement("td");
     cell.dataset.element = `font-${font[field]}`;
-    cell.innerHTML = `${Math.round(font[field] * 100)}<span class="deweight">%</span>`;
+    if(field === "lineRange") {
+      cell.innerHTML = font[field];
+    } else {
+      cell.innerHTML = `${Math.round(font[field] * 100)}<span class="deweight">%</span>`;
+    }
     tableRow.appendChild(cell);
   });
 
@@ -51,7 +55,7 @@ function TableRow({font, action, fields}) {
       entries.forEach((entry) => {
         if(entry.isIntersecting) {
           loadFont(font).then(() => {
-            setFontStyles({element: label, font: font, size: fontSize});
+            setFontStyles({element: label, font: font, size: fontSize, weight: "normal"});
           });
           observer.disconnect();
         }
