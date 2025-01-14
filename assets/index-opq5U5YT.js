@@ -77,9 +77,9 @@
         </pre>
       </div>
     </div>
-  `;const f=u.querySelector('[data-element="copy-stylesheet"]');return f.addEventListener("click",function(v){v.preventDefault();const p=f.querySelector('[data-element="copy-label"]'),x=u.querySelector("code");navigator.clipboard.writeText(x.textContent).then(()=>{p.innerText="Copied",setTimeout(()=>{p.innerText="Copy"},1e3)})}),u.querySelector('[data-element="copy-icon"]').appendChild($2("Copy")),u}function V9({label:u,action:f,value:a}){const v=document.createElement("div");v.className="control-element";const p=u.replace(/\W/g,"_");v.innerHTML=`
+  `;const f=u.querySelector('[data-element="copy-stylesheet"]');return f.addEventListener("click",function(v){v.preventDefault();const p=f.querySelector('[data-element="copy-label"]'),x=u.querySelector("code");navigator.clipboard.writeText(x.textContent).then(()=>{p.innerText="Copied",setTimeout(()=>{p.innerText="Copy"},1e3)})}),u.querySelector('[data-element="copy-icon"]').appendChild($2("Copy")),u}function V9({label:u,action:f,value:a}){const v=document.createElement("div");v.className="control-element checkbox-wrapper";const p=u.replace(/\W/g,"_");v.innerHTML=`
     <input id=${p} type="checkbox">
-    <label for=${p}>${u}</label>
+    <label class="secondary-text" for=${p}>${u}</label>
   `;const x=v.querySelector("input");return x.checked=a,x.addEventListener("change",function(){x.checked?f(!0):f(!1)}),v}function xi(u,f,a,v,p){function x(L){return Math.round(L*100)/100}const Z=P7(u),R=P7(f),B=x(u.capHeightPct/.7),A=x(f.capHeightPct/.7),b=[];return a==="Variables"?(b.push(`  --primary-font: ${Z};`),b.push(`  --secondary-font: ${R};`),b.push(""),v&&(b.push(`  --primary-adjust: ${B}`),b.push(`  --secondary-adjust: ${A}`),b.push("")),p&&(b.push(`  --primary-long-line-height: ${u.lineMax}`),b.push(`  --primary-short-line-height: ${u.lineMin}`),b.push(""),b.push(`  --secondary-long-line-height: ${f.lineMax}`),b.push(`  --secondary-short-line-height: ${f.lineMin}`),b.push(""))):(b.push(".primary-font {"),b.push(`  font-family: ${Z};`),b.push("}"),b.push(""),b.push(".secondary-font {"),b.push(`  font-family: ${R};`),b.push("}"),b.push(""),(p||v)&&(b.push(".primary-font-paragraph {"),v&&b.push(`  font-size: calc(1rem * ${B});`),p&&b.push(`  line-height: ${u.lineMax};`),b.push("}"),b.push(""),b.push(".primary-font-heading {"),v&&b.push(`  font-size: calc(2rem * ${B});`),p&&b.push(`  line-height: ${u.lineMin};`),b.push("}"),b.push(""),b.push(".secondary-font-paragraph {"),v&&b.push(`  font-size: calc(1rem * ${A});`),p&&b.push(`  line-height: ${f.lineMax};`),b.push("}"),b.push(""),b.push(".secondary-font-heading {"),v&&b.push(`  font-size: calc(2rem * ${A});`),p&&b.push(`  line-height: ${f.lineMin};`),b.push("}"),b.push(""))),b}function yi(u){const f=document.createElement("div");f.id="import",f.className="screen",f.style.display="none",f.dataset.screen="Import",f.dataset.element="screen",f.innerHTML=`
     <header data-element="import-header">
       <div data-element="top-bar">
@@ -174,7 +174,7 @@ function print() { __p += __j.call(arguments, '') }
         </div>
       </div>
     </header>
-    <main class="wrap insulate stack">
+    <main class="wrap insulate stack table-wrapper">
       <table>
         <thead>
           <tr>
@@ -498,7 +498,7 @@ function print() { __p += __j.call(arguments, '') }
       <div class="insulate" data-element="table-guidance">
         <!-- Table Guidance -->
       </div>
-      <div class="insulate">
+      <div class="insulate table-wrapper">
         <table>
           <thead data-element="table-fields">
           <!-- Table Header -->
