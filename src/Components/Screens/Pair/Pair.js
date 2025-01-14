@@ -41,10 +41,8 @@ function Pair(store) {
           <tr>
             <th></th>
             <th>Font</th>
-            <th>X-Height Diff</th>
-            <th>Cap Height Adjust</th>
             <th>X-Height</th>
-            <th>Cap Height</th>
+            <th>X-Height Difference</th>
           </tr>
         </thead>
         <tbody data-element="pair-list">
@@ -129,11 +127,14 @@ function Pair(store) {
       pairList.innerHTML = '';
       const pairings = findPairings(primary, fonts);
       pairings.map((font, index) => {
-        pairList.appendChild(TableRow({font: font, action: changeSecondary, fields: ["xHeightDiff", "capHeightDiff", "xHeightPct", "capHeightPct"]}));
+        pairList.appendChild(TableRow({font: font, action: changeSecondary, fields: ["xHeightPct", "xHeightDiff"]}));
       });
 
       pairList.dataset.primary = primary.name;
-      changeSecondary(pairings[0]);
+
+      const newSecondary = pairings[0];
+      store.setData({secondaryFont: newSecondary})
+      highlightRows(pairList, newSecondary);
 
     }
   }
@@ -141,9 +142,14 @@ function Pair(store) {
   store.subscribe(updatePairingList);
 
   function changeSecondary(font) {
-    const pairList = pair.querySelector('[data-element="pair-list"]');
-    highlightRows(pairList, font);
-    store.setData({secondaryFont: font});
+    if(store.getData().secondaryFont.label === font.label) {
+      store.setData({primaryFont: font});
+      window.scrollTo(0, 0);
+    } else {
+      const pairList = pair.querySelector('[data-element="pair-list"]');
+      highlightRows(pairList, font);
+      store.setData({secondaryFont: font});
+    }
   }
 
   return pair;

@@ -39,7 +39,7 @@ function findPairings(font, fonts) {
   });
 
   fontList.forEach(font => {
-    font.capHeightDiff = 1 - (font.capHeightPct / thisFont.capHeightPct);
+    font.capHeightDiff = 1 - (font.capHeightPct / 0.7);
   });
 
   
@@ -87,7 +87,7 @@ function findPairings(font, fonts) {
     }
 
     // Then sort by classification
-    const classA = (a.classification !== thisFont.classification) ? 1 : 0;
+    /* const classA = (a.classification !== thisFont.classification) ? 1 : 0;
     const classB = (b.classification !== thisFont.classification) ? 1 : 0;
     if(classA !== classB) {
       return classB - classA;
@@ -100,7 +100,7 @@ function findPairings(font, fonts) {
       return subclassB - subclassA;
     } else {
       return b.Score - a.Score;
-    }
+    } */
   });
 
   return fontList;

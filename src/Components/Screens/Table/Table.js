@@ -3,6 +3,8 @@ import highlightRows from "../../../utils/highlightRows";
 import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
 import Branding from "../../Elements/Branding";
 import TableHeader from "../../Elements/TableHeader";
+import TableGuidance from "./TableGuidance";
+import TableShowGuidance from "./TableShowGuidance";
 
 function Table(store) {
   
@@ -20,15 +22,20 @@ function Table(store) {
         <!-- Table Topbar -->
       </div>
     </header>
-    <main class="wrap insulate stack">
-      <table>
-        <thead data-element="table-fields">
-        <!-- Table Header -->
-        </thead>
-        <tbody data-element="table-list">
-          <!-- Table List -->
-        </tbody>
-      </table>
+    <main class="wrap stack">
+      <div class="insulate" data-element="table-guidance">
+        <!-- Table Guidance -->
+      </div>
+      <div class="insulate">
+        <table>
+          <thead data-element="table-fields">
+          <!-- Table Header -->
+          </thead>
+          <tbody data-element="table-list">
+            <!-- Table List -->
+          </tbody>
+        </table>
+      </div>
     </main>
   `;
 
@@ -36,7 +43,25 @@ function Table(store) {
   topBar.appendChild(Branding());
 
   const tableHeader = table.querySelector('[data-element="table-fields');
-  tableHeader.appendChild(TableHeader({fields: ["Licence", "Font", "X-Height", "Cap Height", "Line Heights"], action: changeSort}));
+  tableHeader.appendChild(TableHeader({fields: ["Licence", "Font", "X-Height", "Cap Height", "Line Height (Short)", "Line Height (Long)"], action: changeSort}));
+
+  function updateGuidance() {
+    const guidance = table.querySelector('[data-element="table-guidance"]');
+    guidance.innerHTML = "";
+
+    if(!localStorage.getItem('guidance')) {
+      localStorage.setItem('guidance', "show");
+    }
+
+    if(localStorage.getItem('guidance') === "show") {
+      guidance.appendChild(TableGuidance(toggleGuidance));
+    } else {
+      guidance.appendChild(TableShowGuidance(toggleGuidance));
+    }
+  }
+
+  updateGuidance();
+
 
   function updateTableList() {
     
@@ -53,7 +78,7 @@ function Table(store) {
       tableList.innerHTML = '';
 
       sortedFonts.map((font, index) => {
-        tableList.appendChild(TableRow({font: font, action: changePrimary, fields: ["xHeightPct", "capHeightPct", "lineRange"]}));
+        tableList.appendChild(TableRow({font: font, action: changePrimary, fields: ["xHeightPct", "capHeightPct", "lineMin","lineMax"]}));
       });
 
       highlightRows(tableList, store.getData().primaryFont);
@@ -87,6 +112,16 @@ function Table(store) {
 
   store.subscribe(updateTableList);
   updateTableList();
+
+  function toggleGuidance() {
+    if(localStorage.getItem('guidance') === "show") {
+      localStorage.setItem('guidance', "hide");
+    } else {
+      localStorage.setItem('guidance', "show");
+    }
+
+    updateGuidance();
+  }
 
   function changePrimary(font) {
     store.setData({tableScroll: window.scrollY});

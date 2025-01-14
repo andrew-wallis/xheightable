@@ -40,7 +40,7 @@ function TableRow({font, action, fields}) {
   fields.forEach((field) => {
     const cell = document.createElement("td");
     cell.dataset.element = `font-${font[field]}`;
-    if(field === "lineRange") {
+    if(field === "lineMax" || field === "lineMin") {
       cell.innerHTML = font[field];
     } else {
       cell.innerHTML = `${Math.round(font[field] * 100)}<span class="deweight">%</span>`;

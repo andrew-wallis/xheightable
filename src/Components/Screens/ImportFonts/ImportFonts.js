@@ -1,18 +1,10 @@
-
-import setFontStyles from "../../../utils/setFontStyles";
 import Branding from "../../Elements/Branding";
 import Navigation from "../../Global/Navigation";
-import ImportEmbed from "./ImportEmbed";
 import ImportGoogle from "./ImportGoogle";
 import ImportAdobe from "./ImportAdobe";
 import ImportCode from "./ImportCode";
-import getFontFamily from "../../../utils/getFontFamily";
 import Button from "../../Elements/Button";
 import Checkbox from "../../Elements/Checkbox";
-import NumberField from "../../Elements/NumberField";
-import Select from "../../Elements/Select";
-import ButtonGroup from "../../Elements/ButtonGroup";
-import generateFontSizes from "./helpers/generateFontSizes";
 import generateFontFamilies from "./helpers/generateFontFamilies";
 
 function ImportFonts(store) {
@@ -47,8 +39,10 @@ function ImportFonts(store) {
   topBar.appendChild(Branding());
   topBar.appendChild(Navigation());
 
-  const primaryEmbed = ImportEmbed();
-  const secondaryEmbed = ImportEmbed();
+  const primaryEmbed = document.createElement('div');
+  primaryEmbed.dataset.element = "data-details";
+  const secondaryEmbed = document.createElement('div');
+  secondaryEmbed.dataset.element = "data-details";
   const code = ImportCode();
 
   const divider = document.createElement('hr');
@@ -76,13 +70,8 @@ function ImportFonts(store) {
   // Controls
 
   const controlContainer = importFonts.querySelector('[data-element="import-controls"]');
-  controlContainer.appendChild(Checkbox({label: "Include font sizes", action: toggleSizes, value: store.getData().fontSizes}));
-
-  const sizeControlContainer = document.createElement('div');
-  sizeControlContainer.className = "control-size";
-  sizeControlContainer.appendChild(NumberField({label: "Base", suffix: "px", action: changeBaseSize, value: store.getData().base}));
-  sizeControlContainer.appendChild(Select({label: "Scale", options: [1.067, 1.125, 1.2, 1.25, 1.333, 1.414, 1.5, 1.618, 1.667, 1.778, 1.875, 2], action: changeScale, value: store.getData().scale}));
-  controlContainer.appendChild(sizeControlContainer);
+  controlContainer.appendChild(Checkbox({label: "Include cap height adjusts", action: toggleCapAdjusts, value: store.getData().capAdjusts}));
+  controlContainer.appendChild(Checkbox({label: "Include line heights", action: toggleLineHeights, value: store.getData().lineHeights}));
 
 
   // Functions
@@ -107,19 +96,12 @@ function ImportFonts(store) {
 
       if(Object.keys(font).length > 0) {
 
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-        const label = element.querySelector('[data-element="data-label"]');
-        label.innerText = font.label;
-        setFontStyles({element: label, font: font, size: isMobile ? 1.3 : 1.5, leading: 1.5, weight: "bold"});
-
-        const details = element.querySelector('[data-element="data-details"]');
-        details.innerHTML = '';
+        element.innerHTML = '';
 
         if(font.distribution === "Google") {
-          details.appendChild(ImportGoogle(font));
+          element.appendChild(ImportGoogle(font));
         } else {
-          details.appendChild(ImportAdobe(font));
+          element.appendChild(ImportAdobe(font));
         }
 
         element.dataset.label = font.label;
@@ -134,12 +116,8 @@ function ImportFonts(store) {
 
       let codeArray = [];
 
-      codeArray = [...codeArray, ...generateFontFamilies(primaryFont, secondaryFont, format)];
+      codeArray = [...codeArray, ...generateFontFamilies(primaryFont, secondaryFont, format, store.getData().capAdjusts, store.getData().lineHeights)];
       codeArray.push("");
-
-      if(store.getData().fontSizes) {
-        codeArray = [...codeArray, ...generateFontSizes(store.getData().base, store.getData().scale, format, primaryFont, secondaryFont)];
-      }
 
       if(format === "Variables") {
         codeArray.unshift("");
@@ -175,36 +153,17 @@ function ImportFonts(store) {
   changeTab("Variables");
 
 
-  function toggleSizes(bool) {
-
-    const elements = sizeControlContainer.querySelectorAll('input, select');
-
-    if(bool) {
-      store.setData({fontSizes: true});
-      sizeControlContainer.classList.remove("disabled");
-
-      elements.forEach((element) => {
-        element.disabled = false;
-      });
-    } else {
-      store.setData({fontSizes: false});
-      sizeControlContainer.classList.add("disabled");
-
-      elements.forEach((element) => {
-        element.disabled = true;
-      });
-    }
+  function toggleCapAdjusts(bool) {
+    store.setData({capAdjusts: bool});
   }
 
-  toggleSizes(false);
+  toggleCapAdjusts(store.getData().capAdjusts);
 
-  function changeBaseSize(value) {
-    store.setData({base: value});
+  function toggleLineHeights(bool) {
+    store.setData({lineHeights: bool});
   }
- 
-  function changeScale(value) {
-    store.setData({scale: value});
-  }
+
+  toggleLineHeights(store.getData().lineHeights);
 
   return importFonts;
 

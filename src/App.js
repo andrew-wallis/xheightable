@@ -17,9 +17,8 @@ function App({store}) {
   store.setData({activeScreen: "Table"});
   store.setData({tableScroll: 0});
   store.setData({pairScroll: 0});
-  store.setData({fontSizes: true});
-  store.setData({base: 16});
-  store.setData({scale: "1.125"});
+  store.setData({capAdjusts: true});
+  store.setData({lineHeights: true});
   
 
   // Containers
@@ -47,7 +46,10 @@ function App({store}) {
 
   const brandingControls = app.querySelectorAll('[data-element="branding-controls"]');
   brandingControls.forEach((control) => {
-    control.appendChild(Button({label: "Theme", icon: "", type: "theme-switch", action: setTheme}))
+    const tipNotice = document.createElement("div");
+    tipNotice.innerText = "Enjoying x-heightable?";
+    control.appendChild(tipNotice);
+    control.appendChild(Button({label: "Leave us a tip!", icon: "", type: "tipjar", action: setTheme}))
   });
 
   function updateScreen() {
@@ -116,7 +118,7 @@ function App({store}) {
     }
   }
 
-  setTheme();
+  //setTheme();
 
   function adjustStickyHeaderOffset() {
     const screen = store.getData().activeScreen;

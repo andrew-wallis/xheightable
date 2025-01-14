@@ -1,3 +1,4 @@
+import getLineHeight from "../../../utils/getLineHeight";
 import setFontStyles from "../../../utils/setFontStyles";
 import Branding from "../../Elements/Branding";
 import Navigation from "../../Global/Navigation";

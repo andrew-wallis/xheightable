@@ -1,6 +1,6 @@
 function PairSample(referenceFont) {
 
-  const referenceLineColor = referenceFont ? "#FF539B" : "transparent";
+  const referenceLineColor = referenceFont ? "#D92854" : "transparent";
   
   const fontSample = document.createElement('div');
   fontSample.className = "sample";
@@ -16,16 +16,16 @@ function PairSample(referenceFont) {
       </span>
     </div>
     <div class="sampleWrapper">
-      <hr data-element="cap-line" class="sampleLine" style="border-color: #609FFF;">
+      <hr data-element="cap-line" class="sampleLine">
     </div>
     <div class="sampleWrapper sampleReference">
       <hr data-element="reference-line" class="sampleLine" style="border-color: ${referenceLineColor};">
     </div>
     <div class="sampleWrapper">
-      <hr data-element="xHeight-line" class="sampleLine" style="border-color: #25BE7E;">
+      <hr data-element="xHeight-line" class="sampleLine x-line">
     </div>
     <div class="sampleWrapper">
-      <hr data-element="base-line" class="sampleLine" style="border-color: #FDB784;">
+      <hr data-element="base-line" class="sampleLine">
     </div>
   `
 
