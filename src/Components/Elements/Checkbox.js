@@ -1,14 +1,14 @@
 function Checkbox({label, action, value}) {
 
   const checkboxWrapper = document.createElement('div');
-  checkboxWrapper.className = "control-element";
+  checkboxWrapper.className = "control-element checkbox-wrapper";
 
   const id = label.replace(/\W/g,'_');
 
   /* html */
   checkboxWrapper.innerHTML = `
     <input id=${id} type="checkbox">
-    <label for=${id}>${label}</label>
+    <label class="secondary-text" for=${id}>${label}</label>
   `;
 
   const checkbox = checkboxWrapper.querySelector('input');

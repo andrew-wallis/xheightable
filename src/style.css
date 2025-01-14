@@ -158,7 +158,7 @@ header {
 }
 
 .branding-controls > .button {
-  color: var(--background);
+  color: #fff;
   background-color: var(--blue);
 }
 
@@ -189,6 +189,14 @@ nav > div:not(.navbar) {
 
 /* Tables */
 
+table {
+  min-width: 32rem;
+}
+
+.table-wrapper {
+  overflow-y: auto;
+}
+
 th,
 td {
   padding-top: var(--space-s);
@@ -201,10 +209,6 @@ th {
 }
 
 thead {
-  position: sticky;
-  top: 0;
-  z-index: 75;
-  background-color: var(--background);
   border-bottom: 1px solid var(--border-accent);
 }
 
@@ -237,18 +241,6 @@ td:not(:first-child):not(:nth-child(2)) {
 th:not(:first-child):not(:nth-child(2)),
 td:not(:first-child):not(:nth-child(2)) {
   padding-left: var(--space-s);
-}
-
-th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)),
-td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)) {
-  display: none;
-}
-
-@media (min-width: 48rem) {
-  th:not(:first-child):not(:nth-child(2)):not(:nth-child(3)),
-  td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)) {
-    display: table-cell;
-  }
 }
 
 th {
@@ -363,6 +355,7 @@ th > a {
   font-size: var(--step--1);
   line-height: var(--space-s);
   color: var(--secondary);
+  font-weight: 500;
 }
 
 .navbar > .button {
@@ -463,6 +456,41 @@ select {
 [type="radio"] {
   appearance: auto;
 }
+
+[type="checkbox"] {
+  width: var(--space-m);
+  height: var(--space-m);
+  opacity: 0;
+}
+
+.checkbox-wrapper {
+  position: relative;
+}
+
+.checkbox-wrapper > label::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: var(--space-m);
+  height: var(--space-m);
+  border: 1px solid var(--border-accent);
+}
+
+.checkbox-wrapper > [type="checkbox"]:checked + label::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6.5px;
+  display: block;
+  height: 0.75rem;
+  width: 0.375rem;
+  border-bottom: 2px solid var(--blue);
+  border-right: 2px solid var(--blue);
+  transform: rotate(45deg);
+}
+
 
 /* Guidance */
 

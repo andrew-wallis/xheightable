@@ -35,7 +35,7 @@ function Pair(store) {
         </div>
       </div>
     </header>
-    <main class="wrap insulate stack">
+    <main class="wrap insulate stack table-wrapper">
       <table>
         <thead>
           <tr>

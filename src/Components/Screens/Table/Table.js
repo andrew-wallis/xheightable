@@ -26,7 +26,7 @@ function Table(store) {
       <div class="insulate" data-element="table-guidance">
         <!-- Table Guidance -->
       </div>
-      <div class="insulate">
+      <div class="insulate table-wrapper">
         <table>
           <thead data-element="table-fields">
           <!-- Table Header -->
