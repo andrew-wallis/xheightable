@@ -46,10 +46,7 @@ function App({store}) {
 
   const brandingControls = app.querySelectorAll('[data-element="branding-controls"]');
   brandingControls.forEach((control) => {
-    const tipNotice = document.createElement("div");
-    tipNotice.innerText = "Enjoying x-heightable?";
-    control.appendChild(tipNotice);
-    control.appendChild(Button({label: "Leave us a tip!", icon: "", type: "tipjar", action: setTheme}))
+    control.appendChild(Button({label: "Buy us a coffee!", icon: "", type: "tipjar", action: setTheme}))
   });
 
   function updateScreen() {

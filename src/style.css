@@ -145,21 +145,9 @@ header {
   align-items: center;
 }
 
-.branding-controls > div {
-  color: var(--secondary);
-  font-size: var(--step--1);
-  display: none;
-}
-
-@media (min-width: 48rem) {
-  .branding-controls > div {
-    display: block;
-  }
-}
-
 .branding-controls > .button {
-  color: #fff;
-  background-color: var(--blue);
+  color: var(--blue);
+  font-weight: 600;
 }
 
 nav {
@@ -210,6 +198,7 @@ th {
 
 thead {
   border-bottom: 1px solid var(--border-accent);
+  position: sticky;
 }
 
 td {
@@ -496,7 +485,8 @@ select {
 
 .table-guidance-wrapper {
   gap: var(--space-xl);
-  background-color: var(--highlight); 
+  background-color: var(--highlight);
+  padding: var(--space-xl);
 }
 
 .table-guidance-grid {

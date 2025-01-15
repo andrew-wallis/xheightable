@@ -142,14 +142,9 @@ function Pair(store) {
   store.subscribe(updatePairingList);
 
   function changeSecondary(font) {
-    if(store.getData().secondaryFont.label === font.label) {
-      store.setData({primaryFont: font});
-      window.scrollTo(0, 0);
-    } else {
-      const pairList = pair.querySelector('[data-element="pair-list"]');
-      highlightRows(pairList, font);
-      store.setData({secondaryFont: font});
-    }
+    const pairList = pair.querySelector('[data-element="pair-list"]');
+    highlightRows(pairList, font);
+    store.setData({secondaryFont: font});
   }
 
   return pair;
