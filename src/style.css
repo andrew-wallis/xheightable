@@ -198,7 +198,18 @@ th {
 
 thead {
   border-bottom: 1px solid var(--border-accent);
-  position: sticky;
+}
+
+@media (min-width: 48rem) {
+  .table-wrapper {
+    overflow-y: unset;
+  }
+
+  thead {
+    position: sticky;
+    background-color: var(--background);
+    z-index: 75;
+  }
 }
 
 td {
