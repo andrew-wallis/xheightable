@@ -1,16 +1,22 @@
 function PairLabel() {
 
-  const fontLabel = document.createElement('div');
-  fontLabel.className = "pair-label";
+  const fontLabel = document.createElement('ul');
+  fontLabel.className = "caption data-label cluster";
 
   /* html */
   fontLabel.innerHTML = `
-    <div data-element="label-text" class="secondary-text pair-label">
-      <!-- Label Text -->
-    </div>
-    <div data-element="label-xHeight" class="secondary-text">
-      <!-- Label xHeight -->
-    </div>
+    <li>
+      <strong data-element="label-text"><!-- Label Text --></strong>
+    </li>
+    <li>
+      Cap height <span class="data" data-element="label-capheight"><!-- Label Cap height --></span><span class="deweight">%</span>
+    </li>
+    <li>
+      x-height <span class="data" data-element="label-xheight"><!-- Label x-height --></span><span class="deweight">%</span>
+    </li>
+    <li>
+      Line heights <span class="data" data-element="label-lineheight"><!-- Label Line heights --></span>
+    </li>
   `;
 
   return fontLabel;

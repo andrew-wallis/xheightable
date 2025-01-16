@@ -1,4 +1,4 @@
-function Select({label, options, action, value}) {
+function Select({label, options, action, value, hideLabel}) {
 
   const select = document.createElement('div');
   select.className = "control-element";
@@ -8,7 +8,7 @@ function Select({label, options, action, value}) {
 
   /* html */
   select.innerHTML = `
-    <label class="label" for=${id}>${label}</label>
+    <label class="label ${hideLabel ? "sr-only" : ""}" for=${id}>${label}</label>
     <select id=${id}>
 
     </select>

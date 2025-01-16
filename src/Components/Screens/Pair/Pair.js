@@ -1,11 +1,10 @@
 import PairLabel from "./PairLabel";
 import PairSample from "./PairSample";
-import findPairings from "../../../utils/findPairings";
-import highlightRows from "../../../utils/highlightRows";
 import setFontStyles from "../../../utils/setFontStyles";
-import TableRow from "../../Elements/TableRow";
 import Header from "../../Global/Header";
-import Navigation from "../../Global/Navigation";
+import Select from "../../Elements/Select";
+import PairList from "./PairList";
+import Test from "../Test/Test";
 
 function Pair(store) {
 
@@ -23,39 +22,38 @@ function Pair(store) {
         <!-- Pair Topbar -->
       </div>
       <div class="wrap insulate stack">
-        <div data-element="pair-labels" class="labels">
-          <!-- Pair Labels -->
-        </div>
-        <div class="samplesOuter">
-          <div class="samplesMid">
-            <div data-element="pair-samples" data-label="" class="samplesInner">
-              <!-- Pair Samples -->
+        <div class="insulate stack-xl">
+          <div>
+            <div data-element="pair-primary">
+              <!-- Pair Controls -->
+            </div>
+            <div data-element="pair-import">
+              <!-- Pair Controls -->
+            </div>
+          </div>
+          <div>
+            <div class="samplesOuter">
+              <div class="samplesMid">
+                <div data-element="pair-samples" data-label="" class="samplesInner">
+                  <!-- Pair Samples -->
+                </div>
+              </div>
+            </div>
+            <div data-element="pair-labels" class="grid columns-2">
+              <!-- Pair Labels -->
             </div>
           </div>
         </div>
       </div>
     </div>
-    <main class="wrap insulate stack table-y-scrollable">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Font</th>
-            <th>X-Height</th>
-            <th>X-Height Difference</th>
-          </tr>
-        </thead>
-        <tbody data-element="pair-list">
-          <!-- Pair List -->
-        </tbody>
-      </table>
+    <main data-element="pair-main" class="wrap insulate grid-xl columns-1-2">
+      <!-- Pair main" -->
     </main>
   `;
-
+  
   const topBar = pair.querySelector('[data-element="top-bar"]');
   topBar.appendChild(Header());
-  topBar.appendChild(Navigation());
-  
+
   const primaryLabel = PairLabel();
   const secondaryLabel = PairLabel();
 
@@ -69,6 +67,11 @@ function Pair(store) {
   const pairSamples = pair.querySelector('[data-element="pair-samples"]');
   pairSamples.appendChild(primarySample);
   pairSamples.appendChild(secondarySample);
+
+  const pairMain = pair.querySelector('[data-element="pair-main"]');
+  pairMain.appendChild(Test(store));
+  pairMain.appendChild(PairList(store));
+
 
   function updatePairingSample() {
     const primaryFont = store.getData().primaryFont;
@@ -95,9 +98,15 @@ function Pair(store) {
         const text = label.querySelector('[data-element="label-text"]');
         text.innerText = font.shortlabel;
   
-        const xHeight = label.querySelector('[data-element="label-xHeight"]');
-        xHeight.innerHTML = `<span class="deweight">${isMobile ? "x" : "x-height"}</span> <span class="data">${Math.round(font.xHeightPct * 100)}<span class="deweight">%</span></span>`;
+        const capHeightLabel = label.querySelector('[data-element="label-capheight"]');
+        capHeightLabel.innerHTML = Math.round(font.xHeightPct * 100);  
   
+        const xHeight = label.querySelector('[data-element="label-xheight"]');
+        xHeight.innerHTML = Math.round(font.xHeightPct * 100);
+  
+        const lineHeight = label.querySelector('[data-element="label-lineheight"]');
+        lineHeight.innerHTML = `${font.lineMin}-${font.lineMax}`;
+
         const capLine = sample.querySelector('[data-element="cap-line"]');
         capLine.style.verticalAlign = `${capHeight}rem`;
 
@@ -116,35 +125,9 @@ function Pair(store) {
 
   store.subscribe(updatePairingSample);
 
-  function updatePairingList() {
-    
-    const pairList = pair.querySelector('[data-element="pair-list"]');
-    const primary = store.getData().primaryFont;
-    const fonts = store.getData().fonts;
-
-    if(Object.keys(primary).length > 0 && pairList.dataset.primary !== primary.name) {
-
-      pairList.innerHTML = '';
-      const pairings = findPairings(primary, fonts);
-      pairings.map((font, index) => {
-        pairList.appendChild(TableRow({font: font, action: changeSecondary, fields: ["xHeightPct", "xHeightDiff"]}));
-      });
-
-      pairList.dataset.primary = primary.name;
-
-      const newSecondary = pairings[0];
-      store.setData({secondaryFont: newSecondary})
-      highlightRows(pairList, newSecondary);
-
-    }
-  }
-
-  store.subscribe(updatePairingList);
-
-  function changeSecondary(font) {
-    const pairList = pair.querySelector('[data-element="pair-list"]');
-    highlightRows(pairList, font);
-    store.setData({secondaryFont: font});
+  function changePrimary(label) {
+    const font = store.getData().fonts.find(font => font.label === label);
+    store.setData({primaryFont: font});
   }
 
   return pair;

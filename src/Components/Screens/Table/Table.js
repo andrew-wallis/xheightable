@@ -43,7 +43,7 @@ function Table(store) {
   const tableHeader = table.querySelector('[data-element="table-fields');
   tableHeader.appendChild(TableHeader({fields: ["Licence", "Font", "X-Height", "Cap Height", "Line Height (Headings)", "Line Height (Paragraphs)"], action: changeSort}));
 
-  function updateGuidance() {
+/*   function updateGuidance() {
     const guidance = table.querySelector('[data-element="table-guidance"]');
     guidance.innerHTML = "";
 
@@ -59,7 +59,7 @@ function Table(store) {
   }
 
   updateGuidance();
-
+ */
 
   function updateTableList() {
     

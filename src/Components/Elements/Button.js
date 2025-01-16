@@ -4,7 +4,7 @@ function Button({label, icon, type, action}) {
 
   const iconButton = document.createElement('button');
   
-  iconButton.className = `button ${type}`;
+  iconButton.className = `${type}`;
 
   if(icon) {
     iconButton.appendChild(Icon(icon));

@@ -137,10 +137,6 @@ aside {
   padding-bottom: var(--space-s-l);
 }
 
-.clickable {
-  cursor: pointer;
-}
-
 [class*="stack"] {
   display: flex;
   flex-direction: column;
@@ -162,6 +158,12 @@ aside {
 .center {
   display: flex;
   justify-content: center;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
 }
 
 .with-sidebar {
@@ -213,6 +215,10 @@ aside {
   }
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -261,6 +267,26 @@ button,
   background-color: var(--highlight);
 }
 
+.primary-button {
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-full);
+  color: var(--text);
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-xs) var(--space-xl);
+}
+
+@media (min-width: 48rem) {
+  .primary-button {
+    max-width: 24rem;
+  }
+}
+
+.primary-button > .icon {
+  color: var(--accent);
+}
+
 
 /* Code */
 
@@ -306,6 +332,14 @@ code {
   flex-grow: 1;
   padding: var(--space-s);
   background-color: var(--background);
+}
+
+/* Horitzonal Rules */
+
+hr {
+  border-top: 1px solid var(--border-primary);
+  margin: 0;
+  width: 100%;
 }
 
 /* Inputs */
@@ -426,10 +460,6 @@ nav > div:not(.navbar) {
 
 
 /* Tables */
-
-table {
-  min-width: 32rem;
-}
 
 th,
 td {
@@ -565,19 +595,6 @@ th > a {
 }
 
 /* Pair Screen */
-
-.labels {
-  display: flex;
-  gap: var(--space-s-l);
-  width: 100%;
-  margin-bottom: var(--space-s);
-}
-
-.pair-label {
-  display: flex;
-  gap: var(--space-s-l);
-  width: 50%;
-}
 
 .pair-label > div:first-of-type {
   flex-grow: 1;
@@ -803,10 +820,12 @@ strong,
 button,
 .button,
 .label,
-.pair-label {
+.pair-label,
+select {
   color: var(--secondary);
   font-size: var(--step--1);
   font-weight: 500;
+  line-height: var(--space-s);
 }
 
 .slub,
@@ -833,6 +852,7 @@ aside {
   color: var(--secondary);
 }
 
+.caption,
 .caption > p {
   font-size: var(--step--3);
 }
@@ -844,4 +864,9 @@ aside {
 
 .deweight {
   opacity: 0.8;
+}
+
+.data-label {
+  font-weight: 500;
+  color: var(--secondary);
 }

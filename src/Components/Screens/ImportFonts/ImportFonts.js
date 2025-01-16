@@ -35,7 +35,6 @@ function ImportFonts(store) {
 
   const topBar = importFonts.querySelector('[data-element="top-bar"]');
   topBar.appendChild(Header());
-  topBar.appendChild(Navigation());
 
   const primaryEmbed = document.createElement('div');
   primaryEmbed.dataset.element = "data-details";

@@ -10,11 +10,11 @@ function App({store}) {
 
   // Initial
 
-  store.setData({primaryFont: {}});
+  store.setData({primaryFont: store.getData().fonts[0]});
   store.setData({secondaryFont: {}});
   store.setData({search: ""});
   store.setData({sort: "Font"});
-  store.setData({activeScreen: "Table"});
+  store.setData({activeScreen: "Pair"});
   store.setData({tableScroll: 0});
   store.setData({pairScroll: 0});
   store.setData({capAdjusts: true});
@@ -27,12 +27,12 @@ function App({store}) {
 
   app.appendChild(Table(store));
   app.appendChild(Pair(store));
-  app.appendChild(Test(store));
+  //app.appendChild(Test(store));
   app.appendChild(ImportFonts(store));
 
 
 
-  const backLinks = app.querySelectorAll('[data-element="back-link"]');
+/*   const backLinks = app.querySelectorAll('[data-element="back-link"]');
   backLinks.forEach((backLink) => {
     backLink.appendChild(Button({label: "Back", icon: "Arrow Left", type: "back-button", action: backToTable}));
   });
@@ -44,7 +44,24 @@ function App({store}) {
     navButtons.map(button => {
       navBar.appendChild(Button({label: button, icon: button, type: "nav-button", action: changeScreen}));
     });
-  });
+  }); */
+
+  const importWrapper = app.querySelector('[data-element="pair-import"]');
+  importWrapper.appendChild(Button({label: "Import", action: openImport, type: "import-button", icon: "Import"}));
+
+  function updateOpenPrimary() {
+    const controls = app.querySelector('[data-element="pair-primary"]');
+    const primaryFont = store.getData().primaryFont.label;
+
+    if(controls.dataset.primary !== primaryFont) {
+      controls.innerHTML = "";
+      controls.appendChild(Button({label: primaryFont, action: openPrimary, type: "primary-button", icon: "Arrow Down"}));
+      controls.dataset.primary = primaryFont;
+    }
+  }
+
+  store.subscribe(updateOpenPrimary);
+  updateOpenPrimary();
 
   function updateScreen() {
 
@@ -94,8 +111,12 @@ function App({store}) {
     store.setData({activeScreen: screen});
   }
 
-  function backToTable() {
+  function openPrimary() {
     changeScreen("Table");
+  }
+
+  function openImport() {
+    changeScreen("Import");
   }
 
   function setTheme() {
