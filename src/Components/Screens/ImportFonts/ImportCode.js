@@ -6,17 +6,17 @@ function importCode() {
 
   /* html */
   importCode.innerHTML = `
-    <div class="code-wrapper">
-      <div class="control-panel" data-element="import-controls">
+    <aside class="code-wrapper stack">
+      <div class="control-panel stack" data-element="import-controls">
         <!-- Import Control -->
       </div>
       <div class="code-panel">
-        <div class="code-header">
+        <div class="with-sidebar">
           <ul class="tabs" data-element="import-tabs">
             <!-- Import Tabs -->
           </ul>
           <div class="">
-            <a href="#" data-element="copy-stylesheet" class="button secondary-text">
+            <a href="#" data-element="copy-stylesheet" class="button">
               <div data-element="copy-label">Copy</div>
               <div data-element="copy-icon"></div>
             </a>

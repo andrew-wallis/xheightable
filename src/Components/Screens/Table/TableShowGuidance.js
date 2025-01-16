@@ -6,13 +6,13 @@ function TableShowGuidance(action) {
 
   /* html */
   showGuidance.innerHTML = `
-    <div class="table-guidance-cta" data-element="table-guidance-cta">
+    <div class="center" data-element="table-guidance-cta">
       <!-- Table Guidance CTA -->
     </div>
   `;
 
   const cta = showGuidance.querySelector('[data-element="table-guidance-cta"]');
-  cta.appendChild(Button({label: "Show Guidance", action: action}));
+  cta.appendChild(Button({label: "Show Guidance", action: action, type: "secondary-button"}));
 
   return showGuidance;
 

@@ -4,7 +4,7 @@ import findPairings from "../../../utils/findPairings";
 import highlightRows from "../../../utils/highlightRows";
 import setFontStyles from "../../../utils/setFontStyles";
 import TableRow from "../../Elements/TableRow";
-import Branding from "../../Elements/Branding";
+import Header from "../../Global/Header";
 import Navigation from "../../Global/Navigation";
 
 function Pair(store) {
@@ -18,7 +18,7 @@ function Pair(store) {
   
   /* html */
   pair.innerHTML = `
-    <header data-element="pair-header">
+    <div class="top-bar">
       <div data-element="top-bar">
         <!-- Pair Topbar -->
       </div>
@@ -34,8 +34,8 @@ function Pair(store) {
           </div>
         </div>
       </div>
-    </header>
-    <main class="wrap insulate stack table-wrapper">
+    </div>
+    <main class="wrap insulate stack table-y-scrollable">
       <table>
         <thead>
           <tr>
@@ -53,7 +53,7 @@ function Pair(store) {
   `;
 
   const topBar = pair.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(Branding());
+  topBar.appendChild(Header());
   topBar.appendChild(Navigation());
   
   const primaryLabel = PairLabel();

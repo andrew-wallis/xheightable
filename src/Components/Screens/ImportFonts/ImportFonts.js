@@ -1,4 +1,4 @@
-import Branding from "../../Elements/Branding";
+import Header from "../../Global/Header";
 import Navigation from "../../Global/Navigation";
 import ImportGoogle from "./ImportGoogle";
 import ImportAdobe from "./ImportAdobe";
@@ -18,13 +18,11 @@ function ImportFonts(store) {
   
   /* html */
   importFonts.innerHTML = `
-    <header data-element="import-header">
-      <div data-element="top-bar">
-        <!-- ImportFonts Topbar -->
-      </div>
-    </header>
+    <div class="top-bar" data-element="top-bar">
+      <!-- ImportFonts Topbar -->
+    </div>
     <main>
-      <div class="wrap insulate stack embed-wrapper" data-element="import-embed">
+      <div class="wrap insulate stack grid-s-xl columns-1-2" data-element="import-embed">
         <!-- Import Embed -->
       </div>
       <div class="wrap insulate stack" data-element="import-code">
@@ -36,7 +34,7 @@ function ImportFonts(store) {
   // Page Layout
 
   const topBar = importFonts.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(Branding());
+  topBar.appendChild(Header());
   topBar.appendChild(Navigation());
 
   const primaryEmbed = document.createElement('div');
@@ -45,11 +43,12 @@ function ImportFonts(store) {
   secondaryEmbed.dataset.element = "data-details";
   const code = ImportCode();
 
-  const divider = document.createElement('hr');
+  // const divider = document.createElement('hr');
+  // divider.classList = "embed-divider";
 
   const embedContainer = importFonts.querySelector('[data-element="import-embed"]');
   embedContainer.appendChild(primaryEmbed);
-  embedContainer.appendChild(divider);
+  //embedContainer.appendChild(divider);
   embedContainer.appendChild(secondaryEmbed);
 
   const codeContainer = importFonts.querySelector('[data-element="import-code"]');

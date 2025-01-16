@@ -5,29 +5,27 @@ import Icons from "../../Elements/Icons";
 function ImportGoogle(font) {
 
   const importGoogle = document.createElement('div');
-  importGoogle.className = "embed";
+  importGoogle.className = "stack";
 
   /* html */
   importGoogle.innerHTML = `
-    <div class="embed-header">
-      <h2 data-element="data-label">
-        <!-- Data-Label -->
-      </h2>
-      <a class="button copy-button secondary-text" href="#" data-element="copy-stylesheet">
+    <h2 data-element="data-label">
+      <!-- Data-Label -->
+    </h2>
+    <div class="with-sidebar">
+      <div class="small strong">${(font.designer.split(";").join(", "))}</div>
+      <a class="button copy-button" href="#" data-element="copy-stylesheet">
         <div data-element="copy-label">Copy</div>
         <div data-element="copy-icon"></div>
       </a>
     </div>
-    <div class="embed-details">
-      <div class="embed-designers">${(font.designer.split(";").join(", "))}</div>
-      <code data-code="stylesheet">${getFontStylesheet(font)}</code>
-      <div class="embed-footer">
-        <p class="tertiary-text">
-          <a href=${font.link} target="_blank">
-            Visit Google Fonts for more information.
-          </a>
-        </p>
-      </div>
+    <code class="embed-code" data-code="stylesheet">${getFontStylesheet(font)}</code>
+    <div class="embed-footer">
+      <p class="small">
+        <a href=${font.link} target="_blank">
+          Visit Google Fonts for more information.
+        </a>
+      </p>
     </div>
   `;
 

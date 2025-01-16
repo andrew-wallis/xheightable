@@ -2,9 +2,8 @@ import Icon from "./Icons";
 
 function Button({label, icon, type, action}) {
 
-  const iconButton = document.createElement('a');
-
-  iconButton.href = "#";
+  const iconButton = document.createElement('button');
+  
   iconButton.className = `button ${type}`;
 
   if(icon) {

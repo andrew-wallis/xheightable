@@ -6,7 +6,7 @@ import Icons from "./Icons";
 function TableRow({font, action, fields}) {
   
   const tableRow = document.createElement('tr');
-  tableRow.className = "clickable primary-text";
+  tableRow.className = "clickable";
   tableRow.dataset.name = font.name;
   tableRow.dataset.label = font.label;
   tableRow.dataset.element = "font-link";

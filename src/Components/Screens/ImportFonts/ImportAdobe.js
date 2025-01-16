@@ -4,7 +4,7 @@ import Icons from "../../Elements/Icons";
 function ImportAdobe(font) {
 
   const importAdobe = document.createElement('div');
-  importAdobe.className = "embed-details";
+  importAdobe.className = "stack";
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
@@ -15,13 +15,13 @@ function ImportAdobe(font) {
 
   const designers = document.createElement('div');
   designers.innerText = font.designer.split(";").join(", ");
-  designers.className = "embed-designers"
+  designers.className = "small strong"
   importAdobe.appendChild(designers);
 
   const cta = document.createElement('a');
   cta.href = font.link;
   cta.target = "_blank";
-  cta.className = "button cta-button";
+  cta.className = "button cta-button slub";
 
   cta.appendChild(Icons("Adobe"));
 
@@ -32,7 +32,7 @@ function ImportAdobe(font) {
   importAdobe.appendChild(cta);
 
   const disclaimer = document.createElement('p');
-  disclaimer.className = "tertiary-text";
+  disclaimer.className = "small";
   disclaimer.innerHTML = "We have partnered with Adobe and get a percentage from each licence sold through x-heightable."
   importAdobe.appendChild(disclaimer);
 

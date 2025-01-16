@@ -1,6 +1,5 @@
-import getLineHeight from "../../../utils/getLineHeight";
 import setFontStyles from "../../../utils/setFontStyles";
-import Branding from "../../Elements/Branding";
+import Header from "../../Global/Header";
 import Navigation from "../../Global/Navigation";
 
 function Test(store) {
@@ -14,11 +13,9 @@ function Test(store) {
   
   /* html */
   test.innerHTML = `
-    <header data-element="test-header">
-      <div data-element="top-bar">
-        <!-- Test Topbar -->
-      </div>
-    </header>
+    <div class="top-bar" data-element="top-bar">
+      <!-- Test Topbar -->
+    </div>
     <main class="insulate wrap stack stack-xl">
       <div class="test-wrapper" data-element="test-wrapper">
         <div class="test-section stack" data-element="test-section">
@@ -72,7 +69,7 @@ function Test(store) {
   `;
 
   const topBar = test.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(Branding());
+  topBar.appendChild(Header());
   topBar.appendChild(Navigation());
 
   function updateTestScreen() {

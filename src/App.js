@@ -30,6 +30,8 @@ function App({store}) {
   app.appendChild(Test(store));
   app.appendChild(ImportFonts(store));
 
+
+
   const backLinks = app.querySelectorAll('[data-element="back-link"]');
   backLinks.forEach((backLink) => {
     backLink.appendChild(Button({label: "Back", icon: "Arrow Left", type: "back-button", action: backToTable}));
@@ -42,11 +44,6 @@ function App({store}) {
     navButtons.map(button => {
       navBar.appendChild(Button({label: button, icon: button, type: "nav-button", action: changeScreen}));
     });
-  });
-
-  const brandingControls = app.querySelectorAll('[data-element="branding-controls"]');
-  brandingControls.forEach((control) => {
-    control.appendChild(Button({label: "Buy us a coffee!", icon: "", type: "tipjar", action: setTheme}))
   });
 
   function updateScreen() {

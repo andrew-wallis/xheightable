@@ -1,10 +1,10 @@
 import TableRow from "../../Elements/TableRow";
 import highlightRows from "../../../utils/highlightRows";
 import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
-import Branding from "../../Elements/Branding";
 import TableHeader from "../../Elements/TableHeader";
 import TableGuidance from "./TableGuidance";
 import TableShowGuidance from "./TableShowGuidance";
+import Header from "../../Global/Header";
 
 function Table(store) {
   
@@ -17,16 +17,14 @@ function Table(store) {
 
   /* html */
   table.innerHTML = `
-    <header data-element="table-header">
-      <div data-element="top-bar">
-        <!-- Table Topbar -->
-      </div>
-    </header>
+    <div class="top-bar" data-element="top-bar">
+      <!-- Table Topbar -->
+    </div>
     <main class="wrap stack">
       <div class="insulate" data-element="table-guidance">
         <!-- Table Guidance -->
       </div>
-      <div class="insulate table-wrapper">
+      <div class="insulate table-y-scrollable">
         <table>
           <thead data-element="table-fields">
           <!-- Table Header -->
@@ -40,10 +38,10 @@ function Table(store) {
   `;
 
   const topBar = table.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(Branding());
+  topBar.appendChild(Header());
 
   const tableHeader = table.querySelector('[data-element="table-fields');
-  tableHeader.appendChild(TableHeader({fields: ["Licence", "Font", "X-Height", "Cap Height", "Line Height (Short)", "Line Height (Long)"], action: changeSort}));
+  tableHeader.appendChild(TableHeader({fields: ["Licence", "Font", "X-Height", "Cap Height", "Line Height (Headings)", "Line Height (Paragraphs)"], action: changeSort}));
 
   function updateGuidance() {
     const guidance = table.querySelector('[data-element="table-guidance"]');
