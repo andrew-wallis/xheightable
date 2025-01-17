@@ -22,13 +22,20 @@ function Pair(store) {
         <!-- Pair Topbar -->
       </div>
       <div class="wrap insulate stack">
-        <div class="insulate stack-xl">
-          <div>
-            <div data-element="pair-primary">
-              <!-- Pair Controls -->
+        <div class="insulate stack-s">
+          <div class="grid columns-2">
+            <div class="cluster pair-label">
+              <div class="" data-element="pair-primary-label">
+                <!-- Pair Primary -->
+              </div>
+              <div data-element="pair-change">
+                <!-- Pair Change -->
+              </div>
             </div>
-            <div data-element="pair-import">
-              <!-- Pair Controls -->
+            <div class="cluster pair-label">
+              <div class="pair-label" data-element="pair-secondary-label">
+                <!-- Pair Secondary -->
+              </div>
             </div>
           </div>
           <div>
@@ -40,7 +47,7 @@ function Pair(store) {
               </div>
             </div>
             <div data-element="pair-labels" class="grid columns-2">
-              <!-- Pair Labels -->
+            <!-- Pair Labels -->
             </div>
           </div>
         </div>
@@ -54,12 +61,15 @@ function Pair(store) {
   const topBar = pair.querySelector('[data-element="top-bar"]');
   topBar.appendChild(Header());
 
-  const primaryLabel = PairLabel();
-  const secondaryLabel = PairLabel();
+  const primaryLabel = pair.querySelector('[data-element="pair-primary-label"]');
+  const secondaryLabel = pair.querySelector('[data-element="pair-secondary-label"]');
+
+  const primaryData = PairLabel();
+  const secondaryData = PairLabel();
 
   const pairLabels = pair.querySelector('[data-element="pair-labels"]');
-  pairLabels.appendChild(primaryLabel);
-  pairLabels.appendChild(secondaryLabel);
+  pairLabels.appendChild(primaryData);
+  pairLabels.appendChild(secondaryData);
 
   const primarySample = PairSample();
   const secondarySample = PairSample(true);
@@ -81,30 +91,30 @@ function Pair(store) {
     const capHeight = 33.5 / 16;
 
     if(primaryFont.label !== primaryLabel.dataset.label) {
-      updateFont(primaryFont, primaryLabel, primarySample);
+      updateFont(primaryFont, primaryLabel, primaryData, primarySample);
     }
 
     if(secondaryFont.label !== secondaryLabel.dataset.label) {
-      updateFont(secondaryFont, secondaryLabel, secondarySample);
+      updateFont(secondaryFont, secondaryLabel, secondaryData, secondarySample);
     }
     const sampleText = pair.querySelectorAll('[data-element="font-sample"]');
     sampleText.forEach((text) => {
       text.innerText = isMobile ? "ABC abc" : "ABCEFG abcefg 123";
     });
 
-    function updateFont(font, label, sample) {
+    function updateFont(font, label, data, sample) {
       if(Object.keys(font).length > 0) {
     
-        const text = label.querySelector('[data-element="label-text"]');
-        text.innerText = font.shortlabel;
+        label.innerText = font.shortlabel;
+        setFontStyles({element: label, font: font, size: isMobile ? 1.1 : 1.25, leading: "2.25rem", weight: "bold"});
   
-        const capHeightLabel = label.querySelector('[data-element="label-capheight"]');
+        const capHeightLabel = data.querySelector('[data-element="label-capheight"]');
         capHeightLabel.innerHTML = Math.round(font.xHeightPct * 100);  
   
-        const xHeight = label.querySelector('[data-element="label-xheight"]');
+        const xHeight = data.querySelector('[data-element="label-xheight"]');
         xHeight.innerHTML = Math.round(font.xHeightPct * 100);
   
-        const lineHeight = label.querySelector('[data-element="label-lineheight"]');
+        const lineHeight = data.querySelector('[data-element="label-lineheight"]');
         lineHeight.innerHTML = `${font.lineMin}-${font.lineMax}`;
 
         const capLine = sample.querySelector('[data-element="cap-line"]');

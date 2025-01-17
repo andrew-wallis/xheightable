@@ -155,6 +155,10 @@ aside {
   gap: var(--space-xl);
 }
 
+.stack-s-xl {
+  gap: var(--space-s-xl);
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -215,6 +219,12 @@ aside {
   }
 }
 
+@media (max-width: 48rem) {
+  .desktop {
+    display: none
+  }
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -268,23 +278,7 @@ button,
 }
 
 .primary-button {
-  border: 1px solid var(--border-accent);
-  border-radius: var(--radius-full);
-  color: var(--text);
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  width: 100%;
-  padding: var(--space-xs) var(--space-xl);
-}
-
-@media (min-width: 48rem) {
-  .primary-button {
-    max-width: 24rem;
-  }
-}
-
-.primary-button > .icon {
-  color: var(--accent);
+  padding: 0;
 }
 
 
@@ -596,12 +590,9 @@ th > a {
 
 /* Pair Screen */
 
-.pair-label > div:first-of-type {
-  flex-grow: 1;
-}
-
-.pair-label > div:last-of-type {
-  flex-shrink: 0;
+.pair-label {
+  align-items: baseline;
+  gap: var(--space-s-xl);
 }
 
 .samplesOuter {
@@ -820,7 +811,6 @@ strong,
 button,
 .button,
 .label,
-.pair-label,
 select {
   color: var(--secondary);
   font-size: var(--step--1);
@@ -869,4 +859,8 @@ aside {
 .data-label {
   font-weight: 500;
   color: var(--secondary);
+}
+
+.primary-button {
+  color: var(--accent);
 }

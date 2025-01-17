@@ -46,22 +46,12 @@ function App({store}) {
     });
   }); */
 
-  const importWrapper = app.querySelector('[data-element="pair-import"]');
-  importWrapper.appendChild(Button({label: "Import", action: openImport, type: "import-button", icon: "Import"}));
+  // const importWrapper = app.querySelector('[data-element="pair-import"]');
+  // importWrapper.appendChild(Button({label: "Import", action: openImport, type: "import-button", icon: "Import"}));
 
-  function updateOpenPrimary() {
-    const controls = app.querySelector('[data-element="pair-primary"]');
-    const primaryFont = store.getData().primaryFont.label;
 
-    if(controls.dataset.primary !== primaryFont) {
-      controls.innerHTML = "";
-      controls.appendChild(Button({label: primaryFont, action: openPrimary, type: "primary-button", icon: "Arrow Down"}));
-      controls.dataset.primary = primaryFont;
-    }
-  }
-
-  store.subscribe(updateOpenPrimary);
-  updateOpenPrimary();
+  const changePrimary = app.querySelector('[data-element="pair-change"]');
+  changePrimary.appendChild(Button({label: "Change", action: openPrimary, type: "primary-button slub"}));
 
   function updateScreen() {
 
