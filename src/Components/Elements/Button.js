@@ -1,6 +1,6 @@
 import Icon from "./Icons";
 
-function Button({label, icon, type, action}) {
+function Button({label, icon, type, action, hideLabel}) {
 
   const iconButton = document.createElement('button');
   
@@ -15,6 +15,7 @@ function Button({label, icon, type, action}) {
   
   const iconButtonLabel = document.createElement('div');
   iconButtonLabel.innerText = label;
+  iconButtonLabel.classList = hideLabel ? "sr-only" : "";
   iconButton.appendChild(iconButtonLabel);
 
   iconButton.addEventListener('click', function(e) {

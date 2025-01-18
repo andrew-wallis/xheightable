@@ -1,6 +1,6 @@
 @import './preflight.css';
 
-/* @link https://utopia.fyi/type/calculator/?c=375,14,1.125,1240,16,1.125,8,3,&s=0.75|0.5|0.25,1.125|1.25|1.5|2|3|4|6|8,s-xl|3xl-5xl|s-l&g=xl,xl,2xl,12 */
+/* @link https://utopia.fyi/type/calculator/?c=375,14,1.125,1240,16,1.125,8,3,&s=0.75|0.5|0.25,1.125|1.25|1.5|2|3|4|6|8,s-l|3xl-5xl|s-l&g=xl,xl,2xl,12 */
 
 :root {
 
@@ -82,7 +82,7 @@
 
   /* Custom pairs */
   --space-s-l: clamp(0.875rem, 0.604rem + 1.1561vw, 1.5rem);
-  --space-s-xl: clamp(0.875rem, 0.3873rem + 2.0809vw, 2rem);
+  --space-s-l: clamp(0.875rem, 0.3873rem + 2.0809vw, 2rem);
 }
 
 html[data-theme="dark"] {
@@ -127,7 +127,7 @@ aside {
 .wrap {
   max-width: 64rem;
   width: 100%;
-  padding: 0 var(--space-s-xl);
+  padding: 0 var(--space-s-l);
   margin-left: auto;
   margin-right: auto;
 }
@@ -155,8 +155,8 @@ aside {
   gap: var(--space-xl);
 }
 
-.stack-s-xl {
-  gap: var(--space-s-xl);
+.stack-s-l {
+  gap: var(--space-s-l);
 }
 
 .center {
@@ -164,10 +164,14 @@ aside {
   justify-content: center;
 }
 
-.cluster {
+[class*="cluster"] {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-s);
+}
+
+.cluster-no-gap {
+  gap: 0;
 }
 
 .with-sidebar {
@@ -196,8 +200,8 @@ aside {
   gap: var(--space-xl);
 }
 
-.grid-s-xl {
-  gap: var(--space-s-xl);
+.grid-s-l {
+  gap: var(--space-s-l);
 }
 
 .columns-2 {
@@ -281,6 +285,35 @@ button,
   padding: 0;
 }
 
+.filter-button {
+  border: 1px solid var(--border-primary);
+  border-right: 0;
+  padding: calc(var(--space-2xs) + 1px);
+}
+
+.filter-button:first-of-type {
+  border-top-left-radius: var(--space-2xs);
+  border-bottom-left-radius: var(--space-2xs);
+}
+
+.filter-button:last-of-type {
+  border-top-right-radius: var(--space-2xs);
+  border-bottom-right-radius: var(--space-2xs);
+  border-right: 1px solid var(--border-primary);
+}
+
+.filter-button > .icon {
+  align-items: center;
+  display: flex;
+  height: var(--space-s);
+  justify-content: center;
+  width: var(--space-s);
+}
+
+.filter-button.active {
+  background-color: var(--highlight);
+}
+
 
 /* Code */
 
@@ -337,6 +370,13 @@ hr {
 }
 
 /* Inputs */
+
+select {
+  background-color: transparent;
+  border: 1px solid var(--border-primary);
+  border-radius: var(--space-2xs);
+  padding: calc(var(--space-2xs) + 1px) var(--space-xs);
+}
 
 [type="checkbox"] {
   appearance: auto;
@@ -579,7 +619,7 @@ tr.active-row {
 
 .pair-label {
   align-items: baseline;
-  gap: var(--space-s-xl);
+  gap: var(--space-s-l);
 }
 
 .samplesOuter {
@@ -648,7 +688,7 @@ tr.active-row {
 .test-wrapper {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: var(--space-s-xl);
+  gap: var(--space-s-l);
 }
 
 .test-wrapper hr {

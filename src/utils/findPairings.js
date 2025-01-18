@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-function findPairings(font, fonts) {
+function findPairings({font, fonts, sort, licences, classifications}) {
 
   function roundToTwoDecimals(number) {
     return Math.round(number * 100) / 100;
@@ -11,28 +11,13 @@ function findPairings(font, fonts) {
   
   fontList = fontList.filter(font => font.id !== thisFont.id);
 
-/*   const exactMatch = fontList.filter(font => font.xHeightPct === thisFont.xHeightPct);
+  if(licences.length > 0) {
+    fontList = fontList.filter(font => licences.includes(font.distribution));
+  }
 
-  const closeMatch = fontList.filter(font => 
-    roundToTwoDecimals(Math.abs(font.xHeightPct - thisFont.xHeightPct)) === 0.02
-  );
-
-  const nearMatch = fontList.filter(font => 
-    roundToTwoDecimals(Math.abs(font.xHeightPct - thisFont.xHeightPct)) === 0.04
-  );
-
-  const distantMatch = fontList.filter(font => 
-    roundToTwoDecimals(Math.abs(font.xHeightPct - thisFont.xHeightPct)) > 0.04
-  );
-
-  const renderArray = [
-    exactMatch,
-    closeMatch,
-    nearMatch,
-    distantMatch
-  ];
-  
-  return renderArray; */
+  if(classifications.length > 0) {
+    fontList = fontList.filter(font => classifications.includes(font.superclass));
+  }
 
   fontList.forEach(font => {
     font.xHeightDiff = Math.abs(font.xHeightPct - thisFont.xHeightPct);
@@ -42,68 +27,60 @@ function findPairings(font, fonts) {
     font.capHeightDiff = 1 - (font.capHeightPct / 0.7);
   });
 
-  
-  fontList = fontList.sort((a, b) => {
+  if(sort === "A-Z") {
+    fontList = fontList.sort((a, b) => a.label.localeCompare(b.label));
+  } else if(sort === "Rating") {
+    fontList = fontList.sort((a, b) => Number(b.Rating) - Number(a.Rating));
+  } else {
 
-    // Sort by xHeights
-    const diffA = Math.abs(a.xHeightPct - thisFont.xHeightPct);
-    const diffB = Math.abs(b.xHeightPct - thisFont.xHeightPct);
+    fontList = fontList.sort((a, b) => {
 
-    if (diffA !== diffB) {
-      return diffA - diffB;
-    }
+      // Sort by xHeights
+      const diffA = Math.abs(a.xHeightPct - thisFont.xHeightPct);
+      const diffB = Math.abs(b.xHeightPct - thisFont.xHeightPct);
 
-    // Promote fonts with the same family
-    const sameFamilyA = (a.family === thisFont.family) ? 0 : 1;
-    const sameFamilyB = (b.family === thisFont.family) ? 0 : 1;
-    if (sameFamilyA !== sameFamilyB) {
-      return sameFamilyA - sameFamilyB;
-    }
+      if (diffA !== diffB) {
+        return diffA - diffB;
+      }
 
-    // Deweight fonts based on superclass
-    const isSansOrSerif = (thisFont.superclass === 'Sans' || thisFont.superclass === 'Serif');
-    const isMono = (thisFont.superclass === 'Mono');
+      // Promote fonts with the same family
+      const sameFamilyA = (a.family === thisFont.family) ? 0 : 1;
+      const sameFamilyB = (b.family === thisFont.family) ? 0 : 1;
+      if (sameFamilyA !== sameFamilyB) {
+        return sameFamilyA - sameFamilyB;
+      }
 
-    let deweightA = 0;
-    let deweightB = 0;
+      // Deweight fonts based on superclass
+      const isSansOrSerif = (thisFont.superclass === 'Sans' || thisFont.superclass === 'Serif');
+      const isMono = (thisFont.superclass === 'Mono');
 
-    if (isSansOrSerif) {
-      deweightA = (a.superclass === 'Mono') ? 1 : 0;
-      deweightB = (b.superclass === 'Mono') ? 1 : 0;
-    } else if (isMono) {
-      deweightA = (a.superclass === 'Serif' || a.superclass === 'Sans') ? 1 : 0;
-      deweightB = (b.superclass === 'Serif' || b.superclass === 'Sans') ? 1 : 0;
-    }
+      let deweightA = 0;
+      let deweightB = 0;
 
-    if (deweightA !== deweightB) {
-      return deweightA - deweightB;
-    }
+      if (isSansOrSerif) {
+        deweightA = (a.superclass === 'Mono') ? 1 : 0;
+        deweightB = (b.superclass === 'Mono') ? 1 : 0;
+      } else if (isMono) {
+        deweightA = (a.superclass === 'Serif' || a.superclass === 'Sans') ? 1 : 0;
+        deweightB = (b.superclass === 'Serif' || b.superclass === 'Sans') ? 1 : 0;
+      }
 
-    // Then sort by superclass
-    const superclassA = (a.superclass !== thisFont.superclass) ? 1 : 0;
-    const superclassB = (b.superclass !== thisFont.superclass) ? 1 : 0;
-    if(superclassA !== superclassB) {
-      return superclassB - superclassA;
-    }
+      if (deweightA !== deweightB) {
+        return deweightA - deweightB;
+      }
 
-    return Number(b.Rating) - Number(a.Rating);
+      // Then sort by superclass
+      const superclassA = (a.superclass !== thisFont.superclass) ? 1 : 0;
+      const superclassB = (b.superclass !== thisFont.superclass) ? 1 : 0;
+      if(superclassA !== superclassB) {
+        return superclassB - superclassA;
+      }
 
-    // Then sort by classification
-    /* const classA = (a.classification !== thisFont.classification) ? 1 : 0;
-    const classB = (b.classification !== thisFont.classification) ? 1 : 0;
-    if(classA !== classB) {
-      return classB - classA;
-    }
+      return Number(b.Rating) - Number(a.Rating);
 
-    // Then sort by subclass
-    const subclassA = (a.subclass !== thisFont.subclass) ? 1 : 0;
-    const subclassB = (b.subclass !== thisFont.subclass) ? 1 : 0;
-    if(subclassA !== subclassB) {
-      return subclassB - subclassA;
-    } else {
-      return b.Score - a.Score;
-    } */
-  });
+    });
+      
+  }
 
   return fontList;
 

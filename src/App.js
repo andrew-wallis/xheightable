@@ -15,6 +15,16 @@ function App({store}) {
   store.setData({sort: "Font"});
   store.setData({activeScreen: "Pair"});
   store.setData({activeSection: "Pair"});
+  store.setData({primaryFilter: {
+    sort: "Rating",
+    licences: [],
+    classifications: []
+  }});
+  store.setData({secondaryFilter: {
+    sort: "Match",
+    licences: [],
+    classifications: []
+  }});
   store.setData({tableScroll: 0});
   store.setData({pairScroll: 0});
   store.setData({capAdjusts: true});

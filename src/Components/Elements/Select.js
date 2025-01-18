@@ -1,7 +1,6 @@
 function Select({label, options, action, value, hideLabel}) {
 
   const select = document.createElement('div');
-  select.className = "control-element";
   const id = label.replace(/\W/g,'_');
 
   console.log(value);
