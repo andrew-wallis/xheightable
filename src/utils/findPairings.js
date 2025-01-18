@@ -69,13 +69,6 @@ function findPairings({font, fonts, sort, licences, classifications}) {
         return deweightA - deweightB;
       }
 
-      // Then sort by superclass
-      const superclassA = (a.superclass !== thisFont.superclass) ? 1 : 0;
-      const superclassB = (b.superclass !== thisFont.superclass) ? 1 : 0;
-      if(superclassA !== superclassB) {
-        return superclassB - superclassA;
-      }
-
       return Number(b.Rating) - Number(a.Rating);
 
     });

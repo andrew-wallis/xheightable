@@ -1,9 +1,17 @@
-function sortAndFilterFonts(fonts, search, sort) {
+function sortAndFilterFonts({fonts, search, sort, licences, classifications}) {
 
   delete fonts.columns;
 
   if(search) {
     fonts = fonts.filter(font => font.name.toLowerCase().includes(search.toLowerCase()));
+  }
+
+  if(licences.length > 0) {
+    fonts = fonts.filter(font => licences.includes(font.distribution));
+  }
+
+  if(classifications.length > 0) {
+    fonts = fonts.filter(font => classifications.includes(font.superclass));
   }
 
   switch(sort) {

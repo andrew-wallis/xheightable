@@ -43,11 +43,16 @@ function PairList(store) {
     const licences = filterData.licences;
     const classifications = filterData.classifications;
 
+
+
+    console.log("Hi");
+
     if(pairFilter.dataset.sort !== sort
     || areNotEqual(licences, pairFilter.dataset.licences, )
     || areNotEqual(classifications, pairFilter.dataset.classifications)) {
+
       pairFilter.innerHTML = "";
-      pairFilter.appendChild(Filters(filterData, updateFilters, ["Match", "A-Z", "Rating"]));
+      pairFilter.appendChild(Filters(filterData, changeFilters, ["Match", "A-Z", "Rating"]));
 
       pairFilter.dataset.licences = licences.join("|");
       pairFilter.dataset.classifications = classifications.join("|");
@@ -68,8 +73,6 @@ function PairList(store) {
     const pairList = list.querySelector('[data-element="pair-list"]');
     const primary = store.getData().primaryFont;
     const fonts = store.getData().fonts;
-
-    console.log(pairList.dataset.sort, sort);
   
     if(Object.keys(primary).length > 0 && 
       (pairList.dataset.primary !== primary.name
@@ -104,8 +107,7 @@ function PairList(store) {
     store.setData({secondaryFont: font});
   }
 
-  function updateFilters(key, value) {
-
+  function changeFilters(key, value) {
     const filterData = store.getData().secondaryFilter;
     const licences = filterData.licences;
     const classifications = filterData.classifications;
