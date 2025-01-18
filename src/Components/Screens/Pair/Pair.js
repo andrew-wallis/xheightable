@@ -2,9 +2,8 @@ import PairLabel from "./PairLabel";
 import PairSample from "./PairSample";
 import setFontStyles from "../../../utils/setFontStyles";
 import Header from "../../Global/Header";
-import Select from "../../Elements/Select";
 import PairList from "./PairList";
-import Test from "../Test/Test";
+import Button from "../../Elements/Button";
 
 function Pair(store) {
 
@@ -47,13 +46,18 @@ function Pair(store) {
               </div>
             </div>
             <div data-element="pair-labels" class="grid columns-2">
-            <!-- Pair Labels -->
+              <!-- Pair Labels -->
             </div>
           </div>
         </div>
+        <nav>
+          <div class="navbar" data-element="pair-nav">
+            <!-- Pair Nav -->
+          </div>
+        </nav>
       </div>
     </div>
-    <main data-element="pair-main" class="wrap insulate grid-xl columns-1-2">
+    <main data-element="pair-main" class="wrap insulate">
       <!-- Pair main" -->
     </main>
   `;
@@ -79,8 +83,13 @@ function Pair(store) {
   pairSamples.appendChild(secondarySample);
 
   const pairMain = pair.querySelector('[data-element="pair-main"]');
-  pairMain.appendChild(Test(store));
   pairMain.appendChild(PairList(store));
+
+  const navButtons = ["Pair", "Test", "Import"];
+  const navBar = pair.querySelector('[data-element="pair-nav"]');
+  navButtons.map(button => {
+    navBar.appendChild(Button({label: button, icon: button, type: "nav-button", action: changeTab}));
+  });
 
 
   function updatePairingSample() {
@@ -135,9 +144,8 @@ function Pair(store) {
 
   store.subscribe(updatePairingSample);
 
-  function changePrimary(label) {
-    const font = store.getData().fonts.find(font => font.label === label);
-    store.setData({primaryFont: font});
+  function changeTab(tab) {
+
   }
 
   return pair;

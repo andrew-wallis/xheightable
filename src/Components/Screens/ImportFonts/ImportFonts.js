@@ -1,5 +1,4 @@
 import Header from "../../Global/Header";
-import Navigation from "../../Global/Navigation";
 import ImportGoogle from "./ImportGoogle";
 import ImportAdobe from "./ImportAdobe";
 import ImportCode from "./ImportCode";
@@ -18,23 +17,17 @@ function ImportFonts(store) {
   
   /* html */
   importFonts.innerHTML = `
-    <div class="top-bar" data-element="top-bar">
-      <!-- ImportFonts Topbar -->
-    </div>
-    <main>
+    <div>
       <div class="wrap insulate stack grid-s-xl columns-1-2" data-element="import-embed">
         <!-- Import Embed -->
       </div>
       <div class="wrap insulate stack" data-element="import-code">
         <!-- Import Code -->
       </div>
-    </main>
+    </div>
   `;
 
   // Page Layout
-
-  const topBar = importFonts.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(Header());
 
   const primaryEmbed = document.createElement('div');
   primaryEmbed.dataset.element = "data-details";

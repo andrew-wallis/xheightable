@@ -1,10 +1,7 @@
 import TableRow from "../../Elements/TableRow";
+import Header from "../../Global/Header";
 import highlightRows from "../../../utils/highlightRows";
 import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
-import TableHeader from "../../Elements/TableHeader";
-import TableGuidance from "./TableGuidance";
-import TableShowGuidance from "./TableShowGuidance";
-import Header from "../../Global/Header";
 
 function Table(store) {
   
@@ -24,10 +21,15 @@ function Table(store) {
       <div class="insulate" data-element="table-guidance">
         <!-- Table Guidance -->
       </div>
-      <div class="insulate table-y-scrollable">
+      <div class="insulate">
         <table>
-          <thead data-element="table-fields">
-          <!-- Table Header -->
+          <thead class="sr-only">
+            <tr>
+              <th>Distribution</th>
+              <th>Font</th>
+              <th class="desktop">Classification</th>
+              <th>Data</th>
+            </tr>
           </thead>
           <tbody data-element="table-list">
             <!-- Table List -->
@@ -39,27 +41,6 @@ function Table(store) {
 
   const topBar = table.querySelector('[data-element="top-bar"]');
   topBar.appendChild(Header());
-
-  const tableHeader = table.querySelector('[data-element="table-fields');
-  tableHeader.appendChild(TableHeader({fields: ["Licence", "Font", "X-Height", "Cap Height", "Line Height (Headings)", "Line Height (Paragraphs)"], action: changeSort}));
-
-/*   function updateGuidance() {
-    const guidance = table.querySelector('[data-element="table-guidance"]');
-    guidance.innerHTML = "";
-
-    if(!localStorage.getItem('guidance')) {
-      localStorage.setItem('guidance', "show");
-    }
-
-    if(localStorage.getItem('guidance') === "show") {
-      guidance.appendChild(TableGuidance(toggleGuidance));
-    } else {
-      guidance.appendChild(TableShowGuidance(toggleGuidance));
-    }
-  }
-
-  updateGuidance();
- */
 
   function updateTableList() {
     
@@ -81,28 +62,6 @@ function Table(store) {
 
       highlightRows(tableList, store.getData().primaryFont);
 
-      const ths = tableHeader.querySelectorAll("th");
-
-      ths.forEach((th) => {
-        th.classList.remove("active");
-        const tableArrow  = th.querySelector('[data-element="table-arrow"]');
-
-        if(tableArrow) {
-          tableArrow.style.display = "none";
-        }
-
-        if(sort.includes(th.dataset.field)) {
-          th.classList.add("active");
-          tableArrow.style.display = "block";
-          
-          if(sort.includes("Reverse")) {
-            tableArrow.classList.add("reverse");
-          } else {
-            tableArrow.classList.remove("reverse");
-          }
-        }
-      });
-
       tableList.dataset.sort = sort;
       tableList.dataset.search = search;
     }
@@ -110,16 +69,6 @@ function Table(store) {
 
   store.subscribe(updateTableList);
   updateTableList();
-
-  function toggleGuidance() {
-    if(localStorage.getItem('guidance') === "show") {
-      localStorage.setItem('guidance', "hide");
-    } else {
-      localStorage.setItem('guidance', "show");
-    }
-
-    updateGuidance();
-  }
 
   function changePrimary(font) {
     store.setData({tableScroll: window.scrollY});

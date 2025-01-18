@@ -11,9 +11,10 @@ function PairList(store) {
     <table>
       <thead class="sr-only">
         <tr>
-          <th></th>
+          <th>Distribution</th>
           <th>Font</th>
-          <th>X-Height</th>
+          <th>Classification</th>
+          <th>Data</th>
         </tr>
       </thead>
       <tbody data-element="pair-list">

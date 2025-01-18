@@ -86,7 +86,7 @@ function findPairings(font, fonts) {
       return superclassB - superclassA;
     }
 
-    return Number(b.Score) - Number(a.Score);
+    return Number(b.Rating) - Number(a.Rating);
 
     // Then sort by classification
     /* const classA = (a.classification !== thisFont.classification) ? 1 : 0;

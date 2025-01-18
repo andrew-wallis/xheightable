@@ -1,6 +1,4 @@
 import setFontStyles from "../../../utils/setFontStyles";
-import Header from "../../Global/Header";
-import Navigation from "../../Global/Navigation";
 
 function Test(store) {
 
@@ -8,7 +6,7 @@ function Test(store) {
   
   /* html */
   test.innerHTML = `
-    <aside class="stack-xl">
+    <div class="stack-xl">
       <div class="stack">
         <div class="test-title test-example" data-element="test-example" data-example="title" data-font="primary" data-size="2" data-leading="lineMin" data-weight="bold" data-fontFamily="">This is a title</div>
         <hr/>
@@ -28,7 +26,7 @@ function Test(store) {
         <li class="test-example" data-element="test-example" data-example="paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="normal" data-fontFamily=""><strong>Organization</strong>: They help structure content, highlighting key points.</li>
         <li class="test-example" data-element="test-example" data-example="paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="normal" data-fontFamily=""><strong>Emphasis</strong>: Lists draw attention to important details and steps.</li>
       </ul>
-    </aside>
+    </div>
   `;
 
   function updateTestScreen() {
