@@ -3,7 +3,7 @@ import loadFont from "../../utils/loadFont";
 import setFontStyles from "../../utils/setFontStyles";
 import Icons from "./Icons";
 
-function TableRow({font, action, fields}) {
+function TableRow({font, action}) {
   
   const tableRow = document.createElement('tr');
 

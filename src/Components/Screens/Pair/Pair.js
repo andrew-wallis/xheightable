@@ -4,6 +4,8 @@ import setFontStyles from "../../../utils/setFontStyles";
 import Header from "../../Global/Header";
 import PairList from "./PairList";
 import Button from "../../Elements/Button";
+import ImportFonts from "../Test/Test";
+import Test from "../ImportFonts/ImportFonts";
 
 function Pair(store) {
 
@@ -82,14 +84,17 @@ function Pair(store) {
   pairSamples.appendChild(primarySample);
   pairSamples.appendChild(secondarySample);
 
-  const pairMain = pair.querySelector('[data-element="pair-main"]');
-  pairMain.appendChild(PairList(store));
-
   const navButtons = ["Pair", "Test", "Import"];
   const navBar = pair.querySelector('[data-element="pair-nav"]');
   navButtons.map(button => {
-    navBar.appendChild(Button({label: button, icon: button, type: "nav-button", action: changeTab}));
+    navBar.appendChild(Button({label: button, icon: button, type: "nav-button", action: changeSection}));
   });
+
+
+  const pairMain = pair.querySelector('[data-element="pair-main"]');
+  pairMain.appendChild(PairList(store));
+  pairMain.appendChild(Test(store));
+  pairMain.appendChild(ImportFonts(store));
 
 
   function updatePairingSample() {
@@ -144,7 +149,47 @@ function Pair(store) {
 
   store.subscribe(updatePairingSample);
 
-  function changeTab(tab) {
+  function updateSection() {
+
+    const currentSection = pairMain.getAttribute('data-active');
+    const activeSection = store.getData().activeSection;
+
+    if(currentSection !== activeSection) {
+
+      const sections = pairMain.querySelectorAll('[data-element="section"');
+      sections.forEach(section => {
+        section.style.display = section.getAttribute('data-section') === activeSection ? "block" : "none";
+      });
+
+      const buttons = pair.querySelectorAll('[data-element="nav-button"]');
+      buttons.forEach(button => {
+        button.getAttribute('data-target') === activeSection ? button.classList.add("active") : button.classList.remove("active");
+      });
+
+      let pos = 0;
+
+      if(activeSection === "Pair") {
+        pos = store.getData().pairScroll;
+      }
+
+      window.scrollTo(0, pos);
+      pairMain.dataset.active = activeSection;
+    }
+  }
+
+  store.subscribe(updateSection);
+  updateSection();
+
+  function changeSection(section) {
+
+    const currentSection = pairMain.getAttribute('data-active');
+    const scroll = window.scrollY;
+
+    if(currentSection === "Pair") {
+      store.setData({pairScroll: scroll});
+    }
+
+    store.setData({activeSection: section});
 
   }
 

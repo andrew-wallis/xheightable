@@ -5,6 +5,10 @@ import TableRow from "../../Elements/TableRow";
 function PairList(store) {
 
   const list = document.createElement('div');
+  list.id = "pair";
+  list.style.display = "none";
+  list.dataset.section = "Pair";
+  list.dataset.element = "section";
 
   /* html */
   list.innerHTML = `
@@ -34,7 +38,7 @@ function PairList(store) {
       pairList.innerHTML = '';
       const pairings = findPairings(primary, fonts);
       pairings.map((font, index) => {
-        pairList.appendChild(TableRow({font: font, action: changeSecondary, fields: ["xHeightDiff"]}));
+        pairList.appendChild(TableRow({font: font, action: changeSecondary}));
       });
 
       pairList.dataset.primary = primary.name;
@@ -49,7 +53,7 @@ function PairList(store) {
   store.subscribe(updatePairingList);
 
   function changeSecondary(font) {
-    const pairList = pair.querySelector('[data-element="pair-list"]');
+    const pairList = list.querySelector('[data-element="pair-list"]');
     highlightRows(pairList, font);
     store.setData({secondaryFont: font});
   }

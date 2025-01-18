@@ -1,4 +1,3 @@
-import Header from "../../Global/Header";
 import ImportGoogle from "./ImportGoogle";
 import ImportAdobe from "./ImportAdobe";
 import ImportCode from "./ImportCode";
@@ -10,18 +9,17 @@ function ImportFonts(store) {
 
   const importFonts = document.createElement('div');
   importFonts.id = "import";
-  importFonts.className = "screen";
   importFonts.style.display = "none";
-  importFonts.dataset.screen = "Import";
-  importFonts.dataset.element = "screen";
+  importFonts.dataset.section = "Import";
+  importFonts.dataset.element = "section";
   
   /* html */
   importFonts.innerHTML = `
     <div>
-      <div class="wrap insulate stack grid-s-xl columns-1-2" data-element="import-embed">
+      <div class="insulate stack grid-s-xl columns-1-2" data-element="import-embed">
         <!-- Import Embed -->
       </div>
-      <div class="wrap insulate stack" data-element="import-code">
+      <div class="insulate stack" data-element="import-code">
         <!-- Import Code -->
       </div>
     </div>

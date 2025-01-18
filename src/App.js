@@ -14,6 +14,7 @@ function App({store}) {
   store.setData({search: ""});
   store.setData({sort: "Font"});
   store.setData({activeScreen: "Pair"});
+  store.setData({activeSection: "Pair"});
   store.setData({tableScroll: 0});
   store.setData({pairScroll: 0});
   store.setData({capAdjusts: true});
@@ -44,11 +45,6 @@ function App({store}) {
       const screens = app.querySelectorAll('[data-element="screen"]');
       screens.forEach(screen => {
         screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "block" : "none";
-      });
-
-      const buttons = app.querySelectorAll('[data-element="nav-button"]');
-      buttons.forEach(button => {
-        button.getAttribute('data-target') === activeScreen ? button.classList.add("active") : button.classList.remove("active");
       });
 
       let pos = 0;
