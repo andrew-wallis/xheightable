@@ -521,33 +521,12 @@ td:first-child {
   padding-left: var(--space-s);
 }
 
-.table-row-classification,
-.table-row-data {
+td:not(:first-child):not(:nth-child(2)) {
   border-left: 1px solid var(--border-accent);
   padding-left: var(--space-s);
 }
 
 
-@media (max-width: 767px) {
-  table, thead, tbody, td, th {
-    display: block;
-  }
-
-  tr {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .table-row-data {
-    border: 0;
-    width: 100%;
-    padding-top: 0;
-  }
-
-  .table-row-classification {
-    display: none;
-  }
-}
 
 /* 
 

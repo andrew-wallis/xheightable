@@ -19,27 +19,27 @@ function TableRow({font, action}) {
 
   /* html */
   tableRow.innerHTML = `
-    <td class="table-row-icon" data-element="font-icon">
+    <td data-element="font-icon">
       <!-- Font Icon -->
     </td>
-    <td class="table-row-label" data-element="font-label">
+    <td data-element="font-label">
       ${font.label}
     </td>
-    <td class="table-row-classification">
+    <td class="desktop">
       <div class="cluster">
         <div>${font.superclass}</div>
         <div>${font.classification}</div>
       </div>
     </td>
-    <td class="table-row-data">
+    <td>
       <div class="cluster">
         <div>
           <span class="deweight">X height</span> <span class="data"><span data-element="label-xheight">${Math.round(font.xHeightPct * 100)}</span><span class="deweight">%</span></span>
         </div>
-        <div>
+        <div class="desktop">
           <span class="deweight">Cap height</span> <span class="data"><span data-element="label-capheight">${Math.round(font.capHeightPct * 100)}</span><span class="deweight">%</span></span>
         </div>
-        <div>
+        <div class="desktop">
           <span class="deweight">Line height</span> <span class="data"><span data-element="label-lineheight">${font.lineMin}-${font.lineMax}</span></span>
         </div>
       </div>
