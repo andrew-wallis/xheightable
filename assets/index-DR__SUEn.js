@@ -164,7 +164,7 @@ function print() { __p += __j.call(arguments, '') }
         </div>
       </div>
     </td>
-  `,a.querySelector('[data-element="font-icon"]').appendChild(wn(u.distribution));const x=window.matchMedia("(max-width: 768px)").matches?.875:1,M=a.querySelector('[data-element="font-label"]');if(M.style.fontFamily="system-ui",M.style.fontSize=`${x}rem`,!("IntersectionObserver"in window))console.log("IntersectionObserver not supported");else{const S=new IntersectionObserver(A=>{A.forEach(E=>{E.isIntersecting&&(Oh(u).then(()=>{Vt({element:M,font:u,size:x,weight:"normal"})}),S.disconnect())})});S.observe(M),window.addEventListener("beforeunload",()=>{S.disconnect()})}return a}function Ph({label:u,options:d,action:a,value:_,hideLabel:C}){const x=document.createElement("div"),M=u.replace(/\W/g,"_");console.log(_),x.innerHTML=`
+  `,a.querySelector('[data-element="font-icon"]').appendChild(wn(u.distribution));const x=window.matchMedia("(max-width: 768px)").matches?.875:1,M=a.querySelector('[data-element="font-label"]');if(M.style.fontFamily="system-ui",M.style.fontSize=`${x}rem`,!("IntersectionObserver"in window))console.log("IntersectionObserver not supported");else{const S=new IntersectionObserver(A=>{A.forEach(E=>{E.isIntersecting&&(Oh(u).then(()=>{Vt({element:M,font:u,size:x,weight:"normal"})}),S.disconnect())})});S.observe(M),window.addEventListener("beforeunload",()=>{S.disconnect()})}return a}function Ph({label:u,options:d,action:a,value:_,hideLabel:C}){const x=document.createElement("div");x.classList="select-wrapper";const M=u.replace(/\W/g,"_");console.log(_),x.innerHTML=`
     <label class="label ${C?"sr-only":""}" for=${M}>${u}</label>
     <select id=${M}>
 
