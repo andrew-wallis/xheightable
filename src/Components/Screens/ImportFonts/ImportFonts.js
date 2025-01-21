@@ -15,9 +15,15 @@ function ImportFonts(store) {
   
   /* html */
   importFonts.innerHTML = `
-    <div>
-      <div class="insulate stack grid-s-xl columns-1-2" data-element="import-embed">
-        <!-- Import Embed -->
+    <div class="stack">
+      <div class="stack-l">
+        <div class="stack-xs">
+          <h2 class="slub">Embed Code</h2>
+          <hr/>
+        </div>
+        <div class="grid-l columns-1-2" data-element="import-embed">
+          <!-- Import Embed -->
+        </div>
       </div>
       <div class="insulate stack" data-element="import-code">
         <!-- Import Code -->

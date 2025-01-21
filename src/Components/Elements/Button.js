@@ -4,13 +4,15 @@ function Button({label, icon, type, action, hideLabel}) {
 
   const iconButton = document.createElement('button');
   
-  iconButton.className = `${type}`;
+  if(type) {
+    iconButton.className = `${type}`;
+  }
 
   if(icon) {
     iconButton.appendChild(Icon(icon));
   }
   
-  iconButton.dataset.element = type;
+  iconButton.dataset.element = type ? type : "button";
   iconButton.dataset.target = label;
   
   const iconButtonLabel = document.createElement('div');

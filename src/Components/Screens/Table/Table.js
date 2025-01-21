@@ -5,6 +5,7 @@ import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
 import areNotEqual from "../../../utils/areNotEqual";
 import toggleItem from "../../../utils/toggleItem";
 import Filters from "../../Elements/Filters";
+import Button from "../../Elements/Button";
 
 function Table(store) {
   
@@ -17,54 +18,83 @@ function Table(store) {
 
   /* html */
   table.innerHTML = `
-    <div class="top-bar" data-element="top-bar">
+    <div class="top-bar stack-m" data-element="top-bar">
       <!-- Table Topbar -->
     </div>
-    <main class="wrap stack">
-      <div class="insulate" data-element="table-guidance">
-        <!-- Table Guidance -->
+    <main class="wrap stack-m">
+      <div class="table-close" data-element="table-close">
+        <!-- Table Close -->
       </div>
-      <div class="insulate stack-m">
-        <div data-element="table-filter">
-          <!-- Pair Filter -->
-        </div>
-        <table>
-          <thead class="sr-only">
-            <tr>
-              <th>Distribution</th>
-              <th>Font</th>
-              <th class="desktop">Classification</th>
-              <th>Data</th>
-            </tr>
-          </thead>
-          <tbody data-element="table-list">
-            <!-- Table List -->
-          </tbody>
-        </table>
+      <div data-element="table-filter">
+        <!-- Table Filter -->
       </div>
+      <table>
+        <thead class="sr-only">
+          <tr>
+            <th>Distribution</th>
+            <th>Font</th>
+            <th>Classification</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody data-element="table-list">
+          <!-- Table List -->
+        </tbody>
+      </table>
     </main>
   `;
 
   const topBar = table.querySelector('[data-element="top-bar"]');
+  
   topBar.appendChild(Header());
 
+
+
+  const tableClose = document.createElement('div');
+  tableClose.classList = "wrap table-close";
+  tableClose.dataset.element = "table-close";
+  tableClose.appendChild(Button({label: "Close", icon: "Cross", type: "close-button", action: closeTable, hideLabel: true}))
+  topBar.appendChild(tableClose);
+
   const tableFilter = table.querySelector('[data-element="table-filter"]');
+  const filterData = store.getData().primaryFilter;
+  tableFilter.appendChild(Filters(filterData, changeFilters, ["Match", "A-Z", "Rating"]));
+
   function updateTableFilters() {
 
-    const filterData = store.getData().primaryFilter;
-    const sort = filterData.sort;
-    const licences = filterData.licences;
+    const updateFilterData = store.getData().primaryFilter;
+    const sort = updateFilterData.sort;
+    const licences = updateFilterData.licences;
     const classifications = filterData.classifications;
 
-    if(tableFilter.dataset.sort !== sort
-    || areNotEqual(licences, tableFilter.dataset.licences, )
-    || areNotEqual(classifications, tableFilter.dataset.classifications)) {
-      tableFilter.innerHTML = "";
-      tableFilter.appendChild(Filters(filterData, changeFilters, ["A-Z", "Rating", "X-Height"]));
+    if(tableFilter.dataset.sort !== sort) {
+      const sortSelect = tableFilter.querySelector('select');
+      sortSelect.value = sort;
+    }
 
+    if(areNotEqual(licences, tableFilter.dataset.licences)) {
+      const getLicences = tableFilter.querySelectorAll('[data-key="licence"]');
+      getLicences.forEach((licence) => {
+        if(licences.includes(licence.dataset.value)) {
+          console.log(licence.classList);
+          licence.classList.add("active");
+        } else {
+          licence.classList.remove("active");
+        }
+      });
       tableFilter.dataset.licences = licences.join("|");
+    }
+
+    if(areNotEqual(classifications, tableFilter.dataset.classifications)) {
+      const getClassifications = tableFilter.querySelectorAll('[data-key="classification"]');
+      getClassifications.forEach((classification) => {
+        if(classifications.includes(classification.dataset.value)) {
+          classification.classList.add("active");
+        } else {
+          classification.classList.remove("active");
+        }
+      });
       tableFilter.dataset.classifications = classifications.join("|");
-      tableFilter.dataset.sort = sort;
     }
   }
 
@@ -114,8 +144,14 @@ function Table(store) {
     store.setData({pairScroll: 0});
     store.setData({primaryFont: font});
     store.setData({activeScreen: "Pair"});
+    store.setData({activeSection: "Pair"});
     const tableList = table.querySelector('[data-element="table-list"]');
     highlightRows(tableList, font);
+  }
+
+  function closeTable() {
+    store.setData({tableScroll: window.scrollY});
+    store.setData({activeScreen: "Pair"});
   }
 
   function changeFilters(key, value) {

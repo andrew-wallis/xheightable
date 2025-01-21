@@ -49,9 +49,13 @@ function TableRow({font, action}) {
   const icon = tableRow.querySelector('[data-element="font-icon"]');
   icon.appendChild(Icons(font.distribution));
 
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const fontSize = isMobile ? 0.875 : 1;
+
   const label = tableRow.querySelector('[data-element="font-label"]');
   label.style.fontFamily = 'system-ui';
-  label.style.fontSize = `1rem`;
+  label.style.fontSize = `${fontSize}rem`;
 
   if(!('IntersectionObserver' in window)) {
     console.log('IntersectionObserver not supported');
@@ -60,7 +64,7 @@ function TableRow({font, action}) {
       entries.forEach((entry) => {
         if(entry.isIntersecting) {
           loadFont(font).then(() => {
-            setFontStyles({element: label, font: font, size: 1, weight: "normal"});
+            setFontStyles({element: label, font: font, size: fontSize, weight: "normal"});
           });
           observer.disconnect();
         }

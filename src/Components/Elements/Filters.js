@@ -28,14 +28,20 @@ function Filters(data, action, options) {
   const licences = ["Adobe", "Google"];
 
   licences.forEach((licence) => {
-    filtersLicence.appendChild(Button({label: licence, icon: licence, type: `filter-button ${data.licences.includes(licence) ? "active" : ""}`, action: filterLicence, hideLabel: true}));
+    const licenceButton = Button({label: licence, icon: licence, type: `filter-button ${data.licences.includes(licence) ? "active" : ""}`, action: filterLicence, hideLabel: true});
+    licenceButton.dataset.key = "licence";
+    licenceButton.dataset.value = licence;
+    filtersLicence.appendChild(licenceButton);
   })
 
   const filtersClassification = filters.querySelector('[data-element="filters-classification"]');
   const classifications = ["Sans", "Serif", "Mono"];
 
   classifications.forEach((classification) => {
-    filtersClassification.appendChild(Button({label: classification, icon: classification, type: `filter-button ${data.classifications.includes(classification) ? "active" : ""}`, action: filterClassification, hideLabel: true}));
+    const classificationButton = Button({label: classification, icon: classification, type: `filter-button ${data.classifications.includes(classification) ? "active" : ""}`, action: filterClassification, hideLabel: true});
+    classificationButton.dataset.key = "classification";
+    classificationButton.dataset.value = classification;
+    filtersClassification.appendChild(classificationButton);
   });
   
   function filterSort(value) {

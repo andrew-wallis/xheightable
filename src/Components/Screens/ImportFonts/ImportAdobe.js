@@ -8,15 +8,11 @@ function ImportAdobe(font) {
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-  const label = document.createElement('h2');
+  const labelWrapper = document.createElement('h3');
+  const label = document.createElement('strong');
   label.innerText = font.label;
-  setFontStyles({element: label, font: font, size: isMobile ? 1.3 : 1.5, leading: "2.25rem", weight: "bold"});
-  importAdobe.appendChild(label);
-
-  const designers = document.createElement('div');
-  designers.innerText = font.designer.split(";").join(", ");
-  designers.className = "small strong"
-  importAdobe.appendChild(designers);
+  labelWrapper.appendChild(label);
+  importAdobe.appendChild(labelWrapper);
 
   const cta = document.createElement('a');
   cta.href = font.link;

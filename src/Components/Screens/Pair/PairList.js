@@ -36,27 +36,44 @@ function PairList(store) {
   `;
 
   const pairFilter = list.querySelector('[data-element="pair-filter"]');
+  const filterData = store.getData().secondaryFilter;
+  pairFilter.appendChild(Filters(filterData, changeFilters, ["Match", "A-Z", "Rating"]));
+
   function updateFilters() {
 
-    const filterData = store.getData().secondaryFilter;
-    const sort = filterData.sort;
-    const licences = filterData.licences;
+    const updateFilterData = store.getData().secondaryFilter;
+    const sort = updateFilterData.sort;
+    const licences = updateFilterData.licences;
     const classifications = filterData.classifications;
 
+    if(pairFilter.dataset.sort !== sort) {
+      const sortSelect = pairFilter.querySelector('select');
+      sortSelect.value = sort;
+    }
 
-
-    console.log("Hi");
-
-    if(pairFilter.dataset.sort !== sort
-    || areNotEqual(licences, pairFilter.dataset.licences, )
-    || areNotEqual(classifications, pairFilter.dataset.classifications)) {
-
-      pairFilter.innerHTML = "";
-      pairFilter.appendChild(Filters(filterData, changeFilters, ["Match", "A-Z", "Rating"]));
-
+    if(areNotEqual(licences, pairFilter.dataset.licences)) {
+      const getLicences = pairFilter.querySelectorAll('[data-key="licence"]');
+      getLicences.forEach((licence) => {
+        if(licences.includes(licence.dataset.value)) {
+          console.log(licence.classList);
+          licence.classList.add("active");
+        } else {
+          licence.classList.remove("active");
+        }
+      });
       pairFilter.dataset.licences = licences.join("|");
+    }
+
+    if(areNotEqual(classifications, pairFilter.dataset.classifications)) {
+      const getClassifications = pairFilter.querySelectorAll('[data-key="classification"]');
+      getClassifications.forEach((classification) => {
+        if(classifications.includes(classification.dataset.value)) {
+          classification.classList.add("active");
+        } else {
+          classification.classList.remove("active");
+        }
+      });
       pairFilter.dataset.classifications = classifications.join("|");
-      pairFilter.dataset.sort = sort;
     }
   }
 

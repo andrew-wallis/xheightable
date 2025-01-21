@@ -6,29 +6,35 @@ function importCode() {
 
   /* html */
   importCode.innerHTML = `
-    <aside class="code-wrapper stack">
-      <div class="control-panel stack" data-element="import-controls">
-        <!-- Import Control -->
+    <aside class="stack-l">
+      <div class="stack-xs">
+        <h2 class="slub">CSS</h2>
+        <hr/>
       </div>
-      <div class="code-panel">
-        <div class="with-sidebar">
-          <ul class="tabs" data-element="import-tabs">
-            <!-- Import Tabs -->
-          </ul>
-          <div class="">
-            <a href="#" data-element="copy-stylesheet" class="button">
-              <div data-element="copy-label">Copy</div>
-              <div data-element="copy-icon"></div>
-            </a>
-          </div>
+      <div class="code-wrapper stack-l">
+        <div class="control-panel stack" data-element="import-controls">
+          <!-- Import Control -->
         </div>
-        <pre class="code-container">
-          <code>
-            <!-- Code -->
-          </code>
-        </pre>
+        <div class="code-panel">
+          <div class="with-sidebar">
+            <ul class="tabs" data-element="import-tabs">
+              <!-- Import Tabs -->
+            </ul>
+            <div class="">
+              <a href="#" data-element="copy-stylesheet" class="button">
+                <div data-element="copy-label">Copy</div>
+                <div data-element="copy-icon"></div>
+              </a>
+            </div>
+          </div>
+          <pre class="code-container">
+            <code>
+              <!-- Code -->
+            </code>
+          </pre>
+        </div>
       </div>
-    </div>
+    </aside>
   `;
 
   const copyStylesheet = importCode.querySelector('[data-element="copy-stylesheet"]');

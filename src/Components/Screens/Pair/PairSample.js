@@ -1,6 +1,7 @@
 function PairSample(referenceFont) {
 
-  const referenceLineColor = referenceFont ? "#D92854" : "transparent";
+  const referenceLineColor = referenceFont ? "#59A6CD" : "transparent";
+  const xHeightLineColor = referenceFont ? "#D92854" : "#59A6CD";
   
   const fontSample = document.createElement('div');
   fontSample.className = "sample";
@@ -22,7 +23,7 @@ function PairSample(referenceFont) {
       <hr data-element="reference-line" class="sampleLine" style="border-color: ${referenceLineColor};">
     </div>
     <div class="sampleWrapper">
-      <hr data-element="xHeight-line" class="sampleLine x-line">
+      <hr data-element="xHeight-line" class="sampleLine" style="border-color: ${xHeightLineColor};">
     </div>
     <div class="sampleWrapper">
       <hr data-element="base-line" class="sampleLine">

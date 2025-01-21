@@ -43,6 +43,23 @@ function findPairings({font, fonts, sort, licences, classifications}) {
         return diffA - diffB;
       }
 
+      // Determine superclass order
+      const orderMap = {
+        Sans: { Serif: 0, Mono: 1, Sans: 2 },
+        Serif: { Sans: 0, Mono: 1, Serif: 2 },
+        Mono: { Sans: 0, Serif: 1, Mono: 2 },
+      };
+
+      const superclassOrder = orderMap[thisFont.superclass];
+      const orderA = superclassOrder[a.superclass] ?? 3; // Default to 3 if not in map
+      const orderB = superclassOrder[b.superclass] ?? 3;
+
+      if (orderA !== orderB) {
+        return orderA - orderB;
+      }
+
+      return Number(b.Rating) - Number(a.Rating);
+/* 
       // Promote fonts with the same family
       const sameFamilyA = (a.family === thisFont.family) ? 0 : 1;
       const sameFamilyB = (b.family === thisFont.family) ? 0 : 1;
@@ -67,9 +84,7 @@ function findPairings({font, fonts, sort, licences, classifications}) {
 
       if (deweightA !== deweightB) {
         return deweightA - deweightB;
-      }
-
-      return Number(b.Rating) - Number(a.Rating);
+      } */
 
     });
       

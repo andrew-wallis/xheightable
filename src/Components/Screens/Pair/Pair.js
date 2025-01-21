@@ -6,6 +6,9 @@ import PairList from "./PairList";
 import Button from "../../Elements/Button";
 import ImportFonts from "../Test/Test";
 import Test from "../ImportFonts/ImportFonts";
+import Icons from "../../Elements/Icons";
+import { round } from "lodash";
+import PairMatch from "./PairMatch";
 
 function Pair(store) {
 
@@ -23,7 +26,7 @@ function Pair(store) {
         <!-- Pair Topbar -->
       </div>
       <div class="wrap insulate stack">
-        <div class="insulate stack-s">
+        <div class="insulate stack">
           <div class="grid columns-2">
             <div class="cluster pair-label">
               <div class="" data-element="pair-primary-label">
@@ -34,8 +37,11 @@ function Pair(store) {
               </div>
             </div>
             <div class="cluster pair-label">
-              <div class="pair-label" data-element="pair-secondary-label">
+              <div data-element="pair-secondary-label">
                 <!-- Pair Secondary -->
+              </div>
+              <div class="desktop" data-element="pair-match">
+                <!-- Pair Match -->
               </div>
             </div>
           </div>
@@ -48,7 +54,19 @@ function Pair(store) {
               </div>
             </div>
             <div data-element="pair-labels" class="grid columns-2">
-              <!-- Pair Labels -->
+              <div>
+                <div data-element="data-primary">
+                  <!-- Data Primary  -->
+                </div>
+              </div>
+              <div class="pair-data" >
+                <div data-element="data-secondary">
+                  <!-- Data Secondary -->
+                </div>
+                <div class="mobile" data-element="pair-match">
+                  <!-- Pair Match -->
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -73,9 +91,11 @@ function Pair(store) {
   const primaryData = PairLabel();
   const secondaryData = PairLabel();
 
-  const pairLabels = pair.querySelector('[data-element="pair-labels"]');
-  pairLabels.appendChild(primaryData);
-  pairLabels.appendChild(secondaryData);
+  const dataPrimary = pair.querySelector('[data-element="data-primary"]');
+  dataPrimary.appendChild(primaryData);
+
+  const dataSecondary = pair.querySelector('[data-element="data-secondary"]');
+  dataSecondary.appendChild(secondaryData);
 
   const primarySample = PairSample();
   const secondarySample = PairSample(true);
@@ -116,14 +136,25 @@ function Pair(store) {
       text.innerText = isMobile ? "ABC abc" : "ABCEFG abcefg 123";
     });
 
+    const pairMatches = pair.querySelectorAll('[data-element="pair-match"]');
+
+    pairMatches.forEach((match) => {
+      match.innerHTML = "";
+      match.appendChild(PairMatch(primaryFont, secondaryFont));
+    });
+
+
     function updateFont(font, label, data, sample) {
+
+      console.log(font);
+
       if(Object.keys(font).length > 0) {
     
         label.innerText = font.shortlabel;
-        setFontStyles({element: label, font: font, size: isMobile ? 1.1 : 1.25, leading: "2.25rem", weight: "bold"});
+        setFontStyles({element: label, font: font, size: isMobile ? 1 : 1.25, leading: "1", weight: "bold"});
   
         const capHeightLabel = data.querySelector('[data-element="label-capheight"]');
-        capHeightLabel.innerHTML = Math.round(font.xHeightPct * 100);  
+        capHeightLabel.innerHTML = Math.round(font.capHeightPct * 100);  
   
         const xHeight = data.querySelector('[data-element="label-xheight"]');
         xHeight.innerHTML = Math.round(font.xHeightPct * 100);

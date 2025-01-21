@@ -9,11 +9,12 @@ function ImportGoogle(font) {
 
   /* html */
   importGoogle.innerHTML = `
-    <h2 data-element="data-label">
-      <!-- Data-Label -->
-    </h2>
     <div class="with-sidebar">
-      <div class="small strong">${(font.designer.split(";").join(", "))}</div>
+      <h3>
+        <strong data-element="data-label">
+          <!-- Data-Label -->
+        </strong>
+      </h3>
       <a class="button copy-button" href="#" data-element="copy-stylesheet">
         <div data-element="copy-label">Copy</div>
         <div data-element="copy-icon"></div>
@@ -29,11 +30,8 @@ function ImportGoogle(font) {
     </div>
   `;
 
-  const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
   const label = importGoogle.querySelector('[data-element="data-label"]');
   label.innerText = font.label;
-  setFontStyles({element: label, font: font, size: isMobile ? 1.3 : 1.5, leading: "2.25rem", weight: "bold"});
 
   const copyStylesheet = importGoogle.querySelector('[data-element="copy-stylesheet"]');
   copyStylesheet.addEventListener("click", function(e) {

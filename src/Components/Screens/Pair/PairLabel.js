@@ -8,10 +8,10 @@ function PairLabel() {
     <li>
       X <span class="desktop">height</span> <span data-element="label-xheight"><!-- Label Cap height --></span><span class="deweight">%</span>
     </li>
-    <li>
+    <li class="desktop">
       Cap <span class="desktop">height</span> <span data-element="label-capheight"><!-- Label x-height --></span><span class="deweight">%</span>
     </li>
-    <li>
+    <li class="desktop">
       Line <span class="desktop">height</span> <span data-element="label-lineheight"><!-- Label Line heights --></span>
     </li>
   `;
