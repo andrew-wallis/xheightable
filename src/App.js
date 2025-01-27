@@ -1,6 +1,5 @@
 
 import Button from "./Components/Elements/Button";
-import ImportFonts from "./Components/Screens/ImportFonts/ImportFonts";
 import Pair from "./Components/Screens/Pair/Pair";
 import Table from "./Components/Screens/Table/Table";
 
@@ -38,7 +37,7 @@ function App({store}) {
   app.appendChild(Table(store));
   app.appendChild(Pair(store));
   //app.appendChild(Test(store));
-  app.appendChild(ImportFonts(store));
+  //app.appendChild(ImportFonts(store));
 
 
 

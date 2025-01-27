@@ -10,7 +10,7 @@ function TableRow({font, action}) {
   tableRow.className = "clickable";
   tableRow.dataset.name = font.name;
   tableRow.dataset.label = font.label;
-  tableRow.dataset.element = "font-link";
+  tableRow.dataset.element = "table-link";
 
   tableRow.addEventListener('click', function(e) {
     e.preventDefault();
@@ -19,43 +19,43 @@ function TableRow({font, action}) {
 
   /* html */
   tableRow.innerHTML = `
-    <td data-element="font-icon">
+    <td data-element="table-icon">
       <!-- Font Icon -->
     </td>
-    <td data-element="font-label">
+    <td data-element="table-label">
       ${font.label}
     </td>
-    <td class="desktop">
-      <div class="cluster">
-        <div>${font.superclass}</div>
-        <div>${font.classification}</div>
-      </div>
+    <td data-element="table-sample" class="desktop">
+      hamburgers & JACKDAWS
     </td>
     <td>
       <div class="cluster">
         <div>
-          <span class="deweight">X height</span> <span class="data"><span data-element="label-xheight">${Math.round(font.xHeightPct * 100)}</span><span class="deweight">%</span></span>
+          <span class="deweight">X-Height</span> <span class="data"><span data-element="label-xheight">${Math.round(font.xHeightPct * 100)}</span><span class="deweight">%</span></span>
         </div>
         <div class="desktop">
-          <span class="deweight">Cap height</span> <span class="data"><span data-element="label-capheight">${Math.round(font.capHeightPct * 100)}</span><span class="deweight">%</span></span>
+          <span class="deweight">Cap Height</span> <span class="data"><span data-element="label-capheight">${Math.round(font.capHeightPct * 100)}</span><span class="deweight">%</span></span>
         </div>
         <div class="desktop">
-          <span class="deweight">Line height</span> <span class="data"><span data-element="label-lineheight">${font.lineMin}-${font.lineMax}</span></span>
+          <span class="deweight">Line Height</span> <span class="data"><span data-element="label-lineheight">${font.lineMin}-${font.lineMax}</span></span>
         </div>
       </div>
     </td>
   `;
 
-  const icon = tableRow.querySelector('[data-element="font-icon"]');
+  const icon = tableRow.querySelector('[data-element="table-icon"]');
   icon.appendChild(Icons(font.distribution));
-
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   const fontSize = isMobile ? 0.875 : 1;
 
-  const label = tableRow.querySelector('[data-element="font-label"]');
+  const label = tableRow.querySelector('[data-element="table-label"]');
   label.style.fontFamily = 'system-ui';
   label.style.fontSize = `${fontSize}rem`;
+
+  const sample = tableRow.querySelector('[data-element="table-sample"]');
+  sample.style.fontFamily = 'system-ui';
+  sample.style.fontSize = `${fontSize}rem`;
 
   if(!('IntersectionObserver' in window)) {
     console.log('IntersectionObserver not supported');
@@ -65,6 +65,7 @@ function TableRow({font, action}) {
         if(entry.isIntersecting) {
           loadFont(font).then(() => {
             setFontStyles({element: label, font: font, size: fontSize, weight: "normal"});
+            setFontStyles({element: sample, font: font, size: fontSize, weight: "normal"});
           });
           observer.disconnect();
         }
@@ -75,7 +76,7 @@ function TableRow({font, action}) {
 
     window.addEventListener('beforeunload', () => {
       observer.disconnect();
-    })
+    });
   }
 
   return tableRow;

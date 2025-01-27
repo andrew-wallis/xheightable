@@ -185,7 +185,7 @@ aside {
 }
 
 .cluster-2xs {
-  gap: var(--space-2xs);
+  gap: 0 var(--space-2xs);
 }
 
 .cluster-no-gap {
@@ -916,5 +916,5 @@ aside {
 
 .match-possible,
 .match-possible .icon {
-  color: var(--orange);
+  color: var(--secondary);
 }

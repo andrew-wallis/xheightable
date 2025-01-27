@@ -9,6 +9,7 @@ import Test from "../ImportFonts/ImportFonts";
 import Icons from "../../Elements/Icons";
 import { round } from "lodash";
 import PairMatch from "./PairMatch";
+import loadFont from "../../../utils/loadFont";
 
 function Pair(store) {
 
@@ -25,7 +26,7 @@ function Pair(store) {
       <div data-element="top-bar">
         <!-- Pair Topbar -->
       </div>
-      <div class="wrap insulate stack">
+      <div class="wrap insulate stack-l">
         <div class="insulate stack">
           <div class="grid columns-2">
             <div class="cluster pair-label">
@@ -39,9 +40,6 @@ function Pair(store) {
             <div class="cluster pair-label">
               <div data-element="pair-secondary-label">
                 <!-- Pair Secondary -->
-              </div>
-              <div class="desktop" data-element="pair-match">
-                <!-- Pair Match -->
               </div>
             </div>
           </div>
@@ -77,7 +75,7 @@ function Pair(store) {
         </nav>
       </div>
     </div>
-    <main data-element="pair-main" class="wrap insulate">
+    <main data-element="pair-main" class="wrap">
       <!-- Pair main" -->
     </main>
   `;
@@ -122,7 +120,9 @@ function Pair(store) {
     const secondaryFont = store.getData().secondaryFont;
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-    const capHeight = 33.5 / 16;
+    const capHeight = (isMobile ? 27.8 : 33.5) / 16;
+    const labelSize = isMobile ? 1 : 1.25;
+    const sampleSize = isMobile ? 2.5 : 3;
 
     if(primaryFont.label !== primaryLabel.dataset.label) {
       updateFont(primaryFont, primaryLabel, primaryData, primarySample);
@@ -133,28 +133,26 @@ function Pair(store) {
     }
     const sampleText = pair.querySelectorAll('[data-element="font-sample"]');
     sampleText.forEach((text) => {
-      text.innerText = isMobile ? "ABC abc" : "ABCEFG abcefg 123";
+      text.innerText = isMobile ? "ABC abc" : "ABCDEF abcdef 123";
     });
-
-    const pairMatches = pair.querySelectorAll('[data-element="pair-match"]');
-
-    pairMatches.forEach((match) => {
-      match.innerHTML = "";
-      match.appendChild(PairMatch(primaryFont, secondaryFont));
-    });
-
 
     function updateFont(font, label, data, sample) {
-
-      console.log(font);
 
       if(Object.keys(font).length > 0) {
     
         label.innerText = font.shortlabel;
-        setFontStyles({element: label, font: font, size: isMobile ? 1 : 1.25, leading: "1", weight: "bold"});
-  
+        label.style.opacity = 0;
+        label.style.fontFamily = 'system-ui';
+        label.style.fontSize = `${labelSize}rem`;
+        label.style.lineHeight = `${labelSize}rem`;
+
+        sample.style.fontFamily = 'system-ui';
+        sample.style.opacity = 0;
+        sample.style.fontSize = `${sampleSize}rem`;
+        sample.style.lineHeight = `${sampleSize}rem`;
+        
         const capHeightLabel = data.querySelector('[data-element="label-capheight"]');
-        capHeightLabel.innerHTML = Math.round(font.capHeightPct * 100);  
+        capHeightLabel.innerHTML = Math.round(font.capHeightPct * 100);
   
         const xHeight = data.querySelector('[data-element="label-xheight"]');
         xHeight.innerHTML = Math.round(font.xHeightPct * 100);
@@ -171,7 +169,30 @@ function Pair(store) {
         const xHeightLine = sample.querySelector('[data-element="xHeight-line"]');
         xHeightLine.style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
 
-        setFontStyles({element: sample, font: font, size: "3", leading: "3rem", weight: "normal"});
+        if(!('IntersectionObserver' in window)) {
+          console.log('IntersectionObserver not supported');
+        } else {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if(entry.isIntersecting) {
+                loadFont(font).then(() => {
+                  setFontStyles({element: label, font: font, size: labelSize, leading: `${labelSize}rem`, weight: "bold"});
+                  setFontStyles({element: sample, font: font, size: sampleSize, leading: `${sampleSize}rem`, weight: "normal"});
+                  label.style.opacity = 1;
+                  sample.style.opacity = 1;
+                });
+                observer.disconnect();
+              }
+            });
+          });
+
+          observer.observe(label);
+
+          window.addEventListener('beforeunload', () => {
+            observer.disconnect();
+          });
+        }
+
 
         label.dataset.label = font.label;
       }
@@ -179,6 +200,7 @@ function Pair(store) {
   }
 
   store.subscribe(updatePairingSample);
+  updatePairingSample();
 
   function updateSection() {
 
