@@ -269,7 +269,7 @@ function print() { __p += __j.call(arguments, '') }
         <!-- Pair Topbar -->
       </div>
       <div class="wrap insulate stack-l">
-        <div class="insulate stack">
+        <div class="insulate-s stack">
           <div class="grid columns-2">
             <div class="cluster pair-label">
               <div class="" data-element="pair-primary-label">
