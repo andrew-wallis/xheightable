@@ -36,15 +36,13 @@ function App({store}) {
 
   app.appendChild(Table(store));
   app.appendChild(Pair(store));
-  //app.appendChild(Test(store));
-  //app.appendChild(ImportFonts(store));
-
-
 
   const changePrimary = app.querySelector('[data-element="pair-change"]');
   changePrimary.appendChild(Button({label: "Change", action: openPrimary, type: "primary-button slub"}));
 
   function updateScreen() {
+
+    console.log("Update Screen Triggered!");
 
     const currentScreen = app.getAttribute('data-active');
     const activeScreen = store.getData().activeScreen;

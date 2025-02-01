@@ -42,12 +42,6 @@ function findPairings({font, fonts, sort, licences, classifications}) {
       if (diffA !== diffB) {
         return diffA - diffB;
       }
-      
-      const sameFamilyA = (a.family === thisFont.family) ? 0 : 1;
-      const sameFamilyB = (b.family === thisFont.family) ? 0 : 1;
-      if (sameFamilyA !== sameFamilyB) {
-        return sameFamilyA - sameFamilyB;
-      }
 
       // Determine superclass order
       const orderMap = {

@@ -58,9 +58,11 @@ function Table(store) {
 
   const tableFilter = table.querySelector('[data-element="table-filter"]');
   const filterData = store.getData().primaryFilter;
-  tableFilter.appendChild(Filters(filterData, changeFilters, ["Match", "A-Z", "Rating"]));
+  tableFilter.appendChild(Filters(filterData, changeFilters, ["Rating", "A-Z", "X-Height"]));
 
   function updateTableFilters() {
+
+    console.log("Update Table Filters Triggered!");
 
     const updateFilterData = store.getData().primaryFilter;
     const sort = updateFilterData.sort;
@@ -103,6 +105,8 @@ function Table(store) {
 
   function updateTableList() {
 
+    console.log("Update Table List Triggered!");
+
     const filterData = store.getData().primaryFilter;
     const search = filterData.search;
     const sort = filterData.sort;
@@ -140,11 +144,18 @@ function Table(store) {
   updateTableList();
 
   function changePrimary(font) {
-    store.setData({tableScroll: window.scrollY});
-    store.setData({pairScroll: 0});
-    store.setData({primaryFont: font});
-    store.setData({activeScreen: "Pair"});
-    store.setData({activeSection: "Pair"});
+    store.setData({
+      tableScroll: window.scrollY,
+      pairScroll: 0,
+      primaryFont: font,
+      activeScreen: "Pair",
+      activeSection: "Pair",
+      secondaryFilter: {
+        sort: "Match",
+        licences: [],
+        classifications: []
+      }
+    });
     const tableList = table.querySelector('[data-element="table-list"]');
     highlightRows(tableList, font);
   }

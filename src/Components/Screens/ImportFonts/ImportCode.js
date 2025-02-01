@@ -9,7 +9,7 @@ function importCode() {
     <aside class="stack-l">
       <div class="stack-xs">
         <h2 class="slub">CSS</h2>
-        <hr/>
+        <hr class="accent"/>
       </div>
       <div class="code-wrapper stack-l">
         <div class="control-panel stack" data-element="import-controls">

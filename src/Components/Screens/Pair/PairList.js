@@ -41,6 +41,8 @@ function PairList(store) {
 
   function updateFilters() {
 
+    console.log("Update Filters Triggered!");
+
     const updateFilterData = store.getData().secondaryFilter;
     const sort = updateFilterData.sort;
     const licences = updateFilterData.licences;
@@ -81,6 +83,9 @@ function PairList(store) {
   updateFilters();
 
   function updatePairingList() {
+
+
+    console.log("Update Pairing List Triggered!");
 
     const filterData = store.getData().secondaryFilter;
     const sort = filterData.sort;

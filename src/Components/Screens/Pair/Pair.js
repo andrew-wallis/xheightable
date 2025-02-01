@@ -27,7 +27,7 @@ function Pair(store) {
         <!-- Pair Topbar -->
       </div>
       <div class="wrap insulate stack-l">
-        <div class="insulate stack">
+        <div class="insulate-s stack">
           <div class="grid columns-2">
             <div class="cluster pair-label">
               <div class="" data-element="pair-primary-label">
@@ -40,6 +40,9 @@ function Pair(store) {
             <div class="cluster pair-label">
               <div data-element="pair-secondary-label">
                 <!-- Pair Secondary -->
+              </div>
+              <div class="desktop" data-element="pair-match">
+                <!-- Pair Match -->
               </div>
             </div>
           </div>
@@ -60,9 +63,6 @@ function Pair(store) {
               <div class="pair-data" >
                 <div data-element="data-secondary">
                   <!-- Data Secondary -->
-                </div>
-                <div class="mobile" data-element="pair-match">
-                  <!-- Pair Match -->
                 </div>
               </div>
             </div>
@@ -116,6 +116,9 @@ function Pair(store) {
 
 
   function updatePairingSample() {
+
+    console.log("Update Pairing Triggered!");
+
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
@@ -135,6 +138,14 @@ function Pair(store) {
     sampleText.forEach((text) => {
       text.innerText = isMobile ? "ABC abc" : "ABCDEF abcdef 123";
     });
+
+
+/*     const pairMatches = pair.querySelectorAll('[data-element="pair-match"]');
+
+    pairMatches.forEach((match) => {
+      match.innerHTML = "";
+      match.appendChild(PairMatch(primaryFont, secondaryFont));
+    }); */
 
     function updateFont(font, label, data, sample) {
 
@@ -203,6 +214,8 @@ function Pair(store) {
   updatePairingSample();
 
   function updateSection() {
+
+    console.log("Update Section Triggered!");
 
     const currentSection = pairMain.getAttribute('data-active');
     const activeSection = store.getData().activeSection;

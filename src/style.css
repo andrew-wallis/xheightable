@@ -123,7 +123,7 @@ header {
 }
 
 aside {
-  background-color: var(--highlight);
+  border: 1px solid var(--border-primary);
   padding: var(--space-l);
 }
 
@@ -141,6 +141,11 @@ aside {
 .insulate {
   padding-top: var(--space-s-l);
   padding-bottom: var(--space-s-l);
+}
+
+.insulate-s {
+  padding-top: var(--space-s);
+  padding-bottom: var(--space-s);
 }
 
 [class*="stack"] {
@@ -315,6 +320,11 @@ button,
 .cta-button {
   border: 1px solid var(--border-accent);
   border-radius: 0;
+  color: var(--accent) !important;
+}
+
+.cta-button .icon {
+  color: var(--blue-light);
 }
 
 .secondary-button {
@@ -349,7 +359,7 @@ code {
   display: block;
   white-space: break-spaces;
   width: 100%;
-  background-color: var(--highlight-overlay);
+  background-color: var(--highlight);
   padding: var(--space-xs) var(--space-s);
   font-family: var(--monospace-font);
   font-size: var(--step--1);
@@ -386,7 +396,8 @@ code {
   display: flex;
   flex-grow: 1;
   padding: var(--space-s);
-  background-color: var(--background);
+  border: 1px solid var(--border-accent);
+  margin-top: -1px;
 }
 
 /* Horitzonal Rules */
@@ -498,11 +509,9 @@ nav > div:not(.navbar) {
 }
 
 .navbar {
-  background-color: var(--border-accent);
   border-radius: var(--radius-full);
   display: grid;
   flex-shrink: 0;
-  gap: 1px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   max-width: 28rem;
   padding: 1px;
@@ -511,6 +520,11 @@ nav > div:not(.navbar) {
 
 .navbar > button {
   background-color: var(--background);
+  border: 1px solid var(--border-accent);
+}
+
+.navbar > button:not(:last-of-type) {
+  border-right: 0;
 }
 
 .navbar > button:first-of-type {
@@ -600,12 +614,16 @@ tr.active-row {
   letter-spacing: .05em;
   text-transform: uppercase;
   color: var(--secondary);
+  border: 1px solid transparent;
 }
 
 .tab.active {
+  z-index: 5;
+  position: relative;
   font-weight: 600;
-  background-color: var(--background);
-  border-radius: 0;
+  border: 1px solid var(--border-accent);
+  border-bottom-color: var(--background);
+  color: var(--accent);
 }
 
 

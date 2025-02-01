@@ -64,6 +64,8 @@ function Test(store) {
 
   function updateTestScreen() {
 
+    console.log("Update Test Screen Triggered!");
+
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
 
@@ -81,6 +83,8 @@ function Test(store) {
       });
     }
   }
+
+  store.subscribe(updateTestScreen);
 
   const examples = test.querySelectorAll('[data-element="clickable"');
   examples.forEach(example => {
@@ -146,8 +150,6 @@ function Test(store) {
     });
     example.dataset.fontFamily = font.label;
   }
-
-  store.subscribe(updateTestScreen);
 
   return test;
 

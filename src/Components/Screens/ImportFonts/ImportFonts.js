@@ -19,7 +19,7 @@ function ImportFonts(store) {
       <div class="stack-l">
         <div class="stack-xs">
           <h2 class="slub">Embed Code</h2>
-          <hr/>
+          <hr class="accent"/>
         </div>
         <div class="grid-l columns-1-2" data-element="import-embed">
           <!-- Import Embed -->
@@ -72,6 +72,8 @@ function ImportFonts(store) {
   // Functions
   
   function updateImport() {
+
+    console.log("Update Import Triggered!");
 
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
