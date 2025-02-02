@@ -3,16 +3,13 @@ import Icon from "./Icons";
 function Button({label, icon, type, action, hideLabel}) {
 
   const iconButton = document.createElement('button');
-  
-  if(type) {
-    iconButton.className = `${type}`;
-  }
+  iconButton.className = `label ${type ? type : ""}`;
 
   if(icon) {
     iconButton.appendChild(Icon(icon));
   }
   
-  iconButton.dataset.element = type ? type : "button";
+  iconButton.dataset.element = "button";
   iconButton.dataset.target = label;
   
   const iconButtonLabel = document.createElement('div');

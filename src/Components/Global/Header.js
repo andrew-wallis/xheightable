@@ -25,7 +25,7 @@ function Header() {
         </svg>
       </div>
       <div>
-        <a class="link" href="https://www.google.com" target="_blank">Buy us a coffee!</a>
+        <a class="accent" href="https://www.google.com" target="_blank"><strong>Buy us a coffee!</strong></a>
       </div>
     </div>
   `;

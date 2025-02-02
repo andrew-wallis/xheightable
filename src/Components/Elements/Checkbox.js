@@ -1,7 +1,7 @@
 function Checkbox({label, action, value}) {
 
   const checkboxWrapper = document.createElement('div');
-  checkboxWrapper.className = "control-element checkbox-wrapper";
+  checkboxWrapper.className = "cluster-s";
 
   const id = label.replace(/\W/g,'_');
 

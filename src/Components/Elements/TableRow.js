@@ -1,5 +1,6 @@
 
 import loadFont from "../../utils/loadFont";
+import qu from "../../utils/qu";
 import setFontStyles from "../../utils/setFontStyles";
 import Icons from "./Icons";
 
@@ -29,31 +30,30 @@ function TableRow({font, action}) {
       hamburgers & JACKDAWS
     </td>
     <td>
-      <div class="cluster">
+      <div class="cluster caption">
         <div>
-          <span class="deweight">X-Height</span> <span class="data"><span data-element="label-xheight">${Math.round(font.xHeightPct * 100)}</span><span class="deweight">%</span></span>
+          <span class="tertiary">X-Height</span> <span class="data"><span data-element="label-xheight">${Math.round(font.xHeightPct * 100)}</span><span class="tertiary">%</span></span>
         </div>
         <div class="desktop">
-          <span class="deweight">Cap Height</span> <span class="data"><span data-element="label-capheight">${Math.round(font.capHeightPct * 100)}</span><span class="deweight">%</span></span>
+          <span class="tertiary">Cap Height</span> <span class="data"><span data-element="label-capheight">${Math.round(font.capHeightPct * 100)}</span><span class="tertiary">%</span></span>
         </div>
         <div class="desktop">
-          <span class="deweight">Line Height</span> <span class="data"><span data-element="label-lineheight">${font.lineMin}-${font.lineMax}</span></span>
+          <span class="tertiary">Line Height</span> <span class="data"><span data-element="label-lineheight">${font.lineMin}-${font.lineMax}</span></span>
         </div>
       </div>
     </td>
   `;
 
-  const icon = tableRow.querySelector('[data-element="table-icon"]');
-  icon.appendChild(Icons(font.distribution));
+  qu(tableRow, "table-icon").appendChild(Icons(font.distribution));
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   const fontSize = isMobile ? 0.875 : 1;
 
-  const label = tableRow.querySelector('[data-element="table-label"]');
+  const label = qu(tableRow, "table-label");
   label.style.fontFamily = 'system-ui';
   label.style.fontSize = `${fontSize}rem`;
 
-  const sample = tableRow.querySelector('[data-element="table-sample"]');
+  const sample = qu(tableRow, "table-sample");
   sample.style.fontFamily = 'system-ui';
   sample.style.fontSize = `${fontSize}rem`;
 

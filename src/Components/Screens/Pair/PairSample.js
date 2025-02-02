@@ -3,16 +3,16 @@ function PairSample(referenceFont) {
   const referenceLineColor = referenceFont ? "#59A6CD" : "transparent";
   const xHeightLineColor = referenceFont ? "#D92854" : "#59A6CD";
   
-  const fontSample = document.createElement('div');
-  fontSample.className = "sample";
+  const sample = document.createElement('div');
+  sample.className = "sample";
 
   /* html */
-  fontSample.innerHTML = `
-    <span data-element="font-sample">
+  sample.innerHTML = `
+    <span data-element="pair-sample">
       <!-- Data-sample -->
     </span>
     <div class="sampleWrapper sampleText" style="vertical-align: 0px;">
-      <span data-element="font-sample">
+      <span data-element="pair-sample">
         <!-- Data-sample -->
       </span>
     </div>
@@ -30,7 +30,7 @@ function PairSample(referenceFont) {
     </div>
   `
 
-  return fontSample;
+  return sample;
 
 }
 

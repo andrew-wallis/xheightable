@@ -1,17 +1,18 @@
-import PairLabel from "./PairLabel";
+import PairData from "./PairData";
 import PairSample from "./PairSample";
-import setFontStyles from "../../../utils/setFontStyles";
-import Header from "../../Global/Header";
 import PairList from "./PairList";
-import Button from "../../Elements/Button";
 import ImportFonts from "../Test/Test";
 import Test from "../ImportFonts/ImportFonts";
-import Icons from "../../Elements/Icons";
-import { round } from "lodash";
-import PairMatch from "./PairMatch";
+import Header from "../../Global/Header";
+import Button from "../../Elements/Button";
 import loadFont from "../../../utils/loadFont";
+import qu from "../../../utils/qu";
+import qua from "../../../utils/qua";
+import setFontStyles from "../../../utils/setFontStyles";
 
 function Pair(store) {
+
+  // Initial 
 
   const pair = document.createElement('div');
   pair.id = "pair";
@@ -29,49 +30,48 @@ function Pair(store) {
       <div class="wrap insulate stack-l">
         <div class="insulate-s stack">
           <div class="grid columns-2">
-            <div class="cluster pair-label">
+            <div class="cluster-m-baseline">
               <div class="" data-element="pair-primary-label">
-                <!-- Pair Primary -->
+                <!-- Pair Primary Label -->
               </div>
               <div data-element="pair-change">
                 <!-- Pair Change -->
               </div>
             </div>
-            <div class="cluster pair-label">
-              <div data-element="pair-secondary-label">
-                <!-- Pair Secondary -->
-              </div>
-              <div class="desktop" data-element="pair-match">
-                <!-- Pair Match -->
-              </div>
+            <div data-element="pair-secondary-label">
+              <!-- Pair Secondary Label -->
             </div>
           </div>
           <div>
             <div class="samplesOuter">
               <div class="samplesMid">
-                <div data-element="pair-samples" data-label="" class="samplesInner">
+                <div data-element="pair-samples" class="samplesInner">
                   <!-- Pair Samples -->
                 </div>
               </div>
             </div>
-            <div data-element="pair-labels" class="grid columns-2">
-              <div>
-                <div data-element="data-primary">
-                  <!-- Data Primary  -->
-                </div>
+            <div class="grid columns-2">
+              <div data-element="data-primary">
+                <!-- Data Primary  -->
               </div>
-              <div class="pair-data" >
-                <div data-element="data-secondary">
-                  <!-- Data Secondary -->
-                </div>
+              <div data-element="data-secondary">
+                <!-- Data Secondary -->
               </div>
             </div>
           </div>
         </div>
-        <nav>
-          <div class="navbar" data-element="pair-nav">
-            <!-- Pair Nav -->
-          </div>
+        <nav data-element="nav" class="center">
+          <ul>
+            <li data-element="nav-item" data-label="Pair">
+              <!-- Nav Pair -->
+            </li>
+            <li data-element="nav-item" data-label="Test">
+              <!-- Nav Test -->
+            </li>
+            <li data-element="nav-item" data-label="Import">
+              <!-- Nav Import -->
+            </li>
+          </ul>
         </nav>
       </div>
     </div>
@@ -79,45 +79,51 @@ function Pair(store) {
       <!-- Pair main" -->
     </main>
   `;
+
   
-  const topBar = pair.querySelector('[data-element="top-bar"]');
-  topBar.appendChild(Header());
+  // Queries
 
-  const primaryLabel = pair.querySelector('[data-element="pair-primary-label"]');
-  const secondaryLabel = pair.querySelector('[data-element="pair-secondary-label"]');
+  const primaryLabel = qu(pair, "pair-primary-label");
+  const secondaryLabel = qu(pair, "pair-secondary-label");
+  const pairSamples = qu(pair, "pair-samples");
+  const pairMain = qu(pair, "pair-main");
 
-  const primaryData = PairLabel();
-  const secondaryData = PairLabel();
 
-  const dataPrimary = pair.querySelector('[data-element="data-primary"]');
-  dataPrimary.appendChild(primaryData);
+  // Create Page Elements
 
-  const dataSecondary = pair.querySelector('[data-element="data-secondary"]');
-  dataSecondary.appendChild(secondaryData);
+  const primaryData = PairData();
+  const secondaryData = PairData();
 
   const primarySample = PairSample();
   const secondarySample = PairSample(true);
 
-  const pairSamples = pair.querySelector('[data-element="pair-samples"]');
+
+  // Appends
+  
+  qu(pair, "top-bar").appendChild(Header());
+  qu(pair, "data-primary").appendChild(primaryData);
+  qu(pair, "data-secondary").appendChild(secondaryData);
+  
+  qu(pair, "pair-change").appendChild(Button({
+    label: "Change", 
+    action: openTable, 
+    type: "accent slub slim-button"
+  }));
+
   pairSamples.appendChild(primarySample);
   pairSamples.appendChild(secondarySample);
-
-  const navButtons = ["Pair", "Test", "Import"];
-  const navBar = pair.querySelector('[data-element="pair-nav"]');
-  navButtons.map(button => {
-    navBar.appendChild(Button({label: button, icon: button, type: "nav-button", action: changeSection}));
-  });
-
-
-  const pairMain = pair.querySelector('[data-element="pair-main"]');
   pairMain.appendChild(PairList(store));
   pairMain.appendChild(Test(store));
   pairMain.appendChild(ImportFonts(store));
 
+  qua(pair, "nav-item").forEach(item => {
+    item.appendChild(Button({label: item.dataset.label, icon: item.dataset.label, type: "nav-button", action: changeSection}));
+  });
+
+
+  // Functions
 
   function updatePairingSample() {
-
-    console.log("Update Pairing Triggered!");
 
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
@@ -134,18 +140,10 @@ function Pair(store) {
     if(secondaryFont.label !== secondaryLabel.dataset.label) {
       updateFont(secondaryFont, secondaryLabel, secondaryData, secondarySample);
     }
-    const sampleText = pair.querySelectorAll('[data-element="font-sample"]');
-    sampleText.forEach((text) => {
+
+    qua(pair, "pair-sample").forEach((text) => {
       text.innerText = isMobile ? "ABC abc" : "ABCDEF abcdef 123";
     });
-
-
-/*     const pairMatches = pair.querySelectorAll('[data-element="pair-match"]');
-
-    pairMatches.forEach((match) => {
-      match.innerHTML = "";
-      match.appendChild(PairMatch(primaryFont, secondaryFont));
-    }); */
 
     function updateFont(font, label, data, sample) {
 
@@ -162,23 +160,13 @@ function Pair(store) {
         sample.style.fontSize = `${sampleSize}rem`;
         sample.style.lineHeight = `${sampleSize}rem`;
         
-        const capHeightLabel = data.querySelector('[data-element="label-capheight"]');
-        capHeightLabel.innerHTML = Math.round(font.capHeightPct * 100);
-  
-        const xHeight = data.querySelector('[data-element="label-xheight"]');
-        xHeight.innerHTML = Math.round(font.xHeightPct * 100);
-  
-        const lineHeight = data.querySelector('[data-element="label-lineheight"]');
-        lineHeight.innerHTML = `${font.lineMin}-${font.lineMax}`;
+        qu(data, "data-capheight").innerHTML = Math.round(font.capHeightPct * 100);
+        qu(data, "data-xheight").innerHTML = Math.round(font.xHeightPct * 100);
+        qu(data, "data-lineheight").innerHTML = `${font.lineMin}-${font.lineMax}`;
 
-        const capLine = sample.querySelector('[data-element="cap-line"]');
-        capLine.style.verticalAlign = `${capHeight}rem`;
-
-        const referenceLine = sample.querySelector('[data-element="reference-line"]');
-        referenceLine.style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
-
-        const xHeightLine = sample.querySelector('[data-element="xHeight-line"]');
-        xHeightLine.style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
+        qu(sample, "cap-line").style.verticalAlign = `${capHeight}rem`;
+        qu(sample, "reference-line").style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
+        qu(sample, "xHeight-line").style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
 
         if(!('IntersectionObserver' in window)) {
           console.log('IntersectionObserver not supported');
@@ -204,7 +192,6 @@ function Pair(store) {
           });
         }
 
-
         label.dataset.label = font.label;
       }
     }
@@ -213,22 +200,20 @@ function Pair(store) {
   store.subscribe(updatePairingSample);
   updatePairingSample();
 
-  function updateSection() {
 
-    console.log("Update Section Triggered!");
+  function updateSection() {
 
     const currentSection = pairMain.getAttribute('data-active');
     const activeSection = store.getData().activeSection;
 
     if(currentSection !== activeSection) {
 
-      const sections = pairMain.querySelectorAll('[data-element="section"');
-      sections.forEach(section => {
+      qua(pairMain, "section").forEach(section => {
         section.style.display = section.getAttribute('data-section') === activeSection ? "block" : "none";
       });
 
-      const buttons = pair.querySelectorAll('[data-element="nav-button"]');
-      buttons.forEach(button => {
+      const nav = qu(pair, "nav");
+      qua(nav, "button").forEach(button => {
         button.getAttribute('data-target') === activeSection ? button.classList.add("active") : button.classList.remove("active");
       });
 
@@ -246,18 +231,32 @@ function Pair(store) {
   store.subscribe(updateSection);
   updateSection();
 
+
   function changeSection(section) {
 
     const currentSection = pairMain.getAttribute('data-active');
     const scroll = window.scrollY;
 
     if(currentSection === "Pair") {
-      store.setData({pairScroll: scroll});
+      store.setData({
+        pairScroll: scroll,
+        activeSection: section
+      });
+    } else {
+      store.setData({activeSection: section});
     }
-
-    store.setData({activeSection: section});
-
   }
+
+
+  function openTable() {
+    store.setData({
+      pairScroll: window.scrollY,
+      activeScreen: "Table"
+    });
+  }
+
+
+  // Return
 
   return pair;
 

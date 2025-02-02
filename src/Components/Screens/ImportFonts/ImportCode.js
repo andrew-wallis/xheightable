@@ -1,3 +1,4 @@
+import qu from "../../../utils/qu";
 import Icons from "../../Elements/Icons";
 
 function importCode() {
@@ -6,43 +7,47 @@ function importCode() {
 
   /* html */
   importCode.innerHTML = `
-    <aside class="stack-l">
+    <div class="stack-l">
       <div class="stack-xs">
         <h2 class="slub">CSS</h2>
-        <hr class="accent"/>
+        <hr/>
       </div>
-      <div class="code-wrapper stack-l">
-        <div class="control-panel stack" data-element="import-controls">
+      <div class="grid columns-1-3">
+        <div class="stack" data-element="import-controls">
           <!-- Import Control -->
         </div>
-        <div class="code-panel">
+        <div class="span-2">
           <div class="with-sidebar">
-            <ul class="tabs" data-element="import-tabs">
-              <!-- Import Tabs -->
+            <ul class="cluster" data-element="tabs">
+              <li class="tab" data-element="tab" data-tab="Variables">
+                <!-- Variables Tab -->
+              </li>
+              <li class="tab" data-element="tab" data-tab="Classes">
+                <!-- Classes Tab -->
+              </li>
             </ul>
             <div class="">
-              <a href="#" data-element="copy-stylesheet" class="button">
+              <a href="#" data-element="copy-stylesheet" class="button slim-button label">
                 <div data-element="copy-label">Copy</div>
                 <div data-element="copy-icon"></div>
               </a>
             </div>
           </div>
-          <pre class="code-container">
-            <code>
+          <pre class="tab-content">
+            <code class="data">
               <!-- Code -->
             </code>
           </pre>
         </div>
       </div>
-    </aside>
+    </div>
   `;
 
-  const copyStylesheet = importCode.querySelector('[data-element="copy-stylesheet"]');
+  const copyStylesheet = qu(importCode, "copy-stylesheet");
   copyStylesheet.addEventListener("click", function(e) {
     e.preventDefault();
-    const label = copyStylesheet.querySelector('[data-element="copy-label"]');
-    const code = importCode.querySelector('code');
-    navigator.clipboard.writeText(code.textContent).then(() => {
+    const label = qu(copyStylesheet, "copy-label");
+    navigator.clipboard.writeText(importCode.querySelector('code').textContent).then(() => {
       label.innerText = "Copied";
       setTimeout(() => {
         label.innerText = "Copy";
@@ -50,8 +55,7 @@ function importCode() {
     });
   });
 
-  const copyIcon = importCode.querySelector('[data-element="copy-icon"]');
-  copyIcon.appendChild(Icons("Copy"));
+  qu(importCode, "copy-icon").appendChild(Icons("Copy"));
 
   return importCode;
 

@@ -1,56 +1,51 @@
-
-import Button from "./Components/Elements/Button";
 import Pair from "./Components/Screens/Pair/Pair";
 import Table from "./Components/Screens/Table/Table";
+import qua from "./utils/qua";
 
 function App({store}) {
 
 
   // Initial
 
-  store.setData({primaryFont: store.getData().fonts[57]});
-  store.setData({secondaryFont: {}});
-  store.setData({search: ""});
-  store.setData({sort: "Font"});
-  store.setData({activeScreen: "Pair"});
-  store.setData({activeSection: "Pair"});
-  store.setData({primaryFilter: {
-    sort: "Rating",
-    licences: [],
-    classifications: []
-  }});
-  store.setData({secondaryFilter: {
-    sort: "Match",
-    licences: [],
-    classifications: []
-  }});
-  store.setData({tableScroll: 0});
-  store.setData({pairScroll: 0});
-  store.setData({capAdjusts: true});
-  store.setData({lineHeights: true});
-  
-
-  // Containers
+  store.setData({
+    primaryFont: store.getData().fonts[57],
+    secondaryFont: {},
+    activeScreen: "Pair",
+    activeSection: "Pair",
+    primaryFilter: {
+      sort: "Rating",
+      licences: [],
+      classifications: []
+    },
+    secondaryFilter: {
+      sort: "Match",
+      licences: [],
+      classifications: []
+    },
+    tableScroll: 0,
+    pairScroll: 0,
+    capAdjusts: true,
+    lineHeights: true
+  });
 
   const app = document.createElement('div');
+
+
+  // Appends
 
   app.appendChild(Table(store));
   app.appendChild(Pair(store));
 
-  const changePrimary = app.querySelector('[data-element="pair-change"]');
-  changePrimary.appendChild(Button({label: "Change", action: openPrimary, type: "primary-button slub"}));
+
+  // Functions
 
   function updateScreen() {
-
-    console.log("Update Screen Triggered!");
 
     const currentScreen = app.getAttribute('data-active');
     const activeScreen = store.getData().activeScreen;
 
     if(currentScreen !== activeScreen) {
-  
-      const screens = app.querySelectorAll('[data-element="screen"]');
-      screens.forEach(screen => {
+      qua(app, "screen").forEach(screen => {
         screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "block" : "none";
       });
 
@@ -71,25 +66,14 @@ function App({store}) {
   store.subscribe(updateScreen);
   updateScreen();
 
-  function changeScreen(screen) {
 
-    const currentScreen = app.getAttribute('data-active');
-    const scroll = window.scrollY;
+  // Return
 
-    if(currentScreen === "Table") {
-      store.setData({tableScroll: scroll});
-    } else if (currentScreen === "Pair") {
-      store.setData({pairScroll: scroll});
-    }
+  return app;
 
-    store.setData({activeScreen: screen});
-  }
+  // Legacy theme and scroll functions
 
-  function openPrimary() {
-    changeScreen("Table");
-  }
-
-  function setTheme() {
+/*   function setTheme() {
     
     const html = document.documentElement;
     const theme = html.getAttribute("data-theme");
@@ -101,11 +85,11 @@ function App({store}) {
     } else {
       html.setAttribute("data-theme", localStorage.getItem('theme'));
     }
-  }
+  } */
 
   //setTheme();
 
-  function adjustStickyHeaderOffset() {
+/*   function adjustStickyHeaderOffset() {
     const screen = store.getData().activeScreen;
 
     if(screen === "Table" || screen === "Pair") {
@@ -121,8 +105,7 @@ function App({store}) {
   }
 
   window.onscroll = function() {adjustStickyHeaderOffset()};
-
-  return app;
+ */
 
 }
 

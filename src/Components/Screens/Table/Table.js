@@ -1,11 +1,13 @@
 import TableRow from "../../Elements/TableRow";
+import Button from "../../Elements/Button";
 import Header from "../../Global/Header";
 import highlightRows from "../../../utils/highlightRows";
 import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
 import areNotEqual from "../../../utils/areNotEqual";
 import toggleItem from "../../../utils/toggleItem";
 import Filters from "../../Elements/Filters";
-import Button from "../../Elements/Button";
+import qu from "../../../utils/qu";
+import qua from "../../../utils/qua";
 
 function Table(store) {
   
@@ -18,16 +20,20 @@ function Table(store) {
 
   /* html */
   table.innerHTML = `
-    <div class="top-bar stack-m" data-element="top-bar">
-      <!-- Table Topbar -->
+    <div class="top-bar">
+      <div data-element="top-bar">
+        <!-- Table Topbar -->
+      </div>
+      <div class="insulate wrap stack">
+        <div class="cluster" data-element="table-back">
+          <!-- Table Close -->
+        </div>
+        <div data-element="table-filter">
+          <!-- Table Filter -->
+        </div>
+      </div>
     </div>
     <main class="wrap stack-m">
-      <div class="table-close" data-element="table-close">
-        <!-- Table Close -->
-      </div>
-      <div data-element="table-filter">
-        <!-- Table Filter -->
-      </div>
       <table>
         <thead class="sr-only">
           <tr>
@@ -44,25 +50,14 @@ function Table(store) {
     </main>
   `;
 
-  const topBar = table.querySelector('[data-element="top-bar"]');
-  
-  topBar.appendChild(Header());
+  qu(table, "top-bar").appendChild(Header());
+  qu(table, "table-back").appendChild(Button({label: "Back", icon: "Arrow Left", type: "slim-button", action: closeTable}));
 
-
-
-  const tableClose = document.createElement('div');
-  tableClose.classList = "wrap table-close";
-  tableClose.dataset.element = "table-close";
-  tableClose.appendChild(Button({label: "Close", icon: "Cross", type: "close-button", action: closeTable, hideLabel: true}))
-  topBar.appendChild(tableClose);
-
-  const tableFilter = table.querySelector('[data-element="table-filter"]');
+  const tableFilter = qu(table, "table-filter");
   const filterData = store.getData().primaryFilter;
   tableFilter.appendChild(Filters(filterData, changeFilters, ["Rating", "A-Z", "X-Height"]));
 
   function updateTableFilters() {
-
-    console.log("Update Table Filters Triggered!");
 
     const updateFilterData = store.getData().primaryFilter;
     const sort = updateFilterData.sort;
@@ -70,15 +65,12 @@ function Table(store) {
     const classifications = filterData.classifications;
 
     if(tableFilter.dataset.sort !== sort) {
-      const sortSelect = tableFilter.querySelector('select');
-      sortSelect.value = sort;
+      tableFilter.querySelector('select').value = sort;
     }
 
     if(areNotEqual(licences, tableFilter.dataset.licences)) {
-      const getLicences = tableFilter.querySelectorAll('[data-key="licence"]');
-      getLicences.forEach((licence) => {
+      qua(tableFilter, "licence", "key").forEach((licence) => {
         if(licences.includes(licence.dataset.value)) {
-          console.log(licence.classList);
           licence.classList.add("active");
         } else {
           licence.classList.remove("active");
@@ -88,8 +80,7 @@ function Table(store) {
     }
 
     if(areNotEqual(classifications, tableFilter.dataset.classifications)) {
-      const getClassifications = tableFilter.querySelectorAll('[data-key="classification"]');
-      getClassifications.forEach((classification) => {
+      qua(tableFilter, "classification", "key").forEach((classification) => {
         if(classifications.includes(classification.dataset.value)) {
           classification.classList.add("active");
         } else {
@@ -105,15 +96,13 @@ function Table(store) {
 
   function updateTableList() {
 
-    console.log("Update Table List Triggered!");
-
     const filterData = store.getData().primaryFilter;
     const search = filterData.search;
     const sort = filterData.sort;
     const licences = filterData.licences;
     const classifications = filterData.classifications;
     
-    const tableList = table.querySelector('[data-element="table-list"]');
+    const tableList = qu(table, "table-list");
     const primary = store.getData().primaryFont;
     const fonts = store.getData().fonts;
   
@@ -156,13 +145,14 @@ function Table(store) {
         classifications: []
       }
     });
-    const tableList = table.querySelector('[data-element="table-list"]');
-    highlightRows(tableList, font);
+    highlightRows(qu(table, "table-list"), font);
   }
 
   function closeTable() {
-    store.setData({tableScroll: window.scrollY});
-    store.setData({activeScreen: "Pair"});
+    store.setData({
+      tableScroll: window.scrollY,
+      activeScreen: "Pair"
+    });
   }
 
   function changeFilters(key, value) {

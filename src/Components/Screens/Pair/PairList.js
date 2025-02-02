@@ -4,6 +4,8 @@ import TableRow from "../../Elements/TableRow";
 import Filters from "../../Elements/Filters";
 import toggleItem from "../../../utils/toggleItem";
 import areNotEqual from "../../../utils/areNotEqual";
+import qu from "../../../utils/qu";
+import qua from "../../../utils/qua";
 
 function PairList(store) {
 
@@ -35,29 +37,29 @@ function PairList(store) {
     </div>
   `;
 
-  const pairFilter = list.querySelector('[data-element="pair-filter"]');
-  const filterData = store.getData().secondaryFilter;
-  pairFilter.appendChild(Filters(filterData, changeFilters, ["Match", "A-Z", "Rating"]));
+
+  // Appends
+
+  const pairFilter = qu(list, "pair-filter");
+  pairFilter.appendChild(Filters(store.getData().secondaryFilter, changeFilters, ["Match", "A-Z", "Rating"]));
+
+
+  // Functions
 
   function updateFilters() {
 
-    console.log("Update Filters Triggered!");
-
-    const updateFilterData = store.getData().secondaryFilter;
-    const sort = updateFilterData.sort;
-    const licences = updateFilterData.licences;
+    const filterData = store.getData().secondaryFilter;
+    const sort = filterData.sort;
+    const licences = filterData.licences;
     const classifications = filterData.classifications;
 
     if(pairFilter.dataset.sort !== sort) {
-      const sortSelect = pairFilter.querySelector('select');
-      sortSelect.value = sort;
+      pairFilter.querySelector('select').value = sort;
     }
 
     if(areNotEqual(licences, pairFilter.dataset.licences)) {
-      const getLicences = pairFilter.querySelectorAll('[data-key="licence"]');
-      getLicences.forEach((licence) => {
+      qua(pairFilter, "licence", "key").forEach((licence) => {
         if(licences.includes(licence.dataset.value)) {
-          console.log(licence.classList);
           licence.classList.add("active");
         } else {
           licence.classList.remove("active");
@@ -67,8 +69,7 @@ function PairList(store) {
     }
 
     if(areNotEqual(classifications, pairFilter.dataset.classifications)) {
-      const getClassifications = pairFilter.querySelectorAll('[data-key="classification"]');
-      getClassifications.forEach((classification) => {
+      qua(pairFilter, "classification", "key").forEach((classification) => {
         if(classifications.includes(classification.dataset.value)) {
           classification.classList.add("active");
         } else {
@@ -82,17 +83,15 @@ function PairList(store) {
   store.subscribe(updateFilters);
   updateFilters();
 
+
   function updatePairingList() {
-
-
-    console.log("Update Pairing List Triggered!");
 
     const filterData = store.getData().secondaryFilter;
     const sort = filterData.sort;
     const licences = filterData.licences;
     const classifications = filterData.classifications;
     
-    const pairList = list.querySelector('[data-element="pair-list"]');
+    const pairList = qu(list, "pair-list");
     const primary = store.getData().primaryFont;
     const fonts = store.getData().fonts;
   
@@ -123,11 +122,13 @@ function PairList(store) {
 
   store.subscribe(updatePairingList);
 
+
   function changeSecondary(font) {
-    const pairList = list.querySelector('[data-element="pair-list"]');
+    const pairList = qu(list, "pair-list");
     highlightRows(pairList, font);
     store.setData({secondaryFont: font});
   }
+
 
   function changeFilters(key, value) {
     const filterData = store.getData().secondaryFilter;
@@ -148,6 +149,9 @@ function PairList(store) {
     const updatedFilter = {...store.getData().secondaryFilter, ...updatedValue};
     store.setData({secondaryFilter: updatedFilter});
   }
+
+
+  // Return
 
   return list;
 
