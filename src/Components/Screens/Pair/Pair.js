@@ -141,6 +141,13 @@ function Pair(store) {
       updateFont(secondaryFont, secondaryLabel, secondaryData, secondarySample);
     }
 
+    qua(pair, "pair-sample").forEach((text) => {
+      /* html */
+      text.innerHTML = `
+        ABC<span class="desktop">DEF</span> abc<span class="desktop">def 123</span>
+      `;
+    });
+
     function updateFont(font, label, data, sample) {
 
       if(Object.keys(font).length > 0) {

@@ -201,35 +201,43 @@ aside {
   }
 }
 
-[class*="-none"] {
+.stack-none,
+.grid-none,
+.cluster-none {
   gap: 0;
 }
 
-[class*="-xs"] {
+.stack-xs,
+.grid-xs {
   gap: var(--space-xs);
 }
 
-[class*="-s"] {
+.stack-s,
+.grid-s {
   gap: var(--space-s);
 }
 
-[class*="-m"] {
+.stack-m,
+.grid-m {
   gap: var(--space-m);
 }
 
-[class*="-l"] {
+.stack-l,
+.grid-l {
   gap: var(--space-l);
 }
 
-[class*="-xl"] {
+.stack-xl,
+.grid-xl {
   gap: var(--space-xl);
 }
 
-[class*="-s-l"] {
+.stack-s-l,
+.grid-s-l {
   gap: var(--space-s-l);
 }
 
-[class*="cluster-s"] {
+.cluster-s {
   gap: var(--space-3xs) var(--space-xs);
 }
 

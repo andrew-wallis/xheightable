@@ -6,21 +6,15 @@ function PairData() {
   /* html */
   data.innerHTML = `
     <li>
-      X
-        <span class="desktop">-Height</span> 
-        <span class="data" data-element="data-xheight"><!-- Label Cap height --></span>
+      X H<span class="desktop">ei</span>g<span class="desktop">h</span>t <span class="data" data-element="data-xheight"><!-- Label Cap height --></span>
       %
     </li>
     <li>
-      Cap
-        <span class="desktop"> Height</span> 
-        <span class="data" data-element="data-capheight"><!-- Label x-height --></span>
+      Cap H<span class="desktop">ei</span>g<span class="desktop">h</span>t <span class="data" data-element="data-capheight"><!-- Label x-height --></span>
       %
     </li>
     <li>
-      Line
-        <span class="desktop"> Height</span> 
-        <span class="data" data-element="data-lineheight"><!-- Label Line heights --></span>
+      Line H<span class="desktop">ei</span>g<span class="desktop">h</span>t <span class="data" data-element="data-capheight"><!-- Label x-height --></span> <span class="data" data-element="data-lineheight"><!-- Label Line heights --></span>
     </li>
   `;
 
