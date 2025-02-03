@@ -1,6 +1,7 @@
+import qua from "./qua";
+
 function highlightRows(container, font) {
-  const rows = container.querySelectorAll('[data-element="font-link"]');
-  rows.forEach(row => {
+  qua(container, "table-link").forEach(row => {
     if(row.dataset.name === font.name) {
       row.classList.add("active-row");
     } else {

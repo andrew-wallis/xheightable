@@ -30,7 +30,7 @@ function Pair(store) {
       <div class="wrap insulate stack-l">
         <div class="insulate-s stack">
           <div class="grid columns-2">
-            <div class="cluster-m-baseline">
+            <div class="cluster-s-baseline">
               <div class="" data-element="pair-primary-label">
                 <!-- Pair Primary Label -->
               </div>
@@ -140,10 +140,6 @@ function Pair(store) {
     if(secondaryFont.label !== secondaryLabel.dataset.label) {
       updateFont(secondaryFont, secondaryLabel, secondaryData, secondarySample);
     }
-
-    qua(pair, "pair-sample").forEach((text) => {
-      text.innerText = isMobile ? "ABC abc" : "ABCDEF abcdef 123";
-    });
 
     function updateFont(font, label, data, sample) {
 

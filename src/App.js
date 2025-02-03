@@ -8,7 +8,7 @@ function App({store}) {
   // Initial
 
   store.setData({
-    primaryFont: store.getData().fonts[57],
+    primaryFont: store.getData().fonts[Math.floor(Math.random() * store.getData().fonts.length)],
     secondaryFont: {},
     activeScreen: "Pair",
     activeSection: "Pair",

@@ -229,6 +229,10 @@ aside {
   gap: var(--space-s-l);
 }
 
+[class*="cluster-s"] {
+  gap: var(--space-3xs) var(--space-xs);
+}
+
 [class*="-baseline"] {
   align-items: baseline;
 }
@@ -241,6 +245,7 @@ aside {
 
 .clickable {
   cursor: pointer;
+  user-select: none;
 }
 
 .horizontal-scroll {

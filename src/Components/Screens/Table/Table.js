@@ -118,7 +118,7 @@ function Table(store) {
       tableList.innerHTML = '';
 
       sortedFonts.map((font, index) => {
-        tableList.appendChild(TableRow({font: font, action: changePrimary, fields: ["xHeightPct", "capHeightPct", "lineMin","lineMax"]}));
+        tableList.appendChild(TableRow({font: font, action: changePrimary}));
       });
 
       highlightRows(tableList, store.getData().primaryFont);

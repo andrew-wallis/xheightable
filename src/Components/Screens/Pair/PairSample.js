@@ -13,7 +13,7 @@ function PairSample(referenceFont) {
     </span>
     <div class="sampleWrapper sampleText" style="vertical-align: 0px;">
       <span data-element="pair-sample">
-        <!-- Data-sample -->
+        ABC<span class="desktop">DEX</span> xbc<span class="desktop">def 123</span>
       </span>
     </div>
     <div class="sampleWrapper">

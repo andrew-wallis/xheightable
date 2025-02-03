@@ -1,10 +1,6 @@
 import _ from "lodash";
 
 function findPairings({font, fonts, sort, licences, classifications}) {
-
-  function roundToTwoDecimals(number) {
-    return Math.round(number * 100) / 100;
-  }
   
   let fontList = _.cloneDeep(fonts);
   const thisFont = font;
@@ -35,6 +31,13 @@ function findPairings({font, fonts, sort, licences, classifications}) {
 
     fontList = fontList.sort((a, b) => {
 
+      const familyA = a.family === thisFont.family ? 1 : 0;
+      const familyB = b.family === thisFont.family ? 1 : 0;
+
+      if (familyA !== familyB) {
+        return familyB - familyA;
+      }
+
       // Sort by xHeights
       const diffA = Math.abs(a.xHeightPct - thisFont.xHeightPct);
       const diffB = Math.abs(b.xHeightPct - thisFont.xHeightPct);
@@ -59,32 +62,6 @@ function findPairings({font, fonts, sort, licences, classifications}) {
       }
 
       return Number(b.Rating) - Number(a.Rating);
-/* 
-      // Promote fonts with the same family
-      const sameFamilyA = (a.family === thisFont.family) ? 0 : 1;
-      const sameFamilyB = (b.family === thisFont.family) ? 0 : 1;
-      if (sameFamilyA !== sameFamilyB) {
-        return sameFamilyA - sameFamilyB;
-      }
-
-      // Deweight fonts based on superclass
-      const isSansOrSerif = (thisFont.superclass === 'Sans' || thisFont.superclass === 'Serif');
-      const isMono = (thisFont.superclass === 'Mono');
-
-      let deweightA = 0;
-      let deweightB = 0;
-
-      if (isSansOrSerif) {
-        deweightA = (a.superclass === 'Mono') ? 1 : 0;
-        deweightB = (b.superclass === 'Mono') ? 1 : 0;
-      } else if (isMono) {
-        deweightA = (a.superclass === 'Serif' || a.superclass === 'Sans') ? 1 : 0;
-        deweightB = (b.superclass === 'Serif' || b.superclass === 'Sans') ? 1 : 0;
-      }
-
-      if (deweightA !== deweightB) {
-        return deweightA - deweightB;
-      } */
 
     });
       
