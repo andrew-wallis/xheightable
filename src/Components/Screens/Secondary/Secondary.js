@@ -9,8 +9,6 @@ import loadFont from "../../../utils/loadFont";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
 import setFontStyles from "../../../utils/setFontStyles";
-import getFontFamily from "../../../utils/getFontFamily";
-import getFontSize from "../../../utils/getFontSize";
 
 function Secondary(store) {
 
@@ -30,7 +28,7 @@ function Secondary(store) {
         <!-- Top Bar -->
       </div>
       <div class="wrap insulate stack-l">
-        <div class="insulate-s stack">
+        <div class="insulate-s stack unselectable">
           <div class="grid columns-2">
             <div class="cluster-s-baseline">
               <div class="" data-element="primary-label">
@@ -117,11 +115,11 @@ function Secondary(store) {
     type: "accent slub slim-button"
   }));
   
-  qDom(secondary, "secondary-swap").appendChild(Button({
+/*   qDom(secondary, "secondary-swap").appendChild(Button({
     label: "Swap", 
     action: swapSecondary, 
     type: "accent slub slim-button"
-  }));
+  })); */
 
   samples.appendChild(primarySample);
   samples.appendChild(secondarySample);
@@ -176,14 +174,10 @@ function Secondary(store) {
         label.style.fontSize = `${labelSize}rem`;
         label.style.lineHeight = `${labelSize}rem`;
 
-/*         sample.style.fontFamily = 'system-ui';
+        sample.style.fontFamily = 'system-ui';
         sample.style.opacity = 0;
         sample.style.fontSize = `${sampleSize}rem`;
-        sample.style.lineHeight = `${sampleSize}rem`; */
-
-        const className = generateRandomClass();
-        sample.classList.add(className);
-        qDom(sample, "sample-style").innerText = `.${className} {font-family: 'system-ui'; font-size: ${sampleSize}rem; line-height: ${sampleSize}rem; opacity: 0}`;
+        sample.style.lineHeight = `${sampleSize}rem`;
         
         qDom(data, "data-capheight").innerText = Math.round(font.capHeightPct * 100);
         qDom(data, "data-xheight").innerText = Math.round(font.xHeightPct * 100);
@@ -201,9 +195,9 @@ function Secondary(store) {
               if(entry.isIntersecting) {
                 loadFont(font).then(() => {
                   setFontStyles({element: label, font: font, size: labelSize, leading: `${labelSize}rem`, weight: "bold"});
-                  //setFontStyles({element: sample, font: font, size: sampleSize, leading: `${sampleSize}rem`, weight: "normal"});
-                  qDom(sample, "sample-style").innerText = `.${className} {font-family: ${getFontFamily(font)}; font-size: ${getFontSize(font, sampleSize)}; line-height: ${sampleSize}rem; opacity: 1}`;
+                  setFontStyles({element: sample, font: font, size: sampleSize, leading: `${sampleSize}rem`, weight: "normal"});
                   label.style.opacity = 1;
+                  sample.style.opacity = 1;
                 });
                 observer.disconnect();
               }
@@ -218,15 +212,6 @@ function Secondary(store) {
         }
 
         label.dataset.label = font.label;
-
-        function generateRandomClass(length = 8) {
-          const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-";
-          let className = "_"; // CSS classes can't start with a number
-          for (let i = 0; i < length; i++) {
-              className += chars.charAt(Math.floor(Math.random() * chars.length));
-          }
-          return className;
-        }
       }
     }
   }

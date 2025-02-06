@@ -19,8 +19,10 @@
   --grey-75: #51514E;
   --black: #191917;
 
+  --blue-dark: #0D6EA1;
   --blue: #1683BB;
   --blue-light: #59A6CD;
+  --red-dark: #BF1943;
   --red: #D92854;
   --green: #0A701B;
   --green-light: #588F20;
@@ -39,6 +41,7 @@
   --text: var(--black);
 
   --accent: var(--blue);
+  --accent-hover: var(--blue-dark);
 
   --error: var(--red);
   --active-icon: var(--blue);
@@ -125,6 +128,10 @@ header {
 aside {
   border: 1px solid var(--border-primary);
   padding: var(--space-l);
+}
+
+*:focus {
+  outline: 0;
 }
 
 
@@ -260,6 +267,10 @@ aside {
   user-select: none;
 }
 
+.unselectable {
+  user-select: none;
+}
+
 .horizontal-scroll {
   max-width: 100%;
   overflow-x: auto;
@@ -295,8 +306,12 @@ button,
   padding: var(--space-xs) var(--space-s);
 }
 
-button.active,
-.button.active {
+button:not(.filter-button).active,
+.button:not(.filter-button).active,
+button:not(.filter-button):hover,
+.button:not(.filter-button):hover,
+button:not(.filter-button):focus,
+.button:not(.filter-button):focus {
   background-color: var(--highlight);
 }
 
@@ -420,6 +435,11 @@ div:has([type="checkbox"]) {
   height: 0.75em;
   justify-content: center;
   width: 0.75em;
+}
+
+.icon:hover,
+.icon:focus {
+  color: var(--blue-light);
 }
 
 
@@ -672,6 +692,11 @@ p > a {
   text-decoration: underline;
 }
 
+p > a:hover,
+p > a:focus {
+  color: var(--accent);
+}
+
 em {
   font-style: italic;
 }
@@ -685,6 +710,13 @@ strong {
   font-size: var(--step--1);
   font-weight: 500;
   line-height: var(--space-s);
+}
+
+.label:hover,
+.label:focus,
+.label:hover,
+.label:focus {
+  color: var(--accent);
 }
 
 @media (max-width: 767px) {
@@ -720,6 +752,13 @@ cite {
   color: var(--accent);
 }
 
+.active:hover,
+.active:focus,
+.accent:hover,
+.active:focus {
+  color: var(--accent-hover);
+}
+
 .active > .icon,
 .accent > .icon {
   color: var(--blue-light);
@@ -727,6 +766,11 @@ cite {
 
 a.double-accent {
   color: var(--red);
+}
+
+a.double-accent:hover,
+a.double-accent:focus {
+  color: var(--red-dark);
 }
 
 a.double-accent:visited {

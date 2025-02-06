@@ -15,7 +15,7 @@ function Test(store) {
   /* html */
   test.innerHTML = `
     <div class="stack-xl">
-      <div class="grid-s-l columns-1-3">
+      <div class="grid-xl columns-1-3">
         <div class="span-2 stack test">
           <h2 class="clickable uppercase" data-element="clickable" data-example="title" data-font="primary" data-size="2.5" data-leading="lineMin" data-weight="bold" data-fontFamily="">This is a title</h2>
           <hr/>
@@ -26,7 +26,7 @@ function Test(store) {
           </ul>
         </div>
       </div>
-      <div class="grid-s-l columns-1-3">
+      <div class="grid-xl columns-1-3">
         <div class="span-2 stack-m test">
           <p class="clickable" data-element="clickable" data-example="paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="normal" data-fontFamily="">A paragraph is a distinct section of writing focused on a single idea, beginning with a topic sentence and followed by supporting sentences that develop the idea with details and evidence. It ensures coherence and clarity, enhancing readability by breaking down information into manageable segments. Effective paragraphs help writers maintain focus and coherence, contributing to a clearer and more engaging piece of writing.</p>
           <h3 class="test-heading clickable" data-element="clickable" data-example="heading" data-font="primary" data-size="1.6" data-leading="lineMin" data-weight="bold" data-fontFamily="">This is a heading</h3>
