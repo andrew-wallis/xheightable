@@ -1,4 +1,4 @@
-function PairSample(referenceFont) {
+function Sample(referenceFont) {
 
   const referenceLineColor = referenceFont ? "#59A6CD" : "transparent";
   const xHeightLineColor = referenceFont ? "#D92854" : "#59A6CD";
@@ -8,12 +8,15 @@ function PairSample(referenceFont) {
 
   /* html */
   sample.innerHTML = `
-    <span data-element="pair-sample">
+    <style data-element="sample-style">
+
+    </style>
+    <span data-element="sample-text">
       <!-- Data-sample -->
     </span>
     <div class="sampleWrapper sampleText" style="vertical-align: 0px;">
-      <span data-element="pair-sample">
-        ABC<span class="desktop">DEX</span> xbc<span class="desktop">def 123</span>
+      <span data-element="sample-text">
+        <!-- Data-sample -->
       </span>
     </div>
     <div class="sampleWrapper">
@@ -34,4 +37,4 @@ function PairSample(referenceFont) {
 
 }
 
-export default PairSample;
+export default Sample;

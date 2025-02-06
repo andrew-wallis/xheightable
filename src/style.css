@@ -105,6 +105,10 @@ body {
   position: relative;
 }
 
+html {
+  padding-bottom: var(--space-3xl);
+}
+
 .top-bar {
   background-color: var(--background);
   position: sticky;
@@ -719,6 +723,14 @@ cite {
 .active > .icon,
 .accent > .icon {
   color: var(--blue-light);
+}
+
+a.double-accent {
+  color: var(--red);
+}
+
+a.double-accent:visited {
+  color: var(--accent);
 }
 
 .secondary {

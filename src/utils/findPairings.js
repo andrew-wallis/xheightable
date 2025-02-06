@@ -48,8 +48,8 @@ function findPairings({font, fonts, sort, licences, classifications}) {
 
       // Determine superclass order
       const orderMap = {
-        Sans: { Serif: 0, Mono: 1, Sans: 2 },
-        Serif: { Sans: 0, Mono: 1, Serif: 2 },
+        Sans: { Serif: 0, Mono: 2, Sans: 1 },
+        Serif: { Sans: 0, Mono: 2, Serif: 1 },
         Mono: { Sans: 0, Serif: 1, Mono: 2 },
       };
 

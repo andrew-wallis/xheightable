@@ -1,21 +1,21 @@
-import TableRow from "../../Elements/TableRow";
 import Button from "../../Elements/Button";
-import Header from "../../Global/Header";
-import highlightRows from "../../../utils/highlightRows";
-import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
-import areNotEqual from "../../../utils/areNotEqual";
-import toggleItem from "../../../utils/toggleItem";
 import Filters from "../../Elements/Filters";
-import qu from "../../../utils/qu";
-import qua from "../../../utils/qua";
+import TableRow from "../../Elements/TableRow";
+import Header from "../../Global/Header";
+import areNotEqual from "../../../utils/areNotEqual";
+import highlightRows from "../../../utils/highlightRows";
+import qDom from "../../../utils/qDom";
+import qaDom from "../../../utils/qaDom";
+import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
+import toggleItem from "../../../utils/toggleItem";
 
 function Table(store) {
   
   const table = document.createElement('div');
-  table.id = "table";
+  table.id = "primary";
   table.className = "screen";
   table.style.display = "block";
-  table.dataset.screen = "Table";
+  table.dataset.screen = "Primary";
   table.dataset.element = "screen";
 
   /* html */
@@ -50,10 +50,10 @@ function Table(store) {
     </main>
   `;
 
-  qu(table, "top-bar").appendChild(Header());
-  qu(table, "table-back").appendChild(Button({label: "Back", icon: "Arrow Left", type: "slim-button", action: closeTable}));
+  qDom(table, "top-bar").appendChild(Header());
+  qDom(table, "table-back").appendChild(Button({label: "Back", icon: "Arrow Left", type: "slim-button", action: closeTable}));
 
-  const tableFilter = qu(table, "table-filter");
+  const tableFilter = qDom(table, "table-filter");
   const filterData = store.getData().primaryFilter;
   tableFilter.appendChild(Filters(filterData, changeFilters, ["Rating", "A-Z", "X-Height"]));
 
@@ -69,7 +69,7 @@ function Table(store) {
     }
 
     if(areNotEqual(licences, tableFilter.dataset.licences)) {
-      qua(tableFilter, "licence", "key").forEach((licence) => {
+      qaDom(tableFilter, "licence", "key").forEach((licence) => {
         if(licences.includes(licence.dataset.value)) {
           licence.classList.add("active");
         } else {
@@ -80,7 +80,7 @@ function Table(store) {
     }
 
     if(areNotEqual(classifications, tableFilter.dataset.classifications)) {
-      qua(tableFilter, "classification", "key").forEach((classification) => {
+      qaDom(tableFilter, "classification", "key").forEach((classification) => {
         if(classifications.includes(classification.dataset.value)) {
           classification.classList.add("active");
         } else {
@@ -102,7 +102,7 @@ function Table(store) {
     const licences = filterData.licences;
     const classifications = filterData.classifications;
     
-    const tableList = qu(table, "table-list");
+    const tableList = qDom(table, "table-list");
     const primary = store.getData().primaryFont;
     const fonts = store.getData().fonts;
   
@@ -137,7 +137,7 @@ function Table(store) {
       tableScroll: window.scrollY,
       pairScroll: 0,
       primaryFont: font,
-      activeScreen: "Pair",
+      activeScreen: "Secondary",
       activeSection: "Pair",
       secondaryFilter: {
         sort: "Match",
@@ -145,13 +145,13 @@ function Table(store) {
         classifications: []
       }
     });
-    highlightRows(qu(table, "table-list"), font);
+    highlightRows(qDom(table, "table-list"), font);
   }
 
   function closeTable() {
     store.setData({
       tableScroll: window.scrollY,
-      activeScreen: "Pair"
+      activeScreen: "Secondary"
     });
   }
 

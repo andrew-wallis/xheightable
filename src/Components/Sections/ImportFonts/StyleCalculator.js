@@ -1,12 +1,12 @@
-import qu from "../../../utils/qu";
 import Icons from "../../Elements/Icons";
+import qDom from "../../../utils/qDom";
 
-function importCode() {
+function StyleCalculator() {
 
-  const importCode = document.createElement('div');
+  const styleCalculator = document.createElement('div');
 
   /* html */
-  importCode.innerHTML = `
+  styleCalculator.innerHTML = `
     <div class="stack-l">
       <div class="stack-xs">
         <h2 class="slub">CSS</h2>
@@ -43,11 +43,11 @@ function importCode() {
     </div>
   `;
 
-  const copyStylesheet = qu(importCode, "copy-stylesheet");
+  const copyStylesheet = qDom(styleCalculator, "copy-stylesheet");
   copyStylesheet.addEventListener("click", function(e) {
     e.preventDefault();
-    const label = qu(copyStylesheet, "copy-label");
-    navigator.clipboard.writeText(importCode.querySelector('code').textContent).then(() => {
+    const label = qDom(copyStylesheet, "copy-label");
+    navigator.clipboard.writeText(styleCalculator.querySelector('code').textContent).then(() => {
       label.innerText = "Copied";
       setTimeout(() => {
         label.innerText = "Copy";
@@ -55,10 +55,10 @@ function importCode() {
     });
   });
 
-  qu(importCode, "copy-icon").appendChild(Icons("Copy"));
+  qDom(styleCalculator, "copy-icon").appendChild(Icons("Copy"));
 
-  return importCode;
+  return styleCalculator;
 
 }
 
-export default importCode;
+export default StyleCalculator;

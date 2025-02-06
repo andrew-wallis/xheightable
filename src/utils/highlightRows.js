@@ -1,7 +1,7 @@
-import qua from "./qua";
+import qaDom from "./qaDom";
 
 function highlightRows(container, font) {
-  qua(container, "table-link").forEach(row => {
+  qaDom(container, "table-link").forEach(row => {
     if(row.dataset.name === font.name) {
       row.classList.add("active-row");
     } else {

@@ -1,11 +1,11 @@
-import ImportGoogle from "./ImportGoogle";
-import ImportAdobe from "./ImportAdobe";
-import ImportCode from "./ImportCode";
+import EmbedCode from "./EmbedCode";
+import EmbedCTA from "./EmbedCTA";
+import StyleCalculator from "./StyleCalculator";
 import Button from "../../Elements/Button";
 import Checkbox from "../../Elements/Checkbox";
 import generateFontFamilies from "./helpers/generateFontFamilies";
-import qu from "../../../utils/qu";
-import qua from "../../../utils/qua";
+import qDom from "../../../utils/qDom";
+import qaDom from "../../../utils/qaDom";
 
 function ImportFonts(store) {
 
@@ -20,7 +20,7 @@ function ImportFonts(store) {
     <div class="stack">
       <div class="stack-l">
         <div class="stack-xs">
-          <h2 class="slub">Embed Code</h2>
+          <h2 class="slub">Embed</h2>
           <hr/>
         </div>
         <div class="grid-l columns-1-2">
@@ -42,23 +42,23 @@ function ImportFonts(store) {
   // Appends
 
 
-  const codeContainer = qu(importFonts, "import-code");
-  codeContainer.appendChild(ImportCode());
+  const codeContainer = qDom(importFonts, "import-code");
+  codeContainer.appendChild(StyleCalculator());
 
-  const controlContainer = qu(importFonts, "import-controls");
+  const controlContainer = qDom(importFonts, "import-controls");
 
   controlContainer.appendChild(Checkbox({label: "Include cap height adjusts", action: toggleCapAdjusts, value: store.getData().capAdjusts}));
   controlContainer.appendChild(Checkbox({label: "Include line heights", action: toggleLineHeights, value: store.getData().lineHeights}));
 
-  qu(importFonts, "Variables", "tab").appendChild(Button({label: "Variables", type: "slub", action: changeTab}));
-  qu(importFonts, "Classes", "tab").appendChild(Button({label: "Classes", type: "slub", action: changeTab}));
+  qDom(importFonts, "Variables", "tab").appendChild(Button({label: "Variables", type: "slub", action: changeTab}));
+  qDom(importFonts, "Classes", "tab").appendChild(Button({label: "Classes", type: "slub", action: changeTab}));
 
 
   // Queries
 
-  const primaryEmbed = qu(importFonts, "primary-embed");
-  const secondaryEmbed = qu(importFonts, "secondary-embed");
-  const tabs = qu(importFonts, "tabs");
+  const primaryEmbed = qDom(importFonts, "primary-embed");
+  const secondaryEmbed = qDom(importFonts, "secondary-embed");
+  const tabs = qDom(importFonts, "tabs");
 
 
   // Functions
@@ -83,10 +83,11 @@ function ImportFonts(store) {
       if(Object.keys(font).length > 0) {
         element.innerHTML = '';
 
-        if(font.distribution === "Google") {
-          element.appendChild(ImportGoogle(font));
+        if(store.getData().embedLicence.includes(font.distribution)) {
+          element.appendChild(EmbedCode(font));
         } else {
-          element.appendChild(ImportAdobe(font));
+          const affiliate = store.getData().affiliateLicence.includes(font.distribution);
+          element.appendChild(EmbedCTA(font, affiliate));
         }
 
         element.dataset.label = font.label;
@@ -123,14 +124,14 @@ function ImportFonts(store) {
   function changeTab(tab) {
     store.setData({codeTab: tab});
 
-    qua(tabs, "tab").forEach((thisTab) => {
+    qaDom(tabs, "tab").forEach((thisTab) => {
       thisTab.classList.remove("active");
       if(thisTab.dataset.tab === tab) {
         thisTab.classList.add("active");
       }
     });
 
-    qua(tabs, "slub").forEach((thisButton) => {
+    qaDom(tabs, "slub").forEach((thisButton) => {
       thisButton.classList.remove("active");
       if(thisButton.dataset.target === tab) {
         thisButton.classList.add("active");

@@ -1,4 +1,4 @@
-import qua from "../../../utils/qua";
+import qaDom from "../../../utils/qaDom";
 import setFontStyles from "../../../utils/setFontStyles";
 
 function Test(store) {
@@ -69,7 +69,7 @@ function Test(store) {
 
   // Events
 
-  qua(test, "clickable").forEach(example => {
+  qaDom(test, "clickable").forEach(example => {
     example.addEventListener('mouseenter', handleMouseEnter);
     example.addEventListener('mouseleave', handleMouseLeave);
     example.addEventListener('click', handleClick);
@@ -83,8 +83,8 @@ function Test(store) {
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
 
-    processExamples(qua(test, "primary", "font"), primaryFont);
-    processExamples(qua(test, "secondary", "font"), secondaryFont);
+    processExamples(qaDom(test, "primary", "font"), primaryFont);
+    processExamples(qaDom(test, "secondary", "font"), secondaryFont);
 
     function processExamples(examples, font) {
       examples.forEach((example) => {
@@ -101,7 +101,7 @@ function Test(store) {
   function handleMouseEnter(e) {
     const element = e.target;
     const type = element.dataset.example;
-    qua(test, type, "example").forEach((match) => {
+    qaDom(test, type, "example").forEach((match) => {
       match.classList.add("test-highlighted");
     });
   }
@@ -109,7 +109,7 @@ function Test(store) {
   function handleMouseLeave(e) {
     const element = e.target;
     const type = element.dataset.example;
-    qua(test, type, "example").forEach((match) => {
+    qaDom(test, type, "example").forEach((match) => {
       match.classList.remove("test-highlighted");
     });
   }
@@ -129,7 +129,7 @@ function Test(store) {
       fontType = "primary";
     }
 
-    qua(test, type, "example").forEach((match) => {
+    qaDom(test, type, "example").forEach((match) => {
       match.classList.remove("test-highlighted");
       match.dataset.font = fontType;
       updateFont(match, font);

@@ -1,6 +1,6 @@
 
 import loadFont from "../../utils/loadFont";
-import qu from "../../utils/qu";
+import qDom from "../../utils/qDom";
 import setFontStyles from "../../utils/setFontStyles";
 import Icons from "./Icons";
 
@@ -44,16 +44,16 @@ function TableRow({font, action}) {
     </td>
   `;
 
-  qu(tableRow, "table-icon").appendChild(Icons(font.distribution));
+  qDom(tableRow, "table-icon").appendChild(Icons(font.distribution));
 
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   const fontSize = isMobile ? 0.875 : 1;
 
-  const label = qu(tableRow, "table-label");
+  const label = qDom(tableRow, "table-label");
   label.style.fontFamily = 'system-ui';
   label.style.fontSize = `${fontSize}rem`;
 
-  const sample = qu(tableRow, "table-sample");
+  const sample = qDom(tableRow, "table-sample");
   sample.style.fontFamily = 'system-ui';
   sample.style.fontSize = `${fontSize}rem`;
 

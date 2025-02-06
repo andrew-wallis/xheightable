@@ -1,22 +1,22 @@
+import Filters from "../../Elements/Filters";
+import TableRow from "../../Elements/TableRow";
+import areNotEqual from "../../../utils/areNotEqual";
 import findPairings from "../../../utils/findPairings";
 import highlightRows from "../../../utils/highlightRows";
-import TableRow from "../../Elements/TableRow";
-import Filters from "../../Elements/Filters";
+import qDom from "../../../utils/qDom";
+import qaDom from "../../../utils/qaDom";
 import toggleItem from "../../../utils/toggleItem";
-import areNotEqual from "../../../utils/areNotEqual";
-import qu from "../../../utils/qu";
-import qua from "../../../utils/qua";
 
-function PairList(store) {
+function Pair(store) {
 
-  const list = document.createElement('div');
-  list.id = "pair";
-  list.style.display = "none";
-  list.dataset.section = "Pair";
-  list.dataset.element = "section";
+  const pair = document.createElement('div');
+  pair.id = "pair";
+  pair.style.display = "none";
+  pair.dataset.section = "Pair";
+  pair.dataset.element = "section";
 
   /* html */
-  list.innerHTML = `
+  pair.innerHTML = `
     <div class="stack-m">
       <div data-element="pair-filter">
         <!-- Pair Filter -->
@@ -30,8 +30,8 @@ function PairList(store) {
             <th>Data</th>
           </tr>
         </thead>
-        <tbody data-element="pair-list">
-          <!-- Pair List -->
+        <tbody data-element="pair-table">
+          <!-- Pair Table -->
         </tbody>
       </table>
     </div>
@@ -40,7 +40,7 @@ function PairList(store) {
 
   // Appends
 
-  const pairFilter = qu(list, "pair-filter");
+  const pairFilter = qDom(pair, "pair-filter");
   pairFilter.appendChild(Filters(store.getData().secondaryFilter, changeFilters, ["Match", "A-Z", "Rating"]));
 
 
@@ -58,7 +58,7 @@ function PairList(store) {
     }
 
     if(areNotEqual(licences, pairFilter.dataset.licences)) {
-      qua(pairFilter, "licence", "key").forEach((licence) => {
+      qaDom(pairFilter, "licence", "key").forEach((licence) => {
         if(licences.includes(licence.dataset.value)) {
           licence.classList.add("active");
         } else {
@@ -69,7 +69,7 @@ function PairList(store) {
     }
 
     if(areNotEqual(classifications, pairFilter.dataset.classifications)) {
-      qua(pairFilter, "classification", "key").forEach((classification) => {
+      qaDom(pairFilter, "classification", "key").forEach((classification) => {
         if(classifications.includes(classification.dataset.value)) {
           classification.classList.add("active");
         } else {
@@ -91,7 +91,7 @@ function PairList(store) {
     const licences = filterData.licences;
     const classifications = filterData.classifications;
     
-    const pairList = qu(list, "pair-list");
+    const pairList = qDom(pair, "pair-table");
     const primary = store.getData().primaryFont;
     const fonts = store.getData().fonts;
   
@@ -122,13 +122,14 @@ function PairList(store) {
 
   store.subscribe(updatePairingList);
 
-
   function changeSecondary(font) {
-    const pairList = qu(list, "pair-list");
-    highlightRows(pairList, font);
+    highlightRows(qDom(pair, "pair-table"), font);
     store.setData({secondaryFont: font});
   }
 
+  function changePrimary(font) {
+    store.setData({primaryFont: font});
+  }
 
   function changeFilters(key, value) {
     const filterData = store.getData().secondaryFilter;
@@ -153,8 +154,8 @@ function PairList(store) {
 
   // Return
 
-  return list;
+  return pair;
 
 }
 
-export default PairList;
+export default Pair;

@@ -1,6 +1,7 @@
-import Pair from "./Components/Screens/Pair/Pair";
-import Table from "./Components/Screens/Table/Table";
-import qua from "./utils/qua";
+import Secondary from "./Components/Screens/Secondary/Secondary";
+import Primary from "./Components/Screens/Primary.js/Primary";
+import qaDom from "./utils/qaDom";
+import getRandomArrayItem from "./utils/getRandomArrayKey";
 
 function App({store}) {
 
@@ -8,9 +9,9 @@ function App({store}) {
   // Initial
 
   store.setData({
-    primaryFont: store.getData().fonts[Math.floor(Math.random() * store.getData().fonts.length)],
+    primaryFont: getRandomArrayItem(store.getData().fonts),
     secondaryFont: {},
-    activeScreen: "Pair",
+    activeScreen: "Secondary",
     activeSection: "Pair",
     primaryFilter: {
       sort: "Rating",
@@ -25,7 +26,9 @@ function App({store}) {
     tableScroll: 0,
     pairScroll: 0,
     capAdjusts: true,
-    lineHeights: true
+    lineHeights: true,
+    embedLicence: ["Google"],
+    affiliateLicence: ["Adobe"]
   });
 
   const app = document.createElement('div');
@@ -33,8 +36,8 @@ function App({store}) {
 
   // Appends
 
-  app.appendChild(Table(store));
-  app.appendChild(Pair(store));
+  app.appendChild(Primary(store));
+  app.appendChild(Secondary(store));
 
 
   // Functions
@@ -45,15 +48,15 @@ function App({store}) {
     const activeScreen = store.getData().activeScreen;
 
     if(currentScreen !== activeScreen) {
-      qua(app, "screen").forEach(screen => {
+      qaDom(app, "screen").forEach(screen => {
         screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "block" : "none";
       });
 
       let pos = 0;
 
-      if(activeScreen === "Table") {
+      if(activeScreen === "Primary") {
         pos = store.getData().tableScroll;
-      } else if(activeScreen === "Pair") {
+      } else if(activeScreen === "Secondary") {
         pos = store.getData().pairScroll;
       }
 
@@ -92,7 +95,7 @@ function App({store}) {
 /*   function adjustStickyHeaderOffset() {
     const screen = store.getData().activeScreen;
 
-    if(screen === "Table" || screen === "Pair") {
+    if(screen === "Primary" || screen === "Pair") {
       const thisScreen = app.querySelector(`[data-screen="${screen}"]`);
       const header = thisScreen.querySelector('header');
       const thead = thisScreen.querySelector('thead');

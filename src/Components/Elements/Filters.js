@@ -1,4 +1,4 @@
-import qu from "../../utils/qu";
+import qDom from "../../utils/qDom";
 import Button from "./Button";
 import Select from "./Select";
 
@@ -22,7 +22,7 @@ function Filters(data, action, options) {
     </div>
   `;
 
-  qu(filters, "filters-sort").appendChild(Select({
+  qDom(filters, "filters-sort").appendChild(Select({
     label: "Sort", 
     options: options, 
     value: data.sort, 
@@ -34,14 +34,14 @@ function Filters(data, action, options) {
     const licenceButton = Button({label: licence, icon: licence, type: `filter-button ${data.licences.includes(licence) ? "active" : ""}`, action: filterLicence, hideLabel: true});
     licenceButton.dataset.key = "licence";
     licenceButton.dataset.value = licence;
-    qu(filters, "filters-licence").appendChild(licenceButton);
+    qDom(filters, "filters-licence").appendChild(licenceButton);
   });
 
   ["Sans", "Serif", "Mono"].forEach((classification) => {
     const classificationButton = Button({label: classification, icon: classification, type: `filter-button ${data.classifications.includes(classification) ? "active" : ""}`, action: filterClassification, hideLabel: true});
     classificationButton.dataset.key = "classification";
     classificationButton.dataset.value = classification;
-    qu(filters, "filters-classification").appendChild(classificationButton);
+    qDom(filters, "filters-classification").appendChild(classificationButton);
   });
   
   function filterSort(value) {
