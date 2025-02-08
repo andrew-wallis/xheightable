@@ -1,13 +1,17 @@
-function Header() {
+import qDom from "../../utils/qDom";
+
+function Header(front) {
 
   const header = document.createElement('header');
+
+  if(front) header.role = "banner";
 
   /* html */
   header.innerHTML = `
     <div class="wrap with-sidebar">
-      <div class="logo accent">
-        <span class="sr-only">xHeightable</span>
-          <svg width="670" height="128" viewBox="0 0 670 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="logo accent" data-element="branding">
+        <span class="sr-only">x-heightable</span>
+        <svg width="670" height="128" viewBox="0 0 670 128" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M639.779 84.7904C647.899 84.7904 655.739 81.4304 663.019 73.8704L667.639 85.2104C659.939 92.2104 650.139 96.2704 639.639 96.2704C620.039 96.2704 605.759 81.9904 605.759 63.5104C605.759 45.0304 620.178 30.6104 639.078 30.6104C654.898 30.6104 667.498 40.9704 669.458 58.3304L621.018 74.0104C624.378 80.4504 630.958 84.7904 639.779 84.7904ZM639.078 41.9504C627.738 41.9504 619.059 51.0504 618.639 62.9504L654.619 51.1904C651.959 45.4504 646.078 41.9504 639.078 41.9504Z" fill="currentColor"/>
           <path d="M582.359 94.7305V11.3305L596.499 9.23047V94.7305H582.359Z" fill="currentColor"/>
           <path d="M540.735 30.6105C558.655 30.6105 572.935 44.6105 572.935 63.2305C572.935 82.2705 558.095 96.2705 538.635 96.2705C519.455 96.2705 505.035 82.8305 505.035 62.8105V11.3305L519.315 9.23047V39.8505C524.495 34.1105 531.915 30.6105 540.735 30.6105ZM538.775 83.8105C550.255 83.8105 559.075 75.1305 559.075 63.3705C559.075 51.8905 550.535 43.0705 539.195 43.0705C527.715 43.0705 518.895 51.8905 518.895 63.6505C518.895 74.9905 527.295 83.8105 538.775 83.8105Z" fill="currentColor"/>
@@ -21,14 +25,12 @@ function Header() {
           <path d="M63.28 67.9902L65.2477 55.9502H84.0447L82.0771 67.9902H63.28Z" fill="currentColor"/>
           <path d="M63.28 94.7304H47.18L31.64 71.4904L16.24 94.7304H0L23.38 62.1104L1.96 32.1504H17.92L31.64 52.8704L45.5 32.1504H61.32L40.04 62.1104L63.28 94.7304Z" fill="currentColor"/>
         </svg>
-        
       </div>
       <div>
-        <a class="double-accent" href="https://www.blah.com" target="_blank"><strong>Buy us a coffee!</strong></a>
+        <a aria-label="Visit Blah (Opens in a new tab)" rel="noopener noreferrer" class="double-accent" href="https://www.blah.com" target="_blank"><strong>Buy us a coffee!</strong></a>
       </div>
     </div>
   `;
-
   return header;
 
 }

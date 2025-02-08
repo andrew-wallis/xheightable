@@ -2,7 +2,7 @@ function Select({label, options, action, value, hideLabel}) {
 
   const select = document.createElement('div');
   select.classList = "select-wrapper";
-  const id = label.replace(/\W/g,'_');
+  const id = `${label}${options.join("")}`.replace(/\W/g,'_');
 
   /* html */
   select.innerHTML = `

@@ -2,6 +2,7 @@ import Secondary from "./Components/Screens/Secondary/Secondary";
 import Primary from "./Components/Screens/Primary.js/Primary";
 import qaDom from "./utils/qaDom";
 import getRandomArrayItem from "./utils/getRandomArrayKey";
+import qDom from "./utils/qDom";
 
 function App({store}) {
 
@@ -12,7 +13,6 @@ function App({store}) {
     primaryFont: getRandomArrayItem(store.getData().fonts),
     secondaryFont: {},
     activeScreen: "Secondary",
-    activeSection: "Pair",
     primaryFilter: {
       sort: "Rating",
       licences: [],
@@ -36,8 +36,8 @@ function App({store}) {
 
   // Appends
 
-  app.appendChild(Primary(store));
   app.appendChild(Secondary(store));
+  app.appendChild(Primary(store));
 
 
   // Functions
@@ -49,8 +49,14 @@ function App({store}) {
 
     if(currentScreen !== activeScreen) {
       qaDom(app, "screen").forEach(screen => {
-        screen.style.display = screen.getAttribute('data-screen') === activeScreen ? "block" : "none";
+        screen.style.display = "none";
+        screen.style.ariaHidden = "true";
       });
+
+      const newScreen = qDom(app, activeScreen, "screen");
+      newScreen.style.display = "block";
+      newScreen.style.ariaHidden = "false";
+      qDom(newScreen, "screen-title").focus();
 
       let pos = 0;
 

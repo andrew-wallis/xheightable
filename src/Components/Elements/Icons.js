@@ -4,6 +4,8 @@ function Icons(name, classes) {
   icon.className = classes ? classes : "icon";
   icon.dataset.icon = name;
   icon.innerHTML = getSvg();
+  icon.ariaHidden = true;
+
   return icon;
 
   function getSvg() {

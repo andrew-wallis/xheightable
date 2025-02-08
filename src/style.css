@@ -15,15 +15,15 @@
   --grey-20: #CACAC6;
   --grey-30: #B4B4B0;
   --grey-45: #92928F;
-  --grey-65: #72726F;
+  --grey-65: #6C6C6A;
   --grey-75: #51514E;
   --black: #191917;
 
   --blue-dark: #0D6EA1;
-  --blue: #1683BB;
+  --blue: #1477A9;
   --blue-light: #59A6CD;
   --red-dark: #BF1943;
-  --red: #D92854;
+  --red: #D42551;
   --green: #0A701B;
   --green-light: #588F20;
   --orange: #B66A12;
@@ -42,6 +42,7 @@
 
   --accent: var(--blue);
   --accent-hover: var(--blue-dark);
+  --active: var(--blue-dark);
 
   --error: var(--red);
   --active-icon: var(--blue);
@@ -445,7 +446,7 @@ div:has([type="checkbox"]) {
 
 /* Navbar */
 
-nav ul {
+nav {
   display: grid;
   flex-shrink: 0;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -453,28 +454,25 @@ nav ul {
   width: 100%;
 }
 
-nav li {
+nav button {
   background-color: var(--background);
   border: 1px solid var(--border-accent);
   overflow: hidden;
+  width: 100%;
 }
 
-nav li:not(:last-of-type) {
+nav button:not(:last-of-type) {
   border-right: 0;
 }
 
-nav li:first-of-type {
+nav button:first-of-type {
   border-top-left-radius: var(--radius-full);
   border-bottom-left-radius: var(--radius-full);
 }
 
-nav li:last-of-type {
+nav button:last-of-type {
   border-top-right-radius: var(--radius-full);
   border-bottom-right-radius: var(--radius-full);
-}
-
-nav button {
-  width: 100%;
 }
 
 
@@ -602,15 +600,15 @@ tr.active-row {
 
 /* Test Screen */
 
-.test > h2 {
+.test > h3 {
   margin-top: var(--space-2xl);
 }
 
-.test > h3 {
+.test > h4 {
   margin-top: var(--space-m);
 }
 
-.test > h4 {
+.test > h5 {
   margin-top: var(--space-2xs);
 }
 
@@ -697,7 +695,8 @@ p > a:focus {
   color: var(--accent);
 }
 
-em {
+em,
+.em {
   font-style: italic;
 }
 
@@ -747,21 +746,30 @@ cite {
   letter-spacing: 0.05em;
 }
 
-.active,
 .accent {
   color: var(--accent);
 }
 
-.active:hover,
-.active:focus,
 .accent:hover,
-.active:focus {
+.accent:focus {
   color: var(--accent-hover);
 }
 
-.active > .icon,
 .accent > .icon {
   color: var(--blue-light);
+}
+
+.accent:hover > .icon,
+.accent:focus > .icon {
+  color: var(--accent);
+}
+
+.active {
+  color: var(--active);
+}
+
+.active > .icon {
+  color: var(--accent);
 }
 
 a.double-accent {

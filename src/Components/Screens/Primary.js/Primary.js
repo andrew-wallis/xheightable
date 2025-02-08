@@ -6,7 +6,7 @@ import areNotEqual from "../../../utils/areNotEqual";
 import highlightRows from "../../../utils/highlightRows";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
-import sortAndFilterFonts from "../../../utils/sortAndFilterFonts";
+import sortAndFilterFonts from "./helpers/sortAndFilterFonts";
 import toggleItem from "../../../utils/toggleItem";
 
 function Table(store) {
@@ -24,6 +24,7 @@ function Table(store) {
       <div data-element="top-bar">
         <!-- Table Topbar -->
       </div>
+      <h2 data-element="screen-title" class="sr-only" tabindex="-1">Change Primary Font</h2>
       <div class="insulate wrap stack">
         <div class="cluster" data-element="table-back">
           <!-- Table Close -->
@@ -51,7 +52,7 @@ function Table(store) {
   `;
 
   qDom(table, "top-bar").appendChild(Header());
-  qDom(table, "table-back").appendChild(Button({label: "Back", icon: "Arrow Left", type: "slim-button", action: closeTable}));
+  qDom(table, "table-back").appendChild(Button({label: "Back", icon: "Arrow Left", classes: "slim-button", action: closeTable}));
 
   const tableFilter = qDom(table, "table-filter");
   const filterData = store.getData().primaryFilter;

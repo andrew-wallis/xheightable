@@ -1,7 +1,7 @@
 import Filters from "../../Elements/Filters";
 import TableRow from "../../Elements/TableRow";
 import areNotEqual from "../../../utils/areNotEqual";
-import findPairings from "../../../utils/findPairings";
+import findPairings from "./helpers/findPairings";
 import highlightRows from "../../../utils/highlightRows";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
@@ -14,9 +14,12 @@ function Pair(store) {
   pair.style.display = "none";
   pair.dataset.section = "Pair";
   pair.dataset.element = "section";
+  pair.role = "tabpanel";
+  pair.setAttribute("aria-labelledby", "pair-tab");
 
   /* html */
   pair.innerHTML = `
+    <h2 data-element="section-title" tabindex="-1" class="sr-only">Pair</h2>
     <div class="stack-m">
       <div data-element="pair-filter">
         <!-- Pair Filter -->
@@ -61,8 +64,10 @@ function Pair(store) {
       qaDom(pairFilter, "licence", "key").forEach((licence) => {
         if(licences.includes(licence.dataset.value)) {
           licence.classList.add("active");
+          licence.setAttribute("aria-pressed", "true");
         } else {
           licence.classList.remove("active");
+          licence.setAttribute("aria-pressed", "false");
         }
       });
       pairFilter.dataset.licences = licences.join("|");
@@ -72,8 +77,10 @@ function Pair(store) {
       qaDom(pairFilter, "classification", "key").forEach((classification) => {
         if(classifications.includes(classification.dataset.value)) {
           classification.classList.add("active");
+          classification.setAttribute("aria-pressed", "true");
         } else {
           classification.classList.remove("active");
+          classification.setAttribute("aria-pressed", "false");
         }
       });
       pairFilter.dataset.classifications = classifications.join("|");
@@ -125,10 +132,6 @@ function Pair(store) {
   function changeSecondary(font) {
     highlightRows(qDom(pair, "pair-table"), font);
     store.setData({secondaryFont: font});
-  }
-
-  function changePrimary(font) {
-    store.setData({primaryFont: font});
   }
 
   function changeFilters(key, value) {

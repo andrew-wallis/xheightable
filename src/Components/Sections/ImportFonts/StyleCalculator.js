@@ -9,7 +9,7 @@ function StyleCalculator() {
   styleCalculator.innerHTML = `
     <div class="stack-l">
       <div class="stack-xs">
-        <h2 class="slub">CSS</h2>
+        <h3 class="slub">CSS</h3>
         <hr/>
       </div>
       <div class="grid columns-1-3">

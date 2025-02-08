@@ -27,6 +27,7 @@ function Secondary(store) {
       <div data-element="top-bar">
         <!-- Top Bar -->
       </div>
+      <h1 data-element="screen-title" class="sr-only" tabindex="-1">x-Heightable</h1>
       <div class="wrap insulate stack-l">
         <div class="insulate-s stack unselectable">
           <div class="grid columns-2">
@@ -65,19 +66,11 @@ function Secondary(store) {
             </div>
           </div>
         </div>
-        <nav data-element="nav" class="center">
-          <ul>
-            <li data-element="nav-item" data-label="Pair">
-              <!-- Nav Pair -->
-            </li>
-            <li data-element="nav-item" data-label="Test">
-              <!-- Nav Test -->
-            </li>
-            <li data-element="nav-item" data-label="Import">
-              <!-- Nav Import -->
-            </li>
-          </ul>
-        </nav>
+        <div class="center">
+          <nav role="tablist" data-element="nav">
+            <!-- Nav -->
+          </nav>
+        </div>
       </div>
     </div>
     <main data-element="secondary-main" class="wrap">
@@ -105,14 +98,14 @@ function Secondary(store) {
 
   // Appends
   
-  qDom(secondary, "top-bar").appendChild(Header());
+  qDom(secondary, "top-bar").appendChild(Header(true));
   qDom(secondary, "primary-data").appendChild(primaryData);
   qDom(secondary, "secondary-data").appendChild(secondaryData);
   
   qDom(secondary, "primary-change").appendChild(Button({
     label: "Change", 
     action: openPrimary, 
-    type: "accent slub slim-button"
+    classes: "accent slub slim-button"
   }));
   
 /*   qDom(secondary, "secondary-swap").appendChild(Button({
@@ -127,8 +120,9 @@ function Secondary(store) {
   main.appendChild(Test(store));
   main.appendChild(ImportFonts(store));
 
-  qaDom(secondary, "nav-item").forEach(item => {
-    item.appendChild(Button({label: item.dataset.label, icon: item.dataset.label, type: "nav-button", action: changeSection}));
+  const nav = qDom(secondary, "nav");
+  ["Pair", "Test", "Import"].forEach(item => {
+    nav.appendChild(Button({label: item, icon: item, classes: "nav-button", action: changeSection, type: "tab"}));
   });
 
 
@@ -225,16 +219,25 @@ function Secondary(store) {
     const currentSection = main.getAttribute('data-active');
     const activeSection = store.getData().activeSection;
 
-    if(currentSection !== activeSection) {
+    if(activeSection && currentSection !== activeSection) {
 
       qaDom(main, "section").forEach(section => {
-        section.style.display = section.getAttribute('data-section') === activeSection ? "block" : "none";
+        section.style.display = "none";
       });
+
+      const newSection = qDom(main, activeSection, "Section");
+      newSection.style.display = "block";
+      qDom(newSection, "section-title").focus();
 
       const nav = qDom(secondary, "nav");
       qaDom(nav, "button").forEach(button => {
-        button.getAttribute('data-target') === activeSection ? button.classList.add("active") : button.classList.remove("active");
+        button.classList.remove("active");
+        button.ariaSelected = "false";
       });
+
+      const newTab = qDom(nav, activeSection, "target");
+      newTab.classList.add("active");
+      newTab.ariaSelected = "true";
 
       let pos = 0;
 
@@ -249,6 +252,7 @@ function Secondary(store) {
 
   store.subscribe(updateSection);
   updateSection();
+  store.setData({activeSection: "Pair"});
 
 
   function changeSection(section) {

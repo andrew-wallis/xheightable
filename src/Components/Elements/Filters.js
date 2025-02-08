@@ -10,10 +10,10 @@ function Filters(data, action, options) {
   /* html */
   filters.innerHTML = `
     <div class="cluster">
-      <div class="cluster-none" data-element="filters-licence">
+      <div role="group" aria-label="Filter by licence" class="cluster-none" data-element="filters-licence">
         <!-- Filters Licence -->
       </div>
-      <div class="cluster-none" data-element="filters-classification">
+      <div role="group" aria-label="Filter by classification" class="cluster-none" data-element="filters-classification">
         <!-- Filters Licence -->
       </div>
     </div>
@@ -31,14 +31,14 @@ function Filters(data, action, options) {
   }));
 
   ["Adobe", "Google"].forEach((licence) => {
-    const licenceButton = Button({label: licence, icon: licence, type: `filter-button ${data.licences.includes(licence) ? "active" : ""}`, action: filterLicence, hideLabel: true});
+    const licenceButton = Button({label: licence, icon: licence, classes: `filter-button ${data.licences.includes(licence) ? "active" : ""}`, action: filterLicence, hideLabel: true, type: "filter"});
     licenceButton.dataset.key = "licence";
     licenceButton.dataset.value = licence;
     qDom(filters, "filters-licence").appendChild(licenceButton);
   });
 
   ["Sans", "Serif", "Mono"].forEach((classification) => {
-    const classificationButton = Button({label: classification, icon: classification, type: `filter-button ${data.classifications.includes(classification) ? "active" : ""}`, action: filterClassification, hideLabel: true});
+    const classificationButton = Button({label: classification, icon: classification, classes: `filter-button ${data.classifications.includes(classification) ? "active" : ""}`, action: filterClassification, hideLabel: true, type: "filter"});
     classificationButton.dataset.key = "classification";
     classificationButton.dataset.value = classification;
     qDom(filters, "filters-classification").appendChild(classificationButton);

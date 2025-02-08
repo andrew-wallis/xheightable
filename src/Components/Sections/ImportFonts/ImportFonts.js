@@ -14,13 +14,16 @@ function ImportFonts(store) {
   importFonts.style.display = "none";
   importFonts.dataset.section = "Import";
   importFonts.dataset.element = "section";
+  importFonts.role = "tabpanel";
+  importFonts.setAttribute("aria-labelledby", "import-tab");
   
   /* html */
   importFonts.innerHTML = `
+    <h2 data-element="section-title" tabindex="-1" class="sr-only">Import</h2>
     <div class="stack">
       <div class="stack-l">
         <div class="stack-xs">
-          <h2 class="slub">Embed</h2>
+          <h3 class="slub">Embed</h3>
           <hr/>
         </div>
         <div class="grid-l columns-1-2">
@@ -50,8 +53,8 @@ function ImportFonts(store) {
   controlContainer.appendChild(Checkbox({label: "Include cap height adjusts", action: toggleCapAdjusts, value: store.getData().capAdjusts}));
   controlContainer.appendChild(Checkbox({label: "Include line heights", action: toggleLineHeights, value: store.getData().lineHeights}));
 
-  qDom(importFonts, "Variables", "tab").appendChild(Button({label: "Variables", type: "slub", action: changeTab}));
-  qDom(importFonts, "Classes", "tab").appendChild(Button({label: "Classes", type: "slub", action: changeTab}));
+  qDom(importFonts, "Variables", "tab").appendChild(Button({label: "Variables", classes: "slub", action: changeTab}));
+  qDom(importFonts, "Classes", "tab").appendChild(Button({label: "Classes", classes: "slub", action: changeTab}));
 
 
   // Queries

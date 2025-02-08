@@ -1,9 +1,9 @@
 import Icon from "./Icons";
 
-function Button({label, icon, type, action, hideLabel}) {
+function Button({label, icon, classes, action, hideLabel, type}) {
 
   const iconButton = document.createElement('button');
-  iconButton.className = `label clickable ${type ? type : ""}`;
+  iconButton.className = `label clickable ${classes ? classes : ""}`;
 
   if(icon) {
     iconButton.appendChild(Icon(icon));
@@ -21,6 +21,14 @@ function Button({label, icon, type, action, hideLabel}) {
     e.preventDefault();
     action(label);
   });
+
+  if(type === "tab") {
+    const tabId = label.replace(/\W/g,'_');
+    iconButton.role = "tab";
+    iconButton.id = `${tabId.toLowerCase()}-tab`;
+    iconButton.setAttribute("aria-controls", tabId);
+    iconButton.ariaSelected = "false";
+  }
 
   return iconButton;
 
