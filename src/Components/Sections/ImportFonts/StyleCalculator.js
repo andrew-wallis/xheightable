@@ -8,17 +8,10 @@ function StyleCalculator() {
   /* html */
   styleCalculator.innerHTML = `
     <div class="stack-l">
-      <div class="stack-xs">
-        <h3 class="slub">CSS</h3>
-        <hr/>
-      </div>
-      <div class="grid columns-1-3">
-        <div class="stack" data-element="import-controls">
-          <!-- Import Control -->
-        </div>
-        <div class="span-2">
+      <div class="stack-l">
+        <div>
           <div class="with-sidebar">
-            <ul class="cluster" data-element="tabs">
+            <ul class="cluster not-sidebar" data-element="tabs">
               <li class="tab" data-element="tab" data-tab="Variables">
                 <!-- Variables Tab -->
               </li>
@@ -38,6 +31,9 @@ function StyleCalculator() {
               <!-- Code -->
             </code>
           </pre>
+        </div>
+        <div class="stack" data-element="import-controls">
+          <!-- Import Control -->
         </div>
       </div>
     </div>

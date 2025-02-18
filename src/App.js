@@ -1,8 +1,14 @@
-import Secondary from "./Components/Screens/Secondary/Secondary";
-import Primary from "./Components/Screens/Primary.js/Primary";
 import qaDom from "./utils/qaDom";
 import getRandomArrayItem from "./utils/getRandomArrayKey";
 import qDom from "./utils/qDom";
+import Header from "./Components/Global/Header";
+import Button from "./Components/Elements/Button";
+import Samples from "./Components/Sections/Samples/Samples";
+import Secondary from "./Components/Global/Secondary";
+import Primary from "./Components/Global/Primary";
+import Test from "./Components/Sections/Test/Test";
+import Horizontal from "./Components/Elements/Horizontal";
+import ImportFonts from "./Components/Sections/ImportFonts/ImportFonts";
 
 function App({store}) {
 
@@ -12,68 +18,93 @@ function App({store}) {
   store.setData({
     primaryFont: getRandomArrayItem(store.getData().fonts),
     secondaryFont: {},
-    activeScreen: "Secondary",
-    primaryFilter: {
-      sort: "Rating",
-      licences: [],
-      classifications: []
-    },
-    secondaryFilter: {
-      sort: "Match",
-      licences: [],
-      classifications: []
-    },
-    tableScroll: 0,
-    pairScroll: 0,
+    primarySort: "A-Z",
+    secondarySort: "Match",
     capAdjusts: true,
     lineHeights: true,
     embedLicence: ["Google"],
-    affiliateLicence: ["Adobe"]
+    affiliateLicence: ["Adobe"],
+    sidebar: "",
   });
 
   const app = document.createElement('div');
+  app.classList = "stack-none page"
+
+  /* html */
+  app.innerHTML = `
+    <div class="top-bar">
+      <div data-element="top-bar">
+
+      </div>
+    </div>
+    <div data-element="slider" class="slider">
+      <aside class="wrap" data-element="primary-sidebar">
+        <!-- Primary Sidebar -->
+      </aside>
+      <main class="">
+        <div class="stack scrollable-container wrap">
+          <div data-element="main-sample" class="insulate ">
+            <!-- Main Sample -->
+          </div>
+          <div data-element="main-content" class="scrollable insulate stack-xl">
+            <!-- Main Content -->
+          </div>
+        </div>
+        <div data-element="slider-overlay" class="slider-overlay"></div>
+      </main>
+      <aside class="wrap" data-element="secondary-sidebar">
+        <!-- Secondary Sidebar -->
+      </aside>
+    </div>
+  `;
+
+
+  // Queries
+
+  const slider = qDom(app, "slider");
+  const main = qDom(app, "main-content");
 
 
   // Appends
 
-  app.appendChild(Secondary(store));
-  app.appendChild(Primary(store));
+  qDom(app, "top-bar").appendChild(Header());
+  qDom(app, "primary-sidebar").appendChild(Primary(store));
+  qDom(app, "secondary-sidebar").appendChild(Secondary(store));
+  qDom(app, "main-sample").appendChild(Samples(store));
+
+  main.appendChild(Test(store));
+  main.appendChild(Horizontal());
+  main.appendChild(ImportFonts(store));
+
+
+  // Event Listeners
+
+  qDom(app, "slider-overlay").addEventListener("click", function(e) {
+    store.setData({sidebar: ""});
+  });
 
 
   // Functions
 
-  function updateScreen() {
+  function updateSidebar() {
 
-    const currentScreen = app.getAttribute('data-active');
-    const activeScreen = store.getData().activeScreen;
+    const activeSidebar = store.getData().sidebar;
 
-    if(currentScreen !== activeScreen) {
-      qaDom(app, "screen").forEach(screen => {
-        screen.style.display = "none";
-        screen.style.ariaHidden = "true";
-      });
+    if(slider.dataset.active !== activeSidebar) {
+      slider.classList.remove("secondary");
+      slider.classList.remove("primary");
 
-      const newScreen = qDom(app, activeScreen, "screen");
-      newScreen.style.display = "block";
-      newScreen.style.ariaHidden = "false";
-      qDom(newScreen, "screen-title").focus();
-
-      let pos = 0;
-
-      if(activeScreen === "Primary") {
-        pos = store.getData().tableScroll;
-      } else if(activeScreen === "Secondary") {
-        pos = store.getData().pairScroll;
+      if(activeSidebar) {
+        slider.classList.add(activeSidebar);
+        slider.dataset.active = activeSidebar;
+      } else {
+        slider.dataset.active = "";
       }
-
-      window.scrollTo(0, pos);
-      app.dataset.active = activeScreen;
-
     }
   }
 
-  store.subscribe(updateScreen);
-  updateScreen();
+  store.subscribe(updateSidebar);
+  updateSidebar();
 
 
   // Return
@@ -97,24 +128,6 @@ function App({store}) {
   } */
 
   //setTheme();
-
-/*   function adjustStickyHeaderOffset() {
-    const screen = store.getData().activeScreen;
-
-    if(screen === "Primary" || screen === "Pair") {
-      const thisScreen = app.querySelector(`[data-screen="${screen}"]`);
-      const header = thisScreen.querySelector('header');
-      const thead = thisScreen.querySelector('thead');
-      const headerHeight = header.offsetHeight;
-
-      if(thead.style.top !== headerHeight) {
-        thead.style.top = `${headerHeight - 2}px`;
-      }
-    }
-  }
-
-  window.onscroll = function() {adjustStickyHeaderOffset()};
- */
 
 }
 

@@ -11,22 +11,12 @@ function ImportFonts(store) {
 
   const importFonts = document.createElement('div');
   importFonts.id = "import";
-  importFonts.style.display = "none";
-  importFonts.dataset.section = "Import";
-  importFonts.dataset.element = "section";
-  importFonts.role = "tabpanel";
-  importFonts.setAttribute("aria-labelledby", "import-tab");
   
   /* html */
   importFonts.innerHTML = `
-    <h2 data-element="section-title" tabindex="-1" class="sr-only">Import</h2>
-    <div class="stack">
+    <div class="stack grid-l columns-1-2">
       <div class="stack-l">
-        <div class="stack-xs">
-          <h3 class="slub">Embed</h3>
-          <hr/>
-        </div>
-        <div class="grid-l columns-1-2">
+        <div class="stack-l">
           <div data-element="primary-embed">
             <!-- Primary Embed -->
           </div>

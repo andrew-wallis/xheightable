@@ -10,13 +10,15 @@ function EmbedCode(font) {
   /* html */
   embed.innerHTML = `
     <div class="with-sidebar">
-      <h3>
+      <h3 class="not-sidebar">
         ${font.label}
       </h3>
-      <a class="button slim-button label" href="#" data-element="copy-stylesheet">
-        <div data-element="copy-label">Copy</div>
-        <div data-element="copy-icon"></div>
-      </a>
+      <div class="">
+        <a class="button slim-button label" href="#" data-element="copy-stylesheet">
+          <div data-element="copy-label">Copy</div>
+          <div data-element="copy-icon"></div>
+        </a>
+      </div>
     </div>
     <code class="data horizontal-scroll " data-code="stylesheet">${getFontStylesheet(font)}</code>
     <div class="embed-footer">
