@@ -44,7 +44,16 @@ function StyleCalculator() {
   `;
 
   const copyStylesheet = qDom(styleCalculator, "copy-stylesheet");
+
   copyStylesheet.addEventListener("click", function(e) {
+    handleClick(e);
+  });
+  
+  copyStylesheet.removeEventListener("click", function(e) {
+    handleClick(e);
+  });
+
+  function handleClick(e) {
     e.preventDefault();
     const label = qDom(copyStylesheet, "copy-label");
     navigator.clipboard.writeText(styleCalculator.querySelector('code').textContent).then(() => {
@@ -53,7 +62,7 @@ function StyleCalculator() {
         label.innerText = "Copy";
       }, 1000);
     });
-  });
+  };
 
   qDom(styleCalculator, "copy-icon").appendChild(Icons("Copy"));
 

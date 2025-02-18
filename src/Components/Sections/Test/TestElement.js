@@ -26,7 +26,7 @@ function TestElement(type, content, classes) {
     switch(type) {
       case "title":
         element = document.createElement("h3");
-        setAttributes(element, content, `uppercase ${classes}`, "primary", "2.5", "lineMin", "bold");
+        setAttributes(element, content, `uppercase ${classes ? classes : ""}`, "primary", "2.5", "lineMin", "bold");
         break;
       case "paragraph":
         element = document.createElement('p');
@@ -34,15 +34,15 @@ function TestElement(type, content, classes) {
         break;
       case "lede":
         element = document.createElement('p');
-        setAttributes(element, content, `secondary em ${classes}`, "secondary", "1.125", "lineMax", "normal");
+        setAttributes(element, content, `secondary em ${classes ? classes : ""}`, "secondary", "1.125", "lineMax", "normal");
         break;
       case "heading":
         element = document.createElement('h4');
-        setAttributes(element, content, `test-heading ${classes}`, "primary", "1.6", "lineMin", "bold");
+        setAttributes(element, content, `test-heading ${classes ? classes : ""}`, "primary", "1.6", "lineMin", "bold");
         break;
       case "subheading":
         element = document.createElement('h5');
-        setAttributes(element, content, `test-subheading ${classes}`, "primary", "1.125", "lineMin", "bold");
+        setAttributes(element, content, `test-subheading ${classes ? classes : ""}`, "primary", "1.125", "lineMin", "bold");
         break;
       case "quote":
         element = document.createElement('blockquote');
@@ -50,7 +50,7 @@ function TestElement(type, content, classes) {
         break;
       case "citation":
         element = document.createElement('cite');
-        setAttributes(element, content, `slub ${classes}`, "secondary", "0.875", "lineMin", "bold");
+        setAttributes(element, content, `slub ${classes ? classes : ""}`, "secondary", "0.875", "lineMin", "bold");
         break;
       case "label":
         element = document.createElement('div');

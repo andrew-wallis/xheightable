@@ -18,9 +18,17 @@ function Button({label, icon, classes, action, hideLabel, type}) {
   iconButton.appendChild(iconButtonLabel);
 
   iconButton.addEventListener('click', function(e) {
+    handleClick(e);
+  });
+
+  iconButton.removeEventListener('click', function(e) {
+    handleClick(e);
+  });
+
+  function handleClick(e) {
     e.preventDefault();
     action(label);
-  });
+  };
 
   if(type === "tab") {
     const tabId = label.replace(/\W/g,'_');

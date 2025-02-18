@@ -31,12 +31,15 @@ function findPairings({font, fonts, sort, licences, classifications}) {
 
     fontList = fontList.sort((a, b) => {
 
-      const familyA = a.family === thisFont.family ? 1 : 0;
-      const familyB = b.family === thisFont.family ? 1 : 0;
-
-      if (familyA !== familyB) {
-        return familyB - familyA;
+      if(thisFont.family) {
+        const familyA = a.family === thisFont.family ? 1 : 0;
+        const familyB = b.family === thisFont.family ? 1 : 0;
+  
+        if (familyA !== familyB) {
+          return familyB - familyA;
+        }
       }
+
 
       // Sort by xHeights
       const diffA = Math.abs(a.xHeightPct - thisFont.xHeightPct);

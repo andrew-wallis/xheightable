@@ -154,7 +154,6 @@ function Pair(store) {
     store.setData({secondaryFilter: updatedFilter});
   }
 
-
   // Return
 
   return pair;

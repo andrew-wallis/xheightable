@@ -16,17 +16,6 @@ function TableRow({font, action}) {
   tableRow.role = "button";
   tableRow.ariaLabel = `Select ${font.label}`;
 
-  tableRow.addEventListener('click', function(e) {
-    action(font);
-  });
-
-  tableRow.addEventListener('keydown', function(e) {
-    if(e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      action(font);
-    }
-  })
-
   /* html */
   tableRow.innerHTML = `
     <td data-element="table-icon">
@@ -86,6 +75,36 @@ function TableRow({font, action}) {
     window.addEventListener('beforeunload', () => {
       observer.disconnect();
     });
+  }
+
+
+  // Functions
+
+  tableRow.addEventListener('click', function(e) {
+    handleClick();
+  });
+
+  tableRow.removeEventListener('click', function(e) {
+    handleClick();
+  });
+
+  tableRow.addEventListener('keydown', function(e) {
+    handleKeyDown(e);
+  });
+
+  tableRow.removeEventListener('keydown', function(e) {
+    handleKeyDown(e);
+  });
+
+  function handleClick() {
+    action(font);
+  }
+
+  function handleKeyDown(e) {
+    if(e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      action(font);
+    }
   }
 
   return tableRow;

@@ -15,8 +15,16 @@ function Checkbox({label, action, value}) {
   checkbox.checked = value;
 
   checkbox.addEventListener('change', function() {
-    checkbox.checked ? action(true) : action(false);
+    handleChange();
   });
+
+  checkbox.removeEventListener('change', function() {
+    handleChange();
+  });
+
+  function handleChange() {
+    checkbox.checked ? action(true) : action(false);
+  }
 
 
   return checkboxWrapper;

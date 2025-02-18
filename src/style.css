@@ -624,7 +624,7 @@ tr.active-row {
   padding: var(--space-l);
 }
 
-.test-form > h3 {
+.test-form > h5 {
   text-align: center;
 }
 

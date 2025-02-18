@@ -166,12 +166,7 @@ function Test(store) {
 
     example.addEventListener('focus', handleMouseEnter);
     example.addEventListener('blur', handleMouseLeave);
-
-    example.addEventListener('keydown', function(e){
-      if(e.key === "Enter" || e.key === " ") {
-        handleClick(e);
-      }
-    });
+    example.addEventListener('keydown', handleKeyDown);
   });
 
 
@@ -234,6 +229,12 @@ function Test(store) {
       updateFont(match, font);
     });
 
+  }
+  
+  function handleKeyDown(e) {
+    if(e.key === "Enter" || e.key === " ") {
+      handleClick(e);
+    }
   }
 
   function updateFont(example, font) {

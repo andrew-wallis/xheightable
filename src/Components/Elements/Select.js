@@ -24,8 +24,16 @@ function Select({label, options, action, value, hideLabel}) {
   field.value = value;
 
   field.addEventListener('change', function () {
-    action(field.value);
+    handleChange();
   });
+
+  field.removeEventListener('change', function () {
+    handleChange();
+  });
+
+  function handleChange() {
+    action(field.value);
+  }
 
   return select;
 

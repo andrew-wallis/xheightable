@@ -29,7 +29,16 @@ function EmbedCode(font) {
   `;
 
   const copyStylesheet = qDom(embed, "copy-stylesheet");
+
   copyStylesheet.addEventListener("click", function(e) {
+    handleClick(e);
+  });
+  
+  copyStylesheet.removeEventListener("click", function(e) {
+    handleClick(e);
+  });
+
+  function handleClick(e) {
     e.preventDefault();
     const label = qDom(copyStylesheet, "copy-label");
     navigator.clipboard.writeText(getFontStylesheet(font)).then(() => {
@@ -38,7 +47,7 @@ function EmbedCode(font) {
         label.innerText = "Copy";
       }, 1000);
     });
-  });
+  }
 
   qDom(embed, "copy-icon").appendChild(Icons("Copy"));
 
