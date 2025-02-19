@@ -11,7 +11,7 @@ function Secondary(store) {
 
   const secondary = document.createElement('div');
   secondary.id = "secondary";
-  secondary.className = "stack scrollable-container";
+  secondary.className = "wrap stack scrollable-container";
 
   /* html */
   secondary.innerHTML = `

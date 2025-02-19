@@ -10,7 +10,7 @@ function Primary(store) {
   
   const primary = document.createElement('div');
   primary.id = "primary";
-  primary.className = "stack scrollable-container"
+  primary.className = "wrap stack scrollable-container"
 
   /* html */
   primary.innerHTML = `

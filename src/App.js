@@ -1,14 +1,13 @@
-import qaDom from "./utils/qaDom";
 import getRandomArrayItem from "./utils/getRandomArrayKey";
 import qDom from "./utils/qDom";
 import Header from "./Components/Global/Header";
-import Button from "./Components/Elements/Button";
 import Samples from "./Components/Sections/Samples/Samples";
 import Secondary from "./Components/Global/Secondary";
 import Primary from "./Components/Global/Primary";
 import Test from "./Components/Sections/Test/Test";
 import Horizontal from "./Components/Elements/Horizontal";
 import ImportFonts from "./Components/Sections/ImportFonts/ImportFonts";
+import './slider.css';
 
 function App({store}) {
 
@@ -28,7 +27,7 @@ function App({store}) {
   });
 
   const app = document.createElement('div');
-  app.classList = "stack-none page"
+  app.classList = ""
 
   /* html */
   app.innerHTML = `
@@ -38,21 +37,16 @@ function App({store}) {
       </div>
     </div>
     <div data-element="slider" class="slider">
-      <aside class="wrap" data-element="primary-sidebar">
+      <aside data-element="primary-sidebar">
         <!-- Primary Sidebar -->
       </aside>
       <main class="">
-        <div class="stack scrollable-container wrap">
-          <div data-element="main-sample" class="insulate ">
-            <!-- Main Sample -->
-          </div>
-          <div data-element="main-content" class="scrollable insulate stack-xl">
-            <!-- Main Content -->
-          </div>
+        <div data-element="main-content" class="stack wrap stack-xl">
+          <!-- Main Content -->
         </div>
         <div data-element="slider-overlay" class="slider-overlay"></div>
       </main>
-      <aside class="wrap" data-element="secondary-sidebar">
+      <aside data-element="secondary-sidebar">
         <!-- Secondary Sidebar -->
       </aside>
     </div>
@@ -63,15 +57,16 @@ function App({store}) {
 
   const slider = qDom(app, "slider");
   const main = qDom(app, "main-content");
+  const primary = qDom(app, "primary-sidebar");
+  const secondary = qDom(app, "secondary-sidebar");
 
 
   // Appends
 
   qDom(app, "top-bar").appendChild(Header());
-  qDom(app, "primary-sidebar").appendChild(Primary(store));
-  qDom(app, "secondary-sidebar").appendChild(Secondary(store));
-  qDom(app, "main-sample").appendChild(Samples(store));
-
+  primary.appendChild(Primary(store));
+  secondary.appendChild(Secondary(store));
+  main.appendChild(Samples(store));
   main.appendChild(Test(store));
   main.appendChild(Horizontal());
   main.appendChild(ImportFonts(store));
@@ -105,6 +100,37 @@ function App({store}) {
 
   store.subscribe(updateSidebar);
   updateSidebar();
+
+  function updateSidebarPositions() {
+
+    const getSlider = document.querySelector('.slider');
+    const getPrimary = document.querySelector('.slider > aside:first-child');
+    const getSecondary = document.querySelector('.slider > aside:last-child');
+
+    console.log(getSlider);
+
+    if(getSlider) {
+      const sliderRect = getSlider.getBoundingClientRect();
+      console.log(sliderRect);
+      getPrimary.style.left = `${sliderRect.left}px`;
+      getPrimary.style.top = `${sliderRect.top}px`;
+      getSecondary.style.right = `${window.innerWidth - sliderRect.right}px`;
+      getSecondary.style.top = `${sliderRect.top}px`;
+    }
+  }
+
+  const observer = new MutationObserver((mutations, obs) => {
+    console.log("Triggered");
+    const slider = document.querySelector('.slider');
+    if (slider) {
+      updateSidebarPositions();
+      obs.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  window.addEventListener('resize', updateSidebarPositions);
+  
 
 
   // Return
