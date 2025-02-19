@@ -75,13 +75,13 @@ function Samples(store) {
 
   qDom(samples, "primary-action").appendChild(Button({
     label: "Change",
-    classes: "slub accent slim-button",
+    classes: "slub accent",
     action: activatePrimary
   }));
 
   qDom(samples, "secondary-action").appendChild(Button({
     label: "Change",
-    classes: "slub accent slim-button",
+    classes: "slub accent",
     action: activateSecondary
   }));
   

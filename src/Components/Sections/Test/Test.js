@@ -20,7 +20,7 @@ function Test(store) {
       <p data-element="test-title" class="clickable strong" data-font="primary" data-size="1.5" data-leading="lineMin">
         ${store.getData().testTitle}
       </p>
-      <ul class="caption cluster-s tertiary moderate" data-element="test-title-data">
+      <ul class="caption cluster moderate" data-element="test-title-data">
         <!-- Test Title Data -->
       </ul>
     </div>
@@ -28,7 +28,7 @@ function Test(store) {
       <p data-element="test-paragraph" class="clickable" data-font="secondary" data-size="1.125" data-leading="lineMax">
         ${store.getData().testText}
       </p>
-      <ul class="caption cluster-s tertiary moderate" data-element="test-paragraph-data">
+      <ul class="caption cluster moderate" data-element="test-paragraph-data">
         <!-- Test Paragraph Data -->
       </ul>
     </div>
@@ -107,11 +107,11 @@ function Test(store) {
 
       /* html */
     data.innerHTML = `
-      <li class="secondary-text">${font.label}</li>
-      <li>
+      <li>${font.label}</li>
+      <li class="tertiary">
         Font Size <span class="data" data-element="data-capheight">${pxSide}px</span>
       </li>
-      <li>
+      <li class="tertiary">
         Line Height <span class="data" data-element="data-capheight">${font[example.dataset.leading]}</span>
       </li>
     `;

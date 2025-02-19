@@ -16,7 +16,7 @@ function ImportFonts(store) {
   /* html */
   importFonts.innerHTML = `
     <hr class="insulate"/>
-    <div class="stack grid-l columns-1-2">
+    <div class="stack grid-l">
       <div class="stack-l">
         <div class="stack-l">
           <div data-element="primary-embed">
@@ -123,13 +123,6 @@ function ImportFonts(store) {
       thisTab.classList.remove("active");
       if(thisTab.dataset.tab === tab) {
         thisTab.classList.add("active");
-      }
-    });
-
-    qaDom(tabs, "slub").forEach((thisButton) => {
-      thisButton.classList.remove("active");
-      if(thisButton.dataset.target === tab) {
-        thisButton.classList.add("active");
       }
     });
   }

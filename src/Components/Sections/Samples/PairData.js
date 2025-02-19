@@ -1,7 +1,7 @@
 function PairData() {
 
   const data = document.createElement('ul');
-  data.className = "caption moderate cluster-s tertiary";
+  data.className = "caption moderate cluster tertiary";
 
   /* html */
   data.innerHTML = `

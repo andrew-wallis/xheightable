@@ -11,7 +11,7 @@ function StyleCalculator() {
       <div class="stack-l">
         <div>
           <div class="with-sidebar tab-header">
-            <ul class="cluster-none not-sidebar" data-element="tabs">
+            <ul class="tabs not-sidebar" data-element="tabs">
               <li class="tab" data-element="tab" data-tab="Variables">
                 <!-- Variables Tab -->
               </li>
@@ -20,7 +20,7 @@ function StyleCalculator() {
               </li>
             </ul>
             <div class="">
-              <a href="#" data-element="copy-stylesheet" class="button slim-button label">
+              <a href="#" data-element="copy-stylesheet" class="button label">
                 <div data-element="copy-label">Copy</div>
                 <div data-element="copy-icon"></div>
               </a>

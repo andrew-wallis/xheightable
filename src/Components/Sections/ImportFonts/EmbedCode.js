@@ -14,7 +14,7 @@ function EmbedCode(font) {
         ${font.label}
       </h3>
       <div class="">
-        <a class="button slim-button label" href="#" data-element="copy-stylesheet">
+        <a class="button label" href="#" data-element="copy-stylesheet">
           <div data-element="copy-label">Copy</div>
           <div data-element="copy-icon"></div>
         </a>
