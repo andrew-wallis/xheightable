@@ -1,7 +1,5 @@
-import getFontSize from "../../../utils/getFontSize";
 import qaDom from "../../../utils/qaDom";
 import qDom from "../../../utils/qDom";
-import roundToTwoDecimals from "../../../utils/roundToTwoDecimals";
 import setFontStyles from "../../../utils/setFontStyles";
 
 function Test(store) {

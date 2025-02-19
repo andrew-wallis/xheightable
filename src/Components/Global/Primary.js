@@ -1,10 +1,8 @@
 import ListItem from "../Elements/ListItem";
-import areNotEqual from "../../utils/areNotEqual";
+import Select from "../Elements/Select";
 import highlightRows from "../../utils/highlightRows";
 import qDom from "../../utils/qDom";
-import qaDom from "../../utils/qaDom";
 import sortAndFilterFonts from "./helpers/sortAndFilterFonts";
-import Select from "../Elements/Select";
 
 function Primary(store) {
   

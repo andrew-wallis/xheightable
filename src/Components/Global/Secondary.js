@@ -1,11 +1,8 @@
 import ListItem from "../Elements/ListItem";
-import areNotEqual from "../../utils/areNotEqual";
+import Select from "../Elements/Select";
 import findPairings from "./helpers/findPairings";
 import highlightRows from "../../utils/highlightRows";
 import qDom from "../../utils/qDom";
-import qaDom from "../../utils/qaDom";
-import toggleItem from "../../utils/toggleItem";
-import Select from "../Elements/Select";
 
 function Secondary(store) {
 

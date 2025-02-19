@@ -1,7 +1,10 @@
 import getFontFamily from "../../../../utils/getFontFamily";
-import roundToTwoDecimals from "../../../../utils/roundToTwoDecimals";
 
 function generateFontFamilies(primary, secondary, format, capAdjusts, lineHeights) {
+
+  function roundToTwoDecimals(number) {
+    return Math.round(number * 100) / 100;
+  }
 
   const primaryFont = getFontFamily(primary);
   const secondaryFont = getFontFamily(secondary);
@@ -64,6 +67,7 @@ function generateFontFamilies(primary, secondary, format, capAdjusts, lineHeight
       fontFamilies.push("");
 
     }
+    
 
   }
 

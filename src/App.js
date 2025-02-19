@@ -1,4 +1,4 @@
-import getRandomArrayItem from "./utils/getRandomArrayKey";
+import getRandomArrayKey from "./utils/getRandomArrayKey";
 import qDom from "./utils/qDom";
 import Header from "./Components/Global/Header";
 import Samples from "./Components/Sections/Samples/Samples";
@@ -16,7 +16,7 @@ function App({store}) {
   // Initial
 
   store.setData({
-    primaryFont: getRandomArrayItem(store.getData().fonts),
+    primaryFont: store.getData().fonts[Math.floor(Math.random() * store.getData().fonts.length)],
     secondaryFont: {},
     primarySort: "A-Z",
     secondarySort: "Match",

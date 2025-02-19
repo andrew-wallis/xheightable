@@ -1,5 +1,3 @@
-import qDom from "../../utils/qDom";
-
 function Header(front) {
 
   const header = document.createElement('header');

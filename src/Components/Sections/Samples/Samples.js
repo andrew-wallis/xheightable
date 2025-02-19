@@ -1,10 +1,10 @@
 import PairData from "./PairData";
 import Sample from "./Sample";
+import Button from "../../Elements/Button";
 import loadFont from "../../../utils/loadFont";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
 import setFontStyles from "../../../utils/setFontStyles";
-import Button from "../../Elements/Button";
 
 function Samples(store) {
 
