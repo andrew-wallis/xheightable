@@ -17,7 +17,7 @@ function Samples(store) {
   samples.innerHTML = `
       <div class="insulate stack unselectable">
         <div class="grid columns-2">
-          <div data-element="primary-header" class="cluster-s-baseline">
+          <div data-element="primary-header" class="sample-header">
             <div data-element="primary-label" class="clickable">
               <!-- Primary Label -->
             </div>
@@ -25,7 +25,7 @@ function Samples(store) {
               <!-- Secondary Action -->
             </div>
           </div>
-          <div data-element="secondary-header" class="cluster-s-baseline">
+          <div data-element="secondary-header" class="sample-header">
             <div data-element="secondary-label" class="clickable">
               <!-- Secondary Label -->
             </div>

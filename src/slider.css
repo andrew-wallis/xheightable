@@ -20,7 +20,6 @@
   background-color: var(--background);
   bottom: 0;
   overflow: hidden;
-  padding-top: var(--space-3xl);
   position: fixed;
   top: 0;
   /* transform: translate(-100%); */
@@ -88,6 +87,11 @@
   display: block;
 }
 
+.sidebar-open {
+  overflow: hidden;
+}
+
+/* Desktop */
 
 @media (min-width: 64rem) {
 
@@ -126,5 +130,9 @@
 
   .slider.primary .secondary-action {
     display: block;
+  }
+
+  .sidebar-open {
+    overflow: auto;
   }
 }

@@ -10,16 +10,18 @@ function Primary(store) {
   
   const primary = document.createElement('div');
   primary.id = "primary";
-  primary.className = "wrap stack scrollable-container"
+  primary.className = "wrap insulate scrollable-container"
 
   /* html */
   primary.innerHTML = `
-    <div data-element="primary-sort">
-      <!-- Pair Filter -->
+    <div class="insulate stack scrollable-container">
+      <div data-element="primary-sort">
+        <!-- Pair Filter -->
+      </div>
+      <ul data-element="primary-list" class="scrollable">
+        <!-- Pair List -->
+      </ul>
     </div>
-    <ul data-element="primary-list" class="scrollable">
-      <!-- Pair List -->
-    </ul>
   `;
 
   

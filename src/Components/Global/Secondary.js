@@ -11,16 +11,18 @@ function Secondary(store) {
 
   const secondary = document.createElement('div');
   secondary.id = "secondary";
-  secondary.className = "wrap stack scrollable-container";
+  secondary.className = "insulate wrap scrollable-container";
 
   /* html */
   secondary.innerHTML = `
-    <div data-element="secondary-sort">
-      <!-- Pair Filter -->
+    <div class="insulate stack scrollable-container">
+      <div data-element="secondary-sort">
+        <!-- Pair Filter -->
+      </div>
+      <ul data-element="secondary-list" class="scrollable">
+        <!-- Pair Table -->
+      </ul>
     </div>
-    <ul data-element="secondary-list" class="scrollable">
-      <!-- Pair Table -->
-    </ul>
   `;
 
 

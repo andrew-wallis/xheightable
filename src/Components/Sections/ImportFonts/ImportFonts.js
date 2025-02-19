@@ -11,9 +11,11 @@ function ImportFonts(store) {
 
   const importFonts = document.createElement('div');
   importFonts.id = "import";
+  importFonts.classList = "insulate";
   
   /* html */
   importFonts.innerHTML = `
+    <hr class="insulate"/>
     <div class="stack grid-l columns-1-2">
       <div class="stack-l">
         <div class="stack-l">
@@ -25,7 +27,7 @@ function ImportFonts(store) {
           </div>
         </div>
       </div>
-      <div class="insulate stack" data-element="import-code">
+      <div class="stack" data-element="import-code">
         <!-- Import Code -->
       </div>
     </div>
@@ -43,8 +45,8 @@ function ImportFonts(store) {
   controlContainer.appendChild(Checkbox({label: "Include cap height adjusts", action: toggleCapAdjusts, value: store.getData().capAdjusts}));
   controlContainer.appendChild(Checkbox({label: "Include line heights", action: toggleLineHeights, value: store.getData().lineHeights}));
 
-  qDom(importFonts, "Variables", "tab").appendChild(Button({label: "Variables", classes: "slub", action: changeTab}));
-  qDom(importFonts, "Classes", "tab").appendChild(Button({label: "Classes", classes: "slub", action: changeTab}));
+  qDom(importFonts, "Variables", "tab").appendChild(Button({label: "Variables", classes: "", action: changeTab}));
+  qDom(importFonts, "Classes", "tab").appendChild(Button({label: "Classes", classes: "", action: changeTab}));
 
 
   // Queries

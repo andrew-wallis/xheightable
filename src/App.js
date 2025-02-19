@@ -8,6 +8,7 @@ import Test from "./Components/Sections/Test/Test";
 import Horizontal from "./Components/Elements/Horizontal";
 import ImportFonts from "./Components/Sections/ImportFonts/ImportFonts";
 import './slider.css';
+import getSampleText from "./utils/getSampleText";
 
 function App({store}) {
 
@@ -24,6 +25,8 @@ function App({store}) {
     embedLicence: ["Google"],
     affiliateLicence: ["Adobe"],
     sidebar: "",
+    testTitle: getSampleText(2),
+    testText: getSampleText(10)
   });
 
   const app = document.createElement('div');
@@ -41,7 +44,7 @@ function App({store}) {
         <!-- Primary Sidebar -->
       </aside>
       <main class="">
-        <div data-element="main-content" class="stack wrap stack-xl">
+        <div data-element="main-content" class="insulate wrap">
           <!-- Main Content -->
         </div>
         <div data-element="slider-overlay" class="slider-overlay"></div>
@@ -68,7 +71,6 @@ function App({store}) {
   secondary.appendChild(Secondary(store));
   main.appendChild(Samples(store));
   main.appendChild(Test(store));
-  main.appendChild(Horizontal());
   main.appendChild(ImportFonts(store));
 
 
@@ -86,12 +88,14 @@ function App({store}) {
     const activeSidebar = store.getData().sidebar;
 
     if(slider.dataset.active !== activeSidebar) {
-      slider.classList.remove("secondary");
       slider.classList.remove("primary");
+      slider.classList.remove("secondary");
+      document.body.classList.remove("sidebar-open");
 
       if(activeSidebar) {
         slider.classList.add(activeSidebar);
         slider.dataset.active = activeSidebar;
+        document.body.classList.add("sidebar-open");
       } else {
         slider.dataset.active = "";
       }
@@ -107,8 +111,6 @@ function App({store}) {
     const getPrimary = document.querySelector('.slider > aside:first-child');
     const getSecondary = document.querySelector('.slider > aside:last-child');
 
-    console.log(getSlider);
-
     if(getSlider) {
       const sliderRect = getSlider.getBoundingClientRect();
       console.log(sliderRect);
@@ -120,7 +122,6 @@ function App({store}) {
   }
 
   const observer = new MutationObserver((mutations, obs) => {
-    console.log("Triggered");
     const slider = document.querySelector('.slider');
     if (slider) {
       updateSidebarPositions();

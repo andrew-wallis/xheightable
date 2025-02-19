@@ -1,6 +1,8 @@
+import getFontSize from "../../../utils/getFontSize";
 import qaDom from "../../../utils/qaDom";
+import qDom from "../../../utils/qDom";
+import roundToTwoDecimals from "../../../utils/roundToTwoDecimals";
 import setFontStyles from "../../../utils/setFontStyles";
-import TestElement from "./TestElement";
 
 function Test(store) {
 
@@ -9,33 +11,41 @@ function Test(store) {
 
   const test = document.createElement('div');
   test.id = "test";
-  test.classList = "stack-l";
+  test.classList = "insulate stack-l";
+
   
+  /* html */
+  test.innerHTML = `
+    <div class="stack-2xs">
+      <p data-element="test-title" class="clickable strong" data-font="primary" data-size="1.5" data-leading="lineMin">
+        ${store.getData().testTitle}
+      </p>
+      <ul class="caption cluster-s tertiary moderate" data-element="test-title-data">
+        <!-- Test Title Data -->
+      </ul>
+    </div>
+    <div class="stack-2xs">
+      <p data-element="test-paragraph" class="clickable" data-font="secondary" data-size="1.125" data-leading="lineMax">
+        ${store.getData().testText}
+      </p>
+      <ul class="caption cluster-s tertiary moderate" data-element="test-paragraph-data">
+        <!-- Test Paragraph Data -->
+      </ul>
+    </div>
+  `;
 
-  // Appends
 
-  test.appendChild(TestElement(
-    "title", 
-    "Pack my box with five dozen liquor jugs"
-  ));
-
-  test.appendChild(TestElement(
-    "paragraph",
-    "A paragraph is a distinct section of writing focused on a single idea, beginning with a topic sentence and followed by supporting sentences that develop the idea with details and evidence. It ensures coherence and clarity, enhancing readability by breaking down information into manageable segments. Effective paragraphs help writers maintain focus and coherence, contributing to a clearer and more engaging piece of writing."
-  ));
+  // Queries
+  const title = qDom(test, "test-title");
+  const paragraph = qDom(test, "test-paragraph");
 
 
-  // Events
+  title.addEventListener('click', handleClick);
+  title.addEventListener('keydown', handleKeyDown);
+  paragraph.addEventListener('click', handleClick);
+  paragraph.addEventListener('keydown', handleKeyDown);
 
-  qaDom(test, "clickable").forEach(example => {
-    example.addEventListener('mouseenter', handleMouseEnter);
-    example.addEventListener('mouseleave', handleMouseLeave);
-    example.addEventListener('click', handleClick);
 
-    example.addEventListener('focus', handleMouseEnter);
-    example.addEventListener('blur', handleMouseLeave);
-    example.addEventListener('keydown', handleKeyDown);
-  });
 
 
   // Functions
@@ -60,44 +70,15 @@ function Test(store) {
   store.subscribe(updateTestScreen);
   updateTestScreen();
 
-
-  function handleMouseEnter(e) {
-    const element = e.target;
-    const type = element.dataset.example;
-    qaDom(test, type, "example").forEach((match) => {
-      match.classList.add("test-highlighted");
-    });
-  }
-
-  function handleMouseLeave(e) {
-    const element = e.target;
-    const type = element.dataset.example;
-    qaDom(test, type, "example").forEach((match) => {
-      match.classList.remove("test-highlighted");
-    });
-  }
-
   function handleClick(e) {
     const element = e.target;
-    const type = element.dataset.example;
-
-    let font;
-    let fontType;
-
     if(element.dataset.font === "primary") {
-      font = store.getData().secondaryFont;
-      fontType = "secondary";
+      element.dataset.font = "secondary";
+      updateFont(element, store.getData().secondaryFont);
     } else {
-      font = store.getData().primaryFont;
-      fontType = "primary";
+      element.dataset.font = "primary";
+      updateFont(element, store.getData().primaryFont);
     }
-
-    qaDom(test, type, "example").forEach((match) => {
-      match.classList.remove("test-highlighted");
-      match.dataset.font = fontType;
-      updateFont(match, font);
-    });
-
   }
   
   function handleKeyDown(e) {
@@ -112,13 +93,28 @@ function Test(store) {
     const fontSize = isMobile ? 0.875 : 1;
 
     setFontStyles({
-      element: example, 
+      element: example,
       font: font, 
       size: example.dataset.size * fontSize, 
       weight: example.dataset.weight,
       leading: font[example.dataset.leading]
     });
     example.dataset.fontFamily = font.label;
+
+    const data = qDom(test, `${example.dataset.element}-data`);
+
+    const pxSide = Math.round((example.dataset.size * fontSize * (0.7 / font.capHeightPct)) * 16)
+
+      /* html */
+    data.innerHTML = `
+      <li class="secondary-text">${font.label}</li>
+      <li>
+        Font Size <span class="data" data-element="data-capheight">${pxSide}px</span>
+      </li>
+      <li>
+        Line Height <span class="data" data-element="data-capheight">${font[example.dataset.leading]}</span>
+      </li>
+    `;
   }
 
 
