@@ -14,8 +14,9 @@ function Test(store) {
   
   /* html */
   test.innerHTML = `
+    <h2 class="sr-only">Test Fonts</h2>
     <div class="stack-2xs">
-      <p data-element="test-title" class="clickable strong" data-font="primary" data-size="1.5" data-leading="lineMin">
+      <p data-element="test-title" class="clickable strong test-title" data-font="primary" data-size="1.5" data-leading="lineMin">
         ${store.getData().testTitle}
       </p>
       <ul class="caption cluster moderate" data-element="test-title-data">
@@ -23,7 +24,7 @@ function Test(store) {
       </ul>
     </div>
     <div class="stack-2xs">
-      <p data-element="test-paragraph" class="clickable" data-font="secondary" data-size="1.125" data-leading="lineMax">
+      <p data-element="test-paragraph" class="clickable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax">
         ${store.getData().testText}
       </p>
       <ul class="caption cluster moderate" data-element="test-paragraph-data">
@@ -52,13 +53,22 @@ function Test(store) {
 
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
+    const isTablet = store.getData().isTablet;
+    
+/*     if(test.dataset.primary !== primaryFont.label) {
+      const title = qDom(test, "test-title");
+      const paragraph = qDom(test, "test-paragraph");
+      title.dataset.font = title.dataset.default;
+      paragraph.dataset.font = paragraph.dataset.default;
+      test.dataset.primary = primaryFont.label;
+    } */
 
     processExamples(qaDom(test, "primary", "font"), primaryFont);
     processExamples(qaDom(test, "secondary", "font"), secondaryFont);
 
     function processExamples(examples, font) {
       examples.forEach((example) => {
-        if(example.dataset.fontFamily !== font.label) {
+        if(example.dataset.fontFamily !== font.label || (example.dataset.tablet === "true") !== isTablet) {
           updateFont(example, font);
         }
       });
@@ -87,8 +97,8 @@ function Test(store) {
 
   function updateFont(example, font) {
     
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const fontSize = isMobile ? 0.875 : 1;
+    const isTablet = store.getData().isTablet;
+    const fontSize = isTablet ? 1 : 0.875;
 
     setFontStyles({
       element: example,
@@ -98,6 +108,7 @@ function Test(store) {
       leading: font[example.dataset.leading]
     });
     example.dataset.fontFamily = font.label;
+    example.dataset.tablet = isTablet;
 
     const data = qDom(test, `${example.dataset.element}-data`);
 

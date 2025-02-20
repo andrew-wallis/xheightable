@@ -16,7 +16,7 @@ function Secondary(store) {
       <div data-element="secondary-sort">
         <!-- Pair Filter -->
       </div>
-      <ul data-element="secondary-list" class="scrollable">
+      <ul data-element="secondary-list" class="scrollable focus-padding">
         <!-- Pair Table -->
       </ul>
     </div>
@@ -71,6 +71,11 @@ function Secondary(store) {
 
 
   function changeSecondary(font) {
+
+    if(!store.getData().isDesktop) {
+      store.setData({sidebar: ""});
+    }
+
     highlightRows(qDom(secondary, "secondary-list"), font);
     store.setData({secondaryFont: font});
   }

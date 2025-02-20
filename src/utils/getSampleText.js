@@ -1,6 +1,9 @@
-function getSampleText(count) {
+function shuffleArray(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
 
-  const strings = [
+function createSampler() {
+  let strings = [
     "The quick brown fox jumps over the lazy dog.",
     "Pack my box with five dozen liquor jugs.",
     "How vexingly quick daft zebras jump!",
@@ -20,11 +23,25 @@ function getSampleText(count) {
     "Grumpy wizards make a toxic brew for the jovial queen.",
     "Six big devils from Japan quickly forgot how to waltz.",
     "While waxing parquet decks, Sly Jim frequently gazed above."
-  ]
+  ];
 
-  return Array.from({ length: count }, () => 
-      strings[Math.floor(Math.random() * strings.length)]
-  ).join(' ');
+  let index = 0;
+  strings = shuffleArray(strings);
+
+  return function getSampleText(count) {
+    let result = [];
+    for (let i = 0; i < count; i++) {
+      result.push(strings[index]);
+      index++;
+      if (index >= strings.length) {
+        index = 0;
+        strings = shuffleArray(strings); // Reshuffle when all have been used
+      }
+    }
+    return result.join(' ');
+  };
 }
+
+const getSampleText = createSampler();
 
 export default getSampleText;

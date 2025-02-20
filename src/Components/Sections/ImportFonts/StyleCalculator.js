@@ -20,9 +20,9 @@ function StyleCalculator() {
               </li>
             </ul>
             <div class="">
-              <a href="#" data-element="copy-stylesheet" class="button label">
+              <a href="#" data-element="copy-stylesheet" class="button label accent">
                 <div data-element="copy-label">Copy</div>
-                <div data-element="copy-icon"></div>
+                <div data-element="copy-icon" class="accent"></div>
               </a>
             </div>
           </div>

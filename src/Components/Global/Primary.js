@@ -16,7 +16,7 @@ function Primary(store) {
       <div data-element="primary-sort">
         <!-- Pair Filter -->
       </div>
-      <ul data-element="primary-list" class="scrollable">
+      <ul data-element="primary-list" class="scrollable focus-padding">
         <!-- Pair List -->
       </ul>
     </div>
@@ -65,8 +65,13 @@ function Primary(store) {
   function changePrimary(font) {
     store.setData({
       primaryFont: font,
-      secondarySort: "Match"
+      secondarySort: "Match",
     });
+
+    if(!store.getData().isDesktop) {
+      store.setData({sidebar: ""});
+    }
+
     const primaryList = qDom(primary, "primary-list");
     primaryList.dataset.primary = font.name;
     highlightRows(primaryList, font);

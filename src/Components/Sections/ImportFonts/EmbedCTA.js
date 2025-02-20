@@ -9,9 +9,7 @@ function EmbedCTA(font, affiliate) {
   /* html */
   embedCTA.innerHTML = `
     <div>
-      <h3>
-        ${font.label}
-      </h3>
+      <h3 class="strong">${font.label}</h3>
     </div>
     <a data-element="cta" href="${font.link}" target="_blank" class="button cta-button accent slub">
       <span data-element="cta-text">Get This Font From ${font.distribution}</span>

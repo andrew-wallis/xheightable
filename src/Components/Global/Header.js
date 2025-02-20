@@ -8,7 +8,7 @@ function Header(front) {
   header.innerHTML = `
     <div class="wrap with-sidebar">
       <div class="not-sidebar logo accent" data-element="branding">
-        <span class="sr-only">x-heightable</span>
+        <h1 class="sr-only">x-heightable</h1>
         <svg width="670" height="128" viewBox="0 0 670 128" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M639.779 84.7904C647.899 84.7904 655.739 81.4304 663.019 73.8704L667.639 85.2104C659.939 92.2104 650.139 96.2704 639.639 96.2704C620.039 96.2704 605.759 81.9904 605.759 63.5104C605.759 45.0304 620.178 30.6104 639.078 30.6104C654.898 30.6104 667.498 40.9704 669.458 58.3304L621.018 74.0104C624.378 80.4504 630.958 84.7904 639.779 84.7904ZM639.078 41.9504C627.738 41.9504 619.059 51.0504 618.639 62.9504L654.619 51.1904C651.959 45.4504 646.078 41.9504 639.078 41.9504Z" fill="currentColor"/>
           <path d="M582.359 94.7305V11.3305L596.499 9.23047V94.7305H582.359Z" fill="currentColor"/>

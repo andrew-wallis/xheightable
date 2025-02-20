@@ -1,11 +1,9 @@
-import getRandomArrayKey from "./utils/getRandomArrayKey";
 import qDom from "./utils/qDom";
 import Header from "./Components/Global/Header";
 import Samples from "./Components/Sections/Samples/Samples";
 import Secondary from "./Components/Global/Secondary";
 import Primary from "./Components/Global/Primary";
 import Test from "./Components/Sections/Test/Test";
-import Horizontal from "./Components/Elements/Horizontal";
 import ImportFonts from "./Components/Sections/ImportFonts/ImportFonts";
 import './slider.css';
 import getSampleText from "./utils/getSampleText";
@@ -26,11 +24,13 @@ function App({store}) {
     affiliateLicence: ["Adobe"],
     sidebar: "",
     testTitle: getSampleText(2),
-    testText: getSampleText(10)
+    testText: getSampleText(10),
+    isTablet: window.matchMedia('(min-width: 768px)').matches,
+    isDesktop: window.matchMedia('(min-width: 1024px)').matches
   });
 
   const app = document.createElement('div');
-  app.classList = ""
+  app.classList = "slider-container"
 
   /* html */
   app.innerHTML = `
@@ -43,8 +43,8 @@ function App({store}) {
       <aside data-element="primary-sidebar">
         <!-- Primary Sidebar -->
       </aside>
-      <main class="">
-        <div data-element="main-content" class="insulate wrap">
+      <main class="insulate desktop-scrollable-container">
+        <div data-element="main-content" class="wrap desktop-scrollable">
           <!-- Main Content -->
         </div>
         <div data-element="slider-overlay" class="slider-overlay"></div>
@@ -96,6 +96,8 @@ function App({store}) {
         slider.classList.add(activeSidebar);
         slider.dataset.active = activeSidebar;
         document.body.classList.add("sidebar-open");
+
+        //qDom(slider, `${activeSidebar}-sidebar`).focus();
       } else {
         slider.dataset.active = "";
       }
@@ -105,7 +107,7 @@ function App({store}) {
   store.subscribe(updateSidebar);
   updateSidebar();
 
-  function updateSidebarPositions() {
+/*   function updateSidebarPositions() {
 
     const getSlider = document.querySelector('.slider');
     const getPrimary = document.querySelector('.slider > aside:first-child');
@@ -130,8 +132,20 @@ function App({store}) {
   });
   observer.observe(document.body, { childList: true, subtree: true });
 
-  window.addEventListener('resize', updateSidebarPositions);
-  
+  window.addEventListener('resize', updateSidebarPositions); */
+
+  function updateIsDesktop() {
+    store.setData({isTablet: window.matchMedia('(min-width: 768px)').matches});
+    store.setData({isDesktop: window.matchMedia('(min-width: 1024px)').matches});
+  }
+
+  const observer = new MutationObserver((mutations, obs) => {
+    updateIsDesktop();
+    obs.disconnect();
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  window.addEventListener('resize', updateIsDesktop);
 
 
   // Return

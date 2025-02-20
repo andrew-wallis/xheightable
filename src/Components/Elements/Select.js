@@ -1,7 +1,7 @@
 function Select({label, options, action, value, hideLabel}) {
 
   const select = document.createElement('div');
-  select.classList = "select-wrapper";
+  select.classList = "focus-padding";
   const id = `${label}${options.join("")}`.replace(/\W/g,'_');
 
   /* html */

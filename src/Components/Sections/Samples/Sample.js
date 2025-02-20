@@ -4,7 +4,7 @@ function Sample(referenceFont) {
   const xHeightLineColor = referenceFont ? "#D92854" : "#59A6CD";
   
   const sample = document.createElement('div');
-  sample.className = "sample clickable";
+  sample.className = "sample";
 
   /* html */
   sample.innerHTML = `

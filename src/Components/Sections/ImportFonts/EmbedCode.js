@@ -10,13 +10,11 @@ function EmbedCode(font) {
   /* html */
   embed.innerHTML = `
     <div class="with-sidebar">
-      <h3 class="not-sidebar">
-        ${font.label}
-      </h3>
+      <h3 class="strong not-sidebar">${font.label}</h3>
       <div class="">
-        <a class="button label" href="#" data-element="copy-stylesheet">
+        <a class="button label accent" href="#" data-element="copy-stylesheet">
           <div data-element="copy-label">Copy</div>
-          <div data-element="copy-icon"></div>
+          <div data-element="copy-icon" class="accent"></div>
         </a>
       </div>
     </div>
