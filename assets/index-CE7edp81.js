@@ -280,8 +280,8 @@ function print() { __p += __j.call(arguments, '') }
       <aside data-element="primary-sidebar">
         <!-- Primary Sidebar -->
       </aside>
-      <main class="insulate scrollable-container">
-        <div data-element="main-content" class="wrap scrollable">
+      <main class="insulate desktop-scrollable-container">
+        <div data-element="main-content" class="wrap desktop-scrollable">
           <!-- Main Content -->
         </div>
         <div data-element="slider-overlay" class="slider-overlay"></div>
