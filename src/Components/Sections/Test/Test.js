@@ -9,27 +9,29 @@ function Test(store) {
 
   const test = document.createElement('div');
   test.id = "test";
-  test.classList = "insulate stack-l";
 
   
   /* html */
   test.innerHTML = `
+    <hr />
     <h2 class="sr-only">Test Fonts</h2>
-    <div class="stack-2xs">
-      <p data-element="test-title" class="clickable strong test-title" data-font="primary" data-size="1.5" data-leading="lineMin">
-        ${store.getData().testTitle}
-      </p>
-      <ul class="caption cluster moderate" data-element="test-title-data">
-        <!-- Test Title Data -->
-      </ul>
-    </div>
-    <div class="stack-2xs">
-      <p data-element="test-paragraph" class="clickable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax">
-        ${store.getData().testText}
-      </p>
-      <ul class="caption cluster moderate" data-element="test-paragraph-data">
-        <!-- Test Paragraph Data -->
-      </ul>
+    <div class="insulate stack-l">
+      <div class="stack-2xs">
+        <p data-element="test-title" class="clickable strong test-title" data-font="primary" data-size="1.5" data-leading="lineMin">
+          ${store.getData().testTitle}
+        </p>
+        <ul class="caption cluster moderate" data-element="test-title-data">
+          <!-- Test Title Data -->
+        </ul>
+      </div>
+      <div class="stack-2xs">
+        <p data-element="test-paragraph" class="clickable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax">
+          ${store.getData().testText}
+        </p>
+        <ul class="caption cluster moderate" data-element="test-paragraph-data">
+          <!-- Test Paragraph Data -->
+        </ul>
+      </div>
     </div>
   `;
 

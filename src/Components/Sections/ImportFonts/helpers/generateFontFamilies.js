@@ -31,7 +31,6 @@ function generateFontFamilies(primary, secondary, format, capAdjusts, lineHeight
       fontFamilies.push("");
       fontFamilies.push(`  --secondary-long-line-height: ${secondary.lineMax}`);
       fontFamilies.push(`  --secondary-short-line-height: ${secondary.lineMin}`);
-      fontFamilies.push("");
     }
   } else {
     fontFamilies.push(`.primary-font {`);
@@ -64,7 +63,6 @@ function generateFontFamilies(primary, secondary, format, capAdjusts, lineHeight
       if(capAdjusts) fontFamilies.push(`  font-size: calc(2rem * ${secondaryAdjust});`);
       if(lineHeights) fontFamilies.push(`  line-height: ${secondary.lineMin};`);
       fontFamilies.push(`}`);
-      fontFamilies.push("");
 
     }
     

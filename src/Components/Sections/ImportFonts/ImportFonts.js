@@ -11,21 +11,18 @@ function ImportFonts(store) {
 
   const importFonts = document.createElement('div');
   importFonts.id = "import";
-  importFonts.classList = "insulate";
   
   /* html */
   importFonts.innerHTML = `
-    <hr class="insulate"/>
+    <hr />
     <h2 class="sr-only">Import Fonts</h2>
-    <div class="stack grid-l">
-      <div class="stack-l">
-        <div class="stack-l">
-          <div data-element="primary-embed">
-            <!-- Primary Embed -->
-          </div>
-          <div data-element="secondary-embed">
-            <!-- Secondary Embed -->
-          </div>
+    <div class="insulate grid-xl">
+      <div class="stack-xl">
+        <div data-element="primary-embed">
+          <!-- Primary Embed -->
+        </div>
+        <div data-element="secondary-embed">
+          <!-- Secondary Embed -->
         </div>
       </div>
       <div class="stack" data-element="import-code">

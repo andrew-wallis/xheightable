@@ -6,7 +6,15 @@ function findPairings({font, fonts, sort}) {
   const thisFont = font;
   
   fontList = fontList.filter(font => font.id !== thisFont.id);
-  
+
+  if(licences.length > 0) {
+    fontList = fontList.filter(font => licences.includes(font.distribution));
+  }
+
+  if(classifications.length > 0) {
+    fontList = fontList.filter(font => classifications.includes(font.superclass));
+  }
+
   fontList.forEach(font => {
     font.xHeightDiff = Math.abs(font.xHeightPct - thisFont.xHeightPct);
   });
