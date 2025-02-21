@@ -3,6 +3,7 @@ import Select from "../Elements/Select";
 import findPairings from "./helpers/findPairings";
 import highlightRows from "../../utils/highlightRows";
 import qDom from "../../utils/qDom";
+import findSecondary from "./helpers/findSecondary";
 
 function Secondary(store) {
 
@@ -28,7 +29,7 @@ function Secondary(store) {
   const secondarySort = qDom(secondary, "secondary-sort");
   secondarySort.appendChild(Select({
     label: "Sort", 
-    options: ["Match", "A-Z", "Rating"], 
+    options: ["X-Height", "A-Z", "Rating"], 
     value: store.getData().secondarySort, 
     hideLabel: true, 
     action: changeSort
@@ -53,13 +54,13 @@ function Secondary(store) {
 
       const pairings = findPairings({font: primaryFont, fonts: fonts, sort: sort});
       pairings.map((font, index) => {
-        secondaryList.appendChild(ListItem({font: font, action: changeSecondary}));
+        secondaryList.appendChild(ListItem({font: font, action: changeSecondary, data: `${Math.round(font.xHeightDiff * 100)}%`}));
       });
        
       secondaryList.dataset.primary = primaryFont.name;
       secondaryList.dataset.sort = sort;
 
-      const newSecondary = pairings[0];
+      const newSecondary = findSecondary(primaryFont, pairings);
       store.setData({secondaryFont: newSecondary});
       highlightRows(secondaryList, newSecondary);
 

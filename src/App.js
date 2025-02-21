@@ -17,7 +17,7 @@ function App({store}) {
     primaryFont: store.getData().fonts[Math.floor(Math.random() * store.getData().fonts.length)],
     secondaryFont: {},
     primarySort: "A-Z",
-    secondarySort: "Match",
+    secondarySort: "X-Height",
     capAdjusts: true,
     lineHeights: true,
     embedLicence: ["Google"],

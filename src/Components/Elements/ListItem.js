@@ -3,7 +3,7 @@ import loadFont from "../../utils/loadFont";
 import qDom from "../../utils/qDom";
 import setFontStyles from "../../utils/setFontStyles";
 
-function ListItem({font, action}) {
+function ListItem({font, action, data}) {
   
   const listItem = document.createElement('li');
 
@@ -21,7 +21,7 @@ function ListItem({font, action}) {
       ${font.label}
     </span>
     <span class="caption tertiary">
-      (<span class="data">${Math.round(font.xHeightPct * 100)}%</span>)
+      (<span class="data">${data}</span>)
     </span>
   `;
 

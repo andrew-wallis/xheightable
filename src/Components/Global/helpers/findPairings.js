@@ -8,12 +8,13 @@ function findPairings({font, fonts, sort}) {
   fontList = fontList.filter(font => font.id !== thisFont.id);
 
   fontList.forEach(font => {
-    font.xHeightDiff = Math.abs(font.xHeightPct - thisFont.xHeightPct);
+    font.xHeightAbs = Math.round(Math.abs(font.xHeightPct - thisFont.xHeightPct) * 100) / 100;
   });
 
   fontList.forEach(font => {
-    font.capHeightDiff = 1 - (font.capHeightPct / 0.7);
+    font.xHeightDiff = Math.round((font.xHeightPct - thisFont.xHeightPct) * 100) / 100;
   });
+
 
   if(sort === "A-Z") {
     fontList = fontList.sort((a, b) => a.label.localeCompare(b.label));
@@ -21,9 +22,19 @@ function findPairings({font, fonts, sort}) {
     fontList = fontList.sort((a, b) => Number(b.Rating) - Number(a.Rating));
   } else {
 
+    fontList = fontList.sort((a, b) => a.label.localeCompare(b.label));
+    fontList = fontList.sort((a, b) => a.xHeightAbs - b.xHeightAbs);
+
     fontList = fontList.sort((a, b) => {
 
-      if(thisFont.family) {
+/*       const diffA = Math.abs(a.xHeightPct - thisFont.xHeightPct);
+      const diffB = Math.abs(b.xHeightPct - thisFont.xHeightPct);
+
+      if (diffA !== diffB) {
+        return diffA - diffB;
+      } */
+
+/*       if(thisFont.family) {
         const familyA = a.family === thisFont.family ? 1 : 0;
         const familyB = b.family === thisFont.family ? 1 : 0;
   
@@ -56,9 +67,11 @@ function findPairings({font, fonts, sort}) {
         return orderA - orderB;
       }
 
-      return Number(b.Rating) - Number(a.Rating);
+      return Number(b.Rating) - Number(a.Rating); */
 
     });
+
+    /* Find the first  */
       
   }
 

@@ -51,7 +51,7 @@ function Primary(store) {
       primaryList.innerHTML = '';
 
       sortedFonts.map((font, index) => {
-        primaryList.appendChild(ListItem({font: font, action: changePrimary}));
+        primaryList.appendChild(ListItem({font: font, action: changePrimary, data: `${Math.round(font.xHeightPct * 100)}%`}));
       });
 
       highlightRows(primaryList, store.getData().primaryFont);
