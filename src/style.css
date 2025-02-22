@@ -581,6 +581,10 @@ strong,
   color: var(--tertiary);
 }
 
-.data {
+/* .data {
+  font-family: var(--accent-font);
+} */
+
+code {
   font-family: var(--accent-font);
 }

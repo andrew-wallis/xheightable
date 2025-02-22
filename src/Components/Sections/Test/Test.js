@@ -1,5 +1,6 @@
 import qaDom from "../../../utils/qaDom";
 import qDom from "../../../utils/qDom";
+import roundToTwoDecimals from "../../../utils/roundToTwoDecimals";
 import setFontStyles from "../../../utils/setFontStyles";
 
 function Test(store) {
@@ -101,11 +102,14 @@ function Test(store) {
     
     const isTablet = store.getData().isTablet;
     const fontSize = isTablet ? 1 : 0.875;
+    const remBase = example.dataset.size * fontSize;
+    const pxBase = (example.dataset.size * fontSize) * 16;
+    const capAdj = roundToTwoDecimals(0.7 / font.capHeightPct);
 
     setFontStyles({
       element: example,
       font: font, 
-      size: example.dataset.size * fontSize, 
+      size: remBase, 
       weight: example.dataset.weight,
       leading: font[example.dataset.leading]
     });
@@ -114,16 +118,16 @@ function Test(store) {
 
     const data = qDom(test, `${example.dataset.element}-data`);
 
-    const pxSide = Math.round((example.dataset.size * fontSize * (0.7 / font.capHeightPct)) * 16)
+    const pxAdj = Math.round(pxBase * capAdj);
 
       /* html */
     data.innerHTML = `
       <li>${font.label}</li>
       <li class="tertiary">
-        Font Size <span class="data" data-element="data-capheight">${pxSide}px</span>
+        Font Size <span class="data">${pxAdj}px</span> (<span class="data">${pxBase}*${capAdj}</span>)
       </li>
       <li class="tertiary">
-        Line Height <span class="data" data-element="data-capheight">${font[example.dataset.leading]}</span>
+        Line Height <span class="data">${font[example.dataset.leading]}</span>
       </li>
     `;
   }

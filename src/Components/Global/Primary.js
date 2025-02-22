@@ -55,6 +55,7 @@ function Primary(store) {
       });
 
       highlightRows(primaryList, store.getData().primaryFont);
+
       primaryList.dataset.sort = sort;
     }
   }
@@ -65,6 +66,7 @@ function Primary(store) {
   function changePrimary(font) {
     store.setData({
       primaryFont: font,
+      secondaryFont: {},
       secondarySort: "Match",
     });
 

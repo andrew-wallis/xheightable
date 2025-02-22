@@ -9,8 +9,8 @@ function generateFontFamilies(primary, secondary, format, capAdjusts, lineHeight
   const primaryFont = getFontFamily(primary);
   const secondaryFont = getFontFamily(secondary);
 
-  const primaryAdjust = roundToTwoDecimals(primary.capHeightPct / 0.7);
-  const secondaryAdjust = roundToTwoDecimals(secondary.capHeightPct / 0.7);
+  const primaryAdjust = roundToTwoDecimals(0.7 / primary.capHeightPct);
+  const secondaryAdjust = roundToTwoDecimals(0.7 / secondary.capHeightPct );
 
   const fontFamilies = [];
 
@@ -50,7 +50,7 @@ function generateFontFamilies(primary, secondary, format, capAdjusts, lineHeight
       fontFamilies.push(`}`);
       fontFamilies.push("");
       fontFamilies.push(`.primary-font-heading {`)
-      if(capAdjusts) fontFamilies.push(`  font-size: calc(2rem * ${primaryAdjust});`);
+      if(capAdjusts) fontFamilies.push(`  font-size: calc(1.5rem * ${primaryAdjust});`);
       if(lineHeights) fontFamilies.push(`  line-height: ${primary.lineMin};`);
       fontFamilies.push(`}`);
       fontFamilies.push("");
@@ -60,7 +60,7 @@ function generateFontFamilies(primary, secondary, format, capAdjusts, lineHeight
       fontFamilies.push(`}`);
       fontFamilies.push("");
       fontFamilies.push(`.secondary-font-heading {`)
-      if(capAdjusts) fontFamilies.push(`  font-size: calc(2rem * ${secondaryAdjust});`);
+      if(capAdjusts) fontFamilies.push(`  font-size: calc(1.5rem * ${secondaryAdjust});`);
       if(lineHeights) fontFamilies.push(`  line-height: ${secondary.lineMin};`);
       fontFamilies.push(`}`);
 

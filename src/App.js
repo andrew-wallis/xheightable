@@ -147,7 +147,6 @@ function App({store}) {
 
   window.addEventListener('resize', updateIsDesktop);
 
-
   // Return
 
   return app;

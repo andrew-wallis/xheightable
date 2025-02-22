@@ -60,9 +60,12 @@ function Secondary(store) {
       secondaryList.dataset.primary = primaryFont.name;
       secondaryList.dataset.sort = sort;
 
-      const newSecondary = findSecondary(primaryFont, pairings);
-      store.setData({secondaryFont: newSecondary});
-      highlightRows(secondaryList, newSecondary);
+      if(Object.keys(store.getData().secondaryFont).length === 0) {
+        const newSecondary = findSecondary(primaryFont, pairings);
+        store.setData({secondaryFont: newSecondary});
+      }
+
+      highlightRows(secondaryList, store.getData().secondaryFont);
 
     }
   }
