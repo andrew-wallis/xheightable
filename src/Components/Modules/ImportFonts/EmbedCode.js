@@ -1,6 +1,7 @@
 import Icons from "../../Elements/Icons";
-import getFontStylesheet from "../../../utils/getFontStylesheet";
+import getFontStylesheet from "../../../helpers/getFontStylesheet";
 import qDom from "../../../utils/qDom";
+import getGoogleEmbed from "./helpers/getGoogleEmbed";
 
 function EmbedCode(font) {
 
@@ -18,7 +19,7 @@ function EmbedCode(font) {
         </a>
       </div>
     </div>
-    <code class="data horizontal-scroll " data-code="stylesheet">${getFontStylesheet(font)}</code>
+    <code class="data horizontal-scroll " data-code="stylesheet">${getGoogleEmbed(font)}</code>
     <div class="embed-footer">
       <p>
         <a class="caption" href=${font.link} target="_blank">

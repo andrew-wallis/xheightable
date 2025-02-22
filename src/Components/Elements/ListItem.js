@@ -1,7 +1,7 @@
 
-import loadFont from "../../utils/loadFont";
+import loadFont from "../../helpers/loadFont";
 import qDom from "../../utils/qDom";
-import setFontStyles from "../../utils/setFontStyles";
+import setFontStyles from "../../helpers/setFontStyles";
 
 function ListItem({font, action, data}) {
   
@@ -10,7 +10,7 @@ function ListItem({font, action, data}) {
   listItem.className = "clickable";
   listItem.dataset.name = font.name;
   listItem.dataset.label = font.label;
-  listItem.dataset.element = "table-link";
+  listItem.dataset.element = "list-item";
   listItem.tabIndex = 0;
   listItem.role = "button";
   listItem.ariaLabel = `Select ${font.label}`;
@@ -38,7 +38,14 @@ function ListItem({font, action, data}) {
       entries.forEach((entry) => {
         if(entry.isIntersecting) {
           loadFont(font).then(() => {
-            setFontStyles({element: label, font: font, size: fontSize, weight: "normal"});
+
+            setFontStyles({
+              element: label, 
+              font: font, 
+              size: fontSize, 
+              weight: 400
+            });
+            
           });
           observer.disconnect();
         }

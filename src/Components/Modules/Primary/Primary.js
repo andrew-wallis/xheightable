@@ -1,14 +1,17 @@
-import ListItem from "../Elements/ListItem";
-import Select from "../Elements/Select";
-import highlightRows from "../../utils/highlightRows";
-import qDom from "../../utils/qDom";
-import sortAndFilterFonts from "./helpers/sortAndFilterFonts";
+
+import ListItem from "../../Elements/ListItem";
+import Select from "../../Elements/Select";
+import sortPrimaryFonts from "./helpers/sortPrimaryFonts";
+import highlightActiveItem from "../../../helpers/highlightActiveItem";
+import isObj from "../../../utils/isObj";
+import qDom from "../../../utils/qDom";
+import getPercentage from "../../../utils/getPercentage";
 
 function Primary(store) {
   
   const primary = document.createElement('div');
   primary.id = "primary";
-  primary.className = "wrap insulate scrollable-container"
+  primary.className = "insulate wrap scrollable-container"
 
   /* html */
   primary.innerHTML = `
@@ -25,13 +28,11 @@ function Primary(store) {
   
   // Appends
 
-  const primarySort = qDom(primary, "primary-sort");
-  primarySort.appendChild(Select({
-    label: "Sort", 
+  qDom(primary, "primary-sort").appendChild(Select({
+    action: changeSort,
+    label: "Sort Primary Fonts", 
     options: ["A-Z", "Rating", "X-Height"], 
-    value: store.getData().primarySort, 
-    hideLabel: true, 
-    action: changeSort
+    value: store.getData().primarySort
   }));
 
 
@@ -44,18 +45,24 @@ function Primary(store) {
     const primaryFont = store.getData().primaryFont;
     const fonts = store.getData().fonts;
   
-    if(Object.keys(primaryFont).length > 0 && primaryList.dataset.sort !== sort) {
-      
-      const sortedFonts = sortAndFilterFonts({fonts: fonts, sort: sort});
+    if(isObj(primaryFont) > 0 && primaryList.dataset.sort !== sort) {
 
       primaryList.innerHTML = '';
 
+      const sortedFonts = sortPrimaryFonts({
+        fonts: fonts, 
+        sort: sort
+      });
+      
       sortedFonts.map((font, index) => {
-        primaryList.appendChild(ListItem({font: font, action: changePrimary, data: `${Math.round(font.xHeightPct * 100)}%`}));
+        primaryList.appendChild(ListItem({
+          font: font,
+          action: changePrimary,
+          data: getPercentage(font.xHeightPct)
+        }));
       });
 
-      highlightRows(primaryList, store.getData().primaryFont);
-
+      highlightActiveItem(primaryList, store.getData().primaryFont);
       primaryList.dataset.sort = sort;
     }
   }
@@ -63,25 +70,28 @@ function Primary(store) {
   store.subscribe(updatePrimaryList);
   updatePrimaryList();
 
+
   function changePrimary(font) {
+    
     store.setData({
       primaryFont: font,
       secondaryFont: {},
-      secondarySort: "Match",
+      secondarySort: "X-Height",
+      sidebar: !store.getData().isDesktop ? "" : store.getData().sidebar
     });
-
-    if(!store.getData().isDesktop) {
-      store.setData({sidebar: ""});
-    }
 
     const primaryList = qDom(primary, "primary-list");
     primaryList.dataset.primary = font.name;
-    highlightRows(primaryList, font);
+    highlightActiveItem(primaryList, font);
   }
+
 
   function changeSort(value) {
     store.setData({primarySort: value});
   }
+
+
+  // Return
 
   return primary;
 

@@ -1,12 +1,16 @@
+
+
+import Header from "./Components/Modules/Header/Header";
+import Primary from "./Components/Modules/Primary/Primary";
+import Secondary from "./Components/Modules/Secondary/Secondary";
+import Samples from "./Components/Modules/Samples/Samples";
+import Test from "./Components/Modules/Test/Test";
+import ImportFonts from "./Components/Modules/ImportFonts/ImportFonts";
+import getRandomIndex from "./utils/getRandomIndex";
+import getSampleText from "./helpers/getSampleText";
+import isViewportWidth from "./utils/isViewportWidth";
 import qDom from "./utils/qDom";
-import Header from "./Components/Global/Header";
-import Samples from "./Components/Sections/Samples/Samples";
-import Secondary from "./Components/Global/Secondary";
-import Primary from "./Components/Global/Primary";
-import Test from "./Components/Sections/Test/Test";
-import ImportFonts from "./Components/Sections/ImportFonts/ImportFonts";
 import './slider.css';
-import getSampleText from "./utils/getSampleText";
 
 function App({store}) {
 
@@ -14,7 +18,7 @@ function App({store}) {
   // Initial
 
   store.setData({
-    primaryFont: store.getData().fonts[Math.floor(Math.random() * store.getData().fonts.length)],
+    primaryFont: getRandomIndex(store.getData().fonts),
     secondaryFont: {},
     primarySort: "A-Z",
     secondarySort: "X-Height",
@@ -25,18 +29,18 @@ function App({store}) {
     sidebar: "",
     testTitle: getSampleText(2),
     testText: getSampleText(10),
-    isTablet: window.matchMedia('(min-width: 768px)').matches,
-    isDesktop: window.matchMedia('(min-width: 1024px)').matches
+    isTablet: isViewportWidth(768),
+    isDesktop: isViewportWidth(1024)
   });
 
   const app = document.createElement('div');
-  app.classList = "slider-container"
+  app.classList = "slider-container";
 
   /* html */
   app.innerHTML = `
     <div class="top-bar">
       <div data-element="top-bar">
-
+        <!-- Top Bar -->
       </div>
     </div>
     <div data-element="slider" class="slider">
@@ -58,15 +62,18 @@ function App({store}) {
 
   // Queries
 
+  const body = document.body;
+  const topBar = qDom(app, "top-bar");
   const slider = qDom(app, "slider");
   const main = qDom(app, "main-content");
   const primary = qDom(app, "primary-sidebar");
   const secondary = qDom(app, "secondary-sidebar");
+  const overlay = qDom(app, "slider-overlay")
 
 
   // Appends
 
-  qDom(app, "top-bar").appendChild(Header());
+  topBar.appendChild(Header());
   primary.appendChild(Primary(store));
   secondary.appendChild(Secondary(store));
   main.appendChild(Samples(store));
@@ -76,7 +83,7 @@ function App({store}) {
 
   // Event Listeners
 
-  qDom(app, "slider-overlay").addEventListener("click", function(e) {
+  overlay.addEventListener("click", function(e) {
     store.setData({sidebar: ""});
   });
 
@@ -90,14 +97,11 @@ function App({store}) {
     if(slider.dataset.active !== activeSidebar) {
       slider.classList.remove("primary");
       slider.classList.remove("secondary");
-      document.body.classList.remove("sidebar-open");
-
+      body.classList.remove("sidebar-open");
       if(activeSidebar) {
         slider.classList.add(activeSidebar);
         slider.dataset.active = activeSidebar;
-        document.body.classList.add("sidebar-open");
-
-        //qDom(slider, `${activeSidebar}-sidebar`).focus();
+        body.classList.add("sidebar-open");
       } else {
         slider.dataset.active = "";
       }
@@ -107,52 +111,29 @@ function App({store}) {
   store.subscribe(updateSidebar);
   updateSidebar();
 
-/*   function updateSidebarPositions() {
 
-    const getSlider = document.querySelector('.slider');
-    const getPrimary = document.querySelector('.slider > aside:first-child');
-    const getSecondary = document.querySelector('.slider > aside:last-child');
-
-    if(getSlider) {
-      const sliderRect = getSlider.getBoundingClientRect();
-      console.log(sliderRect);
-      getPrimary.style.left = `${sliderRect.left}px`;
-      getPrimary.style.top = `${sliderRect.top}px`;
-      getSecondary.style.right = `${window.innerWidth - sliderRect.right}px`;
-      getSecondary.style.top = `${sliderRect.top}px`;
-    }
+  function updateViewports() {
+    store.setData({
+      isTablet: isViewportWidth(768),
+      isDesktop: isViewportWidth(1024)
+    });
   }
 
   const observer = new MutationObserver((mutations, obs) => {
-    const slider = document.querySelector('.slider');
-    if (slider) {
-      updateSidebarPositions();
-      obs.disconnect();
-    }
-  });
-  observer.observe(document.body, { childList: true, subtree: true });
-
-  window.addEventListener('resize', updateSidebarPositions); */
-
-  function updateIsDesktop() {
-    store.setData({isTablet: window.matchMedia('(min-width: 768px)').matches});
-    store.setData({isDesktop: window.matchMedia('(min-width: 1024px)').matches});
-  }
-
-  const observer = new MutationObserver((mutations, obs) => {
-    updateIsDesktop();
+    updateViewports();
     obs.disconnect();
   });
   observer.observe(document.body, { childList: true, subtree: true });
 
-  window.addEventListener('resize', updateIsDesktop);
+  window.addEventListener('resize', updateViewports);
+
 
   // Return
 
   return app;
 
-  // Legacy theme and scroll functions
 
+  // Legacy theme function
 /*   function setTheme() {
     
     const html = document.documentElement;

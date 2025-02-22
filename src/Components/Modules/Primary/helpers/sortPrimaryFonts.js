@@ -1,6 +1,4 @@
-function sortAndFilterFonts({fonts, sort}) {
-
-  delete fonts.columns;
+function sortPrimaryFonts({fonts, sort}) {
 
   switch(sort) {
 
@@ -22,4 +20,4 @@ function sortAndFilterFonts({fonts, sort}) {
 
 }
 
-export default sortAndFilterFonts;
+export default sortPrimaryFonts;

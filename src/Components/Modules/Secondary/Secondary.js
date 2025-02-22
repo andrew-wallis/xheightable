@@ -1,9 +1,11 @@
-import ListItem from "../Elements/ListItem";
-import Select from "../Elements/Select";
-import findPairings from "./helpers/findPairings";
-import highlightRows from "../../utils/highlightRows";
-import qDom from "../../utils/qDom";
+import ListItem from "../../Elements/ListItem";
+import Select from "../../Elements/Select";
+import getSecondaryFonts from "./helpers/getSecondaryFonts";
 import findSecondary from "./helpers/findSecondary";
+import highlightActiveItem from "../../../helpers/highlightActiveItem";
+import isObj from "../../../utils/isObj";
+import qDom from "../../../utils/qDom";
+import getPercentage from "../../../utils/getPercentage";
 
 function Secondary(store) {
 
@@ -26,13 +28,11 @@ function Secondary(store) {
 
   // Appends
 
-  const secondarySort = qDom(secondary, "secondary-sort");
-  secondarySort.appendChild(Select({
-    label: "Sort", 
+  qDom(secondary, "secondary-sort").appendChild(Select({
+    action: changeSort,
+    label: "Sort Secondary Fonts", 
     options: ["X-Height", "A-Z", "Rating"], 
-    value: store.getData().secondarySort, 
-    hideLabel: true, 
-    action: changeSort
+    value: store.getData().secondarySort
   }));
 
 
@@ -45,27 +45,36 @@ function Secondary(store) {
     const primaryFont = store.getData().primaryFont;
     const fonts = store.getData().fonts;
   
-    if(Object.keys(primaryFont).length > 0 && 
+    if(isObj(primaryFont) && 
       (secondaryList.dataset.primary !== primaryFont.name
       || secondaryList.dataset.sort !== sort)
     ) {
 
       secondaryList.innerHTML = '';
 
-      const pairings = findPairings({font: primaryFont, fonts: fonts, sort: sort});
+      const pairings = getSecondaryFonts({
+        primary: primaryFont, 
+        fonts: fonts, 
+        sort: sort
+      });
+
       pairings.map((font, index) => {
-        secondaryList.appendChild(ListItem({font: font, action: changeSecondary, data: `${Math.round(font.xHeightDiff * 100)}%`}));
+        secondaryList.appendChild(ListItem({
+          font: font,
+          action: changeSecondary,
+          data: getPercentage(font.xHeightDiff)
+        }));
       });
        
       secondaryList.dataset.primary = primaryFont.name;
       secondaryList.dataset.sort = sort;
 
-      if(Object.keys(store.getData().secondaryFont).length === 0) {
+      if(!isObj(store.getData().secondaryFont)) {
         const newSecondary = findSecondary(primaryFont, pairings);
         store.setData({secondaryFont: newSecondary});
       }
 
-      highlightRows(secondaryList, store.getData().secondaryFont);
+      highlightActiveItem(secondaryList, store.getData().secondaryFont);
 
     }
   }
@@ -76,12 +85,12 @@ function Secondary(store) {
 
   function changeSecondary(font) {
 
-    if(!store.getData().isDesktop) {
-      store.setData({sidebar: ""});
-    }
+    store.setData({
+      secondaryFont: font,
+      sidebar: !store.getData().isDesktop ? "" : store.getData().sidebar
+    });
 
-    highlightRows(qDom(secondary, "secondary-list"), font);
-    store.setData({secondaryFont: font});
+    highlightActiveItem(qDom(secondary, "secondary-list"), font);
   }
 
 

@@ -1,10 +1,11 @@
-import PairData from "./PairData";
 import Sample from "./Sample";
 import Button from "../../Elements/Button";
-import loadFont from "../../../utils/loadFont";
+import DataList from "../../Elements/DataList";
+import loadFont from "../../../helpers/loadFont";
+import setFontStyles from "../../../helpers/setFontStyles";
+import isObj from "../../../utils/isObj";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
-import setFontStyles from "../../../utils/setFontStyles";
 
 function Samples(store) {
 
@@ -60,12 +61,11 @@ function Samples(store) {
   const primaryLabel = qDom(samples, "primary-label");
   const secondaryLabel = qDom(samples, "secondary-label");
   const samplesContainer = qDom(samples, "samples-container");
+  const primaryData = qDom(samples, "primary-data");
+  const secondaryData = qDom(samples, "secondary-data")
 
 
   // Create Page Elements
-
-  const primaryData = PairData();
-  const secondaryData = PairData();
 
   const primarySample = Sample();
   const secondarySample = Sample(true);
@@ -85,8 +85,6 @@ function Samples(store) {
     action: activateSecondary
   }));
   
-  qDom(samples, "primary-data").appendChild(primaryData);
-  qDom(samples, "secondary-data").appendChild(secondaryData);
   samplesContainer.appendChild(primarySample);
   samplesContainer.appendChild(secondarySample);
 
@@ -128,7 +126,7 @@ function Samples(store) {
 
     function updateFont(font, label, data, sample) {
 
-      if(Object.keys(font).length > 0) {
+      if(isObj(font)) {
 
         const capHeight = (isTablet ?  33.5 : 27.8) / 16;
         const labelSize = isTablet ? 1.25 : 1;
@@ -145,10 +143,6 @@ function Samples(store) {
         sample.style.opacity = 0;
         sample.style.fontSize = `${sampleSize}rem`;
         sample.style.lineHeight = `${sampleSize}rem`;
-        
-        qDom(data, "data-capheight").innerText = Math.round(font.capHeightPct * 100);
-        qDom(data, "data-xheight").innerText = Math.round(font.xHeightPct * 100);
-        qDom(data, "data-lineheight").innerText = `${font.lineMin}-${font.lineMax}`;
 
         qDom(sample, "cap-line").style.verticalAlign = `${capHeight}rem`;
         qDom(sample, "reference-line").style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
@@ -158,6 +152,14 @@ function Samples(store) {
           text.innerText = isTablet ? "ABCDEF abcdef" : "ABC abc";
         });
 
+        data.innerHTML = "";
+
+        data.appendChild(DataList({
+          "X Height": Math.round(font.xHeightPct * 100),
+          "Cap Height": Math.round(font.capHeightPct * 100),
+          "Line Height": `${font.lineMin}-${font.lineMax}`
+        }));
+
         if(!('IntersectionObserver' in window)) {
           console.log('IntersectionObserver not supported');
         } else {
@@ -165,8 +167,22 @@ function Samples(store) {
             entries.forEach((entry) => {
               if(entry.isIntersecting) {
                 loadFont(font).then(() => {
-                  setFontStyles({element: label, font: font, size: labelSize, leading: `${labelSize}rem`, weight: "bold"});
-                  setFontStyles({element: sample, font: font, size: sampleSize, leading: `${sampleSize}rem`, weight: "normal"});
+
+                  setFontStyles({
+                    element: label, 
+                    font: font, 
+                    size: labelSize, 
+                    leading: `${labelSize}rem`, 
+                    weight: 600
+                  });
+
+                  setFontStyles({
+                    element: sample, 
+                    font: font, 
+                    size: sampleSize, 
+                    leading: `${sampleSize}rem`, 
+                    weight: 400
+                  });
                   label.style.opacity = 1;
                   sample.style.opacity = 1;
                 });

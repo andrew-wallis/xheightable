@@ -1,4 +1,4 @@
-import _ from "lodash";
+import isObj from "../../../../utils/isObj";
 
 function findSecondary(primary, secondaryFonts) {
 
@@ -10,7 +10,7 @@ function findSecondary(primary, secondaryFonts) {
     secondary = familyFonts.length ? familyFonts[0] : {};
   }
   
-  if(Object.keys(secondary).length === 0) {
+  if(!isObj(secondary)) {
 
     for (let i = 0; i <= 0.5; ) {
       

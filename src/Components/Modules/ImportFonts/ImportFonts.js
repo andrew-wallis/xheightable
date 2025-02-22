@@ -6,6 +6,7 @@ import Checkbox from "../../Elements/Checkbox";
 import generateFontFamilies from "./helpers/generateFontFamilies";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
+import isObj from "../../../utils/isObj";
 
 function ImportFonts(store) {
 
@@ -73,7 +74,7 @@ function ImportFonts(store) {
 
 
     function updateEmbed(font, element) {
-      if(Object.keys(font).length > 0) {
+      if(isObj(font)) {
         element.innerHTML = '';
 
         if(store.getData().embedLicence.includes(font.distribution)) {
@@ -86,6 +87,7 @@ function ImportFonts(store) {
         element.dataset.label = font.label;
       }
     }
+
 
     function updateCode(primaryFont, secondaryFont) {
       

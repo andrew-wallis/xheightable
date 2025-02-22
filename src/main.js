@@ -1,6 +1,6 @@
 import App from './App.js';
 import './style.css'
-import { fetchAppData } from './utils/fetchAppData.js'
+import { fetchAppData } from './helpers/fetchAppData.js'
 import createStore from './store.js';
 
 async function renderApp() {

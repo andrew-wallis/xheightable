@@ -1,5 +1,4 @@
 import getFontFamily from "./getFontFamily";
-import getFontSize from "./getFontSize";
 
 function setFontStyles({element, font, size, leading, weight}) {
 
@@ -8,7 +7,7 @@ function setFontStyles({element, font, size, leading, weight}) {
     element.style.fontFamily = getFontFamily(font);
 
     if(size) {
-      element.style.fontSize = getFontSize(font, size);
+      element.style.fontSize = `${size * font.capHeightAdj}rem`;
     }
 
     if(leading) {
@@ -16,7 +15,7 @@ function setFontStyles({element, font, size, leading, weight}) {
     }
 
     if(weight) {
-      element.style.fontWeight = font[weight];
+      element.style.fontWeight = weight;
     }
     
   }

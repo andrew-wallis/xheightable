@@ -1,14 +1,14 @@
-function Select({label, options, action, value, hideLabel}) {
+function Select({action, label, options, value}) {
 
+  const id = label.replace(/\W/g,'_');
   const select = document.createElement('div');
   select.classList = "focus-padding";
-  const id = `${label}${options.join("")}`.replace(/\W/g,'_');
 
   /* html */
   select.innerHTML = `
-    <label class="label ${hideLabel ? "sr-only" : ""}" for=${id}>${label}</label>
+    <label class="sr-only" for=${id}>${label}</label>
     <select class="label clickable" id=${id}>
-
+      <!-- Select Options -->
     </select>
   `;
 
