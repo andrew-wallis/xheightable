@@ -14,9 +14,8 @@ function Test(store) {
   
   /* html */
   test.innerHTML = `
-    <hr />
     <h2 class="sr-only">Test Fonts</h2>
-    <div class="insulate stack-l">
+    <div class="stack-l">
       <div class="stack-2xs">
         <p data-element="test-title" class="clickable test-title" data-font="primary" data-size="1.5" data-leading="lineMin" data-weight="600">
           ${store.getData().testTitle}
@@ -117,7 +116,7 @@ function Test(store) {
 
     data.appendChild(DataList({
       "Font": font.label,
-      "Font Size": `${pxAdj}px (${pxBase}×${font.capHeightAdj})`,
+      "Font Size": `${pxAdj}px ${font.capHeightAdj !== "1.00" ? `(${pxBase}×${font.capHeightAdj})` : ""}`,
       "Line Height": font[example.dataset.leading]
     }));
 

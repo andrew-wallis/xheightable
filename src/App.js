@@ -47,8 +47,8 @@ function App({store}) {
       <aside data-element="primary-sidebar">
         <!-- Primary Sidebar -->
       </aside>
-      <main class="insulate desktop-scrollable-container">
-        <div data-element="main-content" class="wrap desktop-scrollable">
+      <main class="insulate-3xl desktop-scrollable-container">
+        <div data-element="main-content" class="stack-3xl wrap desktop-scrollable">
           <!-- Main Content -->
         </div>
         <div data-element="slider-overlay" class="slider-overlay"></div>
@@ -77,7 +77,9 @@ function App({store}) {
   primary.appendChild(Primary(store));
   secondary.appendChild(Secondary(store));
   main.appendChild(Samples(store));
+  main.appendChild(document.createElement("hr"));
   main.appendChild(Test(store));
+  main.appendChild(document.createElement("hr"));
   main.appendChild(ImportFonts(store));
 
 

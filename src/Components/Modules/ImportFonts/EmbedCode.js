@@ -1,5 +1,4 @@
 import Icons from "../../Elements/Icons";
-import getFontStylesheet from "../../../helpers/getFontStylesheet";
 import qDom from "../../../utils/qDom";
 import getGoogleEmbed from "./helpers/getGoogleEmbed";
 
@@ -42,7 +41,7 @@ function EmbedCode(font) {
   function handleClick(e) {
     e.preventDefault();
     const label = qDom(copyStylesheet, "copy-label");
-    navigator.clipboard.writeText(getFontStylesheet(font)).then(() => {
+    navigator.clipboard.writeText(getGoogleEmbed(font)).then(() => {
       label.innerText = "Copied";
       setTimeout(() => {
         label.innerText = "Copy";

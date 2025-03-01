@@ -87,6 +87,23 @@
 }
 
 html[data-theme="dark"] {
+  --white: #0D151A;
+  --grey-3: #1B2326;
+  --grey-5: #1B2326;
+  --grey-10: #21282C;
+  --grey-20: #343B3E;
+  --grey-30: #474E51;
+  --grey-45: #656A6C;
+  --grey-65: #8C8F91;
+  --grey-75: #9FA2A3;
+  --black: #D0D1D2;
+
+  --blue-dark: #89D7FF;
+  --blue: #55AFDC;
+  --blue-light: #3F80A2;
+  --blue-lighter: #2A5367;
+  --red-dark: #FFA0B8;
+  --red: #FF7093;
 }
 
 
@@ -125,6 +142,11 @@ body {
   padding-bottom: var(--space-s-l);
 }
 
+.insulate-3xl {
+  padding-top: var(--space-2xl-3xl);
+  padding-bottom: var(--space-2xl-3xl);
+}
+
 .with-sidebar {
   display: flex;
   flex-wrap: wrap;
@@ -146,10 +168,6 @@ body {
   gap: var(--space-s);
 }
 
-.stack-2xs {
-  gap: var(--space-2xs);
-}
-
 [class*="cluster"] {
   display: flex;
   flex-wrap: wrap;
@@ -160,6 +178,14 @@ body {
   display: grid;
   gap: var(--space-s);
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.stack-2xs {
+  gap: var(--space-2xs);
+}
+
+.stack-3xl {
+  gap: var(--space-2xl-3xl);
 }
 
 .stack-l,
@@ -235,7 +261,7 @@ code {
 }
 
 code.horizontal-scroll {
-  background-color: var(--highlight);
+  border: 1px solid var(--border-primary);
   padding: var(--space-xs);
 }
 
@@ -268,9 +294,8 @@ header .sidebar {
 
 hr {
   border: 0;
+  margin: 0;
   border-top: 1px solid var(--border-primary);
-  margin-top: var(--space-s-l);
-  margin-bottom: var(--space-s-l);
   width: 100%;
 }
 
@@ -316,8 +341,8 @@ select {
 }
 
 [type="checkbox"]:checked + label::after {
-  border-bottom: 1.5px solid var(--icon);
-  border-right: 1.5px solid var(--icon);
+  border-bottom: 1.5px solid var(--accent);
+  border-right: 1.5px solid var(--accent);
   content: '';
   display: block;
   height: 0.6rem;
@@ -337,7 +362,7 @@ select {
 }
 
 .logo > svg {
-  height: var(--space-s);
+  height: var(--space-m);
   width: auto;
 }
 
@@ -477,7 +502,7 @@ aside ul > li.active-item:hover {
 }
 
 .x-line {
-  border-top-color: var(--border-accent);
+  border-top-color: var(--accent);
 }
 
 /* Scrollbar */
@@ -535,10 +560,6 @@ p > a {
 strong,
 .strong {
   font-weight: 600;
-}
-
-.moderate {
-  font-weight: 500;
 }
 
 .label {

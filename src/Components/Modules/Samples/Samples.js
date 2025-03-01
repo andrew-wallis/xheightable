@@ -16,7 +16,7 @@ function Samples(store) {
   
   /* html */
   samples.innerHTML = `
-      <div class="insulate stack unselectable">
+      <div class="stack unselectable">
         <div class="grid columns-2">
           <div data-element="primary-header" class="sample-header">
             <div data-element="primary-label">
@@ -155,8 +155,8 @@ function Samples(store) {
         data.innerHTML = "";
 
         data.appendChild(DataList({
-          "X Height": Math.round(font.xHeightPct * 100),
-          "Cap Height": Math.round(font.capHeightPct * 100),
+          "X Height": `${Math.round(font.xHeightPct * 100)}%`,
+          "Cap Height": `${Math.round(font.capHeightPct * 100)}%`,
           "Line Height": `${font.lineMin}-${font.lineMax}`
         }));
 

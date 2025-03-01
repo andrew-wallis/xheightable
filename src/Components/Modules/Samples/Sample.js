@@ -1,7 +1,7 @@
 function Sample(referenceFont) {
 
-  const referenceLineColor = referenceFont ? "#59A6CD" : "transparent";
-  const xHeightLineColor = referenceFont ? "#D92854" : "#59A6CD";
+  const referenceLineColor = referenceFont ? "#55AFDC" : "transparent";
+  const xHeightLineColor = referenceFont ? "#FF7093" : "#55AFDC";
   
   const sample = document.createElement('div');
   sample.className = "sample";

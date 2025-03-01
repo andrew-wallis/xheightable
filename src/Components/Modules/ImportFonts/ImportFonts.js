@@ -15,9 +15,8 @@ function ImportFonts(store) {
   
   /* html */
   importFonts.innerHTML = `
-    <hr />
     <h2 class="sr-only">Import Fonts</h2>
-    <div class="insulate grid-xl">
+    <div class="grid-xl">
       <div class="stack-xl">
         <div data-element="primary-embed">
           <!-- Primary Embed -->
