@@ -97,7 +97,7 @@ function print() { __p += __j.call(arguments, '') }
               <!-- Label -->
             </div>
           </div>
-          <div data-element="sample-action">
+          <div class="focus-padding" data-element="sample-action">
             <!-- Action -->
           </div>
         </div>
