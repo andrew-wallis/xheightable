@@ -11,6 +11,7 @@ import getSampleText from "./helpers/getSampleText";
 import isViewportWidth from "./utils/isViewportWidth";
 import qDom from "./utils/qDom";
 import './slider.css';
+import Button from "./Components/Elements/Button";
 
 function App({store}) {
 
@@ -59,8 +60,11 @@ function App({store}) {
       </aside>
     </div>
     <footer>
-      <div class="wrap caption">
-        © x-heightable ${new Date().getFullYear()}
+      <div class="with-sidebar wrap caption">
+        <div class="not-sidebar">© x-heightable ${new Date().getFullYear()}</div>
+        <div data-element="theme-switch">
+          <!-- Theme Switch -->
+        </div>
       </div>
     </footer>
   `;
@@ -75,11 +79,13 @@ function App({store}) {
   const primary = qDom(app, "primary-sidebar");
   const secondary = qDom(app, "secondary-sidebar");
   const overlay = qDom(app, "slider-overlay")
+  const theme = qDom(app, "theme-switch")
 
 
   // Appends
 
   topBar.appendChild(Header());
+
   primary.appendChild(Primary(store));
   secondary.appendChild(Secondary(store));
   main.appendChild(Samples(store));
@@ -87,6 +93,12 @@ function App({store}) {
   main.appendChild(Test(store));
   main.appendChild(document.createElement("hr"));
   main.appendChild(ImportFonts(store));
+  
+  theme.appendChild(Button({
+    label: "Theme",
+    action: setTheme,
+    classes: "caption"
+  }));
 
 
   // Event Listeners
@@ -137,13 +149,7 @@ function App({store}) {
   window.addEventListener('resize', updateViewports);
 
 
-  // Return
-
-  return app;
-
-
-  // Legacy theme function
-/*   function setTheme() {
+  function setTheme() {
     
     const html = document.documentElement;
     const theme = html.getAttribute("data-theme");
@@ -155,9 +161,14 @@ function App({store}) {
     } else {
       html.setAttribute("data-theme", localStorage.getItem('theme'));
     }
-  } */
+  }
 
-  //setTheme();
+  setTheme();
+
+
+  // Return
+
+  return app;
 
 }
 

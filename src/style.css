@@ -19,40 +19,31 @@
   --grey-80: #464442;
   --grey-90: #302F2E;
   --grey-95: #252322;
-  --black: #1F1C19;
+  --black: #1A1817;
 
-  --bronze-light: #E8CABA;
-  --bronze: #CEAC9A;
-  --bronze-dark: #947E74;
-  --blue-light: #6CBDE5;
-  --blue: #59A6CD;
-  --blue-dark: #325D73;
-  --red: #CC1D0C;
-
-  --dm-orange: #EDAF71;
-  --dm-blue: #71AFED;
-  --dm-red: #ED7171;
-
+  --orange: #EDAF71;
+  --blue: #71AFED;
+  --red: #ED7171;
 
   --background: var(--black);
   --highlight: var(--grey-95);
   --scrollbar: var(--grey-90);
   --border-secondary: var(--grey-90);
   --border-primary: var(--grey-80);
+  --border-accent: var(--grey-70);
   --icon: var(--grey-50);
   --secondary: var(--grey-30);
   --text: var(--grey-5);
 
-  --accent: var(--dm-orange);
-  --accent-hover: var(--dm-orange);
-  --accent2: var(--dm-blue);
-  --accent2-hover: var(--dm-blue);
-  --accent3: var(--dm-red);
+  --accent: var(--orange);
+  --accent-hover: var(--orange);
+  --accent2: var(--blue);
+  --accent2-hover: var(--blue);
+  --accent3: var(--red);
 
   --outline: 2px solid var(--blue-dark);
   --element-border: 1px solid var(--border-primary);
   --horizontal-border: 1px solid var(--border-secondary);
-  --accent-border: var(--grey-70);
 
   --element-radius: 2px;
 
@@ -104,6 +95,22 @@
 }
 
 
+
+html[data-theme="dark"] {
+  --orange: #E27100;
+  --blue: #1596D8;
+  --red: #E20000;
+
+  --background: var(--white);
+  --highlight: var(--grey-5);
+  --scrollbar: var(--grey-10);
+  --border-secondary: var(--grey-10);
+  --border-primary: var(--grey-20);
+  --border-accent: var(--grey-30);
+  --icon: var(--grey-60);
+  --secondary: var(--grey-80);
+  --text: var(--black);
+}
 
 
 /* Global */
@@ -536,7 +543,7 @@ aside ul > li.active-item {
 
 .sample-line > hr {
   display: inline-block;
-  border-color: var(--accent-border);
+  border-color: var(--border-accent);
 }
 
 .sample-reference > hr {
