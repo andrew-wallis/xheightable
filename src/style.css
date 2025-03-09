@@ -7,33 +7,34 @@
   --primary-font: system-ui, "Inter", sans-serif;
   --accent-font: "DM Mono", monospace;
 
-  --white: #F5F4F2;
-  --grey-5: #EAE9E7;
-  --grey-10: #E0DEDC;
-  --grey-20: #C9C8C7;
-  --grey-30: #B4B2B1;
-  --grey-40: #9D9C9A;
-  --grey-50: #878684;
-  --grey-60: #72706F;
-  --grey-70: #5C5B59;
-  --grey-80: #464442;
-  --grey-90: #302F2E;
-  --grey-95: #252322;
-  --black: #1A1817;
+  --white: #F5F5F5;
+  --grey-5: #EAEAEA;
+  --grey-10: #DFDFE0;
+  --grey-20: #C9C9C9;
+  --grey-30: #B3B3B4;
+  --grey-40: #9C9D9D;
+  --grey-50: #858687;
+  --grey-60: #707172;
+  --grey-70: #5A5B5C;
+  --grey-80: #434546;
+  --grey-90: #2E2F30;
+  --grey-95: #222425;
+  --black: #171919;
 
-  --orange: #EDAF71;
-  --blue: #71AFED;
-  --red: #ED7171;
+  --orange: #CD8059;
+  --blue: #59A6CD;
+  --red: #CD596C;
 
-  --background: var(--black);
-  --highlight: var(--grey-95);
-  --scrollbar: var(--grey-90);
-  --border-secondary: var(--grey-90);
-  --border-primary: var(--grey-80);
-  --border-accent: var(--grey-70);
-  --icon: var(--grey-50);
-  --secondary: var(--grey-30);
-  --text: var(--grey-5);
+
+  --background: var(--white);
+  --highlight: var(--grey-5);
+  --scrollbar: var(--grey-10);
+  --border-secondary: var(--grey-10);
+  --border-primary: var(--grey-20);
+  --border-accent: var(--grey-30);
+  --icon: var(--grey-60);
+  --secondary: var(--grey-80);
+  --text: var(--black);
 
   --accent: var(--orange);
   --accent-hover: var(--orange);
@@ -97,19 +98,15 @@
 
 
 html[data-theme="dark"] {
-  --orange: #E27100;
-  --blue: #1596D8;
-  --red: #E20000;
-
-  --background: var(--white);
-  --highlight: var(--grey-5);
-  --scrollbar: var(--grey-10);
-  --border-secondary: var(--grey-10);
-  --border-primary: var(--grey-20);
-  --border-accent: var(--grey-30);
-  --icon: var(--grey-60);
-  --secondary: var(--grey-80);
-  --text: var(--black);
+  --background: var(--black);
+  --highlight: var(--grey-95);
+  --scrollbar: var(--grey-90);
+  --border-secondary: var(--grey-90);
+  --border-primary: var(--grey-80);
+  --border-accent: var(--grey-70);
+  --icon: var(--grey-50);
+  --secondary: var(--grey-30);
+  --text: var(--grey-5);
 }
 
 
@@ -398,6 +395,7 @@ aside select {
 
 .button-group > [type="radio"] {
   opacity: 0;
+  width: 0;
 }
 
 .button-group > [type="radio"]:not(:last-of-type) + label {
