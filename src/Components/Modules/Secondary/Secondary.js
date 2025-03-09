@@ -1,6 +1,6 @@
 import ListItem from "../../Elements/ListItem";
 import Select from "../../Elements/Select";
-import getSecondaryFonts from "./helpers/getSecondaryFonts";
+import sortSecondaryFonts from "./helpers/sortSecondaryFonts";
 import findSecondary from "./helpers/findSecondary";
 import highlightActiveItem from "../../../helpers/highlightActiveItem";
 import isObj from "../../../utils/isObj";
@@ -30,8 +30,9 @@ function Secondary(store) {
 
   qDom(secondary, "secondary-sort").appendChild(Select({
     action: changeSort,
+    hideLabel: true,
     label: "Sort Secondary Fonts", 
-    options: ["X-Height", "A-Z", "Rating"], 
+    options: ["Match", "A-Z", "Rating"], 
     value: store.getData().secondarySort
   }));
 
@@ -52,7 +53,7 @@ function Secondary(store) {
 
       secondaryList.innerHTML = '';
 
-      const pairings = getSecondaryFonts({
+      const pairings = sortSecondaryFonts({
         primary: primaryFont, 
         fonts: fonts, 
         sort: sort
@@ -74,7 +75,7 @@ function Secondary(store) {
         store.setData({secondaryFont: newSecondary});
       }
 
-      highlightActiveItem(secondaryList, store.getData().secondaryFont);
+      highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
 
     }
   }

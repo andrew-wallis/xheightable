@@ -1,37 +1,69 @@
-function Sample(referenceFont) {
+function Sample() {
 
-  const referenceLineColor = referenceFont ? "#55AFDC" : "transparent";
-  const xHeightLineColor = referenceFont ? "#FF7093" : "#55AFDC";
-  
   const sample = document.createElement('div');
-  sample.className = "sample";
+  sample.classList = "stack-l unselectable";
 
   /* html */
   sample.innerHTML = `
-    <style data-element="sample-style">
-
-    </style>
-    <span data-element="sample-text">
-      <!-- Data-sample -->
-    </span>
-    <div class="sampleWrapper sampleText" style="vertical-align: 0px;">
-      <span data-element="sample-text">
-        <!-- Data-sample -->
-      </span>
+    <div class="stack-2xs sample">
+      <div class="sample-wrapper">
+        <div class="sample-header">
+          <div class="sample-align">
+            <div class="sample-leader" data-element="label-leader">A</div>
+            <div data-element="label-text">
+              <!-- Label -->
+            </div>
+          </div>
+          <div class="focus-padding" data-element="sample-action">
+            <!-- Action -->
+          </div>
+        </div>
+        <div class="sample-align">
+          <div class="sample-leader" data-element="sample-leader">A</div>
+          <div class="sample-text" data-element="sample-text">
+            <div class="sample-guide-text" data-element="sample-text-abc">
+              <!-- Sample Text -->
+            </div>
+            <div class="sample-display-text" data-element="sample-text-abc">
+              <!-- Sample Text -->
+            </div>
+            <div class="sample-line" >
+              <hr data-element="sample-text-capline"/>
+            </div>
+            <div class="sample-line sample-reference">
+              <hr data-element="sample-text-refline"/>
+            </div>
+            <div class="sample-line sample-xline">
+              <hr data-element="sample-text-xline"/>
+            </div>
+            <div class="sample-line">
+              <hr data-element="sample-text-baseline"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="table-list label-medium">
+        <li class="with-sidebar">
+          <div class="not-sidebar label-bold">X Height</div>
+          <div data-element="x-height">
+            <!-- X Height -->
+          </div>
+        </li>
+        <li class="with-sidebar">
+          <div class="not-sidebar label-bold">Cap Height</div>
+          <div data-element="cap-height">
+            <!-- X Height -->
+          </div>
+        </li>
+        <li class="with-sidebar">
+          <div class="not-sidebar label-bold">Line Height</div>
+          <div data-element="line-height">
+            <!-- X Height -->
+          </div>
+        </li>
+      </ul>
     </div>
-    <div class="sampleWrapper">
-      <hr data-element="cap-line" class="sampleLine">
-    </div>
-    <div class="sampleWrapper sampleReference">
-      <hr data-element="reference-line" class="sampleLine" style="border-color: ${referenceLineColor};">
-    </div>
-    <div class="sampleWrapper">
-      <hr data-element="xHeight-line" class="sampleLine" style="border-color: ${xHeightLineColor};">
-    </div>
-    <div class="sampleWrapper">
-      <hr data-element="base-line" class="sampleLine">
-    </div>
-  `
+  `;
 
   return sample;
 

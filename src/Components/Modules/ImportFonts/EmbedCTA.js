@@ -9,12 +9,12 @@ function EmbedCTA(font, affiliate) {
   /* html */
   embedCTA.innerHTML = `
     <div>
-      <h3 class="strong">${font.label}</h3>
+      <h3 class="heading">${font.label}</h3>
     </div>
-    <a data-element="cta" href="${font.link}" target="_blank" class="button cta-button accent slub">
+    <a data-element="cta" href="${font.link}" target="_blank" class="button slub cta-button">
       <span data-element="cta-text">Get This Font From ${font.distribution}</span>
     </a>
-    <div class="embed-footer">
+    <div>
       <p class="caption">
         ${affiliate ? "We have partnered with Adobe and get a percentage from each licence sold through x-heightable." : ""}
       </p>

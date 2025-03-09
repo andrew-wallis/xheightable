@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-function getSecondaryFonts({primary, fonts, sort}) {
+function sortSecondaryFonts({primary, fonts, sort}) {
   
   let fontList = _.cloneDeep(fonts);
   
@@ -18,18 +18,18 @@ function getSecondaryFonts({primary, fonts, sort}) {
 
   switch(sort) {
 
+    case "Match":
+
+      fontList = fontList.sort((a, b) => a.label.localeCompare(b.label));
+      fontList = fontList.sort((a, b) => a.xHeightAbs - b.xHeightAbs);
+      break;
+
     case "A-Z":
       fontList = fontList.sort((a, b) => a.label.localeCompare(b.label));
       break;
 
     case "Rating":
       fontList = fontList.sort((a, b) => Number(b.Rating) - Number(a.Rating));
-      break;
-
-    case "X-Height":
-
-      fontList = fontList.sort((a, b) => a.label.localeCompare(b.label));
-      fontList = fontList.sort((a, b) => a.xHeightAbs - b.xHeightAbs);
       break;
       
   }
@@ -38,4 +38,4 @@ function getSecondaryFonts({primary, fonts, sort}) {
 
 }
 
-export default getSecondaryFonts;
+export default sortSecondaryFonts;

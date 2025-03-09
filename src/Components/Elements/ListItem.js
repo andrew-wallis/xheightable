@@ -12,17 +12,13 @@ function ListItem({font, action, data}) {
   listItem.dataset.label = font.label;
   listItem.dataset.element = "list-item";
   listItem.tabIndex = 0;
-  listItem.role = "button";
+  listItem.role = "option";
   listItem.ariaLabel = `Select ${font.label}`;
 
   /* html */
   listItem.innerHTML = `
-    <span data-element="item-label">
-      ${font.label}
-    </span>
-    <span class="caption tertiary">
-      (<span class="data">${data}</span>)
-    </span>
+    <span class="" data-element="item-label">${font.label}</span>
+    <span class="caption">(${data})</span>
   `;
 
   const fontSize = 0.875;

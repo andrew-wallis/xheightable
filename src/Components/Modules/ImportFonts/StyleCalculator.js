@@ -8,33 +8,17 @@ function StyleCalculator() {
   /* html */
   styleCalculator.innerHTML = `
     <div class="stack">
-      <div>
-        <h3 class="strong">CSS</h3>
-      </div>
-      <div>
-        <div class="with-sidebar tab-header">
-          <ul class="tabs not-sidebar" data-element="tabs">
-            <li class="tab" data-element="tab" data-tab="Variables">
-              <!-- Variables Tab -->
-            </li>
-            <li class="tab" data-element="tab" data-tab="Classes">
-              <!-- Classes Tab -->
-            </li>
-          </ul>
-          <div class="">
-            <a href="#" data-element="copy-stylesheet" class="button label accent">
-              <div data-element="copy-label">Copy</div>
-              <div data-element="copy-icon" class="accent"></div>
-            </a>
-          </div>
+      <div class="with-sidebar">
+        <h3 class="heading not-sidebar">CSS</h3>
+        <div>
+          <a class="copy-button label-medium"  href="#" data-element="copy-stylesheet">
+            <div data-element="copy-label">Copy</div>
+            <div data-element="copy-icon"></div>
+          </a>
         </div>
-        <pre class="tab-content">
-          <code class="data">
-            <!-- Code -->
-          </code>
-        </pre>
       </div>
-      <div class="stack" data-element="import-controls">
+      <pre tabindex="-1"><code tabindex="-1"><!-- Code --></code></pre>
+      <div class="cluster" data-element="import-controls">
         <!-- Import Control -->
       </div>
     </div>

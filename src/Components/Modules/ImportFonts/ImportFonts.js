@@ -1,11 +1,9 @@
 import EmbedCode from "./EmbedCode";
 import EmbedCTA from "./EmbedCTA";
 import StyleCalculator from "./StyleCalculator";
-import Button from "../../Elements/Button";
-import Checkbox from "../../Elements/Checkbox";
+import ButtonGroup from "../../Elements/ButtonGroup";
 import generateFontFamilies from "./helpers/generateFontFamilies";
 import qDom from "../../../utils/qDom";
-import qaDom from "../../../utils/qaDom";
 import isObj from "../../../utils/isObj";
 
 function ImportFonts(store) {
@@ -32,26 +30,29 @@ function ImportFonts(store) {
   `;
 
 
-  // Appends
-
+  // Queries / Appends
 
   const codeContainer = qDom(importFonts, "import-code");
   codeContainer.appendChild(StyleCalculator());
 
-  const controlContainer = qDom(importFonts, "import-controls");
-
-  controlContainer.appendChild(Checkbox({label: "Include cap height adjusts", action: toggleCapAdjusts, value: store.getData().capAdjusts}));
-  controlContainer.appendChild(Checkbox({label: "Include line heights", action: toggleLineHeights, value: store.getData().lineHeights}));
-
-  qDom(importFonts, "Variables", "tab").appendChild(Button({label: "Variables", classes: "", action: changeTab}));
-  qDom(importFonts, "Classes", "tab").appendChild(Button({label: "Classes", classes: "", action: changeTab}));
-
-
-  // Queries
-
   const primaryEmbed = qDom(importFonts, "primary-embed");
   const secondaryEmbed = qDom(importFonts, "secondary-embed");
-  const tabs = qDom(importFonts, "tabs");
+  const controlContainer = qDom(importFonts, "import-controls");
+
+
+  controlContainer.appendChild(ButtonGroup({
+    action: updateFormat,
+    label: "Format",
+    options: ["Variables", "Classes"],
+    value: store.getData().codeFormat
+  }));
+
+  controlContainer.appendChild(ButtonGroup({
+    action: updateUnits,
+    label: "Units",
+    options: ["REM", "PX"],
+    value: store.getData().codeUnits
+  }));
 
 
   // Functions
@@ -90,11 +91,18 @@ function ImportFonts(store) {
 
     function updateCode(primaryFont, secondaryFont) {
       
-      const format = store.getData().codeTab;
+      const format = store.getData().codeFormat;
 
       let codeArray = [];
 
-      codeArray = [...codeArray, ...generateFontFamilies(primaryFont, secondaryFont, format, store.getData().capAdjusts, store.getData().lineHeights)];
+      codeArray = [...codeArray, ...generateFontFamilies({
+        primary: primaryFont, 
+        secondary: secondaryFont, 
+        format: format,
+        titleSize: store.getData().testTitleSize,
+        textSize: store.getData().testTextSize,
+        units: store.getData().codeUnits
+      })];
       codeArray.push("");
 
       if(format === "Variables") {
@@ -115,32 +123,18 @@ function ImportFonts(store) {
   store.subscribe(updateImport);
 
 
-  function changeTab(tab) {
-    store.setData({codeTab: tab});
-
-    qaDom(tabs, "tab").forEach((thisTab) => {
-      thisTab.classList.remove("active");
-      if(thisTab.dataset.tab === tab) {
-        thisTab.classList.add("active");
-      }
+  function updateFormat(value) {
+    store.setData({
+      codeFormat: value
     });
   }
 
-  changeTab("Variables");
 
-
-  function toggleCapAdjusts(bool) {
-    store.setData({capAdjusts: bool});
+  function updateUnits(value) {
+    store.setData({
+      codeUnits: value
+    });
   }
-
-  toggleCapAdjusts(store.getData().capAdjusts);
-
-
-  function toggleLineHeights(bool) {
-    store.setData({lineHeights: bool});
-  }
-
-  toggleLineHeights(store.getData().lineHeights);
 
 
   // Return

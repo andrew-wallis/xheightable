@@ -1,6 +1,5 @@
 import Sample from "./Sample";
 import Button from "../../Elements/Button";
-import DataList from "../../Elements/DataList";
 import loadFont from "../../../helpers/loadFont";
 import setFontStyles from "../../../helpers/setFontStyles";
 import isObj from "../../../utils/isObj";
@@ -13,91 +12,33 @@ function Samples(store) {
 
   const samples = document.createElement('div');
   samples.id = "samples";
-  
-  /* html */
-  samples.innerHTML = `
-      <div class="stack unselectable">
-        <div class="grid columns-2">
-          <div data-element="primary-header" class="sample-header">
-            <div data-element="primary-label">
-              <!-- Primary Label -->
-            </div>
-            <div class="primary-action" data-element="primary-action">
-              <!-- Secondary Action -->
-            </div>
-          </div>
-          <div data-element="secondary-header" class="sample-header">
-            <div data-element="secondary-label">
-              <!-- Secondary Label -->
-            </div>
-            <div class="secondary-action" data-element="secondary-action">
-              <!-- Secondary Action -->
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="samplesOuter">
-            <div class="samplesMid">
-              <div data-element="samples-container" class="samplesInner">
-                <!-- Samples -->
-              </div>
-            </div>
-          </div>
-          <div class="grid columns-2">
-            <div data-element="primary-data">
-              <!-- Primary Data -->
-            </div>
-            <div data-element="secondary-data">
-              <!-- Secondary Data -->
-            </div>
-          </div>
-        </div>
-      </div>
-  `;
-
-  
-  // Queries
-
-  const primaryLabel = qDom(samples, "primary-label");
-  const secondaryLabel = qDom(samples, "secondary-label");
-  const samplesContainer = qDom(samples, "samples-container");
-  const primaryData = qDom(samples, "primary-data");
-  const secondaryData = qDom(samples, "secondary-data")
-
-
-  // Create Page Elements
-
-  const primarySample = Sample();
-  const secondarySample = Sample(true);
+  samples.className = "grid columns-2";
 
 
   // Appends
 
-  qDom(samples, "primary-action").appendChild(Button({
+  const primary = Sample();
+  const secondary = Sample();
+
+  samples.appendChild(primary);
+  samples.appendChild(secondary);
+
+  const primaryAction = qDom(primary, "sample-action");
+  const secondaryAction = qDom(secondary, "sample-action");
+
+  secondaryAction.classList.add("cluster-right");
+
+  primaryAction.appendChild(Button({
     label: "Change",
-    classes: "slub accent",
+    classes: "primary-action slub action-button",
     action: activatePrimary
   }));
 
-  qDom(samples, "secondary-action").appendChild(Button({
+  secondaryAction.appendChild(Button({
     label: "Change",
-    classes: "slub accent",
+    classes: "secondary-action slub action-button",
     action: activateSecondary
   }));
-  
-  samplesContainer.appendChild(primarySample);
-  samplesContainer.appendChild(secondarySample);
-
-
-  // Event Listeners
-
-  primaryLabel.addEventListener("click", activatePrimary);
-  primaryData.addEventListener("click", activatePrimary);
-  primarySample.addEventListener("click", activatePrimary);
-
-  secondaryLabel.addEventListener("click", activateSecondary);
-  secondaryData.addEventListener("click", activateSecondary);
-  secondarySample.addEventListener("click", activateSecondary);
 
 
   // Functions
@@ -116,49 +57,70 @@ function Samples(store) {
     const secondaryFont = store.getData().secondaryFont;
     const isTablet = store.getData().isTablet;
 
-    if(primaryFont.label !== primaryLabel.dataset.label || (primarySample.dataset.tablet === "true") !== isTablet) {
-      updateFont(primaryFont, primaryLabel, primaryData, primarySample);
+    if(primaryFont.label !== primary.dataset.label || (primary.dataset.tablet === "true") !== isTablet) {
+      updateFont(primaryFont, primary);
     }
 
-    if(secondaryFont.label !== secondaryLabel.dataset.label || (secondarySample.dataset.tablet === "true") !== isTablet) {
-      updateFont(secondaryFont, secondaryLabel, secondaryData, secondarySample);
+    if(secondaryFont.label !== secondary.dataset.label || (secondary.dataset.tablet === "true") !== isTablet) {
+      updateFont(secondaryFont, secondary);
     }
 
-    function updateFont(font, label, data, sample) {
+    function updateFont(font, sample) {
 
       if(isObj(font)) {
 
         const capHeight = (isTablet ?  33.5 : 27.8) / 16;
         const labelSize = isTablet ? 1.25 : 1;
         const sampleSize = isTablet ? 3 : 2.5;
+
+
+        // Label
+
+        const labelText = qDom(sample, "label-text");
+        const labelLeader = qDom(sample, "label-leader");
     
-        label.innerText = isTablet ? font.label : font.shortlabel;
+        labelText.innerText = font.label;
 
-        label.style.opacity = 0;
-        label.style.fontFamily = 'system-ui';
-        label.style.fontSize = `${labelSize}rem`;
-        label.style.lineHeight = `${labelSize}rem`;
+        labelText.style.opacity = 0;
+        labelText.style.fontFamily = 'system-ui';
+        labelText.style.fontSize = `${labelSize}rem`;
+        labelText.style.lineHeight = `${labelSize * 1.33}rem`;
 
-        sample.style.fontFamily = 'system-ui';
-        sample.style.opacity = 0;
-        sample.style.fontSize = `${sampleSize}rem`;
-        sample.style.lineHeight = `${sampleSize}rem`;
+        labelLeader.style.fontFamily = 'system-ui';
+        labelLeader.style.opacity = 0;
+        labelLeader.style.fontSize = `${labelSize * 1.33}rem`;
+        labelLeader.style.lineHeight = `${labelSize * 1.33}rem`;
 
-        qDom(sample, "cap-line").style.verticalAlign = `${capHeight}rem`;
-        qDom(sample, "reference-line").style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
-        qDom(sample, "xHeight-line").style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
 
-        qaDom(sample, "sample-text").forEach((text) => {
-          text.innerText = isTablet ? "ABCDEF abcdef" : "ABC abc";
+        // Sample
+
+        const sampleText = qDom(sample, "sample-text");
+        const sampleLeader = qDom(sample, "sample-leader");
+
+        qaDom(sample, "sample-text-abc").forEach((abc) => {
+          abc.innerText = isTablet ? "ABCDEF abcdef" : "ABC abc";
         });
 
-        data.innerHTML = "";
+        sampleText.style.fontFamily = 'system-ui';
+        sampleText.style.opacity = 0;
+        sampleText.style.fontSize = `${sampleSize}rem`;
+        sampleText.style.lineHeight = `${sampleSize * 1.33}rem`;
 
-        data.appendChild(DataList({
-          "X Height": `${Math.round(font.xHeightPct * 100)}%`,
-          "Cap Height": `${Math.round(font.capHeightPct * 100)}%`,
-          "Line Height": `${font.lineMin}-${font.lineMax}`
-        }));
+        sampleLeader.style.fontFamily = 'system-ui';
+        sampleLeader.style.opacity = 0;
+        sampleLeader.style.fontSize = `${sampleSize * 1.33}rem`;
+        sampleLeader.style.lineHeight = `${sampleSize * 1.33}rem`;
+
+        qDom(sample, "sample-text-capline").style.verticalAlign = `${capHeight}rem`;
+        qDom(sample, "sample-text-refline").style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
+        qDom(sample, "sample-text-xline").style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
+
+
+        // Data
+
+        qDom(sample, "x-height").innerText = `${Math.round(font.xHeightPct * 100)}%`;
+        qDom(sample, "cap-height").innerText = `${Math.round(font.capHeightPct * 100)}%`
+        qDom(sample, "line-height").innerText = `${font.lineMin}-${font.lineMax}`
 
         if(!('IntersectionObserver' in window)) {
           console.log('IntersectionObserver not supported');
@@ -169,36 +131,37 @@ function Samples(store) {
                 loadFont(font).then(() => {
 
                   setFontStyles({
-                    element: label, 
+                    element: labelText, 
                     font: font, 
                     size: labelSize, 
-                    leading: `${labelSize}rem`, 
+                    leading: `${labelSize * 1.33}rem`, 
                     weight: 600
                   });
 
                   setFontStyles({
-                    element: sample, 
+                    element: sampleText, 
                     font: font, 
                     size: sampleSize, 
-                    leading: `${sampleSize}rem`, 
+                    leading: `${sampleSize * 1.33}rem`, 
                     weight: 400
                   });
-                  label.style.opacity = 1;
-                  sample.style.opacity = 1;
+
+                  labelText.style.opacity = 1;
+                  sampleText.style.opacity = 1;
                 });
                 observer.disconnect();
               }
             });
           });
 
-          observer.observe(label);
+          observer.observe(sample);
 
           window.addEventListener('beforeunload', () => {
             observer.disconnect();
           });
         }
 
-        label.dataset.label = font.label;
+        sample.dataset.label = font.label;
         sample.dataset.tablet = isTablet;
       }
     }

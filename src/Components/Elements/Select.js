@@ -1,4 +1,4 @@
-function Select({action, label, options, value}) {
+function Select({action, hideLabel, label, options, value}) {
 
   const id = label.replace(/\W/g,'_');
   const select = document.createElement('div');
@@ -6,8 +6,8 @@ function Select({action, label, options, value}) {
 
   /* html */
   select.innerHTML = `
-    <label class="sr-only" for=${id}>${label}</label>
-    <select class="label clickable" id=${id}>
+    <label class="${hideLabel ? "sr-only" : ""} label-medium" for=${id}>${label}</label>
+    <select class="clickable label-medium" id=${id}>
       <!-- Select Options -->
     </select>
   `;

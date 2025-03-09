@@ -1,7 +1,8 @@
 import qaDom from "../../../utils/qaDom";
 import qDom from "../../../utils/qDom";
 import setFontStyles from "../../../helpers/setFontStyles";
-import DataList from "../../Elements/DataList";
+import Select from "../../Elements/Select";
+import Button from "../../Elements/Button";
 
 function Test(store) {
 
@@ -10,60 +11,99 @@ function Test(store) {
 
   const test = document.createElement('div');
   test.id = "test";
+  test.className = "stack-xl";
 
   
   /* html */
   test.innerHTML = `
     <h2 class="sr-only">Test Fonts</h2>
+    <div class="cluster" data-element="test-controls">
+      <!-- Test Controls -->
+    </div>
     <div class="stack-l">
       <div class="stack-2xs">
-        <p data-element="test-title" class="clickable test-title" data-font="primary" data-size="1.5" data-leading="lineMin" data-weight="600">
+        <p data-element="test-title" class="unselectable test-title" data-font="primary" data-size="1.5" data-leading="lineMin" data-weight="600">
           ${store.getData().testTitle}
         </p>
-        <div data-element="test-title-data">
+        <ul class="cluster-s label" data-element="test-title-data">
           <!-- Test Title Data -->
-        </div>
+        </ul>
       </div>
       <div class="stack-2xs">
-        <p data-element="test-paragraph" class="clickable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="400">
+        <p data-element="test-paragraph" class="unselectable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="400">
           ${store.getData().testText}
         </p>
-        <div data-element="test-paragraph-data">
+        <ul class="cluster-s label" data-element="test-paragraph-data">
           <!-- Test Paragraph Data -->
-        </div>
+        </ul>
       </div>
     </div>
   `;
 
 
   // Queries
-  const title = qDom(test, "test-title");
-  const paragraph = qDom(test, "test-paragraph");
+
+  const controls = qDom(test, "test-controls");
 
 
-  // Event Listeners
+  // Appends
 
-  title.addEventListener('click', handleClick);
-  title.addEventListener('keydown', handleKeyDown);
-  paragraph.addEventListener('click', handleClick);
-  paragraph.addEventListener('keydown', handleKeyDown);
+  controls.appendChild(Button({
+    action: swap,
+    classes: "button slub",
+    label: "Swap"
+  }))
+
+  controls.appendChild(Select({
+    action: changeTitleSize,
+    label: "Heading",
+    options: store.getData().sizeOptions,
+    value: store.getData().testTitleSize
+  }));
+
+  controls.appendChild(Select({
+    action: changeTextSize,
+    label: "Paragraph",
+    options: store.getData().sizeOptions,
+    value: store.getData().testTextSize
+  }));
 
 
   // Functions
+
+  function changeTitleSize(value) {
+    store.setData({testTitleSize: value});
+  }
+
+  function changeTextSize(value) {
+    store.setData({testTextSize: value});
+  }
+
+  function swap() {
+    const currentPrimary = store.getData().primaryFont;
+    const currentSecondary = store.getData().secondaryFont;
+
+    store.setData({
+      primaryFont: currentSecondary,
+      secondaryFont: currentPrimary
+    })
+  }
 
   function updateTestScreen() {
 
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
-    const isTablet = store.getData().isTablet;
 
     processExamples(qaDom(test, "primary", "font"), primaryFont);
     processExamples(qaDom(test, "secondary", "font"), secondaryFont);
 
     function processExamples(examples, font) {
       examples.forEach((example) => {
-        if(example.dataset.fontFamily !== font.label || (example.dataset.tablet === "true") !== isTablet) {
-          updateFont(example, font);
+
+        const size = example.dataset.element === "test-title" ? store.getData().testTitleSize : store.getData().testTextSize;
+
+        if(example.dataset.fontFamily !== font.label || example.dataset.size !== size) {
+          updateFont(example, font, size);
         }
       });
     }
@@ -72,30 +112,10 @@ function Test(store) {
   store.subscribe(updateTestScreen);
   updateTestScreen();
 
-  
-  function handleClick(e) {
-    const element = e.target;
-    if(element.dataset.font === "primary") {
-      element.dataset.font = "secondary";
-      updateFont(element, store.getData().secondaryFont);
-    } else {
-      element.dataset.font = "primary";
-      updateFont(element, store.getData().primaryFont);
-    }
-  }
-  
-  function handleKeyDown(e) {
-    if(e.key === "Enter" || e.key === " ") {
-      handleClick(e);
-    }
-  }
 
-  function updateFont(example, font) {
+  function updateFont(example, font, pxBase) {
     
-    const isTablet = store.getData().isTablet;
-    const fontSize = isTablet ? 1 : 0.875;
-    const remBase = example.dataset.size * fontSize;
-    const pxBase = (example.dataset.size * fontSize) * 16;
+    const remBase = pxBase / 16;
 
     setFontStyles({
       element: example,
@@ -106,7 +126,7 @@ function Test(store) {
     });
 
     example.dataset.fontFamily = font.label;
-    example.dataset.tablet = isTablet;
+    example.dataset.size = pxBase;
 
     const data = qDom(test, `${example.dataset.element}-data`);
 
@@ -114,11 +134,25 @@ function Test(store) {
 
     data.innerHTML = '';
 
-    data.appendChild(DataList({
+    Object.entries({
       "Font": font.label,
-      "Font Size": `${pxAdj}px ${font.capHeightAdj !== "1.00" ? `(${pxBase}×${font.capHeightAdj})` : ""}`,
+      "Font Size": `${pxAdj}px ${pxAdj !== pxBase ? `(${pxBase} × ${font.capHeightAdj})` : ""}`,
       "Line Height": font[example.dataset.leading]
-    }));
+    }).map(([key, val]) => {
+
+      const dataItem = document.createElement('li');
+  
+      if(key === "Font") {
+        dataItem.innerHTML = val;
+        dataItem.classList = "label-bold"
+      } else {
+        dataItem.innerHTML = `<span class="label-medium">${key}</span> ${val}`;
+        dataItem.className = "";
+      }
+  
+      data.appendChild(dataItem);
+    });
+  
 
   }
 

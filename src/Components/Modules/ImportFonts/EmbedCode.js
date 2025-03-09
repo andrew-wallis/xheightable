@@ -10,18 +10,18 @@ function EmbedCode(font) {
   /* html */
   embed.innerHTML = `
     <div class="with-sidebar">
-      <h3 class="strong not-sidebar">${font.label}</h3>
-      <div class="">
-        <a class="button label accent" href="#" data-element="copy-stylesheet">
+      <h3 class="heading not-sidebar">${font.label}</h3>
+      <div>
+        <a class="copy-button label-medium" href="#" data-element="copy-stylesheet">
           <div data-element="copy-label">Copy</div>
-          <div data-element="copy-icon" class="accent"></div>
+          <div data-element="copy-icon"></div>
         </a>
       </div>
     </div>
-    <code class="data horizontal-scroll " data-code="stylesheet">${getGoogleEmbed(font)}</code>
-    <div class="embed-footer">
-      <p>
-        <a class="caption" href=${font.link} target="_blank">
+    <code class="horizontal-scroll " data-code="stylesheet">${getGoogleEmbed(font)}</code>
+    <div>
+      <p class="caption">
+        <a href=${font.link} target="_blank">
           Visit ${font.distribution} for more information.
         </a>
       </p>

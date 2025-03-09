@@ -3,7 +3,7 @@ import Icon from "./Icons";
 function Button({label, icon, classes, action, hideLabel, type}) {
 
   const iconButton = document.createElement('button');
-  iconButton.className = `label clickable ${classes ? classes : ""}`;
+  iconButton.className = `clickable ${classes ? classes : ""}`;
 
   if(icon) {
     iconButton.appendChild(Icon(icon));

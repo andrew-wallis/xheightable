@@ -19,7 +19,7 @@ function Primary(store) {
       <div data-element="primary-sort">
         <!-- Pair Filter -->
       </div>
-      <ul data-element="primary-list" class="scrollable focus-padding">
+      <ul role="listbox" tabindex="0" data-element="primary-list" class="scrollable focus-padding">
         <!-- Pair List -->
       </ul>
     </div>
@@ -30,6 +30,7 @@ function Primary(store) {
 
   qDom(primary, "primary-sort").appendChild(Select({
     action: changeSort,
+    hideLabel: true,
     label: "Sort Primary Fonts", 
     options: ["A-Z", "Rating", "X-Height"], 
     value: store.getData().primarySort
@@ -62,7 +63,7 @@ function Primary(store) {
         }));
       });
 
-      highlightActiveItem(primaryList, store.getData().primaryFont);
+      highlightActiveItem(primaryList, store.getData().primaryFont, true);
       primaryList.dataset.sort = sort;
     }
   }
@@ -76,7 +77,7 @@ function Primary(store) {
     store.setData({
       primaryFont: font,
       secondaryFont: {},
-      secondarySort: "X-Height",
+      secondarySort: "Match",
       sidebar: !store.getData().isDesktop ? "" : store.getData().sidebar
     });
 

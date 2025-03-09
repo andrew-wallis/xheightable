@@ -8,7 +8,7 @@ function Checkbox({label, action, value}) {
   /* html */
   checkboxWrapper.innerHTML = `
     <input id=${id} type="checkbox">
-    <label class="label clickable" for=${id}>${label}</label>
+    <label class="clickable" for=${id}>${label}</label>
   `;
 
   const checkbox = checkboxWrapper.querySelector('input');

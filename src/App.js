@@ -21,16 +21,19 @@ function App({store}) {
     primaryFont: getRandomIndex(store.getData().fonts),
     secondaryFont: {},
     primarySort: "A-Z",
-    secondarySort: "X-Height",
-    capAdjusts: true,
-    lineHeights: true,
-    embedLicence: ["Google"],
-    affiliateLicence: ["Adobe"],
+    secondarySort: "Match",
     sidebar: "",
     testTitle: getSampleText(2),
     testText: getSampleText(10),
+    testTitleSize: 24,
+    testTextSize: 16,
+    sizeOptions: ["8", "12", "14", "16", "18", "20", "24", "32", "36", "40", "48"],
+    embedLicence: ["Google"],
+    affiliateLicence: ["Adobe"],
+    codeFormat: "Variables",
+    codeUnits: "REM",
     isTablet: isViewportWidth(768),
-    isDesktop: isViewportWidth(1024)
+    isDesktop: isViewportWidth(1024),
   });
 
   const app = document.createElement('div');
@@ -38,11 +41,9 @@ function App({store}) {
 
   /* html */
   app.innerHTML = `
-    <div class="top-bar">
-      <div data-element="top-bar">
-        <!-- Top Bar -->
-      </div>
-    </div>
+    <header role="banner" data-element="top-bar">
+      <!-- Top Bar -->
+    </header>
     <div data-element="slider" class="slider">
       <aside data-element="primary-sidebar">
         <!-- Primary Sidebar -->
@@ -57,6 +58,11 @@ function App({store}) {
         <!-- Secondary Sidebar -->
       </aside>
     </div>
+    <footer>
+      <div class="wrap caption">
+        © x-heightable ${new Date().getFullYear()}
+      </div>
+    </footer>
   `;
 
 
@@ -97,6 +103,7 @@ function App({store}) {
     const activeSidebar = store.getData().sidebar;
 
     if(slider.dataset.active !== activeSidebar) {
+
       slider.classList.remove("primary");
       slider.classList.remove("secondary");
       body.classList.remove("sidebar-open");
