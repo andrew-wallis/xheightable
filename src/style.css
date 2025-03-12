@@ -22,7 +22,9 @@
   --black: #171919;
 
   --orange: #CD8059;
+  --orange-var: #B26944;
   --blue: #59A6CD;
+  --blue-var: #A6CDE0;
   --red: #CD596C;
 
 
@@ -34,15 +36,15 @@
   --border-accent: var(--grey-30);
   --icon: var(--grey-60);
   --secondary: var(--grey-80);
+  --secondary-hover: var(--grey-90);
   --text: var(--black);
 
   --accent: var(--orange);
-  --accent-hover: var(--orange);
+  --accent-hover: var(--orange-var);
   --accent2: var(--blue);
-  --accent2-hover: var(--blue);
   --accent3: var(--red);
 
-  --outline: 2px solid var(--blue-dark);
+  --outline: 2px solid var(--blue-var);
   --element-border: 1px solid var(--border-primary);
   --horizontal-border: 1px solid var(--border-secondary);
 
@@ -106,7 +108,14 @@ html[data-theme="dark"] {
   --border-accent: var(--grey-70);
   --icon: var(--grey-50);
   --secondary: var(--grey-30);
+  --secondary-hover: var(--grey-20);
   --text: var(--grey-5);
+
+  --orange: #D9875E;
+  --orange-var: #F29F74;
+  --blue: #5EB0D9;
+  --blue-var: #3A6478;
+  --red: #D95E72;
 }
 
 
@@ -127,6 +136,10 @@ body {
 
 .focus-padding {
   padding: 2px;
+}
+
+.disable-transitions * {
+  transition: none !important;
 }
 
 
@@ -192,6 +205,10 @@ body {
 
 .cluster-s {
   gap: var(--space-s);
+}
+
+.cluster-3xs {
+  gap: 0 var(--space-3xs);
 }
 
 .stack-2xl {
@@ -623,10 +640,8 @@ p > a:hover {
   text-decoration: none;
 }
 
-[class*="label"] {
-  color: var(--secondary);
-  font-size: var(--step--2);
-  line-height: 125%;
+[class*="regular"] {
+  font-weight: 400;
 }
 
 [class*="medium"] {
@@ -637,9 +652,10 @@ p > a:hover {
   font-weight: 600;
 }
 
-select[class*="medium"]:hover,
-a[class*="medium"]:hover {
-  color: var(--text);
+[class*="label"] {
+  color: var(--secondary);
+  font-size: var(--step--2);
+  line-height: 125%;
 }
 
 .slub {
@@ -667,6 +683,18 @@ a[class*="medium"]:hover {
   line-height: 125%;
 }
 
+select[class*="label"],
+a[class*="label"],
+button[class*="caption"] {
+  transition: var(--transition-color);
+}
+
+select[class*="label"]:hover,
+a[class*="label"]:hover,
+button[class*="caption"]:hover {
+  color: var(--secondary-hover);
+}
+
 .header-link {
   color: var(--accent);
   border-radius: var(--element-radius);
@@ -676,4 +704,8 @@ a[class*="medium"]:hover {
 
 .header-link:hover {
   color: var(--accent-hover);
+}
+
+.deweight {
+  opacity: 0.8;
 }

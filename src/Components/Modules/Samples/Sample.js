@@ -44,19 +44,31 @@ function Sample() {
       </div>
       <ul class="table-list label-medium">
         <li class="with-sidebar">
-          <div class="not-sidebar label-bold">X Height</div>
+          <div class="not-sidebar label-bold">
+            <div class="cluster-3xs">
+              <div>x-height</div> <div class="regular deweight">(% of Cap Height)</div>
+            </div>
+          </div> 
           <div data-element="x-height">
             <!-- X Height -->
           </div>
         </li>
         <li class="with-sidebar">
-          <div class="not-sidebar label-bold">Cap Height</div>
+          <div class="not-sidebar label-bold">
+            <div class="cluster-3xs">
+              <div>Cap Height</div> <div class="regular deweight">(% of Font Size)</div>
+            </div>
+          </div>
           <div data-element="cap-height">
             <!-- X Height -->
           </div>
         </li>
         <li class="with-sidebar">
-          <div class="not-sidebar label-bold">Line Height</div>
+          <div class="not-sidebar label-bold">
+            <div class="cluster-3xs">
+              <div>Line Height</div> <div class="regular deweight">(Short/Long)</div>
+            </div>
+          </div> 
           <div data-element="line-height">
             <!-- X Height -->
           </div>

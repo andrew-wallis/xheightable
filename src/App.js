@@ -154,6 +154,12 @@ function App({store}) {
     const html = document.documentElement;
     const theme = html.getAttribute("data-theme");
 
+    html.classList.add("disable-transitions");
+  
+    setTimeout(() => {
+      html.classList.remove("disable-transitions");
+    }, 100);
+
     if(theme) {
       const newTheme = (theme === "dark") ? "light" : "dark"
       html.setAttribute("data-theme", newTheme);
