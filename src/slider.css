@@ -22,7 +22,7 @@
   background-color: var(--background);
   bottom: 0;
   position: fixed;
-  top: calc(var(--space-l) + var(--space-xl) + var(--space-3xs));
+  top: var(--space-4xl);
   bottom: 0;
   width: 16rem;
   z-index: 200;
@@ -85,7 +85,7 @@
 
 .slider.primary .slider-overlay,
 .slider.secondary .slider-overlay {
-  display: block;
+  display: flex;
 }
 
 .sidebar-open {
@@ -136,11 +136,13 @@
 
   .slider .secondary-action,
   .slider.primary .primary-action {
-    display: none;
+    opacity: 0.25;
+    cursor: default;
   }
 
   .slider.primary .secondary-action {
-    display: block;
+    opacity: 1;
+    cursor: pointer;
   }
 
   .sidebar-open {

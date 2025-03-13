@@ -18,7 +18,7 @@ function ListItem({font, action, data}) {
   /* html */
   listItem.innerHTML = `
     <span class="" data-element="item-label">${font.label}</span>
-    <span class="caption">(${data})</span>
+    <span class="data">${data}</span>
   `;
 
   const fontSize = 0.875;

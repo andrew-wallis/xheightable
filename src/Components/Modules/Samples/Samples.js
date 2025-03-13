@@ -17,27 +17,30 @@ function Samples(store) {
 
   // Appends
 
-  const primary = Sample();
-  const secondary = Sample();
+  const primary = Sample("primary");
+  const secondary = Sample("secondary");
 
   samples.appendChild(primary);
   samples.appendChild(secondary);
 
-  const primaryAction = qDom(primary, "sample-action");
-  const secondaryAction = qDom(secondary, "sample-action");
-
-  secondaryAction.classList.add("cluster-right");
-
-  primaryAction.appendChild(Button({
+  qDom(primary, "sample-action-left").appendChild(Button({
     label: "Change",
-    classes: "primary-action slub action-button",
-    action: activatePrimary
+    classes: "primary-action",
+    action: activatePrimary,
+    icon: "Arrow Left"
   }));
 
-  secondaryAction.appendChild(Button({
+  qDom(secondary, "sample-action-left").appendChild(Button({
+    label: "Swap",
+    action: swap,
+    icon: "Swap"
+  }));
+
+  qDom(secondary, "sample-action-right").appendChild(Button({
     label: "Change",
-    classes: "secondary-action slub action-button",
-    action: activateSecondary
+    classes: "secondary-action button-icon-reverse",
+    action: activateSecondary,
+    icon: "Arrow Right"
   }));
 
 
@@ -71,7 +74,7 @@ function Samples(store) {
 
         const capHeight = (isTablet ?  33.5 : 27.8) / 16;
         const labelSize = isTablet ? 1.25 : 1;
-        const sampleSize = isTablet ? 3 : 2.5;
+        const sampleSize = isTablet ? 3.2 : 2.5;
 
 
         // Label
@@ -118,9 +121,15 @@ function Samples(store) {
 
         // Data
 
-        qDom(sample, "x-height").innerText = `${Math.round(font.xHeightPct * 100)}%`;
-        qDom(sample, "cap-height").innerText = `${Math.round(font.capHeightPct * 100)}%`
-        qDom(sample, "line-height").innerText = `${font.lineMin}-${font.lineMax}`
+        qDom(sample, "sample-xheight-number").innerText = `${Math.round(font.xHeightPct * 100)}`;
+
+        if(sample.dataset.font === "primary") {
+          qDom(sample, "sample-xheight").dataset.step = "0";
+        } else {
+          const difference = Math.round(Math.abs(secondaryFont.xHeightPct - primaryFont.xHeightPct) * 100);
+          qDom(sample, "sample-xheight").dataset.step = difference > 10 ? "10" : `${difference}`;
+        }
+
 
         if(!('IntersectionObserver' in window)) {
           console.log('IntersectionObserver not supported');
@@ -169,6 +178,17 @@ function Samples(store) {
 
   store.subscribe(updateSample);
   updateSample();
+
+
+  function swap() {
+    const currentPrimary = store.getData().primaryFont;
+    const currentSecondary = store.getData().secondaryFont;
+
+    store.setData({
+      primaryFont: currentSecondary,
+      secondaryFont: currentPrimary
+    })
+  }
 
 
   // Return

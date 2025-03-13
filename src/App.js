@@ -5,13 +5,13 @@ import Primary from "./Components/Modules/Primary/Primary";
 import Secondary from "./Components/Modules/Secondary/Secondary";
 import Samples from "./Components/Modules/Samples/Samples";
 import Test from "./Components/Modules/Test/Test";
-import ImportFonts from "./Components/Modules/ImportFonts/ImportFonts";
+import Details from "./Components/Modules/Details/Details";
+import Button from "./Components/Elements/Button";
 import getRandomIndex from "./utils/getRandomIndex";
 import getSampleText from "./helpers/getSampleText";
 import isViewportWidth from "./utils/isViewportWidth";
 import qDom from "./utils/qDom";
 import './slider.css';
-import Button from "./Components/Elements/Button";
 
 function App({store}) {
 
@@ -89,10 +89,9 @@ function App({store}) {
   primary.appendChild(Primary(store));
   secondary.appendChild(Secondary(store));
   main.appendChild(Samples(store));
-  main.appendChild(document.createElement("hr"));
   main.appendChild(Test(store));
   main.appendChild(document.createElement("hr"));
-  main.appendChild(ImportFonts(store));
+  main.appendChild(Details(store));
   
   theme.appendChild(Button({
     label: "Theme",

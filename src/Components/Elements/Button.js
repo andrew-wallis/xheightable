@@ -1,27 +1,27 @@
 import Icon from "./Icons";
 
-function Button({label, icon, classes, action, hideLabel, type}) {
+function Button({label, icon, classes, action}) {
 
-  const iconButton = document.createElement('button');
-  iconButton.className = `clickable ${classes ? classes : ""}`;
+  const button = document.createElement('button');
+  button.className = `clickable ${classes ? classes : ""} ${icon ? "button slub button-icon" : ""}`;
 
   if(icon) {
-    iconButton.appendChild(Icon(icon));
+    button.appendChild(Icon(icon));
   }
   
-  iconButton.dataset.element = "button";
-  iconButton.dataset.target = label;
+  button.dataset.element = "button";
+  button.dataset.target = label;
   
-  const iconButtonLabel = document.createElement('span');
-  iconButtonLabel.innerText = label;
-  iconButtonLabel.classList = hideLabel ? "sr-only" : "";
-  iconButton.appendChild(iconButtonLabel);
+  const buttonLabel = document.createElement('div');
+  buttonLabel.innerText = label;
+  buttonLabel.className = "button-label";
+  button.appendChild(buttonLabel);
 
-  iconButton.addEventListener('click', function(e) {
+  button.addEventListener('click', function(e) {
     handleClick(e);
   });
 
-  iconButton.removeEventListener('click', function(e) {
+  button.removeEventListener('click', function(e) {
     handleClick(e);
   });
 
@@ -30,15 +30,7 @@ function Button({label, icon, classes, action, hideLabel, type}) {
     action(label);
   };
 
-  if(type === "tab") {
-    const tabId = label.replace(/\W/g,'_');
-    iconButton.role = "tab";
-    iconButton.id = `${tabId.toLowerCase()}-tab`;
-    iconButton.setAttribute("aria-controls", tabId);
-    iconButton.ariaSelected = "false";
-  }
-
-  return iconButton;
+  return button;
 
 }
 
