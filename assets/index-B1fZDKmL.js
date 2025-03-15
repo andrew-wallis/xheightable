@@ -146,21 +146,21 @@ function print() { __p += __j.call(arguments, '') }
     <h3 class="heading" data-element="detail-label">
       <!-- Detail Label-->
     </h3>
-    <ul class="stack caption">
+    <ul class="stack secondary">
       <li class="with-sidebar">
-        <div class="not-sidebar"><span class="slub">X Height</span> (% of Cap Height)</div>
+        <div class="not-sidebar"><strong>X Height</strong> (% of Cap Height)</div>
         <div class="data" data-element="x-height">
           <!-- X Height -->
         </div>
       </li>
       <li class="with-sidebar">
-        <div class="not-sidebar"><span class="slub">Cap Height</span> (% of Font Size)</div>
+        <div class="not-sidebar"><strong>Cap Height</strong> (% of Font Size)</div>
         <div class="data" data-element="cap-height">
           <!-- Cap Height -->
         </div>
       </li>
       <li class="with-sidebar">
-        <div class="not-sidebar"><span class="slub">Line Height</span></div>
+        <div class="not-sidebar"><strong>Line Height</strong></div>
         <div class="data" data-element="line-height">
           <!-- Line Height -->
         </div>
