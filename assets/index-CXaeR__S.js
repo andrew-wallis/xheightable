@@ -24,7 +24,7 @@
       <h1 class="sr-only">x-heightable</h1>
     </div>
     <div class="sidebar">
-      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button button-large slub accent-text" href="https://www.blah.com" target="_blank">Buy us a coffee!</a>
+      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button button-large slub slub-large accent-text" href="https://www.blah.com" target="_blank">Buy us a coffee!</a>
     </div>
   `,f}function E3(f){if(f.distribution==="Google"){const g=f.weight.includes("i")?"ital,wght":"wght",u=f.weight.split(";"),_=[];return u.forEach(p=>{f.weight.includes("i")?p.includes("i")||_.push(`0,${p}`):_.push(p)}),u.forEach(p=>{p.includes("i")&&_.push(`1,${p.substring(0,p.length-1)}`)}),`https://fonts.googleapis.com/css2?family=${f.name.replace(/\s+/g,"+")}:${g}@${_.join(";")}&display=block`}else if(f.distribution==="Adobe"&&f.stylesheet)return`https://use.typekit.net/${f.stylesheet}.css`}function Aa(f){const g=E3(f);return new Promise((u,_)=>{if(document.querySelector(`link[href="${g}"]`)){u();return}const p=document.createElement("link");p.href=g,p.rel="stylesheet",p.type="text/css",p.onload=()=>u(),p.onerror=()=>_(new Error(`Failed to load stylesheet: ${g}`)),document.head.appendChild(p)})}function H(f,g,u="element"){return f.querySelector(`[data-${u}="${g}"]`)}function I3(f){let g=f.name,u="";switch(f.superclass){case"Sans":u="sans-serif";break;case"Serif":u="serif";break;case"Mono":u="monospace";break}return f.distribution==="Google"?`"${g}", ${u}`:f.distribution==="Adobe"?`"${g.toLowerCase().replace(/\s+/g,"-")}", ${u}`:!1}function hr({element:f,font:g,size:u,leading:_,weight:p}){f&&g&&(f.style.fontFamily=I3(g),u&&(f.style.fontSize=`${u*g.capHeightAdj}rem`),_&&(f.style.lineHeight=_),p&&(f.style.fontWeight=p))}function La({font:f,action:g,data:u}){const _=document.createElement("li");_.className="clickable list-item",_.dataset.name=f.name,_.dataset.label=f.label,_.dataset.element="list-item",_.tabIndex=-1,_.role="option",_.ariaLabel=`Select ${f.label}`,_.innerHTML=`
     <div data-element="item-leader" class="sample-leader">A</div>
@@ -166,7 +166,7 @@ function print() { __p += __j.call(arguments, '') }
         </div>
       </li>
     </ul>
-    <a data-element="detail-cta" href="#" target="_blank" class="button button-icon button-large slub">
+    <a data-element="detail-cta" href="#" target="_blank" class="button button-icon button-large slub slub-large">
       <!-- Detail CTA -->
     </a>
     <div data-element="detail-footer">
