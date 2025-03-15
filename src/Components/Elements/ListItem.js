@@ -7,18 +7,19 @@ function ListItem({font, action, data}) {
   
   const listItem = document.createElement('li');
 
-  listItem.className = "clickable";
+  listItem.className = "clickable list-item";
   listItem.dataset.name = font.name;
   listItem.dataset.label = font.label;
   listItem.dataset.element = "list-item";
-  listItem.tabIndex = 0;
+  listItem.tabIndex = -1;
   listItem.role = "option";
   listItem.ariaLabel = `Select ${font.label}`;
 
   /* html */
   listItem.innerHTML = `
-    <span class="" data-element="item-label">${font.label}</span>
-    <span class="data">${data}</span>
+    <div data-element="item-leader" class="sample-leader">A</div>
+    <div class="list-item-label" data-element="item-label">${font.label}<span class="data list-item-data">${data}</span></div>
+    
   `;
 
   const fontSize = 0.875;
@@ -26,6 +27,10 @@ function ListItem({font, action, data}) {
   const label = qDom(listItem, "item-label");
   label.style.fontFamily = 'system-ui';
   label.style.fontSize = `${fontSize}rem`;
+
+  const leader = qDom(listItem, "item-leader");
+  leader.style.fontSize = `1rem`;
+
 
   if(!('IntersectionObserver' in window)) {
     console.log('IntersectionObserver not supported');

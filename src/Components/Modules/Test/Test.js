@@ -36,7 +36,7 @@ function Test(store) {
     function processExamples(examples, font) {
       examples.forEach((example) => {
 
-        const size = example.dataset.element === "test-title" ? store.getData().testTitleSize : store.getData().testTextSize;
+        const size = example.dataset.element === "test-title" ? "24" : "16";
 
         if(example.dataset.fontFamily !== font.label || example.dataset.size !== size) {
           updateFont(example, font, size);

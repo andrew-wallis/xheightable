@@ -78,7 +78,7 @@ function Primary(store) {
       primaryFont: font,
       secondaryFont: {},
       secondarySort: "Match",
-      sidebar: !store.getData().isDesktop ? "" : store.getData().sidebar
+      sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : ""
     });
 
     const primaryList = qDom(primary, "primary-list");

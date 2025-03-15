@@ -19,6 +19,7 @@
 :root {
 
   --primary-font: "DM Sans", sans-serif;
+  --secondary-font: gelica, sans-serif;;
   --accent-font: "DM Mono", monospace;
 
   --neutral-0: #FFF;
@@ -30,22 +31,22 @@
   --neutral-80: #454747;
   --neutral-100: #171919;
 
-  --blue-dkr: #427C99;
-  --blue-dk: #448DB2;
-  --blue: #59A6CD;
-  --blue-lt: #9BCAE1;
-  --blue-ltr: #E6F2F8;
+  --blue-dkr: #23698C;
+  --blue-dk: #317EA5;
+  --blue: #469dc8;
+  --blue-lt: #90C4DE;
+  --blue-ltr: #DAEBF4;
 
   /* Gradient Steps */
   --accent-step-0: var(--blue);
-  --accent-step-2: #8290d4;
-  --accent-step-4: #a477cc;
-  --accent-step-6: #bd63b5;
-  --accent-step-8: #cb5793;
-  --accent-step-10: #cd596c;
+  --accent-step-2: #7884d0;
+  --accent-step-4: #9e68c7;
+  --accent-step-6: #b850ad;
+  --accent-step-8: #c64287;
+  --accent-step-10: #c8465c;
 
   --background: var(--neutral-02);
-  --negative: var(--neutral-0);
+  --negative: var(--neutral-02);
   --highlight: var(--neutral-0);
   --highlight-hover: var(--neutral-02);
   --scrollbar: var(--neutral-10);
@@ -140,16 +141,8 @@
 
   --blue-dkr: #7AB8D7;
   --blue-dk: #59A6CD;
-  --blue: #448DB2;
   --blue-lt: #335F75;
   --blue-ltr: #1E2529;
-
-  /* Gradient Steps */
-  --accent-step-2: #8290d4;
-  --accent-step-4: #a477cc;
-  --accent-step-6: #bd63b5;
-  --accent-step-8: #cb5793;
-  --accent-step-10: #cd596c;
 }
 
 
@@ -174,9 +167,6 @@ body {
 
 .disable-transitions * {
   transition: none !important;
-}
-
-.disabled {
 }
 
 
@@ -321,7 +311,7 @@ button {
 }
 
 .button > .icon {
-  color: var(--accent-step-0);
+  color: var(--accent);
   height: var(--space-xs);
   width: var(--space-xs);
 }
@@ -340,6 +330,7 @@ header .button {
   box-shadow: var(--full-shadow-dark);
 }
 
+
 /* Header */
 
 header {
@@ -353,6 +344,7 @@ header {
 }
 
 footer {
+  border-top: var(--horizontal-border);
   bottom: 0;
   background-color: var(--background);
   padding-top: var(--space-s);
@@ -425,21 +417,29 @@ select:hover{
 
 /* List */
 
-aside ul > li {
+.list-item {
   align-items: baseline;
   border-radius: var(--element-radius);
   color: var(--secondary);
   display: flex;
-  gap: var(--space-3xs);
-  line-height: var(--step--1);
+  line-height: var(--space-l);
   min-height: var(--space-2xl);
-  padding: var(--space-xs);
+  padding: var(--space-2xs) var(--space-xs);
   transition: var(--transition-background), var(--transition-color);
 }
 
-aside ul > li:hover,
-aside ul > li.active-item {
+.list-item:hover,
+.list-item.active-item {
   background-color: var(--accent-highlight);
+}
+
+.list-item-label {
+  line-height: var(--step--1);
+}
+
+.list-item-data {
+  display: inline-block;
+  padding-left: var(--space-3xs);
 }
 
 
@@ -451,7 +451,6 @@ aside ul > li.active-item {
 
 .sample-wrapper {
   height: var(--space-6xl);
-  font-feature-settings: normal;
 }
 
 .sample-wrapper button::after {
@@ -490,6 +489,7 @@ aside ul > li.active-item {
 
 .sample-leader {
   width: 0;
+  overflow: hidden;
 }
 
 .sample-text {
@@ -532,7 +532,7 @@ aside ul > li.active-item {
 }
 
 .sample-xline > hr {
-  border-color: var(--accent);
+  border-color: var(--accent-step-0);
 }
 
 
@@ -573,32 +573,32 @@ aside ul > li.active-item {
 /* X Height */
 
 [data-step="0"] {
-  --keystat: var(--accent-step-0);
+  --xheight-accent: var(--accent-step-0);
 }
 
 [data-step="2"] {
-  --keystat: var(--accent-step-2);
+  --xheight-accent: var(--accent-step-2);
 }
 
 [data-step="4"] {
-  --keystat: var(--accent-step-4);
+  --xheight-accent: var(--accent-step-4);
 }
 
 [data-step="6"] {
-  --keystat: var(--accent-step-6);
+  --xheight-accent: var(--accent-step-6);
 }
 
 [data-step="8"] {
-  --keystat: var(--accent-step-8);
+  --xheight-accent: var(--accent-step-8);
 }
 
 [data-step="10"] {
-  --keystat: var(--accent-step-10);
+  --xheight-accent: var(--accent-step-10);
 }
 
 .xheight {
   align-items: center;
-  background-color: var(--keystat);
+  background-color: var(--xheight-accent);
   border-radius: 9999px;
   box-shadow: var(--full-shadow);
   display: flex;
@@ -612,16 +612,18 @@ aside ul > li.active-item {
   align-items: start;
   color: var(--negative);
   display: flex;
-  font-family: var(--accent-font);
-  font-size: var(--step--1);
-  font-weight: 500;
-  gap: 2px;
+  font-family: var(--secondary-font);
+  font-size: var(--step-2);
+  font-weight: 700;
+  gap: 0px;
+  padding-top: 1px;
+  padding-left: 1px;
 }
 
 .xheight-percentage {
   opacity: 0.8;
-  font-size: var(--step--4);
-  padding-top: 2px;
+  font-size: var(--step--3);
+  padding-top: 3px;
 }
 
 
@@ -630,7 +632,6 @@ aside ul > li.active-item {
 .base-font {
   font-size: var(--step--1);
   font-family: var(--primary-font);
-  font-feature-settings: "ss03" 1;
 }
 
 .heading {
@@ -658,9 +659,10 @@ p > a:hover {
 
 .caption {
   color: var(--secondary);
-  font-size: var(--step--3);
+  font-size: var(--step--2);
   line-height: 125%;
   transition: var(--transition-color);
+  font-feature-settings: "ss03" 1;
 }
 
 a.caption:hover,

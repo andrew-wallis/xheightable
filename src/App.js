@@ -26,15 +26,7 @@ function App({store}) {
     sidebar: "",
     testTitle: getSampleText(2),
     testText: getSampleText(10),
-    testTitleSize: 24,
-    testTextSize: 16,
-    sizeOptions: ["8", "12", "14", "16", "18", "20", "24", "32", "36", "40", "48"],
-    embedLicence: ["Google"],
-    affiliateLicence: ["Adobe"],
-    codeFormat: "Variables",
-    codeUnits: "REM",
-    isTablet: isViewportWidth(768),
-    isDesktop: isViewportWidth(1024),
+    viewport: window.innerWidth
   });
 
   const app = document.createElement('div');
@@ -73,27 +65,22 @@ function App({store}) {
   // Queries
 
   const body = document.body;
-  const topBar = qDom(app, "top-bar");
   const slider = qDom(app, "slider");
   const main = qDom(app, "main-content");
-  const primary = qDom(app, "primary-sidebar");
-  const secondary = qDom(app, "secondary-sidebar");
-  const overlay = qDom(app, "slider-overlay")
-  const theme = qDom(app, "theme-switch")
 
 
   // Appends
 
-  topBar.appendChild(Header());
+  qDom(app, "top-bar").appendChild(Header());
+  qDom(app, "primary-sidebar").appendChild(Primary(store));
+  qDom(app, "secondary-sidebar").appendChild(Secondary(store));
 
-  primary.appendChild(Primary(store));
-  secondary.appendChild(Secondary(store));
   main.appendChild(Samples(store));
   main.appendChild(Test(store));
   main.appendChild(document.createElement("hr"));
   main.appendChild(Details(store));
   
-  theme.appendChild(Button({
+  qDom(app, "theme-switch").appendChild(Button({
     label: "Theme",
     action: setTheme,
     classes: "caption"
@@ -102,7 +89,7 @@ function App({store}) {
 
   // Event Listeners
 
-  overlay.addEventListener("click", function(e) {
+  qDom(app, "slider-overlay").addEventListener("click", function(e) {
     store.setData({sidebar: ""});
   });
 
@@ -133,9 +120,11 @@ function App({store}) {
 
 
   function updateViewports() {
+    console.log("Resize");
     store.setData({
       isTablet: isViewportWidth(768),
-      isDesktop: isViewportWidth(1024)
+      isDesktop: isViewportWidth(1024),
+      viewport: window.innerWidth
     });
   }
 
@@ -145,7 +134,18 @@ function App({store}) {
   });
   observer.observe(document.body, { childList: true, subtree: true });
 
-  window.addEventListener('resize', updateViewports);
+  function debounce(func, delay) {
+    let timeout;
+    return function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(func, delay);
+    };
+  }
+
+  const debouncedUpdateViewports = debounce(updateViewports, 200); // Adjust the delay as needed
+
+  window.addEventListener("resize", debouncedUpdateViewports);
+
 
 
   function setTheme() {

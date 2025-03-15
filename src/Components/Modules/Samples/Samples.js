@@ -5,6 +5,7 @@ import setFontStyles from "../../../helpers/setFontStyles";
 import isObj from "../../../utils/isObj";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
+import getABC from "./helpers/getABC";
 
 function Samples(store) {
 
@@ -58,13 +59,14 @@ function Samples(store) {
 
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
-    const isTablet = store.getData().isTablet;
+    const viewport = store.getData().viewport;
+    const isTablet = viewport >= 768 ? true : false;
 
-    if(primaryFont.label !== primary.dataset.label || (primary.dataset.tablet === "true") !== isTablet) {
+    if(primaryFont.label !== primary.dataset.label || primary.dataset.viewport !== viewport) {
       updateFont(primaryFont, primary);
     }
 
-    if(secondaryFont.label !== secondary.dataset.label || (secondary.dataset.tablet === "true") !== isTablet) {
+    if(secondaryFont.label !== secondary.dataset.label || secondary.dataset.viewport !== isTablet) {
       updateFont(secondaryFont, secondary);
     }
 
@@ -74,7 +76,7 @@ function Samples(store) {
 
         const capHeight = (isTablet ?  33.5 : 27.8) / 16;
         const labelSize = isTablet ? 1.25 : 1;
-        const sampleSize = isTablet ? 3.2 : 2.5;
+        const sampleSize = isTablet ? 3 : 2.5;
 
 
         // Label
@@ -100,10 +102,6 @@ function Samples(store) {
         const sampleText = qDom(sample, "sample-text");
         const sampleLeader = qDom(sample, "sample-leader");
 
-        qaDom(sample, "sample-text-abc").forEach((abc) => {
-          abc.innerText = isTablet ? "ABCDEF abcdef" : "ABC abc";
-        });
-
         sampleText.style.fontFamily = 'system-ui';
         sampleText.style.opacity = 0;
         sampleText.style.fontSize = `${sampleSize}rem`;
@@ -113,6 +111,10 @@ function Samples(store) {
         sampleLeader.style.opacity = 0;
         sampleLeader.style.fontSize = `${sampleSize * 1.33}rem`;
         sampleLeader.style.lineHeight = `${sampleSize * 1.33}rem`;
+
+        qaDom(sample, "sample-text-abc").forEach((abc) => {
+          abc.innerText = getABC(viewport);
+        });
 
         qDom(sample, "sample-text-capline").style.verticalAlign = `${capHeight}rem`;
         qDom(sample, "sample-text-refline").style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
@@ -171,7 +173,7 @@ function Samples(store) {
         }
 
         sample.dataset.label = font.label;
-        sample.dataset.tablet = isTablet;
+        sample.dataset.viewport = viewport;
       }
     }
   }

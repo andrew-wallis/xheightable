@@ -88,7 +88,7 @@ function Secondary(store) {
 
     store.setData({
       secondaryFont: font,
-      sidebar: !store.getData().isDesktop ? "" : store.getData().sidebar
+      sidebar: store.getData().viewport <= 1024 ? store.getData().sidebar : ""
     });
 
     highlightActiveItem(qDom(secondary, "secondary-list"), font);
