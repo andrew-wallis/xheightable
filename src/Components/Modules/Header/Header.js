@@ -30,7 +30,7 @@ function Header() {
       <h1 class="sr-only">x-heightable</h1>
     </div>
     <div class="sidebar">
-      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button button-large slub accent-text" href="https://www.blah.com" target="_blank">Buy us a coffee!</a>
+      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button button-large slub slub-large accent-text" href="https://www.blah.com" target="_blank">Buy us a coffee!</a>
     </div>
   `;
   return header;

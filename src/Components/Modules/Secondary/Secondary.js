@@ -19,7 +19,7 @@ function Secondary(store) {
       <div data-element="secondary-sort">
         <!-- Pair Filter -->
       </div>
-      <ul data-element="secondary-list" class="scrollable focus-padding">
+      <ul role="listbox" tab-index="-1" data-element="secondary-list" class="scrollable focus-padding">
         <!-- Pair Table -->
       </ul>
     </div>
@@ -35,6 +35,38 @@ function Secondary(store) {
     options: ["Match", "A-Z", "Rating"], 
     value: store.getData().secondarySort
   }));
+
+  //let sortedFonts;
+  //let highlightedFont;
+
+
+  // Event Listener
+
+  const list = qDom(secondary, "secondary-list");
+
+  list.addEventListener("keydown", (e) => {
+
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+
+      const secondaryList = qDom(secondary, "secondary-list");
+      const label = highlightedFont.label;
+      const index = sortedFonts.findIndex(item => item.label === label);
+  
+      if (index === -1) return null;
+
+      let nextIndex;
+
+      if (e.key === "ArrowDown") {
+        nextIndex = (index + 1) % sortedFonts.length;
+      } else if (e.key === "ArrowUp") {
+        nextIndex = (index - 1 + sortedFonts.length) % sortedFonts.length;
+      }
+    
+      highlightActiveItem(secondaryList, sortedFonts[nextIndex], true, true);
+      //highlightedFont = sortedFonts[nextIndex];
+    }
+  });
 
 
   // Functions
@@ -53,13 +85,13 @@ function Secondary(store) {
 
       secondaryList.innerHTML = '';
 
-      const pairings = sortSecondaryFonts({
+      const sortedFonts = sortSecondaryFonts({
         primary: primaryFont, 
         fonts: fonts, 
         sort: sort
       });
 
-      pairings.map((font, index) => {
+      sortedFonts.map((font, index) => {
         secondaryList.appendChild(ListItem({
           font: font,
           action: changeSecondary,
@@ -71,11 +103,12 @@ function Secondary(store) {
       secondaryList.dataset.sort = sort;
 
       if(!isObj(store.getData().secondaryFont)) {
-        const newSecondary = findSecondary(primaryFont, pairings);
+        const newSecondary = findSecondary(primaryFont, sortedFonts);
         store.setData({secondaryFont: newSecondary});
       }
 
       highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
+      //highlightedFont = store.getData().secondaryFont;
 
     }
   }
@@ -86,12 +119,15 @@ function Secondary(store) {
 
   function changeSecondary(font) {
 
+    console.log(font);
+
     store.setData({
       secondaryFont: font,
-      sidebar: store.getData().viewport <= 1024 ? store.getData().sidebar : ""
+      sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : ""
     });
 
     highlightActiveItem(qDom(secondary, "secondary-list"), font);
+    //highlightedFont = font;
   }
 
 

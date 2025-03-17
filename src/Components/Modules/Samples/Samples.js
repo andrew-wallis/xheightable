@@ -28,20 +28,23 @@ function Samples(store) {
     label: "Change",
     classes: "primary-action",
     action: activatePrimary,
-    icon: "Arrow Left"
+    icon: "Arrow Left",
+    id: "primary"
   }));
 
   qDom(secondary, "sample-action-left").appendChild(Button({
     label: "Swap",
     action: swap,
-    icon: "Swap"
+    icon: "Swap",
+    id: "swap"
   }));
 
   qDom(secondary, "sample-action-right").appendChild(Button({
     label: "Change",
     classes: "secondary-action button-icon-reverse",
     action: activateSecondary,
-    icon: "Arrow Right"
+    icon: "Arrow Right",
+    id: "secondary"
   }));
 
 
@@ -146,7 +149,7 @@ function Samples(store) {
                     font: font, 
                     size: labelSize, 
                     leading: `${labelSize * 1.33}rem`, 
-                    weight: 600
+                    weight: font.bold
                   });
 
                   setFontStyles({
@@ -154,7 +157,7 @@ function Samples(store) {
                     font: font, 
                     size: sampleSize, 
                     leading: `${sampleSize * 1.33}rem`, 
-                    weight: 400
+                    weight: font.regular
                   });
 
                   labelText.style.opacity = 1;

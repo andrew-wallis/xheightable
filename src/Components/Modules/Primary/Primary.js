@@ -19,11 +19,12 @@ function Primary(store) {
       <div data-element="primary-sort">
         <!-- Pair Filter -->
       </div>
-      <ul role="listbox" tabindex="0" data-element="primary-list" class="scrollable focus-padding">
+      <ul role="listbox" tab-index="-1" data-element="primary-list" class="scrollable focus-padding">
         <!-- Pair List -->
       </ul>
     </div>
   `;
+
 
   
   // Appends
@@ -35,6 +36,38 @@ function Primary(store) {
     options: ["A-Z", "Rating", "X-Height"], 
     value: store.getData().primarySort
   }));
+
+  //let sortedFonts;
+  //let highlightedFont;
+
+
+  // Event Listener
+
+/*   const list = qDom(primary, "primary-list");
+
+  list.addEventListener("keydown", (e) => {
+
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+
+      const primaryList = qDom(primary, "primary-list");
+      const label = highlightedFont.label;
+      const index = sortedFonts.findIndex(item => item.label === label);
+  
+      if (index === -1) return null;
+
+      let nextIndex;
+
+      if (e.key === "ArrowDown") {
+        nextIndex = (index + 1) % sortedFonts.length;
+      } else if (e.key === "ArrowUp") {
+        nextIndex = (index - 1 + sortedFonts.length) % sortedFonts.length;
+      }
+    
+      highlightActiveItem(primaryList, sortedFonts[nextIndex], true, true);
+      highlightedFont = sortedFonts[nextIndex];
+    }
+  }); */
 
 
   // Functions
@@ -64,6 +97,7 @@ function Primary(store) {
       });
 
       highlightActiveItem(primaryList, store.getData().primaryFont, true);
+      //highlightedFont = store.getData().primaryFont;
       primaryList.dataset.sort = sort;
     }
   }
@@ -84,6 +118,7 @@ function Primary(store) {
     const primaryList = qDom(primary, "primary-list");
     primaryList.dataset.primary = font.name;
     highlightActiveItem(primaryList, font);
+    //highlightedFont = font;
   }
 
 

@@ -247,10 +247,18 @@ body {
   user-select: none;
 }
 
-.horizontal-scroll {
-  max-width: 100%;
-  overflow-x: auto;
-  white-space: nowrap;
+.scrollable-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.scrollable {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.scroll-lock {
+  overflow: hidden;
 }
 
 .sr-only {
@@ -292,7 +300,7 @@ button {
 
 .button-label {
   line-height: var(--space-s);
-  padding-top: 1px;
+  padding-top: 2px;
 }
 
 .button:hover {
@@ -312,8 +320,8 @@ button {
 
 .button > .icon {
   color: var(--accent);
-  height: var(--space-xs);
-  width: var(--space-xs);
+  height: var(--space-s);
+  width: var(--space-s);
 }
 
 .button-large {
@@ -322,12 +330,17 @@ button {
 }
 
 .button-large > .icon {
-  height: var(--space-s);
-  width: var(--space-s);
+  height: var(--space-l);
+  width: var(--space-l);
 }
 
 header .button {
   box-shadow: var(--full-shadow-dark);
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.25;
 }
 
 
@@ -371,12 +384,12 @@ select {
   background-image: url('/select-arrow.svg');
   background-repeat: no-repeat;
   background-position: center right var(--space-3xs);
-  background-size: var(--space-xs) var(--space-xs);
+  background-size: var(--space-s) var(--space-s);
   border: 0;
   border-radius: var(--element-radius);
   box-shadow: var(--full-shadow);
   line-height: var(--space-s);
-  padding: var(--space-2xs) var(--space-l) var(--space-2xs) var(--space-xs);
+  padding: var(--space-2xs) var(--space-xl) var(--space-2xs) var(--space-xs);
   position: relative;
   transition: var(--transition-background), var(--transition-color);
   user-select: none;
@@ -559,6 +572,95 @@ select:hover{
 }
 
 
+/* Slider */
+
+.slider {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  flex-grow: 1;
+  height: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 64rem;
+  width: 100%;
+}
+
+.slider-sidebar {
+  background-color: var(--background);
+  bottom: 0;
+  position: fixed;
+  top: var(--space-4xl);
+  bottom: 0;
+  transition: transform 0.3s ease-out;
+  width: 16rem;
+  z-index: 200;
+}
+
+.slider-main {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  transform: translateX(0);
+  transition: transform 0.3s ease-out;
+}
+
+.slider-overlay {
+  position: absolute;
+  z-index: 150;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--background);
+  opacity: 0.5;
+  display: none;
+  overflow: hidden;
+}
+
+.show-overlay {
+  display: flex;
+}
+
+.primary-closed {
+  left: 0;
+  transform: translate(-100%);
+}
+
+.secondary-closed {
+  right: 0;
+  transform: translate(100%);
+}
+
+.sidebar-open {
+  transform: translateX(0);
+}
+
+.primary-open {
+  transform: translateX(16rem);
+}
+
+.secondary-open {
+  transform: translateX(-16rem);
+}
+
+.main-max-width {
+  max-width: calc(100% - 16rem);
+}
+
+.slider-flex {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slider-flex aside {
+  position: absolute;
+  top: 0;
+}
+
+
 /* Test */
 
 .test-title {
@@ -635,7 +737,7 @@ select:hover{
 }
 
 .heading {
-  font-size: var(--step--2);
+  font-size: var(--step--1);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -649,6 +751,10 @@ p > a:hover {
   text-decoration: none;
 }
 
+strong {
+  font-weight: 600;
+}
+
 .slub {
   color: var(--secondary);
   font-size: var(--step--3);
@@ -657,12 +763,27 @@ p > a:hover {
   text-transform: uppercase;
 }
 
+.slub-large {
+  font-size: var(--step--2);
+}
+
+.secondary {
+  color: var(--secondary);
+  font-feature-settings: "ss03" 1;
+  line-height: 125%;
+  transition: var(--transition-color);
+}
+
+.secondary .slub {
+  font-size: var(--step--1);
+}
+
 .caption {
   color: var(--secondary);
+  font-feature-settings: "ss03" 1;
   font-size: var(--step--2);
   line-height: 125%;
   transition: var(--transition-color);
-  font-feature-settings: "ss03" 1;
 }
 
 a.caption:hover,
@@ -671,10 +792,15 @@ button.caption:hover {
 }
 
 .data {
-  font-size: var(--step--3);
+  font-size: var(--step--1);
   font-family: var(--accent-font);
   font-weight: 500;
   opacity: 0.8;
+}
+
+.list-item-data {
+  font-size: var(--step--2);
+  font-weight: 400;
 }
 
 .accent-text {

@@ -1,6 +1,6 @@
 import Icon from "./Icons";
 
-function Button({label, icon, classes, action}) {
+function Button({label, icon, classes, action, id}) {
 
   const button = document.createElement('button');
   button.className = `clickable ${classes ? classes : ""} ${icon ? "button slub button-icon" : ""}`;
@@ -9,7 +9,7 @@ function Button({label, icon, classes, action}) {
     button.appendChild(Icon(icon));
   }
   
-  button.dataset.element = "button";
+  button.dataset.element = id ? `button-${id}` : "button";
   button.dataset.target = label;
   
   const buttonLabel = document.createElement('div');

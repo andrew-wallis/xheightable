@@ -15,10 +15,10 @@ function Test(store) {
   test.innerHTML = `
     <h2 class="sr-only">Test Fonts</h2>
     <div class="stack-l">
-      <p data-element="test-title" class="unselectable test-title" data-font="primary" data-size="1.5" data-leading="lineMin" data-weight="600">
+      <p data-element="test-title" class="unselectable test-title" data-font="primary" data-size="1.5" data-leading="lineMin" data-weight="bold">
         ${store.getData().testTitle}
       </p>
-      <p data-element="test-paragraph" class="unselectable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="400">
+      <p data-element="test-paragraph" class="unselectable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="regular">
         ${store.getData().testText}
       </p>
     </div>
@@ -57,7 +57,7 @@ function Test(store) {
       element: example,
       font: font, 
       size: remBase, 
-      weight: example.dataset.weight,
+      weight: font[example.dataset.weight],
       leading: font[example.dataset.leading]
     });
 

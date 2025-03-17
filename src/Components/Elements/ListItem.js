@@ -11,7 +11,7 @@ function ListItem({font, action, data}) {
   listItem.dataset.name = font.name;
   listItem.dataset.label = font.label;
   listItem.dataset.element = "list-item";
-  listItem.tabIndex = -1;
+  //listItem.tabIndex = -1;
   listItem.role = "option";
   listItem.ariaLabel = `Select ${font.label}`;
 
@@ -44,7 +44,7 @@ function ListItem({font, action, data}) {
               element: label, 
               font: font, 
               size: fontSize, 
-              weight: 400
+              weight: font.regular
             });
             
           });

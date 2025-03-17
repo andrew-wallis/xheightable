@@ -1,5 +1,3 @@
-
-
 import Header from "./Components/Modules/Header/Header";
 import Primary from "./Components/Modules/Primary/Primary";
 import Secondary from "./Components/Modules/Secondary/Secondary";
@@ -11,7 +9,7 @@ import getRandomIndex from "./utils/getRandomIndex";
 import getSampleText from "./helpers/getSampleText";
 import isViewportWidth from "./utils/isViewportWidth";
 import qDom from "./utils/qDom";
-import './slider.css';
+import qaDom from "./utils/qaDom";
 
 function App({store}) {
 
@@ -30,7 +28,6 @@ function App({store}) {
   });
 
   const app = document.createElement('div');
-  app.classList = "slider-container";
 
   /* html */
   app.innerHTML = `
@@ -38,16 +35,16 @@ function App({store}) {
       <!-- Top Bar -->
     </header>
     <div data-element="slider" class="slider">
-      <aside data-element="primary-sidebar">
+      <aside class="slider-sidebar primary-closed" data-element="primary-sidebar">
         <!-- Primary Sidebar -->
       </aside>
-      <main class="insulate-3xl desktop-scrollable-container">
-        <div data-element="main-content" class="stack-3xl wrap desktop-scrollable">
+      <main data-element="main" class="slider-main insulate-3xl">
+        <div data-element="main-content" class="stack-3xl wrap">
           <!-- Main Content -->
         </div>
         <div data-element="slider-overlay" class="slider-overlay"></div>
       </main>
-      <aside data-element="secondary-sidebar">
+      <aside class="slider-sidebar secondary-closed" data-element="secondary-sidebar">
         <!-- Secondary Sidebar -->
       </aside>
     </div>
@@ -66,19 +63,23 @@ function App({store}) {
 
   const body = document.body;
   const slider = qDom(app, "slider");
-  const main = qDom(app, "main-content");
+  const main = qDom(app, "main");
+  const mainContent = qDom(app, "main-content");
+  const primary = qDom(app, "primary-sidebar");
+  const secondary  = qDom(app, "secondary-sidebar");
+  const overlay = qDom(app, "slider-overlay");
 
 
   // Appends
 
   qDom(app, "top-bar").appendChild(Header());
-  qDom(app, "primary-sidebar").appendChild(Primary(store));
-  qDom(app, "secondary-sidebar").appendChild(Secondary(store));
-
-  main.appendChild(Samples(store));
-  main.appendChild(Test(store));
-  main.appendChild(document.createElement("hr"));
-  main.appendChild(Details(store));
+  
+  primary.appendChild(Primary(store));
+  secondary.appendChild(Secondary(store));
+  mainContent.appendChild(Samples(store));
+  mainContent.appendChild(Test(store));
+  mainContent.appendChild(document.createElement("hr"));
+  mainContent.appendChild(Details(store));
   
   qDom(app, "theme-switch").appendChild(Button({
     label: "Theme",
@@ -89,38 +90,108 @@ function App({store}) {
 
   // Event Listeners
 
-  qDom(app, "slider-overlay").addEventListener("click", function(e) {
+  overlay.addEventListener("click", function(e) {
     store.setData({sidebar: ""});
   });
 
 
-  // Functions
+  // Sidebar Functions
 
-  function updateSidebar() {
+  function updateSlider() {
 
     const activeSidebar = store.getData().sidebar;
+    const viewport = store.getData().viewport;
+    const isDesktop = viewport >= 1024 ? true : false;
 
-    if(slider.dataset.active !== activeSidebar) {
+    if(slider.dataset.active !== activeSidebar || slider.dataset.viewport !== viewport) {
+      
+      primary.classList.remove("sidebar-open");
+      secondary.classList.remove('sidebar-open');
+      main.classList.remove('primary-open');
+      main.classList.remove('secondary-open');
+      main.classList.remove("main-max-width");
+      main.classList.remove('scrollable-container');
+      mainContent.classList.remove('scrollable');
+      overlay.classList.remove('show-overlay');
+      body.classList.remove('scroll-lock');
+      app.classList.remove('slider-flex');
 
-      slider.classList.remove("primary");
-      slider.classList.remove("secondary");
-      body.classList.remove("sidebar-open");
-      if(activeSidebar) {
-        slider.classList.add(activeSidebar);
-        slider.dataset.active = activeSidebar;
-        body.classList.add("sidebar-open");
-      } else {
-        slider.dataset.active = "";
+      const primaryButton = qDom(mainContent, "button-primary");
+      const secondaryButton = qDom(mainContent, "button-secondary");
+      const primarySort = qDom(primary, "sort-primary-fonts");
+      const secondarySort = qDom(secondary, "sort-secondary-fonts");
+
+      primaryButton.disabled = false;
+      secondaryButton.disabled = false;
+      // primarySort.tabIndex = -1;
+      // secondarySort.tabIndex = -1;
+
+      if(isDesktop) {
+        main.classList.add("main-max-width");
+        main.classList.add('scrollable-container');
+        mainContent.classList.add('scrollable');
+        app.classList.add('slider-flex');
       }
+
+      if(activeSidebar === "primary") {
+
+        primary.classList.add("sidebar-open");
+        main.classList.add('primary-open');
+        //primarySort.tabIndex = 0;
+
+/*         qaDom(primary, "list-item").forEach(row => {
+          setTimeout(() => {
+            if(row.tabIndex === 0) row.focus();
+          }, 400);
+        });
+ */
+        if(!isDesktop) {
+          overlay.classList.add('show-overlay');
+          body.classList.add('scroll-lock');
+        } else {
+          primaryButton.disabled = true;
+        }
+
+      } else if (activeSidebar === "secondary") {
+
+        secondary.classList.add("sidebar-open");
+        //secondarySort.tabIndex = 0;
+
+/*         qaDom(secondary, "list-item").forEach(row => {
+          setTimeout(() => {
+            if(row.tabIndex === 0) row.focus();
+          }, 400);
+        }); */
+
+        if(!isDesktop) {
+          main.classList.add('secondary-open');
+          overlay.classList.add('show-overlay');
+          body.classList.add('scroll-lock');
+        } else {
+          secondaryButton.disabled = true;
+        }
+
+      } else {
+        if (isDesktop) {
+          secondary.classList.add("sidebar-open");
+          secondaryButton.disabled = true; 
+          //secondarySort.tabIndex = 0;
+        }
+      }
+
+      slider.dataset.viewport = viewport;
+      slider.dataset.active = activeSidebar;
+    
     }
   }
 
-  store.subscribe(updateSidebar);
-  updateSidebar();
+  store.subscribe(updateSlider);
+  updateSlider();
 
+
+  // Viewport Functions
 
   function updateViewports() {
-    console.log("Resize");
     store.setData({
       isTablet: isViewportWidth(768),
       isDesktop: isViewportWidth(1024),
@@ -142,11 +213,12 @@ function App({store}) {
     };
   }
 
-  const debouncedUpdateViewports = debounce(updateViewports, 200); // Adjust the delay as needed
+  const debouncedUpdateViewports = debounce(updateViewports, 50);
 
   window.addEventListener("resize", debouncedUpdateViewports);
 
 
+  // Theme functions
 
   function setTheme() {
     
