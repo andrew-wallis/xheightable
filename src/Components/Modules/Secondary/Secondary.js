@@ -42,7 +42,7 @@ function Secondary(store) {
 
   // Event Listener
 
-  const list = qDom(secondary, "secondary-list");
+/*   const list = qDom(secondary, "secondary-list");
 
   list.addEventListener("keydown", (e) => {
 
@@ -64,9 +64,9 @@ function Secondary(store) {
       }
     
       highlightActiveItem(secondaryList, sortedFonts[nextIndex], true, true);
-      //highlightedFont = sortedFonts[nextIndex];
+      highlightedFont = sortedFonts[nextIndex];
     }
-  });
+  }); */
 
 
   // Functions
@@ -119,14 +119,13 @@ function Secondary(store) {
 
   function changeSecondary(font) {
 
-    console.log(font);
-
     store.setData({
       secondaryFont: font,
       sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : ""
     });
 
     highlightActiveItem(qDom(secondary, "secondary-list"), font);
+    qDom(document, "main-content").scrollTop = 0;
     //highlightedFont = font;
   }
 

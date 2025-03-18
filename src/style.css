@@ -119,6 +119,7 @@
   /* Transitions */
   --transition-background: background-color 0.2s ease-out;
   --transition-color: color 0.2s ease-out;
+  --transition-opacity: opacity 0.1s ease-out;
 }
 
 [data-theme="dark"] {

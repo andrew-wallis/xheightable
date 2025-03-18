@@ -11,7 +11,7 @@ function ListItem({font, action, data}) {
   listItem.dataset.name = font.name;
   listItem.dataset.label = font.label;
   listItem.dataset.element = "list-item";
-  //listItem.tabIndex = -1;
+  listItem.tabIndex = 0;
   listItem.role = "option";
   listItem.ariaLabel = `Select ${font.label}`;
 
@@ -38,7 +38,7 @@ function ListItem({font, action, data}) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if(entry.isIntersecting) {
-          loadFont(font).then(() => {
+          loadFont(font, font.regular).then(() => {
 
             setFontStyles({
               element: label, 

@@ -118,6 +118,7 @@ function Primary(store) {
     const primaryList = qDom(primary, "primary-list");
     primaryList.dataset.primary = font.name;
     highlightActiveItem(primaryList, font);
+    qDom(document, "main-content").scrollTop = 0;
     //highlightedFont = font;
   }
 

@@ -11,7 +11,7 @@ function Sample(font) {
         <div class="sample-header">
           <div class="sample-align">
             <div class="sample-leader" data-element="label-leader">A</div>
-            <div data-element="label-text">
+            <div class="sample-label" data-element="label-text">
               <!-- Label -->
             </div>
           </div>

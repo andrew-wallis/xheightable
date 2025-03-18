@@ -1,5 +1,6 @@
-import qaDom from "../../../utils/qaDom";
 import setFontStyles from "../../../helpers/setFontStyles";
+import loadFont from "../../../helpers/loadFont";
+import qDom from "../../../utils/qDom";
 
 function Test(store) {
 
@@ -24,48 +25,76 @@ function Test(store) {
     </div>
   `;
 
+  // Queries
 
-  function updateTestScreen() {
+  const title = qDom(test, "test-title");
+  const paragraph = qDom(test, "test-paragraph");
+
+
+
+  function updateTest() {
 
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
+    const viewport = store.getData().viewport;
+    const isTablet = viewport >= 768 ? true : false;
 
-    processExamples(qaDom(test, "primary", "font"), primaryFont);
-    processExamples(qaDom(test, "secondary", "font"), secondaryFont);
+    if(primaryFont.label !== title.dataset.label || parseInt(primary.dataset.viewport) !== viewport) {
+      updateFont(primaryFont, title);
+    }
 
-    function processExamples(examples, font) {
-      examples.forEach((example) => {
+    if(secondaryFont.label !== paragraph.dataset.label || parseInt(secondary.dataset.viewport) !== viewport) {
+      updateFont(secondaryFont, paragraph);
+    }
 
-        const size = example.dataset.element === "test-title" ? "24" : "16";
-
-        if(example.dataset.fontFamily !== font.label || example.dataset.size !== size) {
-          updateFont(example, font, size);
-        }
-      });
+    function updateFont(font, example) {
+    
+      const remBase = isTablet ? example.dataset.size : parseFloat(example.dataset.size) * 0.875;
+  
+      example.style.fontFamily = 'system-ui';
+      example.style.opacity = 0;
+      example.style.fontSize = `${remBase}rem`;
+      example.style.lineHeight = font[example.dataset.leading];
+  
+      if(!('IntersectionObserver' in window)) {
+        console.log('IntersectionObserver not supported');
+      } else {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if(entry.isIntersecting) {
+              loadFont(font, font[example.dataset.weight]).then(() => {
+  
+                setFontStyles({
+                  element: example,
+                  font: font, 
+                  size: remBase, 
+                  weight: font[example.dataset.weight],
+                  leading: font[example.dataset.leading]
+                });
+  
+                example.style.opacity = 1;
+              });
+  
+              observer.disconnect();
+            }
+          });
+        });
+  
+        observer.observe(example);
+  
+        window.addEventListener('beforeunload', () => {
+          observer.disconnect();
+        });
+      }
+  
+      example.dataset.fontFamily = font.label;
+      example.dataset.viewport = viewport;
+  
     }
   }
 
-  store.subscribe(updateTestScreen);
-  updateTestScreen();
-
-
-  function updateFont(example, font, pxBase) {
-    
-    const remBase = pxBase / 16;
-
-    setFontStyles({
-      element: example,
-      font: font, 
-      size: remBase, 
-      weight: font[example.dataset.weight],
-      leading: font[example.dataset.leading]
-    });
-
-    example.dataset.fontFamily = font.label;
-    example.dataset.size = pxBase;
-  
-
-  }
+  store.subscribe(updateTest);
+  updateTest();
 
 
   // Return

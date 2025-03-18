@@ -1,8 +1,8 @@
 import getFontStylesheet from "./getFontStylesheet";
 
-function loadFont(font) {
+function loadFont(font, weight) {
 
-  const href = getFontStylesheet(font);
+  const href = getFontStylesheet(font, weight);
 
   return new Promise((resolve, reject) => {
     if (document.querySelector(`link[href="${href}"]`)) {

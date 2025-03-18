@@ -9,7 +9,7 @@ import getRandomIndex from "./utils/getRandomIndex";
 import getSampleText from "./helpers/getSampleText";
 import isViewportWidth from "./utils/isViewportWidth";
 import qDom from "./utils/qDom";
-import qaDom from "./utils/qaDom";
+
 
 function App({store}) {
 
@@ -118,13 +118,9 @@ function App({store}) {
 
       const primaryButton = qDom(mainContent, "button-primary");
       const secondaryButton = qDom(mainContent, "button-secondary");
-      const primarySort = qDom(primary, "sort-primary-fonts");
-      const secondarySort = qDom(secondary, "sort-secondary-fonts");
 
       primaryButton.disabled = false;
       secondaryButton.disabled = false;
-      // primarySort.tabIndex = -1;
-      // secondarySort.tabIndex = -1;
 
       if(isDesktop) {
         main.classList.add("main-max-width");
@@ -137,14 +133,7 @@ function App({store}) {
 
         primary.classList.add("sidebar-open");
         main.classList.add('primary-open');
-        //primarySort.tabIndex = 0;
 
-/*         qaDom(primary, "list-item").forEach(row => {
-          setTimeout(() => {
-            if(row.tabIndex === 0) row.focus();
-          }, 400);
-        });
- */
         if(!isDesktop) {
           overlay.classList.add('show-overlay');
           body.classList.add('scroll-lock');
@@ -155,13 +144,6 @@ function App({store}) {
       } else if (activeSidebar === "secondary") {
 
         secondary.classList.add("sidebar-open");
-        //secondarySort.tabIndex = 0;
-
-/*         qaDom(secondary, "list-item").forEach(row => {
-          setTimeout(() => {
-            if(row.tabIndex === 0) row.focus();
-          }, 400);
-        }); */
 
         if(!isDesktop) {
           main.classList.add('secondary-open');
@@ -175,7 +157,6 @@ function App({store}) {
         if (isDesktop) {
           secondary.classList.add("sidebar-open");
           secondaryButton.disabled = true; 
-          //secondarySort.tabIndex = 0;
         }
       }
 

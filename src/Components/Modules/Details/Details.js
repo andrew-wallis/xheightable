@@ -21,7 +21,7 @@ function Details(store) {
 
   // Functions
   
-  function updateImport() {
+  function updateDetails() {
 
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
@@ -61,7 +61,7 @@ function Details(store) {
   
   }
 
-  store.subscribe(updateImport);
+  store.subscribe(updateDetails);
 
 
   // Return

@@ -58,18 +58,18 @@ function Samples(store) {
     store.setData({sidebar: "secondary"});
   }
 
-  function updateSample() {
+  function updateSamples() {
 
     const primaryFont = store.getData().primaryFont;
     const secondaryFont = store.getData().secondaryFont;
     const viewport = store.getData().viewport;
     const isTablet = viewport >= 768 ? true : false;
 
-    if(primaryFont.label !== primary.dataset.label || primary.dataset.viewport !== viewport) {
+    if(primaryFont.label !== primary.dataset.label || parseInt(primary.dataset.viewport) !== viewport) {
       updateFont(primaryFont, primary);
     }
 
-    if(secondaryFont.label !== secondary.dataset.label || secondary.dataset.viewport !== isTablet) {
+    if(secondaryFont.label !== secondary.dataset.label || parseInt(secondary.dataset.viewport) !== viewport) {
       updateFont(secondaryFont, secondary);
     }
 
@@ -142,7 +142,7 @@ function Samples(store) {
           const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
               if(entry.isIntersecting) {
-                loadFont(font).then(() => {
+                loadFont(font, font.bold).then(() => {
 
                   setFontStyles({
                     element: labelText, 
@@ -152,6 +152,11 @@ function Samples(store) {
                     weight: font.bold
                   });
 
+                  labelText.style.opacity = 1;
+                });
+
+                loadFont(font, font.regular).then(() => {
+
                   setFontStyles({
                     element: sampleText, 
                     font: font, 
@@ -160,7 +165,6 @@ function Samples(store) {
                     weight: font.regular
                   });
 
-                  labelText.style.opacity = 1;
                   sampleText.style.opacity = 1;
                 });
                 observer.disconnect();
@@ -181,8 +185,8 @@ function Samples(store) {
     }
   }
 
-  store.subscribe(updateSample);
-  updateSample();
+  store.subscribe(updateSamples);
+  updateSamples();
 
 
   function swap() {
