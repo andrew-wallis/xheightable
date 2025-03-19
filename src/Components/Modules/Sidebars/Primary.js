@@ -1,4 +1,4 @@
-
+import Sidebar from "./Sidebar";
 import ListItem from "../../Elements/ListItem";
 import Select from "../../Elements/Select";
 import sortPrimaryFonts from "./helpers/sortPrimaryFonts";
@@ -11,25 +11,14 @@ function Primary(store) {
   
   const primary = document.createElement('div');
   primary.id = "primary";
-  primary.className = "insulate wrap scrollable-container"
-
-  /* html */
-  primary.innerHTML = `
-    <div class="insulate stack scrollable-container">
-      <div data-element="primary-sort">
-        <!-- Pair Filter -->
-      </div>
-      <ul role="listbox" tab-index="-1" data-element="primary-list" class="scrollable focus-padding">
-        <!-- Pair List -->
-      </ul>
-    </div>
-  `;
-
-
+  primary.className = "insulate wrap scrollable-container";
   
+
   // Appends
 
-  qDom(primary, "primary-sort").appendChild(Select({
+  primary.append(Sidebar());
+
+  qDom(primary, "sidebar-sort").appendChild(Select({
     action: changeSort,
     hideLabel: true,
     label: "Sort Primary Fonts", 
@@ -75,7 +64,7 @@ function Primary(store) {
   function updatePrimaryList() {
 
     const sort = store.getData().primarySort;
-    const primaryList = qDom(primary, "primary-list");
+    const primaryList = qDom(primary, "sidebar-list");
     const primaryFont = store.getData().primaryFont;
     const fonts = store.getData().fonts;
   

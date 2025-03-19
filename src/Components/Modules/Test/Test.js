@@ -1,5 +1,4 @@
-import setFontStyles from "../../../helpers/setFontStyles";
-import loadFont from "../../../helpers/loadFont";
+import updateElement from "../../../helpers/updateElement";
 import qDom from "../../../utils/qDom";
 
 function Test(store) {
@@ -55,37 +54,8 @@ function Test(store) {
       example.style.opacity = 0;
       example.style.fontSize = `${remBase}rem`;
       example.style.lineHeight = font[example.dataset.leading];
-  
-      if(!('IntersectionObserver' in window)) {
-        console.log('IntersectionObserver not supported');
-      } else {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if(entry.isIntersecting) {
-              loadFont(font, font[example.dataset.weight]).then(() => {
-  
-                setFontStyles({
-                  element: example,
-                  font: font, 
-                  size: remBase, 
-                  weight: font[example.dataset.weight],
-                  leading: font[example.dataset.leading]
-                });
-  
-                example.style.opacity = 1;
-              });
-  
-              observer.disconnect();
-            }
-          });
-        });
-  
-        observer.observe(example);
-  
-        window.addEventListener('beforeunload', () => {
-          observer.disconnect();
-        });
-      }
+
+      updateElement(example, font, remBase, font[example.dataset.weight], font[example.dataset.leading]);
   
       example.dataset.fontFamily = font.label;
       example.dataset.viewport = viewport;

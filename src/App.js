@@ -1,13 +1,12 @@
 import Header from "./Components/Modules/Header/Header";
-import Primary from "./Components/Modules/Primary/Primary";
-import Secondary from "./Components/Modules/Secondary/Secondary";
+import Primary from "./Components/Modules/Sidebars/Primary";
+import Secondary from "./Components/Modules/Sidebars/Secondary";
 import Samples from "./Components/Modules/Samples/Samples";
 import Test from "./Components/Modules/Test/Test";
 import Details from "./Components/Modules/Details/Details";
 import Button from "./Components/Elements/Button";
 import getRandomIndex from "./utils/getRandomIndex";
 import getSampleText from "./helpers/getSampleText";
-import isViewportWidth from "./utils/isViewportWidth";
 import qDom from "./utils/qDom";
 
 
@@ -174,8 +173,6 @@ function App({store}) {
 
   function updateViewports() {
     store.setData({
-      isTablet: isViewportWidth(768),
-      isDesktop: isViewportWidth(1024),
       viewport: window.innerWidth
     });
   }

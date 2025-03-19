@@ -1,11 +1,10 @@
 import Sample from "./Sample";
 import Button from "../../Elements/Button";
-import loadFont from "../../../helpers/loadFont";
-import setFontStyles from "../../../helpers/setFontStyles";
 import isObj from "../../../utils/isObj";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
 import getABC from "./helpers/getABC";
+import updateElement from "../../../helpers/updateElement";
 
 function Samples(store) {
 
@@ -135,49 +134,8 @@ function Samples(store) {
           qDom(sample, "sample-xheight").dataset.step = difference > 10 ? "10" : `${difference}`;
         }
 
-
-        if(!('IntersectionObserver' in window)) {
-          console.log('IntersectionObserver not supported');
-        } else {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if(entry.isIntersecting) {
-                loadFont(font, font.bold).then(() => {
-
-                  setFontStyles({
-                    element: labelText, 
-                    font: font, 
-                    size: labelSize, 
-                    leading: `${labelSize * 1.33}rem`, 
-                    weight: font.bold
-                  });
-
-                  labelText.style.opacity = 1;
-                });
-
-                loadFont(font, font.regular).then(() => {
-
-                  setFontStyles({
-                    element: sampleText, 
-                    font: font, 
-                    size: sampleSize, 
-                    leading: `${sampleSize * 1.33}rem`, 
-                    weight: font.regular
-                  });
-
-                  sampleText.style.opacity = 1;
-                });
-                observer.disconnect();
-              }
-            });
-          });
-
-          observer.observe(sample);
-
-          window.addEventListener('beforeunload', () => {
-            observer.disconnect();
-          });
-        }
+        updateElement(labelText, font, labelSize, font.bold, `${labelSize * 1.33}rem`);
+        updateElement(sampleText, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
 
         sample.dataset.label = font.label;
         sample.dataset.viewport = viewport;

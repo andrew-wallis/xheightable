@@ -6,6 +6,7 @@ import highlightActiveItem from "../../../helpers/highlightActiveItem";
 import isObj from "../../../utils/isObj";
 import qDom from "../../../utils/qDom";
 import getPercentage from "../../../utils/getPercentage";
+import Sidebar from "./Sidebar";
 
 function Secondary(store) {
 
@@ -13,22 +14,12 @@ function Secondary(store) {
   secondary.id = "secondary";
   secondary.className = "insulate wrap scrollable-container";
 
-  /* html */
-  secondary.innerHTML = `
-    <div class="insulate stack scrollable-container">
-      <div data-element="secondary-sort">
-        <!-- Pair Filter -->
-      </div>
-      <ul role="listbox" tab-index="-1" data-element="secondary-list" class="scrollable focus-padding">
-        <!-- Pair Table -->
-      </ul>
-    </div>
-  `;
-
 
   // Appends
 
-  qDom(secondary, "secondary-sort").appendChild(Select({
+  secondary.append(Sidebar());
+
+  qDom(secondary, "sidebar-sort").appendChild(Select({
     action: changeSort,
     hideLabel: true,
     label: "Sort Secondary Fonts", 
@@ -74,7 +65,7 @@ function Secondary(store) {
   function updateSecondaryList() {
 
     const sort = store.getData().secondarySort;
-    const secondaryList = qDom(secondary, "secondary-list");
+    const secondaryList = qDom(secondary, "sidebar-list");
     const primaryFont = store.getData().primaryFont;
     const fonts = store.getData().fonts;
   
@@ -126,7 +117,6 @@ function Secondary(store) {
 
     highlightActiveItem(qDom(secondary, "secondary-list"), font);
     qDom(document, "main-content").scrollTop = 0;
-    //highlightedFont = font;
   }
 
 

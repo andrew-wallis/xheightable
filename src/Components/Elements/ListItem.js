@@ -1,7 +1,5 @@
-
-import loadFont from "../../helpers/loadFont";
 import qDom from "../../utils/qDom";
-import setFontStyles from "../../helpers/setFontStyles";
+import updateElement from "../../helpers/updateElement";
 
 function ListItem({font, action, data}) {
   
@@ -31,34 +29,7 @@ function ListItem({font, action, data}) {
   const leader = qDom(listItem, "item-leader");
   leader.style.fontSize = `1rem`;
 
-
-  if(!('IntersectionObserver' in window)) {
-    console.log('IntersectionObserver not supported');
-  } else {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if(entry.isIntersecting) {
-          loadFont(font, font.regular).then(() => {
-
-            setFontStyles({
-              element: label, 
-              font: font, 
-              size: fontSize, 
-              weight: font.regular
-            });
-            
-          });
-          observer.disconnect();
-        }
-      });
-    });
-
-    observer.observe(label);
-
-    window.addEventListener('beforeunload', () => {
-      observer.disconnect();
-    });
-  }
+  updateElement(label, font, fontSize, font.regular, 1);
 
 
   // Functions
