@@ -38,11 +38,11 @@ function Test(store) {
     const viewport = store.getData().viewport;
     const isTablet = viewport >= 768 ? true : false;
 
-    if(primaryFont.label !== title.dataset.label || parseInt(primary.dataset.viewport) !== viewport) {
+    if(primaryFont.label !== title.dataset.label || parseInt(title.dataset.viewport) !== viewport) {
       updateFont(primaryFont, title);
     }
 
-    if(secondaryFont.label !== paragraph.dataset.label || parseInt(secondary.dataset.viewport) !== viewport) {
+    if(secondaryFont.label !== paragraph.dataset.label || parseInt(paragraph.dataset.viewport) !== viewport) {
       updateFont(secondaryFont, paragraph);
     }
 

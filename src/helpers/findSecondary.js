@@ -1,4 +1,4 @@
-import isObj from "../../../../utils/isObj";
+import isObj from "../utils/isObj";
 
 function findSecondary(primary, secondaryFonts) {
 

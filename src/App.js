@@ -1,12 +1,18 @@
 import Header from "./Components/Modules/Header/Header";
-import Primary from "./Components/Modules/Sidebars/Primary";
-import Secondary from "./Components/Modules/Sidebars/Secondary";
 import Samples from "./Components/Modules/Samples/Samples";
 import Test from "./Components/Modules/Test/Test";
 import Details from "./Components/Modules/Details/Details";
+import Sidebar from "./Components/Modules/Sidebar/Sidebar";
 import Button from "./Components/Elements/Button";
-import getRandomIndex from "./utils/getRandomIndex";
+import ListItem from "./Components/Elements/ListItem";
+import findSecondary from "./helpers/findSecondary";
+import getPercentage from "./utils/getPercentage";
 import getSampleText from "./helpers/getSampleText";
+import highlightActiveItem from "./helpers/highlightActiveItem";
+import sortPrimaryFonts from "./helpers/sortPrimaryFonts";
+import sortSecondaryFonts from "./helpers/sortSecondaryFonts";
+import getRandomIndex from "./utils/getRandomIndex";
+import isObj from "./utils/isObj";
 import qDom from "./utils/qDom";
 
 
@@ -69,12 +75,27 @@ function App({store}) {
   const overlay = qDom(app, "slider-overlay");
 
 
+  // Create Elements
+
+
   // Appends
 
   qDom(app, "top-bar").appendChild(Header());
   
-  primary.appendChild(Primary(store));
-  secondary.appendChild(Secondary(store));
+  primary.appendChild(Sidebar({
+    id: "primary",
+    store: store,
+    options: ["A-Z", "Rating", "X-Height"],
+    sort: "primarySort"
+  }));
+
+  secondary.appendChild(Sidebar({
+    id: "secondary",
+    store: store,
+    options: ["Match", "A-Z", "Rating"],
+    sort: "secondarySort"
+  }));
+
   mainContent.appendChild(Samples(store));
   mainContent.appendChild(Test(store));
   mainContent.appendChild(document.createElement("hr"));
@@ -219,6 +240,104 @@ function App({store}) {
   }
 
   setTheme();
+
+
+  // Font Actions
+
+  function changePrimary(font) {
+    store.setData({
+      primaryFont: font,
+      secondaryFont: {},
+      secondarySort: "Match",
+      sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : ""
+    });
+  }
+
+
+  function updatePrimaryList() {
+
+    const sort = store.getData().primarySort;
+    const primaryList = qDom(primary, "sidebar-list");
+    const primaryFont = store.getData().primaryFont;
+    const fonts = store.getData().fonts;
+  
+    if(isObj(primaryFont) > 0 && primaryList.dataset.sort !== sort) {
+
+      primaryList.innerHTML = '';
+
+      const sortedFonts = sortPrimaryFonts({
+        fonts: fonts, 
+        sort: sort
+      });
+      
+      sortedFonts.map((font, index) => {
+        primaryList.appendChild(ListItem({
+          font: font,
+          action: changePrimary,
+          data: getPercentage(font.xHeightPct)
+        }));
+      });
+
+      highlightActiveItem(primaryList, store.getData().primaryFont, true);
+      primaryList.dataset.sort = sort;
+    }
+  }
+
+  store.subscribe(updatePrimaryList);
+  updatePrimaryList();
+
+
+  function changeSecondary(font) {
+    store.setData({
+      secondaryFont: font,
+      sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : ""
+    });
+  }
+
+
+  function updateSecondaryList() {
+
+    const sort = store.getData().secondarySort;
+    const secondaryList = qDom(secondary, "sidebar-list");
+    const primaryFont = store.getData().primaryFont;
+    const fonts = store.getData().fonts;
+  
+    if(isObj(primaryFont) && 
+      (secondaryList.dataset.primary !== primaryFont.name
+      || secondaryList.dataset.sort !== sort)
+    ) {
+
+      secondaryList.innerHTML = '';
+
+      const sortedFonts = sortSecondaryFonts({
+        primary: primaryFont, 
+        fonts: fonts, 
+        sort: sort
+      });
+
+      sortedFonts.map((font, index) => {
+        secondaryList.appendChild(ListItem({
+          font: font,
+          action: changeSecondary,
+          data: getPercentage(font.xHeightDiff)
+        }));
+      });
+       
+      secondaryList.dataset.primary = primaryFont.name;
+      secondaryList.dataset.sort = sort;
+
+      if(!isObj(store.getData().secondaryFont)) {
+        const newSecondary = findSecondary(primaryFont, sortedFonts);
+        store.setData({secondaryFont: newSecondary});
+      }
+
+      highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
+
+    }
+  }
+
+  store.subscribe(updateSecondaryList);
+  updateSecondaryList();
 
 
   // Return
