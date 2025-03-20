@@ -1,5 +1,7 @@
 function updateElement(element, font, size, weight, leading) {
 
+  console.log(element, font);
+
   function getFontStylesheet(font, weight) {
 
     if(font.distribution === "Google") {
@@ -63,7 +65,7 @@ function updateElement(element, font, size, weight, leading) {
       link.onload = () => resolve();
       
       link.onerror = () => reject(new Error(`Failed to load stylesheet: ${href}`));
-      
+
       document.head.appendChild(link);
     });
   

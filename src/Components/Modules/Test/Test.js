@@ -1,4 +1,5 @@
 import updateElement from "../../../helpers/updateElement";
+import isObj from "../../../utils/isObj";
 import qDom from "../../../utils/qDom";
 
 function Test(store) {
@@ -39,11 +40,15 @@ function Test(store) {
     const isTablet = viewport >= 768 ? true : false;
 
     if(primaryFont.label !== title.dataset.label || parseInt(title.dataset.viewport) !== viewport) {
-      updateFont(primaryFont, title);
+      if(isObj(primaryFont)) {
+        updateFont(primaryFont, title);
+      }
     }
 
     if(secondaryFont.label !== paragraph.dataset.label || parseInt(paragraph.dataset.viewport) !== viewport) {
-      updateFont(secondaryFont, paragraph);
+      if(isObj(secondaryFont)) {
+        updateFont(secondaryFont, paragraph);
+      }
     }
 
     function updateFont(font, example) {
