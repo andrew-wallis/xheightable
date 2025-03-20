@@ -17,6 +17,7 @@ function Sample(font) {
           </div>
           <div class="xheight" data-element="sample-xheight">
             <div class="xheight-content">
+              <div class="sr-only">X Height</div>
               <div data-element="sample-xheight-number">
                 <!-- X-Height -->
               </div>

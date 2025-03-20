@@ -52,6 +52,8 @@ function Test(store) {
     }
 
     function updateFont(font, example) {
+
+      console.log("Update");
     
       const remBase = isTablet ? example.dataset.size : parseFloat(example.dataset.size) * 0.875;
   
@@ -62,7 +64,7 @@ function Test(store) {
 
       updateElement(example, font, remBase, font[example.dataset.weight], font[example.dataset.leading]);
   
-      example.dataset.fontFamily = font.label;
+      example.dataset.label = font.label;
       example.dataset.viewport = viewport;
   
     }

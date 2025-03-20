@@ -114,6 +114,14 @@ function App({store}) {
     store.setData({sidebar: ""});
   });
 
+  primary.addEventListener("focusin", () => {
+    store.setData({sidebar: "primary"});
+  });
+
+  secondary.addEventListener("focusin", () => {
+    store.setData({sidebar: "secondary"});
+  });
+
 
   // Sidebar Functions
 
@@ -251,6 +259,9 @@ function App({store}) {
       secondarySort: "Match",
       sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : ""
     });
+    
+    const primaryList = qDom(primary, "sidebar-list");
+    highlightActiveItem(primaryList, store.getData().primaryFont, true);
   }
 
 
@@ -292,6 +303,9 @@ function App({store}) {
       secondaryFont: font,
       sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : ""
     });
+
+    const secondaryList = qDom(secondary, "sidebar-list");
+    highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
   }
 
 

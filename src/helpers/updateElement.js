@@ -1,7 +1,5 @@
 function updateElement(element, font, size, weight, leading) {
 
-  console.log(element, font);
-
   function getFontStylesheet(font, weight) {
 
     if(font.distribution === "Google") {

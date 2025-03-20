@@ -9,7 +9,7 @@ function ListItem({font, action, data}) {
   listItem.dataset.name = font.name;
   listItem.dataset.label = font.label;
   listItem.dataset.element = "list-item";
-  listItem.tabIndex = 0;
+  listItem.tabIndex = -1;
   listItem.role = "option";
   listItem.ariaLabel = `Select ${font.label}`;
 
