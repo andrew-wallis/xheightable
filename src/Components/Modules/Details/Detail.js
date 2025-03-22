@@ -5,7 +5,7 @@ function Detail() {
 
   /* html */
   detail.innerHTML = `
-    <h3 class="heading" data-element="detail-label">
+    <h3 data-element="detail-label">
       <!-- Detail Label-->
     </h3>
     <ul class="stack secondary">
@@ -22,13 +22,13 @@ function Detail() {
         </div>
       </li>
       <li class="with-sidebar">
-        <div class="not-sidebar"><strong>Line Height</strong></div>
+        <div class="not-sidebar"><strong>Suggested Paragraph Line Height</strong></div>
         <div class="data" data-element="line-height">
           <!-- Line Height -->
         </div>
       </li>
     </ul>
-    <a data-element="detail-cta" href="#" target="_blank" class="button button-icon button-large slub slub-large">
+    <a data-element="detail-cta" href="#" target="_blank" class="button button-icon button-large">
       <!-- Detail CTA -->
     </a>
     <div data-element="detail-footer">

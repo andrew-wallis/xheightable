@@ -16,7 +16,7 @@ function ListItem({font, action, data}) {
   /* html */
   listItem.innerHTML = `
     <div data-element="item-leader" class="sample-leader">A</div>
-    <div class="list-item-label" data-element="item-label">${font.label}<span class="data list-item-data">${data}</span></div>
+    <div class="list-item-label" data-element="item-label">${font.label}<span class="list-item-data">${data}</span></div>
     
   `;
 

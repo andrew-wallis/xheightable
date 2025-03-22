@@ -43,7 +43,7 @@ function App({store}) {
       <aside class="slider-sidebar primary-closed" data-element="primary-sidebar">
         <!-- Primary Sidebar -->
       </aside>
-      <main data-element="main" class="slider-main insulate-3xl">
+      <main data-element="main" class="slider-main insulate-2xl-3xl">
         <div data-element="main-content" class="stack-3xl wrap">
           <!-- Main Content -->
         </div>
@@ -54,7 +54,7 @@ function App({store}) {
       </aside>
     </div>
     <footer>
-      <div class="with-sidebar wrap caption">
+      <div class="with-sidebar wrap">
         <div class="not-sidebar">© x-heightable ${new Date().getFullYear()}</div>
         <div data-element="theme-switch">
           <!-- Theme Switch -->
@@ -103,8 +103,7 @@ function App({store}) {
   
   qDom(app, "theme-switch").appendChild(Button({
     label: "Theme",
-    action: setTheme,
-    classes: "caption"
+    action: setTheme
   }));
 
 

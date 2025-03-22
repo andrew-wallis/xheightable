@@ -7,7 +7,7 @@ function Select({action, hideLabel, label, options, value}) {
   /* html */
   select.innerHTML = `
     <label class="${hideLabel ? "sr-only" : ""} label-medium" for=${id}>${label}</label>
-    <select class="clickable slub" id=${id} data-element=${id}>
+    <select class="clickable" id=${id} data-element=${id}>
       <!-- Select Options -->
     </select>
   `;
