@@ -148,12 +148,15 @@
 
 html,
 body {
-  color: var(--text);
   background-color: var(--background);
+  position: relative;
+}
+
+.app {
+  color: var(--text);
   font-family: var(--primary-font);
   font-variant-numeric: tabular-nums;
   font-size: var(--step--1);
-  position: relative;
 }
 
 *:focus {
