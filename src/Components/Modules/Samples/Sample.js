@@ -1,7 +1,7 @@
 function Sample(font) {
 
   const sample = document.createElement('div');
-  sample.classList = "stack-l unselectable";
+  sample.classList = "unselectable";
   sample.dataset.font = font;
 
   /* html */
