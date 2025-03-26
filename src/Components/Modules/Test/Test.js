@@ -52,8 +52,6 @@ function Test(store) {
     }
 
     function updateFont(font, example) {
-
-      console.log("Update");
     
       const remBase = isTablet ? example.dataset.size : parseFloat(example.dataset.size) * 0.875;
   

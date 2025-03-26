@@ -20,42 +20,47 @@ function Samples(store) {
   const primary = Sample("primary");
   const secondary = Sample("secondary");
 
-  samples.appendChild(primary);
-  samples.appendChild(secondary);
-
-  qDom(primary, "sample-action-left").appendChild(Button({
+  const primaryButton = Button({
     label: "Change",
-    classes: "primary-action",
-    action: activatePrimary,
-    icon: "Arrow Left",
+    classes: "primary-action button-icon-reverse",
+    action: changeSidebar,
+    icon: "Arrow Right",
     id: "primary"
-  }));
+  });
 
-  qDom(secondary, "sample-action-left").appendChild(Button({
-    label: "Swap",
-    action: swap,
-    icon: "Swap",
-    id: "swap"
-  }));
-
-  qDom(secondary, "sample-action-right").appendChild(Button({
+  const secondaryButton = Button({
     label: "Change",
     classes: "secondary-action button-icon-reverse",
-    action: activateSecondary,
+    action: changeSidebar,
     icon: "Arrow Right",
     id: "secondary"
-  }));
+  });
+
+  const swapButton = Button({
+    label: "Swap",
+    action: swap,
+    classes: "button-icon-reverse",
+    icon: "Swap",
+    id: "swap"
+  });
+
+  const lockButton = Button({
+    label: "Lock",
+    action: lock,
+    classes: "button-icon-reverse",
+    icon: "Swap",
+    id: "lock"
+  });
+
+  samples.appendChild(primary);
+  samples.appendChild(secondary);
+  qDom(primary, "sample-action-left").appendChild(swapButton);
+  qDom(primary, "sample-action-right").appendChild(primaryButton);
+  qDom(secondary, "sample-action-left").appendChild(lockButton);
+  qDom(secondary, "sample-action-right").appendChild(secondaryButton);
 
 
   // Functions
-
-  function activatePrimary() {
-    store.setData({sidebar: "primary"});
-  }
-
-  function activateSecondary() {
-    store.setData({sidebar: "secondary"});
-  }
 
   function updateSamples() {
 
@@ -68,7 +73,7 @@ function Samples(store) {
       updateFont(primaryFont, primary);
     }
 
-    if(secondaryFont.label !== secondary.dataset.label || parseInt(secondary.dataset.viewport) !== viewport) {
+    if(secondaryFont.label !== secondary.dataset.label || primaryFont.label !== secondary.dataset.primary || parseInt(secondary.dataset.viewport) !== viewport) {
       updateFont(secondaryFont, secondary);
     }
 
@@ -138,6 +143,7 @@ function Samples(store) {
         updateElement(sampleText, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
 
         sample.dataset.label = font.label;
+        sample.dataset.primary = primaryFont.label;
         sample.dataset.viewport = viewport;
       }
     }
@@ -156,6 +162,39 @@ function Samples(store) {
       secondaryFont: currentPrimary
     })
   }
+
+
+  function lock() {
+    store.setData({
+      lock: !store.getData().lock
+    });
+
+    const label = lockButton.querySelector(".button-label");
+
+    if(store.getData().lock) {
+      lockButton.classList.add("active");
+      label.innerText = "unlock";
+    } else {
+      lockButton.classList.remove("active");
+      label.innerText = "lock";
+    }
+  }
+
+
+
+  function changeSidebar(value) {
+
+    if(value === "primary") {
+      store.setData({sidebar: "primary"});
+      store.setData({open: true});
+    } else if(value === "secondary") {
+      store.setData({sidebar: "secondary"});
+      store.setData({open: true});
+    }
+
+  }
+
+  changeSidebar(store.getData().sidebar);
 
 
   // Return

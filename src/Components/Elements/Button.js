@@ -27,7 +27,7 @@ function Button({label, icon, classes, action, id}) {
 
   function handleClick(e) {
     e.preventDefault();
-    action(label);
+    action(id);
   };
 
   return button;

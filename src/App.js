@@ -2,17 +2,11 @@ import Header from "./Components/Modules/Header/Header";
 import Samples from "./Components/Modules/Samples/Samples";
 import Test from "./Components/Modules/Test/Test";
 import Details from "./Components/Modules/Details/Details";
-import Sidebar from "./Components/Modules/Sidebar/Sidebar";
+import PrimaryFontList from "./Components/Modules/FontList/PrimaryFontList";
+import SecondaryFontList from "./Components/Modules/FontList/SecondaryFontList";
 import Button from "./Components/Elements/Button";
-import ListItem from "./Components/Elements/ListItem";
-import findSecondary from "./helpers/findSecondary";
-import getPercentage from "./utils/getPercentage";
 import getSampleText from "./helpers/getSampleText";
-import highlightActiveItem from "./helpers/highlightActiveItem";
-import sortPrimaryFonts from "./helpers/sortPrimaryFonts";
-import sortSecondaryFonts from "./helpers/sortSecondaryFonts";
 import getRandomIndex from "./utils/getRandomIndex";
-import isObj from "./utils/isObj";
 import qDom from "./utils/qDom";
 
 
@@ -27,30 +21,30 @@ function App({store}) {
     primarySort: "A-Z",
     secondarySort: "Match",
     sidebar: "",
+    open: false,
+    lock: false,
     testTitle: getSampleText(2),
     testText: getSampleText(10),
     viewport: window.innerWidth
   });
 
   const app = document.createElement('div');
+  app.className = "app-container";
 
   /* html */
   app.innerHTML = `
     <header role="banner" data-element="top-bar">
       <!-- Top Bar -->
     </header>
-    <div data-element="slider" class="slider">
-      <aside class="slider-sidebar primary-closed" data-element="primary-sidebar">
-        <!-- Primary Sidebar -->
-      </aside>
-      <main data-element="main" class="slider-main insulate-2xl-3xl">
-        <div data-element="main-content" class="stack-3xl wrap">
+    <div data-element="sidebar-container" class="center scrollable-container sidebar-container">
+      <main data-element="main" class="main insulate-2xl-3xl scrollable-container">
+        <div data-element="main-content" class="stack-3xl wrap scrollable">
           <!-- Main Content -->
         </div>
-        <div data-element="slider-overlay" class="slider-overlay"></div>
+        <div data-element="aside-overlay" class="aside-overlay"></div>
       </main>
-      <aside class="slider-sidebar secondary-closed" data-element="secondary-sidebar">
-        <!-- Secondary Sidebar -->
+      <aside class="aside insulate-2xl-3xl wrap scrollable-container" data-element="aside">
+        <!-- Aside -->
       </aside>
     </div>
     <footer>
@@ -66,40 +60,25 @@ function App({store}) {
 
   // Queries
 
-  const body = document.body;
-  const slider = qDom(app, "slider");
-  const main = qDom(app, "main");
+  const container = qDom(app, "sidebar-container");
   const mainContent = qDom(app, "main-content");
-  const primary = qDom(app, "primary-sidebar");
-  const secondary  = qDom(app, "secondary-sidebar");
-  const overlay = qDom(app, "slider-overlay");
-
-
-  // Create Elements
-
+  const aside = qDom(app, "aside");
+  
 
   // Appends
 
   qDom(app, "top-bar").appendChild(Header());
   
-  primary.appendChild(Sidebar({
-    id: "primary",
-    store: store,
-    options: ["A-Z", "Rating", "X-Height"],
-    sort: "primarySort"
-  }));
-
-  secondary.appendChild(Sidebar({
-    id: "secondary",
-    store: store,
-    options: ["Match", "A-Z", "Rating"],
-    sort: "secondarySort"
-  }));
-
   mainContent.appendChild(Samples(store));
   mainContent.appendChild(Test(store));
   mainContent.appendChild(document.createElement("hr"));
   mainContent.appendChild(Details(store));
+
+  const primary = PrimaryFontList(store);
+  const secondary = SecondaryFontList(store)
+
+  aside.appendChild(primary);
+  aside.appendChild(secondary);
   
   qDom(app, "theme-switch").appendChild(Button({
     label: "Theme",
@@ -109,92 +88,53 @@ function App({store}) {
 
   // Event Listeners
 
-  overlay.addEventListener("click", function(e) {
+  qDom(app, "aside-overlay").addEventListener("click", function(e) {
     store.setData({sidebar: ""});
-  });
-
-  primary.addEventListener("focusin", () => {
-    store.setData({sidebar: "primary"});
-  });
-
-  secondary.addEventListener("focusin", () => {
-    store.setData({sidebar: "secondary"});
+    store.setData({open: false});
   });
 
 
   // Sidebar Functions
 
-  function updateSlider() {
-
+  function updateSidebar() {
     const activeSidebar = store.getData().sidebar;
     const viewport = store.getData().viewport;
     const isDesktop = viewport >= 1024 ? true : false;
 
-    if(slider.dataset.active !== activeSidebar || slider.dataset.viewport !== viewport) {
-      
-      primary.classList.remove("sidebar-open");
-      secondary.classList.remove('sidebar-open');
-      main.classList.remove('primary-open');
-      main.classList.remove('secondary-open');
-      main.classList.remove("main-max-width");
-      main.classList.remove('scrollable-container');
-      mainContent.classList.remove('scrollable');
-      overlay.classList.remove('show-overlay');
-      body.classList.remove('scroll-lock');
-      app.classList.remove('slider-flex');
+    const primaryButton = qDom(mainContent, "button-primary");
+    const secondaryButton = qDom(mainContent, "button-secondary");
 
-      const primaryButton = qDom(mainContent, "button-primary");
-      const secondaryButton = qDom(mainContent, "button-secondary");
+    container.classList.remove("sidebar-open");
+    document.body.classList.remove('scroll-lock');
 
-      primaryButton.disabled = false;
-      secondaryButton.disabled = false;
+    [primary, secondary, primaryButton, secondaryButton].forEach((elem) => {
+      elem.classList.remove("active");
+    });
 
-      if(isDesktop) {
-        main.classList.add("main-max-width");
-        main.classList.add('scrollable-container');
-        mainContent.classList.add('scrollable');
-        app.classList.add('slider-flex');
-      }
-
-      if(activeSidebar === "primary") {
-
-        primary.classList.add("sidebar-open");
-        main.classList.add('primary-open');
-
-        if(!isDesktop) {
-          overlay.classList.add('show-overlay');
-          body.classList.add('scroll-lock');
-        } else {
-          primaryButton.disabled = true;
-        }
-
-      } else if (activeSidebar === "secondary") {
-
-        secondary.classList.add("sidebar-open");
-
-        if(!isDesktop) {
-          main.classList.add('secondary-open');
-          overlay.classList.add('show-overlay');
-          body.classList.add('scroll-lock');
-        } else {
-          secondaryButton.disabled = true;
-        }
-
-      } else {
-        if (isDesktop) {
-          secondary.classList.add("sidebar-open");
-          secondaryButton.disabled = true; 
-        }
-      }
-
-      slider.dataset.viewport = viewport;
-      slider.dataset.active = activeSidebar;
-    
+    if(activeSidebar === "primary") {
+      primary.classList.add("active");
+      primaryButton.classList.add("active");
+    } else if(activeSidebar === "secondary") {
+      secondary.classList.add("active");
+      secondaryButton.classList.add("active");
     }
+
+    if(store.getData().open) {
+      container.classList.add("sidebar-open");
+
+      if(!isDesktop) {
+        document.body.classList.add('scroll-lock');
+      }
+    }
+
+    if(isDesktop && !store.getData().sidebar) {
+      store.setData({sidebar: "primary"});
+    }
+
   }
 
-  store.subscribe(updateSlider);
-  updateSlider();
+  store.subscribe(updateSidebar);
+  updateSidebar();
 
 
   // Viewport Functions
@@ -251,106 +191,15 @@ function App({store}) {
 
   // Font Actions
 
-  function changePrimary(font) {
-    store.setData({
-      primaryFont: font,
-      secondaryFont: {},
-      secondarySort: "Match",
-      sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : ""
-    });
-    
-    const primaryList = qDom(primary, "sidebar-list");
-    highlightActiveItem(primaryList, store.getData().primaryFont, true);
-  }
 
 
-  function updatePrimaryList() {
-
-    const sort = store.getData().primarySort;
-    const primaryList = qDom(primary, "sidebar-list");
-    const primaryFont = store.getData().primaryFont;
-    const fonts = store.getData().fonts;
-  
-    if(isObj(primaryFont) > 0 && primaryList.dataset.sort !== sort) {
-
-      primaryList.innerHTML = '';
-
-      const sortedFonts = sortPrimaryFonts({
-        fonts: fonts, 
-        sort: sort
-      });
-      
-      sortedFonts.map((font, index) => {
-        primaryList.appendChild(ListItem({
-          font: font,
-          action: changePrimary,
-          data: getPercentage(font.xHeightPct)
-        }));
-      });
-
-      highlightActiveItem(primaryList, store.getData().primaryFont, true);
-      primaryList.dataset.sort = sort;
-    }
-  }
-
-  store.subscribe(updatePrimaryList);
-  updatePrimaryList();
 
 
-  function changeSecondary(font) {
-    store.setData({
-      secondaryFont: font,
-      sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : ""
-    });
-
-    const secondaryList = qDom(secondary, "sidebar-list");
-    highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
-  }
 
 
-  function updateSecondaryList() {
 
-    const sort = store.getData().secondarySort;
-    const secondaryList = qDom(secondary, "sidebar-list");
-    const primaryFont = store.getData().primaryFont;
-    const fonts = store.getData().fonts;
-  
-    if(isObj(primaryFont) && 
-      (secondaryList.dataset.primary !== primaryFont.name
-      || secondaryList.dataset.sort !== sort)
-    ) {
 
-      secondaryList.innerHTML = '';
 
-      const sortedFonts = sortSecondaryFonts({
-        primary: primaryFont, 
-        fonts: fonts, 
-        sort: sort
-      });
-
-      sortedFonts.map((font, index) => {
-        secondaryList.appendChild(ListItem({
-          font: font,
-          action: changeSecondary,
-          data: getPercentage(font.xHeightDiff)
-        }));
-      });
-       
-      secondaryList.dataset.primary = primaryFont.name;
-      secondaryList.dataset.sort = sort;
-
-      if(!isObj(store.getData().secondaryFont)) {
-        const newSecondary = findSecondary(primaryFont, sortedFonts);
-        store.setData({secondaryFont: newSecondary});
-      }
-
-      highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
-
-    }
-  }
-
-  store.subscribe(updateSecondaryList);
-  updateSecondaryList();
 
 
   // Return

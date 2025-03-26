@@ -36,6 +36,7 @@
   --blue: #469dc8;
   --blue-lt: #90C4DE;
   --blue-ltr: #DAEBF4;
+  --blue-lst: #E6F2F8;
 
   /* Gradient Steps */
   --accent-step-0: var(--blue);
@@ -48,7 +49,7 @@
   --background: var(--neutral-02);
   --negative: var(--neutral-02);
   --highlight: var(--neutral-0);
-  --highlight-hover: var(--neutral-02);
+  --highlight-hover: var(--blue-ltr);
   --scrollbar: var(--neutral-10);
   --border-secondary: var(--neutral-10);
   --border-primary: var(--neutral-20);
@@ -135,15 +136,16 @@
   --shadow: rgba(255,255,255,0.05);
   --shadow-dark: rgba(255,255,255,0.1);
 
-  --background: var(--neutral-0);
-  --highlight: var(--neutral-02);
-  --highlight-hover: var(--neutral-05);
-  --negative: var(--neutral-100);
-
   --blue-dkr: #7AB8D7;
   --blue-dk: #59A6CD;
   --blue-lt: #335F75;
-  --blue-ltr: #2D3A43;
+  --blue-ltr: #22333C;
+  --blue-lst: #1F2D33;
+
+  --background: var(--neutral-0);
+  --highlight: var(--neutral-02);
+  --negative: var(--neutral-100);
+
 }
 
 
@@ -167,7 +169,7 @@ body {
 }
 
 h3 {
-  font-size: var(--step--1);
+  font-size: var(--step--2);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -177,7 +179,7 @@ strong {
   font-weight: 600;
 }
 
-ul:not([data-element="sidebar-list"]) {
+ul:not([data-element="aside-list"]) {
   color: var(--secondary);
   font-feature-settings: "ss03" 1;
   line-height: 125%;
@@ -225,6 +227,13 @@ hr {
 
 
 /* Layout Utilities */
+
+.center {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 64rem;
+  width: 100%;
+}
 
 .wrap {
   margin-right: auto;
@@ -274,6 +283,10 @@ hr {
   display: grid;
   gap: var(--space-s);
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.stack-2xs {
+  gap: var(--space-2xs);
 }
 
 .stack-3xl {
@@ -342,6 +355,7 @@ button {
   appearance: none;
   background-color: transparent;
   border: 0;
+  color: inherit;
   cursor: pointer;
   padding: 0;
   user-select: none;
@@ -359,7 +373,8 @@ button {
   user-select: none;
 }
 
-.button:hover {
+.button:hover,
+.button.active {
   background-color: var(--highlight-hover);
 }
 
@@ -594,41 +609,46 @@ select {
   scrollbar-color: var(--scrollbar) transparent;
 }
 
+/* Sidebar */
 
-/* Slider */
-
-.slider {
-  display: flex;
+.sidebar-container {
   position: relative;
-  overflow: hidden;
-  flex-grow: 1;
-  height: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 64rem;
-  width: 100%;
 }
 
-.slider-sidebar {
-  background-color: var(--background);
-  bottom: 0;
-  position: fixed;
-  top: var(--space-4xl);
-  bottom: var(--space-3xl);
+.aside-list {
+  height: 0;
+  transition: height .3s ease-out;
+}
+
+.aside-list.active {
+  height: 100%;
+}
+
+.aside-header {
+  align-items: center;
+  color: var(--secondary);
+}
+
+.main {
+  transform: translateX(0%);
   transition: transform 0.3s ease-out;
-  width: 16rem;
+}
+
+.aside {
+  background-color: var(--background);
+  bottom: var(--space-3xl);
+  height: auto;
+  max-width: 16rem;
+  position: fixed;
+  right: 0;
+  top: var(--space-4xl);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-out;
+  width: 100%;
   z-index: 200;
 }
 
-.slider-main {
-  flex: 1;
-  width: 100%;
-  position: relative;
-  transform: translateX(0);
-  transition: transform 0.3s ease-out;
-}
-
-.slider-overlay {
+.aside-overlay {
   position: absolute;
   z-index: 150;
   top: 0;
@@ -641,46 +661,54 @@ select {
   overflow: hidden;
 }
 
-.show-overlay {
-  display: flex;
-}
-
-.primary-closed {
-  left: 0;
-  transform: translate(-100%);
-}
-
-.secondary-closed {
-  right: 0;
-  transform: translate(100%);
-}
-
-.sidebar-open {
+.sidebar-open .aside {
   transform: translateX(0);
 }
 
-.primary-open {
-  transform: translateX(16rem);
+.sidebar-open .aside-overlay {
+  display: block;
 }
 
-.secondary-open {
+.sidebar-open .main {
   transform: translateX(-16rem);
 }
 
-.main-max-width {
-  max-width: calc(100% - 16rem);
-}
+@media (min-width: 1024px) {
 
-.slider-flex {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-}
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-.slider-flex aside {
-  position: absolute;
-  top: 0;
+  .sidebar-container {
+    display: flex;
+  }
+
+  .aside {
+    position: static;
+    flex-shrink: 0;
+    height: 100%;
+    transform: translateX(0);
+  }
+  
+  .main {
+    flex-grow: 1;
+    width: 100%;
+    position: relative;
+    transform: translateX(0);
+    transition: transform 0.3s ease-out;
+  }
+  
+  .sidebar-open .aside-overlay {
+    display: none;
+  }
+  
+  .sidebar-open .main {
+    transform: translateX(0);
+  }
+  
 }
 
 

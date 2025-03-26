@@ -2,27 +2,30 @@ import qaDom from "../../../utils/qaDom";
 import qDom from "../../../utils/qDom";
 import Select from "../../Elements/Select";
 
-function Sidebar({id, store, options, sort}) {
+function FontList({id, store, label, options, sort}) {
 
-  const sidebar = document.createElement('div');
-  sidebar.className = "insulate wrap scrollable-container";
+  const fontlist = document.createElement('div');
+  fontlist.className = "scrollable-container stack";
 
   /* html */
-  sidebar.innerHTML = `
-    <div class="insulate stack scrollable-container">
-      <div data-element="sidebar-sort">
+  fontlist.innerHTML = `
+    <div class="with-sidebar aside-header">
+      <h3 class="not-sidebar">
+        ${label}
+      </h3>
+      <div class="sidebar" data-element="fontlist-sort">
         <!-- Pair Filter -->
       </div>
-      <ul role="listbox" tabindex="-1" data-element="sidebar-list" class="scrollable focus-padding">
-        <!-- Pair List -->
-      </ul>
     </div>
+    <ul role="listbox" tabindex="-1" data-element="aside-list" class="scrollable focus-padding">
+      <!-- Pair List -->
+    </ul>
   `;
 
 
   // Apends
 
-  qDom(sidebar, "sidebar-sort").appendChild(Select({
+  qDom(fontlist, "fontlist-sort").appendChild(Select({
     action: changeSort,
     hideLabel: true,
     label: `Sort ${id} fonts`, 
@@ -33,7 +36,7 @@ function Sidebar({id, store, options, sort}) {
 
   // Event Listeners
 
-  const list = qDom(sidebar, "sidebar-list");
+  const list = qDom(fontlist, "aside-list");
 
   list.addEventListener("keydown", (e) => {
 
@@ -72,8 +75,8 @@ function Sidebar({id, store, options, sort}) {
     store.setData({[sort]: value});
   }
 
-  return sidebar;
+  return fontlist;
 
 }
 
-export default Sidebar;
+export default FontList;
