@@ -61,7 +61,7 @@ id,name,label,superclass,classification,subclass,family,vibe,distribution,weight
 60,Jost,Jost,Sans,Geometric,Futura,,Elegant,Google,100..900;100..900i,400,600,22.08,33.6,0.66,0.70,1.00,1.25,1.45,https://fonts.google.com/specimen/Jost,2018,,232
 61,Karla,Karla,Sans,Grotesque,Blake,,Quirky,Google,200..800;200..800i,400,600,22.99,30.14,0.76,0.63,1.11,1.15,1.40,https://fonts.google.com/specimen/Karla,2012,,111
 62,Kepler Std,Kepler,Serif,Transitional,Times,,Quirky,Adobe,300;300i;400;400i;500;500i;600;600i;700;700i;900;900i,400,600,20.64,30.43,0.68,0.63,1.11,1.10,1.35,https://fonts.adobe.com/fonts/kepler,1996,fxa0ozr,67
-63,Lato,Lato,Sans,Humanist,Johnston,,Quirky,Google,100;100i;300;300i;400;400i;700;700i;900;900i,400,600,24.31,34.39,0.70,0.72,0.97,1.30,1.55,https://fonts.google.com/specimen/Lato,2011,,29
+63,Lato,Lato,Sans,Humanist,Johnston,,Quirky,Google,100;100i;300;300i;400;400i;700;700i;900;900i,400,700,24.31,34.39,0.70,0.72,0.97,1.30,1.55,https://fonts.google.com/specimen/Lato,2011,,29
 64,League Spartan,League Spartan,Sans,Geometric,Neuzeit,,Neutral,Google,100;200;300;400;500;600;700;800;900,400,600,19.7,31.68,0.62,0.66,1.06,1.15,1.35,https://fonts.google.com/specimen/League+Spartan/,2021,,24
 65,Lexend,Lexend,Sans,Geometric,Proxima,,Friendly,Google,100..900,400,600,25.2,33.6,0.76,0.70,1.00,1.25,1.55,https://fonts.google.com/specimen/Lexend,2021,,13
 66,Libre Baskerville,Libre Baskerville,Serif,Transitional,Baskerville,,Friendly,Google,400;400i;700,400,700,25.44,36.96,0.68,0.77,0.91,1.35,1.65,https://fonts.google.com/specimen/Libre+Baskerville,1754,,82
