@@ -4,7 +4,7 @@ import isObj from "../../../utils/isObj";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
 import getABC from "./helpers/getABC";
-import updateElement from "../../../helpers/updateElement";
+import processFont from "../../../helpers/processFont";
 
 function Samples(store) {
 
@@ -22,6 +22,7 @@ function Samples(store) {
 
   const primaryButton = Button({
     label: "Change",
+    suffix: "Primary Font",
     classes: "primary-action button-icon-reverse",
     action: changeSidebar,
     icon: "Arrow Right",
@@ -30,6 +31,7 @@ function Samples(store) {
 
   const secondaryButton = Button({
     label: "Change",
+    suffix: "Secondary Font",
     classes: "secondary-action button-icon-reverse",
     action: changeSidebar,
     icon: "Arrow Right",
@@ -38,6 +40,7 @@ function Samples(store) {
 
   const swapButton = Button({
     label: "Swap",
+    suffix: "Primary and Secondary Font",
     action: swap,
     classes: "button-icon-reverse",
     icon: "Swap",
@@ -46,9 +49,10 @@ function Samples(store) {
 
   const lockButton = Button({
     label: "Lock",
+    suffix: "Secondary Font",
     action: lock,
     classes: "button-icon-reverse",
-    icon: "Swap",
+    icon: "Lock",
     id: "lock"
   });
 
@@ -139,8 +143,8 @@ function Samples(store) {
           qDom(sample, "sample-xheight").dataset.step = difference > 10 ? "10" : `${difference}`;
         }
 
-        updateElement(labelText, font, labelSize, font.bold, `${labelSize * 1.33}rem`);
-        updateElement(sampleText, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
+        processFont(labelText, font, labelSize, font.bold, `${labelSize * 1.33}rem`);
+        processFont(sampleText, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
 
         sample.dataset.label = font.label;
         sample.dataset.primary = primaryFont.label;

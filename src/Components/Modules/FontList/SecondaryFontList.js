@@ -64,7 +64,7 @@ function SecondaryFontList(store) {
       secondaryList.dataset.primary = primaryFont.name;
       secondaryList.dataset.sort = sort;
 
-      if(!store.getData().lock) {
+      if(!isObj(store.getData().secondaryFont)) {
         const newSecondary = findSecondary(primaryFont, sortedFonts);
         store.setData({secondaryFont: newSecondary});
       }

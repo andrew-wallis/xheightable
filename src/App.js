@@ -63,6 +63,17 @@ function App({store}) {
   const container = qDom(app, "sidebar-container");
   const mainContent = qDom(app, "main-content");
   const aside = qDom(app, "aside");
+
+
+  // Create Elements
+
+  const primary = PrimaryFontList(store);
+  const secondary = SecondaryFontList(store)
+
+  const themeSwitch = Button({
+    label: "Theme",
+    action: toggleTheme
+  });
   
 
   // Appends
@@ -74,16 +85,10 @@ function App({store}) {
   mainContent.appendChild(document.createElement("hr"));
   mainContent.appendChild(Details(store));
 
-  const primary = PrimaryFontList(store);
-  const secondary = SecondaryFontList(store)
-
   aside.appendChild(primary);
   aside.appendChild(secondary);
   
-  qDom(app, "theme-switch").appendChild(Button({
-    label: "Theme",
-    action: setTheme
-  }));
+  qDom(app, "theme-switch").appendChild(themeSwitch);
 
 
   // Event Listeners
@@ -103,6 +108,8 @@ function App({store}) {
 
     const primaryButton = qDom(mainContent, "button-primary");
     const secondaryButton = qDom(mainContent, "button-secondary");
+
+    mainContent.scrollTop = 0;
 
     container.classList.remove("sidebar-open");
     document.body.classList.remove('scroll-lock');
@@ -166,7 +173,27 @@ function App({store}) {
 
   // Theme functions
 
-  function setTheme() {
+  function setTheme(mode) {
+    const themeSwitchLabel = themeSwitch.querySelector(".button-label");
+
+    document.documentElement.setAttribute("data-theme", mode);
+    themeSwitchLabel.innerHTML = mode === "light" ? "Switch To Dark Mode" : "Switch To Light Mode";
+    localStorage.setItem('theme', mode);
+  }
+
+  function getDefaultTheme() {
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      setTheme("light");
+    } else if(localStorage.getItem('theme')) {
+      setTheme(localStorage.getItem('theme'))
+    } else {
+      setTheme("dark");
+    }
+  }
+
+  getDefaultTheme();
+
+  function toggleTheme() {
     
     const html = document.documentElement;
     const theme = html.getAttribute("data-theme");
@@ -177,16 +204,14 @@ function App({store}) {
       html.classList.remove("disable-transitions");
     }, 100);
 
-    if(theme) {
-      const newTheme = (theme === "dark") ? "light" : "dark"
-      html.setAttribute("data-theme", newTheme);
-      localStorage.setItem('theme', newTheme);
+    if(theme === "dark") {
+      setTheme("light");
     } else {
-      html.setAttribute("data-theme", localStorage.getItem('theme'));
+      setTheme("dark");
     }
   }
 
-  setTheme();
+  toggleTheme();
 
 
   // Font Actions

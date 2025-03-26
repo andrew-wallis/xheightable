@@ -1,5 +1,5 @@
 import qDom from "../../utils/qDom";
-import updateElement from "../../helpers/updateElement";
+import processFont from "../../helpers/processFont";
 
 function ListItem({font, action, data}) {
   
@@ -28,7 +28,7 @@ function ListItem({font, action, data}) {
   const leader = qDom(listItem, "item-leader");
   leader.style.fontSize = `1rem`;
 
-  updateElement(label, font, fontSize, font.regular, 1);
+  processFont(label, font, fontSize, font.regular, 1);
 
 
   // Functions

@@ -1,7 +1,7 @@
 function Detail() {
 
   const detail = document.createElement('div');
-  detail.className = "stack"
+  detail.className = "stack-l"
 
   /* html */
   detail.innerHTML = `

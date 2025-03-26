@@ -1,4 +1,4 @@
-import updateElement from "../../../helpers/updateElement";
+import processFont from "../../../helpers/processFont";
 import isObj from "../../../utils/isObj";
 import qDom from "../../../utils/qDom";
 
@@ -60,7 +60,7 @@ function Test(store) {
       example.style.fontSize = `${remBase}rem`;
       example.style.lineHeight = font[example.dataset.leading];
 
-      updateElement(example, font, remBase, font[example.dataset.weight], font[example.dataset.leading]);
+      processFont(example, font, remBase, font[example.dataset.weight], font[example.dataset.leading]);
   
       example.dataset.label = font.label;
       example.dataset.viewport = viewport;

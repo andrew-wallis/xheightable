@@ -19,7 +19,7 @@
 :root {
 
   --primary-font: "DM Sans", sans-serif;
-  --secondary-font: gelica, sans-serif;;
+  --secondary-font: gelica, sans-serif;
   --accent-font: "DM Mono", monospace;
 
   --neutral-0: #FFF;
@@ -66,12 +66,10 @@
   --outline: 2px solid var(--blue-lt);
   --horizontal-border: 1px solid var(--border-secondary);
 
-  --shadow: rgba(0,0,0,0.05);
-  --shadow-dark: rgba(0,0,0,0.1);
+  --shadow: rgba(0,0,0,0.1);
   
   --horizontal-shadow: inset 0px -1px 0px 0px var(--shadow);
   --full-shadow: inset 0px 0px 0px 1px var(--shadow);
-  --full-shadow-dark: inset 0px 0px 0px 1px var(--shadow-dark);
   --element-radius: 2px;
 
   --step--4: clamp(0.5463rem, 0.5124rem + 0.1443vw, 0.6243rem);
@@ -133,8 +131,7 @@
   --neutral-80: #D1D1D1;
   --neutral-100: #FFF;
 
-  --shadow: rgba(255,255,255,0.05);
-  --shadow-dark: rgba(255,255,255,0.1);
+  --shadow: rgba(255,255,255,0.1);
 
   --blue-dkr: #7AB8D7;
   --blue-dk: #59A6CD;
@@ -363,7 +360,6 @@ button {
 
 .button {
   align-items: center;
-  background-color: var(--highlight);
   border-radius: var(--element-radius);
   box-shadow: var(--full-shadow);
   display: flex;
@@ -384,7 +380,7 @@ button:disabled {
 }
 
 select {
-  background-color: var(--highlight);
+  background-color: transparent;
   background-image: url('/select-arrow.svg');
   background-repeat: no-repeat;
   background-position: center right var(--space-3xs);
@@ -440,13 +436,8 @@ select {
   padding: var(--space-xs) var(--space-s);
 }
 
-.button-large > .icon {
-  height: var(--space-l);
-  width: var(--space-l);
-}
-
 .button-accent {
-  box-shadow: var(--full-shadow-dark);
+  box-shadow: var(--full-shadow);
   color: var(--accent-text);
   font-weight: 800;
 }

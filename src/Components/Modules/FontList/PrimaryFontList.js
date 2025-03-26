@@ -23,7 +23,8 @@ function PrimaryFontList(store) {
   function changePrimary(font) {
     store.setData({
       primaryFont: font,
-      secondarySort: "Match",
+      secondaryFont: store.getData().lock ? store.getData().secondaryFont : {},
+      secondarySort: store.getData().lock ? store.getData().secondarySort : "Match",
       sidebar: store.getData().viewport >= 1024 ? store.getData().sidebar : "",
       open: false
     });

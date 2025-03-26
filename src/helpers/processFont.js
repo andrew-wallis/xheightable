@@ -1,4 +1,4 @@
-function updateElement(element, font, size, weight, leading) {
+function processFont(element, font, size, weight, leading) {
 
   function getFontStylesheet(font, weight) {
 
@@ -100,4 +100,4 @@ function updateElement(element, font, size, weight, leading) {
 
 }
 
-export default updateElement;
+export default processFont;
