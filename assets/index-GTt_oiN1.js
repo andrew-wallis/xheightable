@@ -196,7 +196,7 @@ function print() { __p += __j.call(arguments, '') }
               <div>Inter and Bitter have matching x-heights (both 76%)</div>
             </figcaption>
           </figure>
-          <p>Although this is a common pairing method, it usually involves trial and error. Not only are the x-heights for fonts rarely documented, but the height of the uppercase letters can vary in proportion to the overall font size.</p>
+          <p>Although this is a common pairing method, it usually involves trial and error. Not only are the x-heights for fonts rarely documented, but the height of the uppercase letters can vary in proportion to the overall font size making it hard to find the right match.</p>
           <p><strong>x-heightable</strong> makes pairing using x-heights easy. It documents the x-heights of over 100 fonts from Google and Adobe and suggests pairings based on these x-heights. Choose a Primary font and <strong>x-heightable</strong> will suggest a match for the Secondary font. From there, you can explore the full range of fonts and find the perfect match for your project.</p>
           <div class="insulate" data-element="help-hide">
             <!-- Help Hide -->
