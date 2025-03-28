@@ -27,7 +27,7 @@
       <div class="" data-element="say-hi">
         <!-- Say Hi -->
       </div>
-      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button button-large button-accent" href="https://ko-fi.com/xheightable" target="_blank">Buy us a coffee!</a>
+      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button button-large button-accent" href="https://buymeacoffee.com/xheightable" target="_blank">Buy us a coffee!</a>
     </div>
   `,o}function yu(o){const g=document.createElement("div");return g.classList="unselectable",g.dataset.font=o,g.innerHTML=`
     <div class="sample-wrapper">
