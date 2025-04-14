@@ -20,7 +20,7 @@ function Button({label, suffix, icon, classes, action, id}) {
     if(suffix) {
       const buttonSuffix = document.createElement('span');
       buttonSuffix.innerText = suffix;
-      buttonSuffix.className = "sr-only";
+      buttonSuffix.className = "sr-only button-suffix";
       buttonLabel.appendChild(buttonSuffix);
     }
   }

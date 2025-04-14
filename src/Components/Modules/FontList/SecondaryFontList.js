@@ -57,7 +57,7 @@ function SecondaryFontList(store) {
         secondaryList.appendChild(ListItem({
           font: font,
           action: changeSecondary,
-          data: getPercentage(font.xHeightDiff)
+          data: `${getPercentage(font.xHeightPct)}% (${getPercentage(font.xHeightDiff) === "0" ? "Match": getPercentage(font.xHeightDiff)})`
         }));
       });
        

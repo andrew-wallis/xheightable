@@ -8,6 +8,7 @@ import Button from "./Components/Elements/Button";
 import getSampleText from "./helpers/getSampleText";
 import getRandomIndex from "./utils/getRandomIndex";
 import qDom from "./utils/qDom";
+import Help from "./Components/Modules/Help/Help";
 
 
 function App({store}) {
@@ -49,9 +50,14 @@ function App({store}) {
     </div>
     <footer>
       <div class="with-sidebar wrap">
-        <div class="not-sidebar">© x-heightable ${new Date().getFullYear()}</div>
-        <div data-element="theme-switch">
-          <!-- Theme Switch -->
+        <div class="not-sidebar">© xheightable ${new Date().getFullYear()}</div>
+        <div class="cluster">
+          <div data-element="theme-switch">
+            <!-- Theme Switch -->
+          </div>
+          <div data-element="help-switch">
+            <!-- Help Switch -->
+          </div>
         </div>
       </div>
     </footer>
@@ -68,18 +74,45 @@ function App({store}) {
   // Create Elements
 
   const primary = PrimaryFontList(store);
-  const secondary = SecondaryFontList(store)
+  const secondary = SecondaryFontList(store);
+  const help = Help();
 
   const themeSwitch = Button({
     label: "Theme",
-    action: toggleTheme
+    action: toggleTheme,
+    suffix: " "
+  });
+
+  const sayHi = Button({
+    label: "Say Hi!",
+    action: openEmail,
+    classes: "say-hi"
+  });
+
+  const hideHelp = Button({
+    label: "Hide",
+    action: removeHelp,
+    classes: "button"
+  });
+
+  const showHelp = Button({
+    label: "Help",
+    action: displayHelp
   });
   
 
   // Appends
 
   qDom(app, "top-bar").appendChild(Header());
-  
+
+  if(localStorage.getItem('help') !== "hide") {
+    document.body.classList.add("help-lock");
+  } else {
+    help.style.display = "none";
+  }
+  qDom(help, "help-hide").appendChild(hideHelp);
+  app.appendChild(help);
+
   mainContent.appendChild(Samples(store));
   mainContent.appendChild(Test(store));
   mainContent.appendChild(document.createElement("hr"));
@@ -89,6 +122,8 @@ function App({store}) {
   aside.appendChild(secondary);
   
   qDom(app, "theme-switch").appendChild(themeSwitch);
+  qDom(app, "help-switch").appendChild(showHelp);
+  qDom(app, "say-hi").appendChild(sayHi);
 
 
   // Event Listeners
@@ -174,10 +209,10 @@ function App({store}) {
   // Theme functions
 
   function setTheme(mode) {
-    const themeSwitchLabel = themeSwitch.querySelector(".button-label");
+    const themeSwitchLabel = themeSwitch.querySelector(".button-suffix");
 
     document.documentElement.setAttribute("data-theme", mode);
-    themeSwitchLabel.innerHTML = mode === "light" ? "Switch To Dark Mode" : "Switch To Light Mode";
+    themeSwitchLabel.innerHTML = mode === "light" ? "Switch To Dark" : "Switch To Light";
     localStorage.setItem('theme', mode);
   }
 
@@ -214,17 +249,23 @@ function App({store}) {
   toggleTheme();
 
 
-  // Font Actions
+  function openEmail() {
+    window.location.href = "mailto:xheightable@gmail.com";
+  }
 
 
+  // Help
 
+  function removeHelp() {
+    localStorage.setItem('help', 'hide');
+    help.style.display = "none";
+    document.body.classList.remove("help-lock");
+  }
 
-
-
-
-
-
-
+  function displayHelp() {
+    help.style.display = "block";
+    document.body.classList.add("help-lock");
+  }
 
 
   // Return

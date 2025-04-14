@@ -40,7 +40,7 @@ function PrimaryFontList(store) {
     const primaryFont = store.getData().primaryFont;
     const fonts = store.getData().fonts;
   
-    if(isObj(primaryFont) > 0 && primaryList.dataset.sort !== sort) {
+    if(isObj(primaryFont) && primaryList.dataset.sort !== sort) {
 
       primaryList.innerHTML = '';
 
@@ -53,7 +53,7 @@ function PrimaryFontList(store) {
         primaryList.appendChild(ListItem({
           font: font,
           action: changePrimary,
-          data: getPercentage(font.xHeightPct)
+          data: `${getPercentage(font.xHeightPct)}%`
         }));
       });
 
