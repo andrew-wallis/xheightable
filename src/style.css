@@ -300,7 +300,8 @@ hr {
 }
 
 .stack-2xs {
-  gap: var(--space-2xs);
+  gap: var(--space-3xl)
+
 }
 
 .stack-3xl {
@@ -538,13 +539,18 @@ select {
   flex-wrap: nowrap;
 }
 
-.logo > svg:first-of-type {
+.logo > a {
+  align-items: center;
+  display: flex;
+}
+
+.logo > a > svg {
   border-radius: 9999px;
   height: var(--space-xl);
   width: auto;
 }
 
-.logo > svg:last-of-type {
+.logo > svg {
   height: var(--step--1);
   width: auto;
 }

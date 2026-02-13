@@ -105,11 +105,7 @@ function App({store}) {
 
   qDom(app, "top-bar").appendChild(Header());
 
-  if(localStorage.getItem('help') !== "hide") {
-    document.body.classList.add("help-lock");
-  } else {
-    help.style.display = "none";
-  }
+  help.style.display = "none";
   qDom(help, "help-hide").appendChild(hideHelp);
   app.appendChild(help);
 
