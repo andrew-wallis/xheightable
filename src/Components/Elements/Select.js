@@ -1,13 +1,13 @@
-function Select({action, hideLabel, label, options, value}) {
+function Select({action, hideLabel, label, options, value, classes}) {
 
   const id = label.replace(/\W/g,'-').toLowerCase();
   const select = document.createElement('div');
-  select.classList = "focus-padding";
+  select.className = ``;
 
   /* html */
   select.innerHTML = `
-    <label class="${hideLabel ? "sr-only" : ""} label-medium" for=${id}>${label}</label>
-    <select class="clickable" id=${id} data-element=${id}>
+    <label class="${hideLabel ? "sr-only" : ""}" for=${id}>${label}</label>
+    <select class="clickable ${classes ? classes : ""}" id=${id} data-element=${id}>
       <!-- Select Options -->
     </select>
   `;

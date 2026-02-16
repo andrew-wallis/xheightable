@@ -1,26 +1,29 @@
 function Sample(font) {
 
   const sample = document.createElement('div');
-  sample.classList = "unselectable";
+  sample.classList = "unselectable stack";
   sample.dataset.font = font;
 
   /* html */
   sample.innerHTML = `
     <div class="sample-wrapper">
-      <div class="sample-header">
-        <div class="sample-align">
-          <div class="sample-leader" data-element="label-leader">A</div>
-          <div data-element="label-text">
-            <!-- Label -->
-          </div>
-        </div>
-        <div class="xheight" data-element="sample-xheight">
-          <div class="xheight-content">
-            <div class="sr-only">X Height</div>
-            <div data-element="sample-xheight-number">
-              <!-- X-Height -->
+      <div class="stack-3xs">
+        <h2 class="label secondary" data-element="sample-header"></h2>
+        <div class="sample-font">
+          <div class="sample-align">
+            <div class="sample-leader" data-element="label-leader">A</div>
+            <div data-element="label-text">
+              <!-- Label -->
             </div>
-            <div class="xheight-percentage">%</div>
+          </div>
+          <div class="xheight" data-element="sample-xheight">
+            <div class="xheight-content">
+              <div class="sr-only">X Height</div>
+              <div data-element="sample-xheight-number">
+                <!-- X-Height -->
+              </div>
+              <div class="xheight-percentage">%</div>
+            </div>
           </div>
         </div>
       </div>
@@ -48,14 +51,16 @@ function Sample(font) {
         </div>
       </div>
     </div>
-    <div class="focus-padding with-sidebar">
-      <div class="not-sidebar" data-element="sample-action-left">
-        <!-- Action Left -->
-      </div>
-      <div data-element="sample-action-right">
-        <!-- Action Right -->
-      </div>
-    </div>
+    <ul class="cluster">
+      <li><span class="label sub-label tertiary">X Height</span> <span class="data" data-element="x-height">70%</span></li>
+      <li><span class="label sub-label tertiary">Cap Height</span> <span class="data" data-element="cap-height">70%</span></li>
+      <li>
+        <a href="#" data-element="get-link" class="label sub-label">
+          Get This Font
+          <span data-element="get-link-distribution" class="sr-only"></span>
+        </a>
+      </li>
+    </ul>
   `;
 
   return sample;

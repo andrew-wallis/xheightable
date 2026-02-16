@@ -8,6 +8,7 @@ import Button from "./Components/Elements/Button";
 import getSampleText from "./helpers/getSampleText";
 import getRandomIndex from "./utils/getRandomIndex";
 import qDom from "./utils/qDom";
+import qaDom from "./utils/qaDom";
 import Help from "./Components/Modules/Help/Help";
 
 
@@ -83,12 +84,6 @@ function App({store}) {
     suffix: " "
   });
 
-  const sayHi = Button({
-    label: "Say Hi!",
-    action: openEmail,
-    classes: "say-hi"
-  });
-
   const hideHelp = Button({
     label: "Hide",
     action: removeHelp,
@@ -111,15 +106,14 @@ function App({store}) {
 
   mainContent.appendChild(Samples(store));
   mainContent.appendChild(Test(store));
-  mainContent.appendChild(document.createElement("hr"));
-  mainContent.appendChild(Details(store));
+  //mainContent.appendChild(document.createElement("hr"));
+  //mainContent.appendChild(Details(store));
 
   aside.appendChild(primary);
   aside.appendChild(secondary);
   
   qDom(app, "theme-switch").appendChild(themeSwitch);
   qDom(app, "help-switch").appendChild(showHelp);
-  qDom(app, "say-hi").appendChild(sayHi);
 
 
   // Event Listeners
@@ -137,24 +131,26 @@ function App({store}) {
     const viewport = store.getData().viewport;
     const isDesktop = viewport >= 1024 ? true : false;
 
-    const primaryButton = qDom(mainContent, "button-primary");
-    const secondaryButton = qDom(mainContent, "button-secondary");
+    const primaryButtons = qaDom(aside, "button-primary");
+    const secondaryButtons = qaDom(aside, "button-secondary");
 
     mainContent.scrollTop = 0;
 
     container.classList.remove("sidebar-open");
     document.body.classList.remove('scroll-lock');
 
-    [primary, secondary, primaryButton, secondaryButton].forEach((elem) => {
-      elem.classList.remove("active");
+    [primary, secondary, primaryButtons[0], primaryButtons[1], secondaryButtons[0], secondaryButtons[1]].forEach((elem) => {
+      if(elem) elem.classList.remove("active");
     });
 
     if(activeSidebar === "primary") {
       primary.classList.add("active");
-      primaryButton.classList.add("active");
+      if(primaryButtons[0]) primaryButtons[0].classList.add("active");
+      if(primaryButtons[1]) primaryButtons[1].classList.add("active");
     } else if(activeSidebar === "secondary") {
       secondary.classList.add("active");
-      secondaryButton.classList.add("active");
+      if(secondaryButtons[0]) secondaryButtons[0].classList.add("active");
+      if(secondaryButtons[1]) secondaryButtons[1].classList.add("active");
     }
 
     if(store.getData().open) {
@@ -245,9 +241,15 @@ function App({store}) {
   toggleTheme();
 
 
-  function openEmail() {
+  // Email
+
+  const sayHi = qDom(app, "say-hi");
+
+  sayHi.addEventListener("click", (e) => {
+    e.preventDefault();
     window.location.href = "mailto:xheightable@gmail.com";
-  }
+
+  });
 
 
   // Help

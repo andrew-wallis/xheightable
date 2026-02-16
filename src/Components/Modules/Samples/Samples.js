@@ -5,6 +5,7 @@ import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
 import getABC from "./helpers/getABC";
 import processFont from "../../../helpers/processFont";
+import Icons from "../../Elements/Icons";
 
 function Samples(store) {
 
@@ -17,10 +18,10 @@ function Samples(store) {
 
   // Appends
 
-  const primary = Sample("primary");
-  const secondary = Sample("secondary");
+  const primary = Sample("primary", "Primary");
+  const secondary = Sample("secondary", "Secondary");
 
-  const primaryButton = Button({
+/*   const primaryButton = Button({
     label: "Change",
     suffix: "Primary Font",
     classes: "primary-action button-icon-reverse",
@@ -36,32 +37,32 @@ function Samples(store) {
     action: changeSidebar,
     icon: "Arrow Right",
     id: "secondary"
-  });
+  }); */
 
-  const swapButton = Button({
+/*   const swapButton = Button({
     label: "Swap",
     suffix: "Primary and Secondary Font",
     action: swap,
     classes: "button-icon-reverse",
     icon: "Swap",
     id: "swap"
-  });
+  }); */
 
-  const lockButton = Button({
+/*   const lockButton = Button({
     label: "Lock",
     suffix: "Secondary Font",
     action: lock,
     classes: "button-icon-reverse",
     icon: "Lock",
     id: "lock"
-  });
+  }); */
 
   samples.appendChild(primary);
   samples.appendChild(secondary);
-  qDom(primary, "sample-action-left").appendChild(swapButton);
+/*   qDom(primary, "sample-action-left").appendChild(swapButton);
   qDom(primary, "sample-action-right").appendChild(primaryButton);
   qDom(secondary, "sample-action-left").appendChild(lockButton);
-  qDom(secondary, "sample-action-right").appendChild(secondaryButton);
+  qDom(secondary, "sample-action-right").appendChild(secondaryButton); */
 
 
   // Functions
@@ -74,14 +75,14 @@ function Samples(store) {
     const isTablet = viewport >= 768 ? true : false;
 
     if(primaryFont.label !== primary.dataset.label || parseInt(primary.dataset.viewport) !== viewport) {
-      updateFont(primaryFont, primary);
+      updateFont(primaryFont, primary, "Primary");
     }
 
     if(secondaryFont.label !== secondary.dataset.label || primaryFont.label !== secondary.dataset.primary || parseInt(secondary.dataset.viewport) !== viewport) {
-      updateFont(secondaryFont, secondary);
+      updateFont(secondaryFont, secondary, "Secondary");
     }
 
-    function updateFont(font, sample) {
+    function updateFont(font, sample, header) {
 
       if(isObj(font)) {
 
@@ -92,9 +93,11 @@ function Samples(store) {
 
         // Label
 
+        const sampleHeader = qDom(sample, "sample-header");
         const labelText = qDom(sample, "label-text");
         const labelLeader = qDom(sample, "label-leader");
     
+        sampleHeader.innerText = header;
         labelText.innerText = font.label;
 
         labelText.style.opacity = 0;
@@ -146,6 +149,16 @@ function Samples(store) {
         processFont(labelText, font, labelSize, font.bold, `${labelSize * 1.33}rem`);
         processFont(sampleText, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
 
+        qDom(sample, "x-height").innerText = `${Math.round(font.xHeightPct * 100)}%`;
+        qDom(sample, "cap-height").innerText = `${Math.round(font.capHeightPct * 100)}%`;
+
+
+        const getLink = qDom(sample, "get-link");
+        getLink.href = font.link;
+
+        const getLinkDistribution = qDom(sample, "get-link-distribution");
+        getLinkDistribution.innerHTML = `from ${font.distribution}`;
+
         sample.dataset.label = font.label;
         sample.dataset.primary = primaryFont.label;
         sample.dataset.viewport = viewport;
@@ -157,7 +170,7 @@ function Samples(store) {
   updateSamples();
 
 
-  function swap() {
+/*   function swap() {
     const currentPrimary = store.getData().primaryFont;
     const currentSecondary = store.getData().secondaryFont;
 
@@ -165,10 +178,10 @@ function Samples(store) {
       primaryFont: currentSecondary,
       secondaryFont: currentPrimary
     })
-  }
+  } */
 
 
-  function lock() {
+/*   function lock() {
     store.setData({
       lock: !store.getData().lock
     });
@@ -182,11 +195,11 @@ function Samples(store) {
       lockButton.classList.remove("active");
       label.innerText = "lock";
     }
-  }
+  } */
 
 
 
-  function changeSidebar(value) {
+/*   function changeSidebar(value) {
 
     if(value === "primary") {
       store.setData({sidebar: "primary"});
@@ -198,7 +211,7 @@ function Samples(store) {
 
   }
 
-  changeSidebar(store.getData().sidebar);
+  changeSidebar(store.getData().sidebar); */
 
 
   // Return

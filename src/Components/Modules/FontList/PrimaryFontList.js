@@ -21,6 +21,10 @@ function PrimaryFontList(store) {
   }));
 
   function changePrimary(font) {
+
+    const primaryList = qDom(primary, "aside-list");
+    primaryList.dataset.primary = font.name;
+    
     store.setData({
       primaryFont: font,
       secondaryFont: store.getData().lock ? store.getData().secondaryFont : {},
@@ -29,8 +33,9 @@ function PrimaryFontList(store) {
       open: false
     });
     
-    const primaryList = qDom(primary, "aside-list");
     highlightActiveItem(primaryList, store.getData().primaryFont, true);
+    
+
   }
 
   function updatePrimaryList() {
@@ -39,9 +44,12 @@ function PrimaryFontList(store) {
     const primaryList = qDom(primary, "aside-list");
     const primaryFont = store.getData().primaryFont;
     const fonts = store.getData().fonts;
-  
-    if(isObj(primaryFont) && primaryList.dataset.sort !== sort) {
 
+    if(isObj(primaryFont) && 
+      (primaryList.dataset.primary !== primaryFont.name
+      || primaryList.dataset.sort !== sort)
+    ) {
+      
       primaryList.innerHTML = '';
 
       const sortedFonts = sortPrimaryFonts({
@@ -59,6 +67,7 @@ function PrimaryFontList(store) {
 
       highlightActiveItem(primaryList, store.getData().primaryFont, true);
       primaryList.dataset.sort = sort;
+      primaryList.dataset.primary = primaryFont.name;
     }
   }
 

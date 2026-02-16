@@ -1,20 +1,26 @@
 import qaDom from "../../../utils/qaDom";
 import qDom from "../../../utils/qDom";
+import Button from "../../Elements/Button";
 import Select from "../../Elements/Select";
 
 function FontList({id, store, label, options, sort}) {
 
   const fontlist = document.createElement('div');
-  fontlist.className = "scrollable-container stack";
+  fontlist.className = "scrollable-container stack-l";
 
   /* html */
   fontlist.innerHTML = `
-    <div class="with-sidebar aside-header">
-      <h3 class="not-sidebar">
-        ${label}
-      </h3>
-      <div class="sidebar" data-element="fontlist-sort">
-        <!-- Pair Filter -->
+    <div class="stack-2xs focus-padding">
+      <div data-element="font-switch" class="button-group">
+        <!-- Font Switch -->
+      </div>
+      <div class="with-sidebar aside-header">
+        <div class="not-sidebar" data-element="swap-button">
+          <!-- Swap Button -->
+        </div>
+        <div class="sidebar" data-element="fontlist-sort">
+          <!-- Pair Filter -->
+        </div>
       </div>
     </div>
     <ul role="listbox" tabindex="-1" data-element="aside-list" class="scrollable focus-padding">
@@ -23,13 +29,39 @@ function FontList({id, store, label, options, sort}) {
   `;
 
 
-  // Apends
+  // Appends
+
+  qDom(fontlist, "font-switch").appendChild(Button({
+    label: "Primary",
+    suffix: "Font",
+    classes: `button button-secondary label not-sidebar`,
+    action: changeSidebar,
+    id: "primary"
+  }));
+
+  qDom(fontlist, "font-switch").appendChild(Button({
+    label: "Secondary",
+    suffix: "Font",
+    classes: `button button-secondary label not-sidebar`,
+    action: changeSidebar,
+    id: "secondary"
+  }));
+
+  qDom(fontlist, "swap-button").appendChild(Button({
+    label: "Swap",
+    suffix: "Primary and Secondary Font",
+    action: swap,
+    classes: "button-icon-reverse button-tertiary label sub-label tertiary",
+    icon: "Swap",
+    id: "swap"
+  }));
 
   qDom(fontlist, "fontlist-sort").appendChild(Select({
     action: changeSort,
     hideLabel: true,
     label: `Sort ${id} fonts`, 
     options: options,
+    classes: "label sub-label tertiary",
     value: store.getData()[sort]
   }));
 
@@ -74,6 +106,31 @@ function FontList({id, store, label, options, sort}) {
   function changeSort(value) {
     store.setData({[sort]: value});
   }
+
+  function changeSidebar(value) {
+
+    if(value === "primary") {
+      store.setData({sidebar: "primary"});
+      store.setData({open: true});
+    } else if(value === "secondary") {
+      store.setData({sidebar: "secondary"});
+      store.setData({open: true});
+    }
+
+  }
+
+  changeSidebar(store.getData().sidebar);
+
+  function swap() {
+    const currentPrimary = store.getData().primaryFont;
+    const currentSecondary = store.getData().secondaryFont;
+
+    store.setData({
+      primaryFont: currentSecondary,
+      secondaryFont: currentPrimary
+    })
+  }
+
 
   return fontlist;
 

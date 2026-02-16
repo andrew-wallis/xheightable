@@ -16,12 +16,38 @@ function Test(store) {
   test.innerHTML = `
     <h2 class="sr-only">Test Fonts</h2>
     <div class="stack-l">
-      <p data-element="test-title" class="unselectable test-title" data-font="primary" data-size="1.5" data-leading="lineMin" data-weight="bold">
-        ${store.getData().testTitle}
-      </p>
-      <p data-element="test-paragraph" class="unselectable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="regular">
-        ${store.getData().testText}
-      </p>
+      <div class="stack-2xs" data-element="test-title" class="unselectable test-title" data-font="primary" data-size="1.5" data-leading="lineMin" data-weight="bold">
+        <p>
+          ${store.getData().testTitle}
+        </p>
+        <ul class="cluster">
+          <li class="">
+            <span class="label sub-label secondary" data-element="font-name"></span>
+          </li>
+          <li class="">
+            <span class="label sub-label tertiary">Font Size</span> <span class="data" data-element="font-size"></span>
+          </li>
+          <li class="">
+            <span class="label sub-label tertiary">Line Height</span> <span class="data" data-element="font-leading"></span>
+          </li>
+        </ul>
+      </div>
+      <div class="stack-2xs" data-element="test-paragraph" class="unselectable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="regular">
+        <p>
+          ${store.getData().testText}
+        </p>
+        <ul class="cluster">
+          <li class="">
+            <span class="label sub-label secondary" data-element="font-name"></span>
+          </li>
+          <li class="">
+            <span class="label sub-label tertiary">Font Size</span> <span class="data" data-element="font-size"></span>
+          </li>
+          <li class="">
+            <span class="label sub-label tertiary">Line Height</span> <span class="data" data-element="font-leading"></span>
+          </li>
+        </ul>
+      </div>
     </div>
   `;
 
@@ -54,16 +80,21 @@ function Test(store) {
     function updateFont(font, example) {
     
       const remBase = isTablet ? example.dataset.size : parseFloat(example.dataset.size) * 0.875;
+      const paragraph = example.querySelector("p");
   
-      example.style.fontFamily = 'system-ui';
-      example.style.opacity = 0;
-      example.style.fontSize = `${remBase}rem`;
-      example.style.lineHeight = font[example.dataset.leading];
+      paragraph.style.fontFamily = 'system-ui';
+      paragraph.style.opacity = 0;
+      paragraph.style.fontSize = `${remBase}rem`;
+      paragraph.style.lineHeight = font[example.dataset.leading];
 
-      processFont(example, font, remBase, font[example.dataset.weight], font[example.dataset.leading]);
-  
+      processFont(paragraph, font, remBase, font[example.dataset.weight], font[example.dataset.leading]);
+
       example.dataset.label = font.label;
       example.dataset.viewport = viewport;
+
+      qDom(example, "font-name").innerText = font.name;
+      qDom(example, "font-size").innerText = `${(Math.round(remBase * font.capHeightAdj * 16 * 2) / 2).toFixed(1).replace(/\.0$/, '')}px`;
+      qDom(example, "font-leading").innerText = `${font[example.dataset.leading]}`;
   
     }
   }

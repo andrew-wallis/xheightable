@@ -6,10 +6,6 @@ function Button({label, suffix, icon, classes, action, id}) {
   button.className = `clickable ${classes ? classes : ""} ${icon ? "button button-icon" : ""}`;
   button.dataset.element = id ? `button-${id}` : "button";
   button.dataset.target = label ? label : id;
-
-  if(icon) {
-    button.appendChild(Icon(icon));
-  }
   
   if(label) {
     const buttonLabel = document.createElement('div');
@@ -23,6 +19,10 @@ function Button({label, suffix, icon, classes, action, id}) {
       buttonSuffix.className = "sr-only button-suffix";
       buttonLabel.appendChild(buttonSuffix);
     }
+  }
+
+  if(icon) {
+    button.appendChild(Icon(icon));
   }
 
   button.addEventListener('click', function(e) {
