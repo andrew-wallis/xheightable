@@ -387,6 +387,7 @@ button {
   display: flex;
   justify-content: center;
   padding: var(--space-xs) var(--space-s);
+  text-decoration: none;
   user-select: none;
 }
 
@@ -918,7 +919,6 @@ select {
   font-weight: 600;
   letter-spacing: 0.05em;
   line-height: 1.25;
-  text-decoration: none;
   text-transform: uppercase;
 }
 
