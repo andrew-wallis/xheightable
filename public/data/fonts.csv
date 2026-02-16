@@ -156,3 +156,15 @@ id,name,label,superclass,classification,subclass,family,vibe,distribution,weight
 155,Optima Nova LT Pro,Optima Nova,Sans,Humanist,Optima,,Elegant,Adobe,,400,600,22.61,32.74,0.70,0.68,1.03,1.20,1.45,https://fonts.adobe.com/fonts/optima-nova,1954,jjy2cxn,254
 156,Sentinel,Sentinel,Serif,Slab,Slab,,Neutral,Adobe,,400,600,21.6,31.34,0.68,0.65,1.08,1.15,1.40,https://fonts.adobe.com/fonts/sentinel,2009,rnq0exm,155
 157,Univers Next Pro,Univers Next,Sans,Grotesque,NeoGrotesque,,Neutral,Adobe,,400,500,24.24,34.7,0.70,0.72,0.97,1.30,1.55,https://fonts.adobe.com/fonts/univers-next,1957,yij0qkv,255
+158,Stack Sans Text,Stack Sans,Sans,Grotesque,NeoGrotesque,,Neutral,Google,,400,600,26.85,33.53,0.80,0.70,1.00,1.28,1.57,https://fonts.google.com/specimen/Stack+Sans+Text,2025,,5
+159,Momo Trust Sans,Momo Trust Sans,Sans,Grotesque,NeoGrotesque,,Neutral,Google,,400,600,25.42,36,0.72,0.75,0.93,1.35,1.62,https://fonts.google.com/specimen/Momo+Trust+Sans,2025,,5
+160,Elms Sans,Elm Sans,Sans,Geometric,Proxima,,Neutral,Google,,400,600,23,33.6,0.68,0.70,1.00,1.24,1.49,https://fonts.google.com/specimen/Elms+Sans,2025,,5
+161,Google Sans Flex,Google Sans Flex,Sans,Geometric,Proxima,,Neutral,Google,,400,600,24.63,34.37,0.72,0.72,0.98,1.28,1.55,https://fonts.google.com/specimen/Google+Sans+Flex,2025,,150
+162,Urbanist,Urbanist,Sans,Geometric,Proxima,,Neutral,Google,,400,600,24,33.5,0.72,0.70,1.00,1.25,1.51,https://fonts.google.com/specimen/Urbanist,2021,,100
+163,Libertinus Serif,Libertinus Serif,Serif,Transitional,Baskerville,Libertinus,Elegant,Google,,400,600,20.64,31,0.66,0.65,1.08,1.14,1.36,https://fonts.google.com/specimen/Libertinus+Serif,2025,,150
+164,Epunda Slab,Epunda Slab,Serif,Slab,Slab,Epunda,Neutral,Google,,400,600,24,32,0.76,0.67,1.05,1.21,1.47,https://fonts.google.com/specimen/Epunda+Slab,2025,,150
+165,Epunda Sans,Epunda Sans,Sans,Humanist,Meta,Epunda,Neutral,Google,,400,600,24,32,0.76,0.67,1.05,1.21,1.47,https://fonts.google.com/specimen/Epunda+Sans,2025,,150
+166,Amarna,Amarna,Sans,Humanist,Optima,,Elegant,Google,,400,600,24,33.6,0.70,0.70,1.00,1.25,1.50,https://fonts.google.com/specimen/Amarna,2025,,150
+167,Libertinus Sans,Libertinus Sans,Sans,Humanist,Optima,,Elegant,Google,,400,600,20.64,31,0.66,0.65,1.08,1.14,1.36,https://fonts.google.com/specimen/Libertinus+Sans,2025,,150
+168,Ancizar Sans,Ancizar Sans,Sans,Humanist,Optima,Ancizar,Elegant,Google,,400,600,21.63,29.37,0.74,0.61,1.14,1.10,1.33,https://fonts.google.com/specimen/Ancizar+Sans,2025,,150
+169,Ancizar Serif,Ancizar Serif,Serif,Old Style,Garamond,Ancizar,Elegant,Google,,400,600,21.63,29.37,0.74,0.61,1.14,1.10,1.33,https://fonts.google.com/specimen/Ancizar+Serif,2025,,150

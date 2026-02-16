@@ -48,6 +48,8 @@ function processFont(element, font, size, weight, leading) {
   function loadFont(font, weight) {
 
     const href = getFontStylesheet(font, weight);
+
+    console.log(href);
   
     return new Promise((resolve, reject) => {
       if (document.querySelector(`link[href="${href}"]`)) {

@@ -202,16 +202,18 @@ header {
 
 footer {
   border-top: var(--primary-border);
-  bottom: 0;
+  bottom: 0px;
   color: var(--secondary-text);
   font-feature-settings: "ss03" 1;
   font-size: var(--step--2);
   line-height: 125%;
+  left: 0px;
   background-color: var(--background);
   padding-top: var(--space-s);
   padding-bottom: var(--space-s);
-  position: sticky;
+  position: fixed;
   transition: var(--transition-color);
+  right: 0px;
   z-index: 300;
 }
 
@@ -782,7 +784,7 @@ select {
   bottom: 0;
   left: 0;
   background-color: var(--background);
-  opacity: 0.5;
+  opacity: 0.8;
   display: none;
   overflow: hidden;
 }
@@ -833,6 +835,10 @@ select {
   
   .sidebar-open .main {
     transform: translateX(0);
+  }
+
+  [data-target="Change Fonts"] {
+    display: none;
   }
   
 }
@@ -934,3 +940,5 @@ select {
   font-size: calc(var(--step--3) * 0.95);
   line-height: 1.25;
 }
+
+/* Exceptions */

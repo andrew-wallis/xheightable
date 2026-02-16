@@ -105,6 +105,13 @@ function App({store}) {
   app.appendChild(help);
 
   mainContent.appendChild(Samples(store));
+
+  mainContent.appendChild(Button({
+    label: "Change Fonts",
+    classes: "button label secondary",
+    action: openSidebar
+  }))
+
   mainContent.appendChild(Test(store));
   //mainContent.appendChild(document.createElement("hr"));
   //mainContent.appendChild(Details(store));
@@ -125,6 +132,11 @@ function App({store}) {
 
 
   // Sidebar Functions
+
+  function openSidebar() {
+    store.setData({open: true});
+    store.setData({sidebar: "primary"});
+  }
 
   function updateSidebar() {
     const activeSidebar = store.getData().sidebar;

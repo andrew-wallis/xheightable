@@ -92,7 +92,7 @@ function Test(store) {
       example.dataset.label = font.label;
       example.dataset.viewport = viewport;
 
-      qDom(example, "font-name").innerText = font.name;
+      qDom(example, "font-name").innerText = font.label;
       qDom(example, "font-size").innerText = `${(Math.round(remBase * font.capHeightAdj * 16 * 2) / 2).toFixed(1).replace(/\.0$/, '')}px`;
       qDom(example, "font-leading").innerText = `${font[example.dataset.leading]}`;
   
