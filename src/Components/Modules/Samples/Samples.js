@@ -1,14 +1,13 @@
 import Sample from "./Sample";
-import Button from "../../Elements/Button";
 import isObj from "../../../utils/isObj";
 import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
 import getABC from "./helpers/getABC";
 import processFont from "../../../helpers/processFont";
-import Icons from "../../Elements/Icons";
 
 function Samples(store) {
 
+  
   // Initial 
 
   const samples = document.createElement('div');
@@ -21,48 +20,8 @@ function Samples(store) {
   const primary = Sample("primary", "Primary");
   const secondary = Sample("secondary", "Secondary");
 
-/*   const primaryButton = Button({
-    label: "Change",
-    suffix: "Primary Font",
-    classes: "primary-action button-icon-reverse",
-    action: changeSidebar,
-    icon: "Arrow Right",
-    id: "primary"
-  });
-
-  const secondaryButton = Button({
-    label: "Change",
-    suffix: "Secondary Font",
-    classes: "secondary-action button-icon-reverse",
-    action: changeSidebar,
-    icon: "Arrow Right",
-    id: "secondary"
-  }); */
-
-/*   const swapButton = Button({
-    label: "Swap",
-    suffix: "Primary and Secondary Font",
-    action: swap,
-    classes: "button-icon-reverse",
-    icon: "Swap",
-    id: "swap"
-  }); */
-
-/*   const lockButton = Button({
-    label: "Lock",
-    suffix: "Secondary Font",
-    action: lock,
-    classes: "button-icon-reverse",
-    icon: "Lock",
-    id: "lock"
-  }); */
-
   samples.appendChild(primary);
   samples.appendChild(secondary);
-/*   qDom(primary, "sample-action-left").appendChild(swapButton);
-  qDom(primary, "sample-action-right").appendChild(primaryButton);
-  qDom(secondary, "sample-action-left").appendChild(lockButton);
-  qDom(secondary, "sample-action-right").appendChild(secondaryButton); */
 
 
   // Functions
@@ -168,50 +127,6 @@ function Samples(store) {
 
   store.subscribe(updateSamples);
   updateSamples();
-
-
-/*   function swap() {
-    const currentPrimary = store.getData().primaryFont;
-    const currentSecondary = store.getData().secondaryFont;
-
-    store.setData({
-      primaryFont: currentSecondary,
-      secondaryFont: currentPrimary
-    })
-  } */
-
-
-/*   function lock() {
-    store.setData({
-      lock: !store.getData().lock
-    });
-
-    const label = lockButton.querySelector(".button-label");
-
-    if(store.getData().lock) {
-      lockButton.classList.add("active");
-      label.innerText = "unlock";
-    } else {
-      lockButton.classList.remove("active");
-      label.innerText = "lock";
-    }
-  } */
-
-
-
-/*   function changeSidebar(value) {
-
-    if(value === "primary") {
-      store.setData({sidebar: "primary"});
-      store.setData({open: true});
-    } else if(value === "secondary") {
-      store.setData({sidebar: "secondary"});
-      store.setData({open: true});
-    }
-
-  }
-
-  changeSidebar(store.getData().sidebar); */
 
 
   // Return

@@ -1,15 +1,12 @@
 import Header from "./Components/Modules/Header/Header";
 import Samples from "./Components/Modules/Samples/Samples";
 import Test from "./Components/Modules/Test/Test";
-import Details from "./Components/Modules/Details/Details";
-import PrimaryFontList from "./Components/Modules/FontList/PrimaryFontList";
-import SecondaryFontList from "./Components/Modules/FontList/SecondaryFontList";
+import Help from "./Components/Modules/Help/Help";
+import Sidebar from "./Components/Modules/Sidebar/Sidebar";
 import Button from "./Components/Elements/Button";
 import getSampleText from "./helpers/getSampleText";
 import getRandomIndex from "./utils/getRandomIndex";
 import qDom from "./utils/qDom";
-import qaDom from "./utils/qaDom";
-import Help from "./Components/Modules/Help/Help";
 
 
 function App({store}) {
@@ -22,7 +19,6 @@ function App({store}) {
     secondaryFont: {},
     primarySort: "A-Z",
     secondarySort: "Match",
-    sidebar: "",
     open: false,
     lock: false,
     testTitle: getSampleText(2),
@@ -74,8 +70,7 @@ function App({store}) {
 
   // Create Elements
 
-  const primary = PrimaryFontList(store);
-  const secondary = SecondaryFontList(store);
+  const sidebar = Sidebar(store);
   const help = Help();
 
   const themeSwitch = Button({
@@ -109,15 +104,11 @@ function App({store}) {
   mainContent.appendChild(Button({
     label: "Change Fonts",
     classes: "button label secondary",
-    action: openSidebar
+    action: openAside
   }))
 
   mainContent.appendChild(Test(store));
-  //mainContent.appendChild(document.createElement("hr"));
-  //mainContent.appendChild(Details(store));
-
-  aside.appendChild(primary);
-  aside.appendChild(secondary);
+  aside.appendChild(sidebar);
   
   qDom(app, "theme-switch").appendChild(themeSwitch);
   qDom(app, "help-switch").appendChild(showHelp);
@@ -126,64 +117,26 @@ function App({store}) {
   // Event Listeners
 
   qDom(app, "aside-overlay").addEventListener("click", function(e) {
-    store.setData({sidebar: ""});
     store.setData({open: false});
+    container.classList.remove("sidebar-open");
+    document.body.classList.remove('scroll-lock');
   });
 
 
-  // Sidebar Functions
+  // Functions
 
-  function openSidebar() {
+  function openAside() {
     store.setData({open: true});
     store.setData({sidebar: "primary"});
-  }
-
-  function updateSidebar() {
-    const activeSidebar = store.getData().sidebar;
     const viewport = store.getData().viewport;
     const isDesktop = viewport >= 1024 ? true : false;
+    container.classList.add("sidebar-open");
 
-    const primaryButtons = qaDom(aside, "button-primary");
-    const secondaryButtons = qaDom(aside, "button-secondary");
-
-    mainContent.scrollTop = 0;
-
-    container.classList.remove("sidebar-open");
-    document.body.classList.remove('scroll-lock');
-
-    [primary, secondary, primaryButtons[0], primaryButtons[1], secondaryButtons[0], secondaryButtons[1]].forEach((elem) => {
-      if(elem) elem.classList.remove("active");
-    });
-
-    if(activeSidebar === "primary") {
-      primary.classList.add("active");
-      if(primaryButtons[0]) primaryButtons[0].classList.add("active");
-      if(primaryButtons[1]) primaryButtons[1].classList.add("active");
-    } else if(activeSidebar === "secondary") {
-      secondary.classList.add("active");
-      if(secondaryButtons[0]) secondaryButtons[0].classList.add("active");
-      if(secondaryButtons[1]) secondaryButtons[1].classList.add("active");
+    if(!isDesktop) {
+      document.body.classList.add('scroll-lock');
     }
-
-    if(store.getData().open) {
-      container.classList.add("sidebar-open");
-
-      if(!isDesktop) {
-        document.body.classList.add('scroll-lock');
-      }
-    }
-
-    if(isDesktop && !store.getData().sidebar) {
-      store.setData({sidebar: "primary"});
-    }
-
   }
 
-  store.subscribe(updateSidebar);
-  updateSidebar();
-
-
-  // Viewport Functions
 
   function updateViewports() {
     store.setData({

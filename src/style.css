@@ -802,6 +802,10 @@ select {
   transform: translateX(-16rem);
 }
 
+.app-container {
+  padding-bottom: var(--space-3xl);
+}
+
 @media (min-width: 1024px) {
 
   .app-container {

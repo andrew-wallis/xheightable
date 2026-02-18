@@ -1,0 +1,252 @@
+import findSecondary from "../../../helpers/findSecondary";
+import highlightActiveItem from "../../../helpers/highlightActiveItem";
+import sortPrimaryFonts from "../../../helpers/sortPrimaryFonts";
+import sortSecondaryFonts from "../../../helpers/sortSecondaryFonts";
+import getPercentage from "../../../utils/getPercentage";
+import isObj from "../../../utils/isObj";
+import qDom from "../../../utils/qDom";
+import Button from "../../Elements/Button";
+import ListItem from "../../Elements/ListItem";
+import Select from "../../Elements/Select";
+
+function Sidebar(store) {
+
+  const sidebar = document.createElement('div');
+  sidebar.className = "scrollable-container stack-l";
+
+  /* html */
+  sidebar.innerHTML = `
+    <div class="stack-2xs focus-padding">
+      <div data-element="switch-wrapper" class="button-group">
+        <!-- Font Switch -->
+      </div>
+      <div class="with-sidebar aside-header">
+        <div class="not-sidebar" data-element="swap-wrapper">
+          <!-- Swap Button -->
+        </div>
+        <div class="sidebar" data-element="sort-wrapper">
+          <!-- Pair Filter -->
+        </div>
+      </div>
+    </div>
+    <ul role="listbox" tabindex="-1" data-element="primary-list" class="scrollable focus-padding">
+      <!-- Pair List -->
+    </ul>
+    <ul role="listbox" tabindex="-1" data-element="secondary-list" class="scrollable focus-padding">
+      <!-- Pair List -->
+    </ul>
+  `
+
+
+  // Queries
+
+  const switchWrapper = qDom(sidebar, "switch-wrapper");
+  const swapWrapper = qDom(sidebar, "swap-wrapper");
+  const sortWrapper = qDom(sidebar, "sort-wrapper");
+  const primaryList = qDom(sidebar, "primary-list");
+  const secondaryList = qDom(sidebar, "secondary-list");
+
+
+  // Create Elements
+
+  const primaryButton = Button({
+    label: "Primary",
+    suffix: "Font",
+    classes: "button button-secondary label not-sidebar",
+    action: changeSidebar,
+    id: "primary"
+  });
+
+  const secondaryButton = Button({
+    label: "Secondary",
+    suffix: "Font",
+    classes: "button button-secondary label not-sidebar",
+    action: changeSidebar,
+    id: "secondary"
+  });
+
+  const swapButton = Button({
+    label: "Swap",
+    suffix: "Primary and Secondary Font",
+    classes: "button-icon-reverse button-tertiary label sub-label tertiary",
+    icon: "Swap",
+    action: changeSwap,
+    id: "swap"
+  });
+
+
+  // Appends
+
+  switchWrapper.appendChild(primaryButton);
+  switchWrapper.appendChild(secondaryButton);
+  swapWrapper.appendChild(swapButton);
+
+
+  // Functions
+
+  function changeSidebar(value) {
+
+    primaryButton.classList.remove("active");
+    secondaryButton.classList.remove("active");
+    primaryList.style.display = "none";
+    secondaryList.style.display = "none";
+    let options = [];
+    let sort = "";
+
+
+    if(value === "primary") {
+      primaryButton.classList.add("active");
+      primaryList.style.display = "block";
+      options = ["A-Z", "Rating", "X-Height"];
+      sort = store.getData().primarySort;
+
+    } else if(value === "secondary") {
+      secondaryButton.classList.add("active");
+      secondaryList.style.display = "block";
+      options = ["Match", "A-Z", "Rating"];
+      sort = store.getData().secondarySort;
+    }
+
+    sortWrapper.innerHTML = '';
+
+    sortWrapper.appendChild(Select({
+      action: changeSort,
+      hideLabel: true,
+      label: `Sort fonts`,
+      options: options,
+      classes: "label sub-label tertiary",
+      value: sort
+    }));
+
+    sortWrapper.dataset.target = value;
+    
+  }
+
+  changeSidebar("primary");
+
+  function changeSort(value) {
+    if(sortWrapper.dataset.target === "primary") {
+      store.setData({primarySort: value});
+    } else if(sortWrapper.dataset.target === "secondary") {
+      store.setData({secondarySort: value});
+    }
+  }
+
+  function changeSwap() {
+    const currentPrimary = store.getData().primaryFont;
+    const currentSecondary = store.getData().secondaryFont;
+
+    store.setData({
+      primaryFont: currentSecondary,
+      secondaryFont: currentPrimary
+    });
+  }
+
+
+  // Subscribed Functions
+
+  function updatePrimaryList() {
+
+    const primaryFont = store.getData().primaryFont;
+    const fonts = store.getData().fonts;
+    const sort = store.getData().primarySort;
+
+    if(isObj(primaryFont) && 
+      (primaryList.dataset.primary !== primaryFont.name || primaryList.dataset.sort !== sort)
+    ) {
+
+      primaryList.innerHTML = '';
+
+      const sortedFonts = sortPrimaryFonts({
+        fonts: fonts,
+        sort: sort
+      });
+
+      sortedFonts.map((font, index) => {
+        primaryList.appendChild(ListItem({
+          font: font,
+          action: changePrimary,
+          data: `${getPercentage(font.xHeightPct)}%`
+        }));
+      });
+
+      highlightActiveItem(primaryList, store.getData().primaryFont, true);
+      primaryList.dataset.sort = sort;
+      primaryList.dataset.primary = primaryFont.name;
+
+      function changePrimary(font) {
+
+        primaryList.dataset.primary = font.name;
+
+        store.setData({
+          primaryFont: font,
+          secondaryFont: store.getData().lock ? store.getData().secondaryFont : {},
+          secondarySort: store.getData().lock ? store.getData().secondarySort : "Match",
+          open: false
+        });
+
+        highlightActiveItem(primaryList, store.getData().primaryFont, true);
+
+      }
+    }
+  }
+
+  store.subscribe(updatePrimaryList);
+  updatePrimaryList();
+
+
+  function updateSecondaryList() {
+
+    const primaryFont = store.getData().primaryFont;
+    const fonts = store.getData().fonts;
+    const sort = store.getData().secondarySort;
+
+    if(isObj(primaryFont) &&
+      (secondaryList.dataset.primary !== primaryFont.name || secondaryList.dataset.sort !== sort) 
+    ) {
+
+      secondaryList.innerHTML = '';
+
+      const sortedFonts = sortSecondaryFonts({
+        primary: primaryFont,
+        fonts: fonts,
+        sort: sort
+      });
+
+      sortedFonts.map((font, index) => {
+        secondaryList.appendChild(ListItem({
+          font: font,
+          action: changeSecondary,
+          data: `${getPercentage(font.xHeightPct)}% (${getPercentage(font.xHeightDiff) === "0" ? "Match": getPercentage(font.xHeightDiff)})`
+        }));
+      });
+
+      secondaryList.dataset.primary = primaryFont.name;
+      secondaryList.dataset.sort = sort;
+
+      if(!isObj(store.getData().secondaryFont)) {
+        const newSecondary = findSecondary(primaryFont, sortedFonts);
+        store.setData({secondaryFont: newSecondary});
+      }
+
+      highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
+
+      function changeSecondary(font) {
+        store.setData({
+          secondaryFont: font,
+          open: false
+        });
+
+        highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
+      }
+    }
+  }
+
+  store.subscribe(updateSecondaryList);
+  updateSecondaryList();
+
+  return sidebar;
+
+}
+
+export default Sidebar;
