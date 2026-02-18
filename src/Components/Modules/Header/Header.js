@@ -33,7 +33,7 @@ function Header() {
       <h1 class="">xheightable</h1>
     </div>
     <div class="sidebar cluster cluster-center">
-      <a class="label secondary" href="#" data-element="say-hi">Say Hi</a>
+      <button class="label secondary" data-element="say-hi">Say Hi</button>
       <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button label secondary" href="https://buymeacoffee.com/xheightable" target="_blank">Buy us a coffee!</a>
     </div>
   `;

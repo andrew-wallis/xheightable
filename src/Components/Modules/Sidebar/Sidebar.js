@@ -4,6 +4,7 @@ import sortPrimaryFonts from "../../../helpers/sortPrimaryFonts";
 import sortSecondaryFonts from "../../../helpers/sortSecondaryFonts";
 import getPercentage from "../../../utils/getPercentage";
 import isObj from "../../../utils/isObj";
+import qaDom from "../../../utils/qaDom";
 import qDom from "../../../utils/qDom";
 import Button from "../../Elements/Button";
 import ListItem from "../../Elements/ListItem";
@@ -52,7 +53,7 @@ function Sidebar(store) {
   const primaryButton = Button({
     label: "Primary",
     suffix: "Font",
-    classes: "button button-secondary label not-sidebar",
+    classes: "button button-accent label not-sidebar",
     action: changeSidebar,
     id: "primary"
   });
@@ -60,7 +61,7 @@ function Sidebar(store) {
   const secondaryButton = Button({
     label: "Secondary",
     suffix: "Font",
-    classes: "button button-secondary label not-sidebar",
+    classes: "button button-accent label not-sidebar",
     action: changeSidebar,
     id: "secondary"
   });
@@ -68,7 +69,7 @@ function Sidebar(store) {
   const swapButton = Button({
     label: "Swap",
     suffix: "Primary and Secondary Font",
-    classes: "button-icon-reverse button-tertiary label sub-label tertiary",
+    classes: "button-secondary label sub-label tertiary",
     icon: "Swap",
     action: changeSwap,
     id: "swap"
@@ -244,6 +245,47 @@ function Sidebar(store) {
 
   store.subscribe(updateSecondaryList);
   updateSecondaryList();
+
+
+  // Event Listeners
+
+  primaryList.addEventListener("keydown", (e) => {
+    keyboardNavigation(e, primaryList);
+  });
+
+  secondaryList.addEventListener("keydown", (e) => {
+    keyboardNavigation(e, secondaryList);
+  });
+
+  function keyboardNavigation(e, list) {
+
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+
+      e.preventDefault();
+
+      const listItems = Array.from(qaDom(list, 'list-item'));
+      const currentItem = document.activeElement;
+      const index = listItems.findIndex(item => item === currentItem);
+
+      if(index === -1) return null;
+
+      let nextIndex;
+
+      if(e.key === "ArrowDown") {
+        nextIndex = (index + 1) % listItems.length;
+      } else if (e.key === "ArrowUp") {
+        nextIndex = (index - 1  + listItems.length) % listItems.length;
+      }
+
+      currentItem.blur();
+      currentItem.tabIndex = -1;
+
+      const nextItem = listItems[nextIndex];
+      nextItem.tabIndex = 0;
+      nextItem.focus();
+      
+    }
+  }
 
   return sidebar;
 

@@ -35,13 +35,13 @@ function App({store}) {
       <!-- Top Bar -->
     </header>
     <div data-element="sidebar-container" class="center scrollable-container sidebar-container">
-      <main data-element="main" class="main insulate-2xl-3xl scrollable-container">
+      <main data-element="main" class="main scrollable-container">
         <div data-element="main-content" class="stack-3xl wrap scrollable">
           <!-- Main Content -->
         </div>
         <div data-element="aside-overlay" class="aside-overlay"></div>
       </main>
-      <aside class="aside insulate-2xl-3xl wrap scrollable-container" data-element="aside">
+      <aside class="aside wrap scrollable-container" data-element="aside">
         <!-- Aside -->
       </aside>
     </div>

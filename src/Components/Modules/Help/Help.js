@@ -1,16 +1,16 @@
 function Help() {
 
   const help = document.createElement('div');
-  help.className = "help-outer-container";
+  help.className = "imposter-outer-container";
 
   /* html */
   help.innerHTML = `
-    <div class="help-container">
-      <div class="help">
+    <div class="imposter-container">
+      <div class="imposter stack-xl">
         <div class="stack">
           <h2>What is xheightable?</h2>
           <p><strong>xheightable</strong> is a tool for pairing fonts using their x-heights. The x-height is the height of a lowercase letter (like a lowercase “x”), in proportion to an uppercase letter (like an uppercase “X”). For example, “Inter” has an x-height of 76%. Fonts with similar x-heights will have similar proportions so should work well together.</p>
-          <figure class="insulate stack-2xs">
+          <figure class="stack-2xs">
             <svg width="100%" height="100%" viewBox="0 0 531 72" fill="none" xmlns="http://www.w3.org/2000/svg">
               <line y1="69.5" x2="250" y2="69.5" stroke="currentColor" opacity="0.2"/>
               <line y1="18.5" x2="250" y2="18.5" stroke="#469DC8"/>
@@ -36,13 +36,13 @@ function Help() {
           </figure>
           <p>Although this is a common pairing method, it usually involves trial and error. Not only are the x-heights for fonts rarely documented, but the height of the uppercase letters can vary in proportion to the overall font size making it hard to find the right match.</p>
           <p><strong>xheightable</strong> makes pairing using x-heights easy. It documents the x-heights of over 100 fonts from Google and Adobe and suggests pairings based on these x-heights. Choose a Primary font and <strong>xheightable</strong> will suggest a match for the Secondary font. From there, you can explore the full range of fonts and find the perfect match for your project.</p>
-          <div class="insulate" data-element="help-hide">
-            <!-- Help Hide -->
-          </div>
+        </div>
+        <div class="insulate" data-element="help-hide">
+          <!-- Help Hide -->
         </div>
       </div>
     </div>
-    <div class="help-overlay"></div>
+    <div class="imposter-overlay"></div>
   `;
 
   return help;

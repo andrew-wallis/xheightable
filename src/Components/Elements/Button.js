@@ -3,7 +3,7 @@ import Icon from "./Icons";
 function Button({label, suffix, icon, classes, action, id}) {
 
   const button = document.createElement('button');
-  button.className = `clickable ${classes ? classes : ""} ${icon ? "button button-icon" : ""}`;
+  button.className = `clickable ${classes ? classes : ""} ${icon ? "button-icon" : ""}`;
   button.dataset.element = id ? `button-${id}` : "button";
   button.dataset.target = label ? label : id;
   
