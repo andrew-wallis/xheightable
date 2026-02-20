@@ -6,10 +6,10 @@ function Sample(font) {
 
   /* html */
   sample.innerHTML = `
-    <div class="sample-wrapper">
+    <div class="sample">
       <div class="stack-3xs">
-        <h2 class="label secondary" data-element="sample-header"></h2>
-        <div class="sample-font">
+        <h2 class="slub secondary" data-element="sample-header"></h2>
+        <div class="sample-label">
           <div class="sample-align">
             <div class="sample-leader" data-element="label-leader">A</div>
             <div data-element="label-text">
@@ -52,10 +52,10 @@ function Sample(font) {
       </div>
     </div>
     <ul class="cluster">
-      <li><span class="label sub-label tertiary">X Height</span> <span class="data" data-element="x-height">70%</span></li>
-      <li><span class="label sub-label tertiary">Cap Height</span> <span class="data" data-element="cap-height">70%</span></li>
+      <li><span class="slub tertiary-text tertiary">X Height</span> <span class="accent-text accent-tertiary-text tertiary" data-element="x-height">70%</span></li>
+      <li><span class="slub tertiary-text tertiary">Cap Height</span> <span class="accent-text accent-tertiary-text tertiary" data-element="cap-height">70%</span></li>
       <li>
-        <a href="#" data-element="get-link" class="label sub-label">
+        <a href="#" data-element="get-link" class="slub tertiary-text">
           Get This Font
           <span data-element="get-link-distribution" class="sr-only"></span>
         </a>

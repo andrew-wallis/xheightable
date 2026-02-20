@@ -8,7 +8,7 @@ function Help() {
     <div class="imposter-container">
       <div class="imposter stack-xl">
         <div class="stack">
-          <h2>What is xheightable?</h2>
+          <h2 class="slub">What is xheightable?</h2>
           <p><strong>xheightable</strong> is a tool for pairing fonts using their x-heights. The x-height is the height of a lowercase letter (like a lowercase “x”), in proportion to an uppercase letter (like an uppercase “X”). For example, “Inter” has an x-height of 76%. Fonts with similar x-heights will have similar proportions so should work well together.</p>
           <figure class="stack-2xs">
             <svg width="100%" height="100%" viewBox="0 0 531 72" fill="none" xmlns="http://www.w3.org/2000/svg">

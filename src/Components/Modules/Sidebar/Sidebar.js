@@ -21,7 +21,7 @@ function Sidebar(store) {
       <div data-element="switch-wrapper" class="button-group">
         <!-- Font Switch -->
       </div>
-      <div class="with-sidebar aside-header">
+      <div class="with-sidebar align-center">
         <div class="not-sidebar" data-element="swap-wrapper">
           <!-- Swap Button -->
         </div>
@@ -36,6 +36,9 @@ function Sidebar(store) {
     <ul role="listbox" tabindex="-1" data-element="secondary-list" class="scrollable focus-padding">
       <!-- Pair List -->
     </ul>
+    <div data-element="close-sidebar" class="close-button">
+      <!-- Close Sidebar -->
+    </div>
   `
 
 
@@ -46,6 +49,7 @@ function Sidebar(store) {
   const sortWrapper = qDom(sidebar, "sort-wrapper");
   const primaryList = qDom(sidebar, "primary-list");
   const secondaryList = qDom(sidebar, "secondary-list");
+  const closeSidebar = qDom(sidebar, "close-sidebar");
 
 
   // Create Elements
@@ -53,7 +57,7 @@ function Sidebar(store) {
   const primaryButton = Button({
     label: "Primary",
     suffix: "Font",
-    classes: "button button-accent label not-sidebar",
+    classes: "button button-accent slub not-sidebar",
     action: changeSidebar,
     id: "primary"
   });
@@ -61,7 +65,7 @@ function Sidebar(store) {
   const secondaryButton = Button({
     label: "Secondary",
     suffix: "Font",
-    classes: "button button-accent label not-sidebar",
+    classes: "button button-accent slub not-sidebar",
     action: changeSidebar,
     id: "secondary"
   });
@@ -69,10 +73,16 @@ function Sidebar(store) {
   const swapButton = Button({
     label: "Swap",
     suffix: "Primary and Secondary Font",
-    classes: "button-secondary label sub-label tertiary",
+    classes: "button-secondary slub tertiary-text tertiary",
     icon: "Swap",
     action: changeSwap,
     id: "swap"
+  });
+
+  const closeButton = Button({
+    label: "Close Sidebar",
+    action: changeClose,
+    id: "close"
   });
 
 
@@ -81,6 +91,7 @@ function Sidebar(store) {
   switchWrapper.appendChild(primaryButton);
   switchWrapper.appendChild(secondaryButton);
   swapWrapper.appendChild(swapButton);
+  closeSidebar.appendChild(closeButton);
 
 
   // Functions
@@ -88,7 +99,10 @@ function Sidebar(store) {
   function changeSidebar(value) {
 
     primaryButton.classList.remove("active");
+    primaryButton.tabIndex = 0;
     secondaryButton.classList.remove("active");
+    secondaryButton.tabIndex = 0;
+    secondaryButton.classList.remove("unselectable");
     primaryList.style.display = "none";
     secondaryList.style.display = "none";
     let options = [];
@@ -97,12 +111,14 @@ function Sidebar(store) {
 
     if(value === "primary") {
       primaryButton.classList.add("active");
+      primaryButton.tabIndex = -1;
       primaryList.style.display = "block";
       options = ["A-Z", "Rating", "X-Height"];
       sort = store.getData().primarySort;
 
     } else if(value === "secondary") {
       secondaryButton.classList.add("active");
+      secondaryButton.tabIndex = -1;
       secondaryList.style.display = "block";
       options = ["Match", "A-Z", "Rating"];
       sort = store.getData().secondarySort;
@@ -115,7 +131,7 @@ function Sidebar(store) {
       hideLabel: true,
       label: `Sort fonts`,
       options: options,
-      classes: "label sub-label tertiary",
+      classes: "slub tertiary-text tertiary",
       value: sort
     }));
 
@@ -137,10 +153,18 @@ function Sidebar(store) {
     const currentPrimary = store.getData().primaryFont;
     const currentSecondary = store.getData().secondaryFont;
 
+    swapButton.classList.contains("is-toggled") ? swapButton.classList.remove("is-toggled") : swapButton.classList.add("is-toggled");
+
     store.setData({
       primaryFont: currentSecondary,
       secondaryFont: currentPrimary
     });
+  }
+
+  function changeClose() {
+    store.setData({open: false});
+    container.classList.remove("is-sidebar-open");
+    document.body.classList.remove('scroll-lock');
   }
 
 

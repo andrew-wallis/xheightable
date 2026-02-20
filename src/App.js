@@ -31,21 +31,21 @@ function App({store}) {
 
   /* html */
   app.innerHTML = `
-    <header role="banner" data-element="top-bar">
+    <header class="bg-background" role="banner" data-element="top-bar">
       <!-- Top Bar -->
     </header>
-    <div data-element="sidebar-container" class="center scrollable-container sidebar-container">
+    <div data-element="aside-container" class="center scrollable-container aside-container">
       <main data-element="main" class="main scrollable-container">
         <div data-element="main-content" class="stack-3xl wrap scrollable">
           <!-- Main Content -->
         </div>
         <div data-element="aside-overlay" class="aside-overlay"></div>
       </main>
-      <aside class="aside wrap scrollable-container" data-element="aside">
+      <aside class="aside" data-element="aside">
         <!-- Aside -->
       </aside>
     </div>
-    <footer>
+    <footer class="secondary-text secondary bg-background">
       <div class="with-sidebar wrap">
         <div class="not-sidebar">© xheightable ${new Date().getFullYear()}</div>
         <div class="cluster">
@@ -63,7 +63,7 @@ function App({store}) {
 
   // Queries
 
-  const container = qDom(app, "sidebar-container");
+  const container = qDom(app, "aside-container");
   const mainContent = qDom(app, "main-content");
   const aside = qDom(app, "aside");
 
@@ -80,9 +80,9 @@ function App({store}) {
   });
 
   const hideHelp = Button({
-    label: "Hide",
+    label: "Close",
     action: removeHelp,
-    classes: "button"
+    classes: "button slub secondary"
   });
 
   const showHelp = Button({
@@ -103,7 +103,7 @@ function App({store}) {
 
   mainContent.appendChild(Button({
     label: "Change Fonts",
-    classes: "button label secondary",
+    classes: "button slub secondary change-fonts",
     action: openAside
   }))
 
@@ -118,7 +118,7 @@ function App({store}) {
 
   qDom(app, "aside-overlay").addEventListener("click", function(e) {
     store.setData({open: false});
-    container.classList.remove("sidebar-open");
+    container.classList.remove("is-sidebar-open");
     document.body.classList.remove('scroll-lock');
   });
 
@@ -130,7 +130,7 @@ function App({store}) {
     store.setData({sidebar: "primary"});
     const viewport = store.getData().viewport;
     const isDesktop = viewport >= 1024 ? true : false;
-    container.classList.add("sidebar-open");
+    container.classList.add("is-sidebar-open");
 
     if(!isDesktop) {
       document.body.classList.add('scroll-lock');
@@ -174,12 +174,13 @@ function App({store}) {
   }
 
   function getDefaultTheme() {
+
     if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
       setTheme("light");
     } else if(localStorage.getItem('theme')) {
       setTheme(localStorage.getItem('theme'))
     } else {
-      setTheme("dark");
+      setTheme("light");
     }
   }
 
@@ -201,9 +202,8 @@ function App({store}) {
     } else {
       setTheme("dark");
     }
-  }
 
-  toggleTheme();
+  }
 
 
   // Email

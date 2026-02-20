@@ -22,13 +22,13 @@ function Test(store) {
         </p>
         <ul class="cluster">
           <li class="">
-            <span class="label sub-label secondary" data-element="font-name"></span>
+            <span class="slub tertiary-text secondary" data-element="font-name"></span>
           </li>
           <li class="">
-            <span class="label sub-label tertiary">Font Size</span> <span class="data" data-element="font-size"></span>
+            <span class="slub tertiary-text tertiary">Font Size</span> <span class="accent-text accent-tertiary-text tertiary" data-element="font-size"></span>
           </li>
           <li class="">
-            <span class="label sub-label tertiary">Line Height</span> <span class="data" data-element="font-leading"></span>
+            <span class="slub tertiary-text tertiary">Line Height</span> <span class="accent-text accent-tertiary-text tertiary" data-element="font-leading"></span>
           </li>
         </ul>
       </div>
@@ -38,13 +38,13 @@ function Test(store) {
         </p>
         <ul class="cluster">
           <li class="">
-            <span class="label sub-label secondary" data-element="font-name"></span>
+            <span class="slub tertiary-text secondary" data-element="font-name"></span>
           </li>
           <li class="">
-            <span class="label sub-label tertiary">Font Size</span> <span class="data" data-element="font-size"></span>
+            <span class="slub tertiary-text tertiary">Font Size</span> <span class="accent-text accent-tertiary-text tertiary" data-element="font-size"></span>
           </li>
           <li class="">
-            <span class="label sub-label tertiary">Line Height</span> <span class="data" data-element="font-leading"></span>
+            <span class="slub tertiary-text tertiary">Line Height</span> <span class="accent-text accent-tertiary-text tertiary" data-element="font-leading"></span>
           </li>
         </ul>
       </div>

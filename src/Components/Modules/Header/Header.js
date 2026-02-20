@@ -1,7 +1,7 @@
 function Header() {
 
   const header = document.createElement('div');
-  header.className = "wrap with-sidebar"
+  header.className = "wrap with-sidebar primary-text"
 
   /* html */
   header.innerHTML = `
@@ -32,9 +32,9 @@ function Header() {
       -->
       <h1 class="">xheightable</h1>
     </div>
-    <div class="sidebar cluster cluster-center">
-      <button class="label secondary" data-element="say-hi">Say Hi</button>
-      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button label secondary" href="https://buymeacoffee.com/xheightable" target="_blank">Buy us a coffee!</a>
+    <div class="sidebar cluster align-center">
+      <button class="slub secondary" data-element="say-hi">Say Hi</button>
+      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button slub secondary" href="https://buymeacoffee.com/xheightable" target="_blank">Buy us a coffee!</a>
     </div>
   `;
   return header;
