@@ -1,11 +1,12 @@
-import qDom from "../../utils/qDom";
 import processFont from "../../helpers/processFont";
+import getPercentage from "../../utils/getPercentage";
+import Icons from "./Icons";
 
-function ListItem({font, action, data}) {
+function ListItem({font, action, target}) {
   
   const listItem = document.createElement('li');
 
-  listItem.className = "clickable list-item";
+  listItem.className = `clickable list-item list-item-${target}`;
   listItem.dataset.name = font.name;
   listItem.dataset.label = font.label;
   listItem.dataset.element = "list-item";
@@ -13,22 +14,33 @@ function ListItem({font, action, data}) {
   listItem.role = "option";
   listItem.ariaLabel = `Select ${font.label}`;
 
-  /* html */
-  listItem.innerHTML = `
-    <div data-element="item-leader" class="sample-leader">A</div>
-    <div class="list-item-label" data-element="item-label">${font.label}<span class="list-item-data">${data}</span></div>
-  `;
-
   const fontSize = 0.875;
 
-  const label = qDom(listItem, "item-label");
+  const leader = document.createElement("div");
+  leader.className = "sample-leader";
+  leader.innerHTML = "A";
+  leader.style.fontFamily = 'system-ui';
+  leader.style.fontSize = `1rem`;
+  listItem.appendChild(leader);
+
+  const label = document.createElement("div");
+  label.className = "list-item-label";
+  label.innerHTML = font.label;
   label.style.fontFamily = 'system-ui';
   label.style.fontSize = `${fontSize}rem`;
+  listItem.appendChild(label);
 
-  const leader = qDom(listItem, "item-leader");
-  leader.style.fontSize = `1rem`;
+  const dataLabel = document.createElement("span");
+  dataLabel.className = "list-item-data";
+  dataLabel.innerHTML = target === "primary" ? `${getPercentage(font.xHeightPct)}%` : `${getPercentage(font.xHeightPct)}% (${getPercentage(font.xHeightDiff) === "0" ? "Match": getPercentage(font.xHeightDiff)})`;
+  label.appendChild(dataLabel);
 
   processFont(label, font, fontSize, font.regular, 1);
+
+  if(target === "secondary") {
+    listItem.appendChild(Icons("Lock", "list-item-lock"));
+    listItem.appendChild(Icons("Unlock", "list-item-unlock"));
+  }
 
 
   // Functions

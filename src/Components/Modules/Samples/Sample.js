@@ -12,8 +12,11 @@ function Sample(font) {
         <div class="sample-label">
           <div class="sample-align">
             <div class="sample-leader" data-element="label-leader">A</div>
-            <div data-element="label-text">
+            <div class="sample-label-text" data-element="label-text">
               <!-- Label -->
+            </div>
+            <div data-element="sample-lock">
+              <!-- Lock -->
             </div>
           </div>
           <div class="xheight" data-element="sample-xheight">

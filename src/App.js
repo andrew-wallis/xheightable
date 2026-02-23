@@ -127,15 +127,25 @@ function App({store}) {
 
   function openAside() {
     store.setData({open: true});
-    store.setData({sidebar: "primary"});
-    const viewport = store.getData().viewport;
-    const isDesktop = viewport >= 1024 ? true : false;
-    container.classList.add("is-sidebar-open");
+  }
 
-    if(!isDesktop) {
-      document.body.classList.add('scroll-lock');
+  function updateAside() {
+
+    if(store.getData().open === true && !container.classList.contains("is-sidebar-open")) {
+      const viewport = store.getData().viewport;
+      const isDesktop = viewport >= 1024 ? true : false;
+      container.classList.add("is-sidebar-open");
+
+      if(!isDesktop) {
+        document.body.classList.add('scroll-lock');
+      }
+    } else if(store.getData().open === false && container.classList.contains("is-sidebar-open")) {
+      container.classList.remove("is-sidebar-open");
+      document.body.classList.remove('scroll-lock');
     }
   }
+  
+  store.subscribe(updateAside);
 
 
   function updateViewports() {

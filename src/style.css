@@ -10,24 +10,25 @@
   --smoke: #F2ECE8;
   --stone: #E6E1DD;
   --grey: #CCC7C2;
-  --slate: #787571;
-  --charcoal: #575551;
+  --slate: #76736F;
+  --charcoal: #090808;
   --black: #222120;
 
   /* todo rename these */
-  --blue-var: #3192A5;
+  --blue-light: #90D1DE;
   --blue: #46B2C8;
-  --blue-var2: #90D1DE;
-  --blue-var3: #317D8C;
+  --blue-dark: #117F92;
+  --blue-darker: #176373;
+  --blue-darkest: #08414D;
 
 
   /* Gradient Steps */
-  --accent-step-0: #00BDAD;
-  --accent-step-2: #5cb14c;
-  --accent-step-4: #869f11;
-  --accent-step-6: #a98700;
-  --accent-step-8: #c66900;
-  --accent-step-10: #DC3F20;
+  --accent-step-0: #029687;
+  --accent-step-2: #33915F;
+  --accent-step-4: #649535;
+  --accent-step-6: #8f8500;
+  --accent-step-8: #b86b00;
+  --accent-step-10: #dc3f20;
 
   --background: var(--white);
   --negative: var(--white);
@@ -41,10 +42,12 @@
   --text: var(--black);
 
   --accent: var(--blue);
-  --accent-text: var(--blue-var);
-  --accent-text-hover: var(--blue-var3);
+  --accent-text: var(--blue-dark);
+  --accent-text-hover: var(--blue-darker);
+  --accent-background: var(--blue-light);
+  --accent-label: var(--blue-darkest);
   
-  --outline: 2px solid var(--blue-var2);
+  --outline: 2px solid var(--blue-light);
   --primary-border: 1px solid var(--border);
   
   --radius: 2px;
@@ -115,20 +118,20 @@
   --charcoal: #CDCAC5;
   --black: #E5E2DC;
 
-
-  --blue-var: #55CFC4;
-  --blue: #41B5AB;
-  --blue-var2: #2D736C;
-  --blue-var3: #6BE8DE;
-
+  /* todo rename these */
+  --blue-light: #176775;
+  --blue: #41A2B5;
+  --blue-dark: #55BBCF;
+  --blue-darker: #6BD4E8;
+  --blue-darkest: #DAE5E4;
 
   /* Gradient Steps */
-  --accent-step-0: #00953b;
-  --accent-step-2: #4d8906;
-  --accent-step-4: #6f7b00;
-  --accent-step-6: #896a00;
-  --accent-step-8: #9e5400;
-  --accent-step-10: #ad3a00;
+  --accent-step-0: #03867A;
+  --accent-step-2: #2F8256;
+  --accent-step-4: #537A2D;
+  --accent-step-6: #756D03;
+  --accent-step-8: #965903;
+  --accent-step-10: #dc3f20;
 
   --xheight: var(--black);
 
@@ -252,6 +255,10 @@ hr {
   padding-bottom: var(--space-3xl);
 }
 
+.close-button {
+  width: 100%;
+}
+
 @media (min-width: 1024px) {
 
   .app-container {
@@ -281,10 +288,9 @@ hr {
   }
 
   .button.change-fonts,
-  .button.close-sidebar {
+  .close-button {
     display: none;
   }
-
 }
 
 
@@ -487,7 +493,7 @@ hr {
 }
 
 .accent-tertiary-text {
-  font-size: calc(var(--step--3) * 0.95);
+  font-size: var(--step--3);
 }
 
 
@@ -666,17 +672,18 @@ button {
 }
 
 .button-accent {
-  border-color: var(--accent);
+  border-color: var(--accent-background);
   color: var(--accent-text);
 }
 
 .button-accent:hover {
   color: var(--accent-text-hover);
+  color: var(--accent-text);
 }
 
 .button-accent.active {
-  background-color: var(--accent);
-  color: var(--negative);
+  background-color: var(--accent-background);
+  color: var(--accent-label);
 }
 
 .button-group {
@@ -747,7 +754,12 @@ select:focus-visible {
   line-height: var(--space-l);
   min-height: var(--space-2xl);
   padding: var(--space-2xs) var(--space-xs);
+  position: relative;
   transition: var(--transition-background), var(--transition-color);
+}
+
+.list-item-secondary {
+  padding-right: var(--space-l);
 }
 
 .list-item:hover,
@@ -768,6 +780,38 @@ select:focus-visible {
   opacity: 0.8;
   padding-left: var(--space-3xs);
 }
+
+.list-item-lock,
+.list-item-unlock {
+  position: absolute;
+  right: 4px;
+  opacity: 0;
+  color: var(--accent);
+  top: calc(50% - 10px);
+  transition: var(--transition-opacity), var(--transition-color);
+}
+
+.list-item.active-item:hover .list-item-lock,
+.list-item.active-item:focus-visible .list-item-lock {
+  opacity: 1;
+}
+
+.list-item.is-locked .list-item-lock {
+  opacity: 1;
+  color: inherit;
+}
+
+.list-item.is-locked:hover .list-item-lock,
+.list-item.is-locked:focus-visible .list-item-lock {
+  opacity: 0;
+}
+
+.list-item.is-locked:hover .list-item-unlock,
+.list-item.is-locked:focus-visible .list-item-unlock {
+  opacity: 1;
+}
+
+
 
 
 /* Samples */
@@ -801,6 +845,10 @@ select:focus-visible {
   width: 100%;
 }
 
+.sample-label-text {
+  padding-right: var(--space-3xs);
+}
+
 .sample-line,
 .sample-display-text {
   position: absolute;
@@ -828,7 +876,7 @@ select:focus-visible {
 
 .sample-line > hr {
   display: inline-block;
-  border-top: 1.5px solid var(--blue-var2);
+  border-top: 1.5px solid var(--blue-light);
 }
 
 .sample-reference > hr {

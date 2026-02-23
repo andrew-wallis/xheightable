@@ -4,6 +4,7 @@ import qDom from "../../../utils/qDom";
 import qaDom from "../../../utils/qaDom";
 import getABC from "./helpers/getABC";
 import processFont from "../../../helpers/processFont";
+import Icons from "../../Elements/Icons";
 
 function Samples(store) {
 
@@ -39,6 +40,18 @@ function Samples(store) {
 
     if(secondaryFont.label !== secondary.dataset.label || primaryFont.label !== secondary.dataset.primary || parseInt(secondary.dataset.viewport) !== viewport) {
       updateFont(secondaryFont, secondary, "Secondary");
+    }
+
+    if(store.getData().lock.toString() !== secondary.dataset.lock) {
+      const sampleLock = qDom(secondary, "sample-lock");
+      sampleLock.innerHTML = '';
+
+      if(store.getData().lock) {
+        sampleLock.appendChild(Icons("Lock"))
+        secondary.dataset.lock = "true";
+      } else {
+        secondary.dataset.lock = "false";
+      }
     }
 
     function updateFont(font, sample, header) {

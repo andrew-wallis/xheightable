@@ -82,7 +82,8 @@ function Sidebar(store) {
   const closeButton = Button({
     label: "Close Sidebar",
     action: changeClose,
-    id: "close"
+    id: "close",
+    classes: "button slub secondary"
   });
 
 
@@ -107,7 +108,6 @@ function Sidebar(store) {
     secondaryList.style.display = "none";
     let options = [];
     let sort = "";
-
 
     if(value === "primary") {
       primaryButton.classList.add("active");
@@ -136,6 +136,12 @@ function Sidebar(store) {
     }));
 
     sortWrapper.dataset.target = value;
+
+    if(value === "primary") {
+      highlightActiveItem(primaryList, store.getData().primaryFont, true);
+    } else if(value === "secondary") {
+      highlightActiveItem(secondaryList, store.getData().secondaryFont, true, store.getData().lock);
+    }
     
   }
 
@@ -157,14 +163,13 @@ function Sidebar(store) {
 
     store.setData({
       primaryFont: currentSecondary,
-      secondaryFont: currentPrimary
+      secondaryFont: currentPrimary,
+      lock: false
     });
   }
 
   function changeClose() {
     store.setData({open: false});
-    container.classList.remove("is-sidebar-open");
-    document.body.classList.remove('scroll-lock');
   }
 
 
@@ -191,7 +196,7 @@ function Sidebar(store) {
         primaryList.appendChild(ListItem({
           font: font,
           action: changePrimary,
-          data: `${getPercentage(font.xHeightPct)}%`
+          target: "primary"
         }));
       });
 
@@ -242,7 +247,7 @@ function Sidebar(store) {
         secondaryList.appendChild(ListItem({
           font: font,
           action: changeSecondary,
-          data: `${getPercentage(font.xHeightPct)}% (${getPercentage(font.xHeightDiff) === "0" ? "Match": getPercentage(font.xHeightDiff)})`
+          target: "secondary"
         }));
       });
 
@@ -254,15 +259,33 @@ function Sidebar(store) {
         store.setData({secondaryFont: newSecondary});
       }
 
-      highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
+      console.log("Triggering sidebar highlight");
+      highlightActiveItem(secondaryList, store.getData().secondaryFont, true, store.getData().lock);
 
       function changeSecondary(font) {
-        store.setData({
-          secondaryFont: font,
-          open: false
-        });
 
-        highlightActiveItem(secondaryList, store.getData().secondaryFont, true);
+        if(font === store.getData().secondaryFont) {
+
+          const lock = !store.getData().lock;
+
+          highlightActiveItem(secondaryList, font, true, lock);
+
+          store.setData({
+            lock: lock
+          });
+
+        } else {
+
+          console.log("Triggering list highlight - inactive");
+          highlightActiveItem(secondaryList, font, true, false);
+
+          store.setData({
+            secondaryFont: font,
+            open: false,
+            lock: false
+          });
+        }
+
       }
     }
   }

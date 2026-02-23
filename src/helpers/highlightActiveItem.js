@@ -1,12 +1,20 @@
 import qaDom from "../utils/qaDom";
 
-function highlightActiveItem(container, font, scroll) {
+function highlightActiveItem(container, font, scroll, locked) {
 
   qaDom(container, "list-item").forEach(row => {
 
     if(row.dataset.name === font.name) {
       
       row.classList.add("active-item");
+      row.ariaSelected = true;
+
+      if(locked) { 
+        row.classList.add("is-locked");
+      } else {
+        row.classList.remove("is-locked");
+      }
+      
       row.tabIndex = 0;
 
       if (scroll && container && row) {
@@ -35,6 +43,8 @@ function highlightActiveItem(container, font, scroll) {
 
     } else {
       row.classList.remove("active-item");
+      row.classList.remove("is-locked");
+      row.ariaSelected = false;
       row.tabIndex = -1;
     }
   });
