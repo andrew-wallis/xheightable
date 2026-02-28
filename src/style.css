@@ -3,32 +3,46 @@
 :root {
 
   --primary-font: "SF Pro", "Helvetica Neue", "Inter", Helvetica, Arial, sans-serif;
-  --secondary-text-font: "SF Pro", "Helvetica Neue", "Inter", Helvetica, Arial, sans-serif;
-  --accent-font: Menlo, Monaco, "Cascadia Mono", monospace;
+  --secondary-font: "Cardo", sans-serif;
+  --accent-font: "SF Pro", "Helvetica Neue", "Inter", Helvetica, Arial, sans-serif;
 
   --white: #FCFBF9;
   --smoke: #F2ECE8;
   --stone: #E6E1DD;
   --grey: #CCC7C2;
   --slate: #76736F;
-  --charcoal: #090808;
+  --charcoal: #575551;
   --black: #222120;
 
-  /* todo rename these */
-  --blue-light: #90D1DE;
-  --blue: #46B2C8;
-  --blue-dark: #117F92;
-  --blue-darker: #176373;
-  --blue-darkest: #08414D;
+  --blue-light: #CFE7EB;
+  --blue: #64B7C8;
+  --blue-dark: #44666C;
 
+  --mint-light: #C8E9DD;
+  --mint: #4CBF9A;
+  --mint-dark: #426c5d;
 
-  /* Gradient Steps */
-  --accent-step-0: #029687;
-  --accent-step-2: #33915F;
-  --accent-step-4: #649535;
-  --accent-step-6: #8f8500;
-  --accent-step-8: #b86b00;
-  --accent-step-10: #dc3f20;
+  --fern-light: #D0E6CF;
+  --fern: #66B46C;
+  --fern-dark: #4c684d;
+
+  --olive-light: #D9E1C1;
+  --olive: #85A43D;
+  --olive-dark: #58623f;
+
+  --mustard-light: #E2DBB3;
+  --mustard: #A4900E;
+  --mustard-dark: #655a36;
+
+  --orange-light: #EBD3AF;
+  --orange: #C37500;
+  --orange-dark: #6f5234;
+  
+  --red-light: #F3C8B9;
+  --red: #DC5021;
+  --red-dark: #77493a;
+
+  --crimson: #A5270E;
 
   --background: var(--white);
   --negative: var(--white);
@@ -40,12 +54,11 @@
   --tertiary-text: var(--slate);
   --secondary-text: var(--charcoal);
   --text: var(--black);
+  --branding: var(--crimson);
 
   --accent: var(--blue);
   --accent-text: var(--blue-dark);
-  --accent-text-hover: var(--blue-darker);
   --accent-background: var(--blue-light);
-  --accent-label: var(--blue-darkest);
   
   --outline: 2px solid var(--blue-light);
   --primary-border: 1px solid var(--border);
@@ -118,22 +131,35 @@
   --charcoal: #CDCAC5;
   --black: #E5E2DC;
 
-  /* todo rename these */
-  --blue-light: #176775;
-  --blue: #41A2B5;
-  --blue-dark: #55BBCF;
-  --blue-darker: #6BD4E8;
-  --blue-darkest: #DAE5E4;
+  --blue-dark: #78A0A7;
+  --blue: #42747D;
+  --blue-light: #203132;
 
-  /* Gradient Steps */
-  --accent-step-0: #03867A;
-  --accent-step-2: #2F8256;
-  --accent-step-4: #537A2D;
-  --accent-step-6: #756D03;
-  --accent-step-8: #965903;
-  --accent-step-10: #dc3f20;
+  --mint-dark: #1B3229;
+  --mint: #347962;
+  --mint-light: #78A798;
 
-  --xheight: var(--black);
+  --fern-dark: #203020;
+  --fern: #437246;
+  --fern-light: #7F9F82;
+
+  --olive-dark: #272D16;
+  --olive: #56682A;
+  --olive-light: #8A966F;
+
+  --mustard-dark: #2D290D;
+  --mustard: #685C0D;
+  --mustard-light: #968B62;
+
+  --orange-dark: #33230A;
+  --orange: #7B4C05;
+  --orange-light: #A17E5D;
+  
+  --red-dark: #381C11;
+  --red: #8A3619;
+  --red-light: #A77261;
+
+  --branding: var(--black);
 
 }
 
@@ -172,7 +198,6 @@ a {
 a:hover,
 a:focus-visible {
   text-underline-offset: 2.5px;
-  color: var(--accent-text-hover);
 }
 
 strong {
@@ -676,14 +701,9 @@ button {
   color: var(--accent-text);
 }
 
-.button-accent:hover {
-  color: var(--accent-text-hover);
-  color: var(--accent-text);
-}
-
 .button-accent.active {
   background-color: var(--accent-background);
-  color: var(--accent-label);
+  color: var(--accent-text);
 }
 
 .button-group {
@@ -716,6 +736,23 @@ button .icon {
 
 .is-toggled .icon {
   transform: rotate(180deg);
+}
+
+
+/* Logo */
+
+.logo {
+  align-items: center;
+  color: var(--branding);
+  user-select: none;
+}
+
+.logo > h1 {
+  padding-top: 1px;
+}
+
+.logo > svg  {
+  width: var(--space-m);
 }
 
 
@@ -880,11 +917,11 @@ select:focus-visible {
 }
 
 .sample-reference > hr {
-  border-color: var(--accent-step-10);
+  border-color: var(--red);
 }
 
 .sample-xline > hr {
-  border-color: var(--accent-step-0);
+  border-color: var(--mint);
 }
 
 
@@ -907,27 +944,33 @@ select:focus-visible {
 /* X Height */
 
 [data-step="0"] {
-  --xheight-accent: var(--accent-step-0);
+  --xheight-accent: var(--mint-light);
+  --xheight-color: var(--mint-dark);
 }
 
 [data-step="2"] {
-  --xheight-accent: var(--accent-step-2);
+  --xheight-accent: var(--fern-light);
+  --xheight-color: var(--fern-dark);
 }
 
 [data-step="4"] {
-  --xheight-accent: var(--accent-step-4);
+  --xheight-accent: var(--olive-light);
+  --xheight-color: var(--olive-dark);
 }
 
 [data-step="6"] {
-  --xheight-accent: var(--accent-step-6);
+  --xheight-accent: var(--mustard-light);
+  --xheight-color: var(--mustard-dark);
 }
 
 [data-step="8"] {
-  --xheight-accent: var(--accent-step-8);
+  --xheight-accent: var(--orange-light);
+  --xheight-color: var(--orange-dark);
 }
 
 [data-step="10"] {
-  --xheight-accent: var(--accent-step-10);
+  --xheight-accent: var(--red-light);
+  --xheight-color: var(--red-dark);
 }
 
 .xheight {
@@ -942,10 +985,10 @@ select:focus-visible {
 }
 
 .xheight-content {
-  align-items: start;
-  color: var(--xheight);
+  align-items: center;
+  color: var(--xheight-color);
   display: flex;
-  font-family: var(--secondary-text-font);
+  font-family: var(--secondary-font);
   font-size: var(--step-2);
   font-weight: 700;
   gap: 0px;
@@ -954,9 +997,7 @@ select:focus-visible {
 }
 
 .xheight-percentage {
-  opacity: 0.8;
   font-size: var(--step--3);
-  padding-top: 3px;
 }
 
 
