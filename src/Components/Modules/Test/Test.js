@@ -92,8 +92,15 @@ function Test(store) {
       example.dataset.label = font.label;
       example.dataset.viewport = viewport;
 
+      const adjustedFontSize = (Math.round(remBase * font.capHeightAdj * 16 * 2) / 2).toFixed(1).replace(/\.0$/, '');
+      const pxBase = remBase * 16;
+
+      const fontSizeLabel = [];
+      fontSizeLabel.push(`${adjustedFontSize}px`);
+      if(adjustedFontSize != pxBase) fontSizeLabel.push(`(${pxBase}px × ${font.capHeightAdj})`);
+      
       qDom(example, "font-name").innerText = font.label;
-      qDom(example, "font-size").innerText = `${(Math.round(remBase * font.capHeightAdj * 16 * 2) / 2).toFixed(1).replace(/\.0$/, '')}px`;
+      qDom(example, "font-size").innerText = fontSizeLabel.join(" ");
       qDom(example, "font-leading").innerText = `${font[example.dataset.leading]}`;
   
     }

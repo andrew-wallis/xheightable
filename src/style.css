@@ -159,7 +159,7 @@
   --red: #8A3619;
   --red-light: #A77261;
 
-  --branding: var(--black);
+  --crimson: #d55232;
 
 }
 
@@ -814,7 +814,6 @@ select:focus-visible {
   font-family: var(--primary-font);
   font-size: var(--step--3);
   font-weight: 400;
-  opacity: 0.8;
   padding-left: var(--space-3xs);
 }
 
@@ -988,9 +987,9 @@ select:focus-visible {
   align-items: center;
   color: var(--xheight-color);
   display: flex;
-  font-family: var(--secondary-font);
-  font-size: var(--step-2);
-  font-weight: 700;
+  font-family: var(--primary-font);
+  font-size: var(--step-0);
+  font-weight: 600;
   gap: 0px;
   padding-top: 1px;
   padding-left: 1px;

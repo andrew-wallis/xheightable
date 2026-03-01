@@ -24,7 +24,7 @@ function Header() {
     </div>
     <div class="sidebar cluster align-center">
       <button class="slub secondary" data-element="say-hi">Say Hi</button>
-      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button slub secondary" href="https://buymeacoffee.com/xheightable" target="_blank">Buy us a coffee!</a>
+      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button slub secondary clickable" href="https://buymeacoffee.com/xheightable" target="_blank">Buy us a coffee!</a>
     </div>
   `;
   return header;
