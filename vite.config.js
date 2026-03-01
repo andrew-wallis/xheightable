@@ -3,7 +3,7 @@ import { baseURL } from './config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: baseURL,
+  //base: baseURL,
   css: {
     postcss: './postcss.config.js'
   }
