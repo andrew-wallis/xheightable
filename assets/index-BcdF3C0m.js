@@ -88,7 +88,7 @@
           ${f.getData().testTitle}
         </p>
         <ul class="cluster">
-          <li class="">
+          <li class="desktop-only">
             <span class="slub tertiary-text secondary" data-element="font-name"></span>
           </li>
           <li class="">
@@ -104,7 +104,7 @@
           ${f.getData().testText}
         </p>
         <ul class="cluster">
-          <li class="">
+          <li class="desktop-only">
             <span class="slub tertiary-text secondary" data-element="font-name"></span>
           </li>
           <li class="">
