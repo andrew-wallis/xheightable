@@ -1,8 +1,8 @@
-import qaDom from "../utils/qaDom";
+import queryAllByData from "../utils/queryAllByData";
 
 function highlightActiveItem(container, font, scroll, locked) {
 
-  qaDom(container, "list-item").forEach(row => {
+  queryAllByData(container, "list-item").forEach(row => {
 
     if(row.dataset.name === font.name) {
       

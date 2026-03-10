@@ -1,7 +1,7 @@
 import Sample from "./Sample";
 import isObj from "../../../utils/isObj";
-import qDom from "../../../utils/qDom";
-import qaDom from "../../../utils/qaDom";
+import queryByData from "../../../utils/queryByData";
+import queryAllByData from "../../../utils/queryAllByData";
 import getABC from "./helpers/getABC";
 import processFont from "../../../helpers/processFont";
 import Icons from "../../Elements/Icons";
@@ -43,7 +43,7 @@ function Samples(store) {
     }
 
     if(store.getData().lock.toString() !== secondary.dataset.lock) {
-      const sampleLock = qDom(secondary, "sample-lock");
+      const sampleLock = queryByData(secondary, "sample-lock");
       sampleLock.innerHTML = '';
 
       if(store.getData().lock) {
@@ -65,9 +65,9 @@ function Samples(store) {
 
         // Label
 
-        const sampleHeader = qDom(sample, "sample-header");
-        const labelText = qDom(sample, "label-text");
-        const labelLeader = qDom(sample, "label-leader");
+        const sampleHeader = queryByData(sample, "sample-header");
+        const labelText = queryByData(sample, "label-text");
+        const labelLeader = queryByData(sample, "label-leader");
     
         sampleHeader.innerText = header;
         labelText.innerText = font.label;
@@ -85,8 +85,8 @@ function Samples(store) {
 
         // Sample
 
-        const sampleText = qDom(sample, "sample-text");
-        const sampleLeader = qDom(sample, "sample-leader");
+        const sampleText = queryByData(sample, "sample-text");
+        const sampleLeader = queryByData(sample, "sample-leader");
 
         sampleText.style.fontFamily = 'system-ui';
         sampleText.style.opacity = 0;
@@ -98,37 +98,40 @@ function Samples(store) {
         sampleLeader.style.fontSize = `${sampleSize * 1.33}rem`;
         sampleLeader.style.lineHeight = `${sampleSize * 1.33}rem`;
 
-        qaDom(sample, "sample-text-abc").forEach((abc) => {
+        queryAllByData(sample, "sample-text-abc").forEach((abc) => {
           abc.innerText = getABC(viewport);
         });
 
-        qDom(sample, "sample-text-capline").style.verticalAlign = `${capHeight}rem`;
-        qDom(sample, "sample-text-refline").style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
-        qDom(sample, "sample-text-xline").style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
+        queryByData(sample, "sample-text-capline").style.verticalAlign = `${capHeight}rem`;
+        queryByData(sample, "sample-text-refline").style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
+        queryByData(sample, "sample-text-xline").style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
 
 
         // Data
 
-        qDom(sample, "sample-xheight-number").innerText = `${Math.round(font.xHeightPct * 100)}`;
+        queryByData(sample, "sample-xheight-number").innerText = `${Math.round(font.xHeightPct * 100)}`;
 
         if(sample.dataset.font === "primary") {
-          qDom(sample, "sample-xheight").dataset.step = "0";
+          queryByData(sample, "sample-xheight").dataset.step = "0";
         } else {
           const difference = Math.round(Math.abs(secondaryFont.xHeightPct - primaryFont.xHeightPct) * 100);
-          qDom(sample, "sample-xheight").dataset.step = difference > 10 ? "10" : `${difference}`;
+          queryByData(sample, "sample-xheight").dataset.step = difference > 10 ? "10" : `${difference}`;
         }
 
         processFont(labelText, font, labelSize, font.bold, `${labelSize * 1.33}rem`);
         processFont(sampleText, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
 
-        qDom(sample, "x-height").innerText = `${Math.round(font.xHeightPct * 100)}%`;
-        qDom(sample, "cap-height").innerText = `${Math.round(font.capHeightPct * 100)}%`;
+        queryByData(sample, "x-height").innerText = `${Math.round(font.xHeightPct * 100)}%`;
+        queryByData(sample, "cap-height").innerText = `${Math.round(font.capHeightPct * 100)}%`;
 
 
-        const getLink = qDom(sample, "get-link");
+        const getLink = queryByData(sample, "get-link");
         getLink.href = font.link;
+        getLink.dataset.umamiEvent = "Get Font";
+        getLink.dataset.umamiEventDistribution = font.distribution;
+        getLink.dataset.umamiEventFont = font.label;
 
-        const getLinkDistribution = qDom(sample, "get-link-distribution");
+        const getLinkDistribution = queryByData(sample, "get-link-distribution");
         getLinkDistribution.innerHTML = `from ${font.distribution}`;
 
         sample.dataset.label = font.label;

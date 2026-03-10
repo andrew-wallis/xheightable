@@ -23,8 +23,8 @@ function Header() {
       <h1 class="slub">xheightable</h1>
     </div>
     <div class="sidebar cluster align-center">
-      <button class="slub secondary" data-element="say-hi">Say Hi</button>
-      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button slub secondary clickable" href="https://buymeacoffee.com/xheightable" target="_blank">Buy us a coffee!</a>
+      <button class="slub secondary" data-element="say-hi" data-umami-event="Say Hi">Say Hi</button>
+      <a aria-label="Buy us a coffee!" rel="noopener noreferrer" class="button slub secondary clickable" href="https://buymeacoffee.com/xheightable" target="_blank" data-umami-event="Buy us a coffee">Buy us a coffee!</a>
     </div>
   `;
   return header;

@@ -1,6 +1,6 @@
 import processFont from "../../../helpers/processFont";
 import isObj from "../../../utils/isObj";
-import qDom from "../../../utils/qDom";
+import queryByData from "../../../utils/queryByData";
 
 function Test(store) {
 
@@ -21,7 +21,7 @@ function Test(store) {
           ${store.getData().testTitle}
         </p>
         <ul class="cluster">
-          <li class="">
+          <li class="desktop-only">
             <span class="slub tertiary-text secondary" data-element="font-name"></span>
           </li>
           <li class="">
@@ -37,7 +37,7 @@ function Test(store) {
           ${store.getData().testText}
         </p>
         <ul class="cluster">
-          <li class="">
+          <li class="desktop-only">
             <span class="slub tertiary-text secondary" data-element="font-name"></span>
           </li>
           <li class="">
@@ -53,8 +53,8 @@ function Test(store) {
 
   // Queries
 
-  const title = qDom(test, "test-title");
-  const paragraph = qDom(test, "test-paragraph");
+  const title = queryByData(test, "test-title");
+  const paragraph = queryByData(test, "test-paragraph");
 
 
 
@@ -99,9 +99,9 @@ function Test(store) {
       fontSizeLabel.push(`${adjustedFontSize}px`);
       if(adjustedFontSize != pxBase) fontSizeLabel.push(`(${pxBase}px × ${font.capHeightAdj})`);
       
-      qDom(example, "font-name").innerText = font.label;
-      qDom(example, "font-size").innerText = fontSizeLabel.join(" ");
-      qDom(example, "font-leading").innerText = `${font[example.dataset.leading]}`;
+      queryByData(example, "font-name").innerText = font.label;
+      queryByData(example, "font-size").innerText = fontSizeLabel.join(" ");
+      queryByData(example, "font-leading").innerText = `${font[example.dataset.leading]}`;
   
     }
   }

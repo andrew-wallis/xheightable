@@ -13,6 +13,9 @@ function ListItem({font, action, target}) {
   listItem.tabIndex = -1;
   listItem.role = "option";
   listItem.ariaLabel = `Select ${font.label}`;
+  listItem.dataset.umamiEvent = `List Item ${target}`;
+  listItem.dataset.umamiEventDistribution = font.distribution;
+  listItem.dataset.umamiEventFont = font.label;
 
   const fontSize = 0.875;
 

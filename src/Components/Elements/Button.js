@@ -6,6 +6,7 @@ function Button({label, suffix, icon, classes, action, id}) {
   button.className = `clickable ${classes ? classes : ""} ${icon ? "button-icon" : ""}`;
   button.dataset.element = id ? `button-${id}` : "button";
   button.dataset.target = label ? label : id;
+  button.dataset.umamiEvent = `Button ${label}`;
   
   if(label) {
     const buttonLabel = document.createElement('div');

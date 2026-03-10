@@ -2,6 +2,7 @@ function Help() {
 
   const help = document.createElement('div');
   help.className = "imposter-outer-container";
+  help.style.display = "none";
 
   /* html */
   help.innerHTML = `

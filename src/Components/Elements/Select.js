@@ -3,6 +3,7 @@ function Select({action, hideLabel, label, options, value, classes}) {
   const id = label.replace(/\W/g,'-').toLowerCase();
   const select = document.createElement('div');
   select.className = ``;
+  select.dataset.umamiEvent = `Select ${label}`;
 
   /* html */
   select.innerHTML = `

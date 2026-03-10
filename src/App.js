@@ -6,7 +6,7 @@ import Sidebar from "./Components/Modules/Sidebar/Sidebar";
 import Button from "./Components/Elements/Button";
 import getSampleText from "./helpers/getSampleText";
 import getRandomIndex from "./utils/getRandomIndex";
-import qDom from "./utils/qDom";
+import queryByData from "./utils/queryByData";
 
 
 function App({store}) {
@@ -63,9 +63,9 @@ function App({store}) {
 
   // Queries
 
-  const container = qDom(app, "aside-container");
-  const mainContent = qDom(app, "main-content");
-  const aside = qDom(app, "aside");
+  const container = queryByData(app, "aside-container");
+  const mainContent = queryByData(app, "main-content");
+  const aside = queryByData(app, "aside");
 
 
   // Create Elements
@@ -93,10 +93,9 @@ function App({store}) {
 
   // Appends
 
-  qDom(app, "top-bar").appendChild(Header());
+  queryByData(app, "top-bar").appendChild(Header());
 
-  help.style.display = "none";
-  qDom(help, "help-hide").appendChild(hideHelp);
+  queryByData(help, "help-hide").appendChild(hideHelp);
   app.appendChild(help);
 
   mainContent.appendChild(Samples(store));
@@ -110,13 +109,13 @@ function App({store}) {
   mainContent.appendChild(Test(store));
   aside.appendChild(sidebar);
   
-  qDom(app, "theme-switch").appendChild(themeSwitch);
-  qDom(app, "help-switch").appendChild(showHelp);
+  queryByData(app, "theme-switch").appendChild(themeSwitch);
+  queryByData(app, "help-switch").appendChild(showHelp);
 
 
   // Event Listeners
 
-  qDom(app, "aside-overlay").addEventListener("click", function(e) {
+  queryByData(app, "aside-overlay").addEventListener("click", function(e) {
     store.setData({open: false});
     container.classList.remove("is-sidebar-open");
     document.body.classList.remove('scroll-lock');
@@ -218,7 +217,7 @@ function App({store}) {
 
   // Email
 
-  const sayHi = qDom(app, "say-hi");
+  const sayHi = queryByData(app, "say-hi");
 
   sayHi.addEventListener("click", (e) => {
     e.preventDefault();

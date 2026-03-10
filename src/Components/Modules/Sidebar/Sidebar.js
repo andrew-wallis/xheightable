@@ -4,8 +4,8 @@ import sortPrimaryFonts from "../../../helpers/sortPrimaryFonts";
 import sortSecondaryFonts from "../../../helpers/sortSecondaryFonts";
 import getPercentage from "../../../utils/getPercentage";
 import isObj from "../../../utils/isObj";
-import qaDom from "../../../utils/qaDom";
-import qDom from "../../../utils/qDom";
+import queryAllByData from "../../../utils/queryAllByData";
+import queryByData from "../../../utils/queryByData";
 import Button from "../../Elements/Button";
 import ListItem from "../../Elements/ListItem";
 import Select from "../../Elements/Select";
@@ -44,12 +44,12 @@ function Sidebar(store) {
 
   // Queries
 
-  const switchWrapper = qDom(sidebar, "switch-wrapper");
-  const swapWrapper = qDom(sidebar, "swap-wrapper");
-  const sortWrapper = qDom(sidebar, "sort-wrapper");
-  const primaryList = qDom(sidebar, "primary-list");
-  const secondaryList = qDom(sidebar, "secondary-list");
-  const closeSidebar = qDom(sidebar, "close-sidebar");
+  const switchWrapper = queryByData(sidebar, "switch-wrapper");
+  const swapWrapper = queryByData(sidebar, "swap-wrapper");
+  const sortWrapper = queryByData(sidebar, "sort-wrapper");
+  const primaryList = queryByData(sidebar, "primary-list");
+  const secondaryList = queryByData(sidebar, "secondary-list");
+  const closeSidebar = queryByData(sidebar, "close-sidebar");
 
 
   // Create Elements
@@ -310,7 +310,7 @@ function Sidebar(store) {
 
       e.preventDefault();
 
-      const listItems = Array.from(qaDom(list, 'list-item'));
+      const listItems = Array.from(queryAllByData(list, 'list-item'));
       const currentItem = document.activeElement;
       const index = listItems.findIndex(item => item === currentItem);
 

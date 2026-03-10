@@ -58,7 +58,7 @@ function Sample(font) {
       <li><span class="slub tertiary-text tertiary">X Height</span> <span class="accent-text accent-tertiary-text tertiary" data-element="x-height">70%</span></li>
       <li><span class="slub tertiary-text tertiary">Cap Height</span> <span class="accent-text accent-tertiary-text tertiary" data-element="cap-height">70%</span></li>
       <li>
-        <a href="#" data-element="get-link" class="slub tertiary-text">
+        <a href="#" data-element="get-link" class="slub tertiary-text" target="_blank">
           Get This Font
           <span data-element="get-link-distribution" class="sr-only"></span>
         </a>
