@@ -1,151 +1,100 @@
+import Footer from "./Components/Modules/Footer/Footer";
 import Header from "./Components/Modules/Header/Header";
-import Samples from "./Components/Modules/Samples/Samples";
-import Test from "./Components/Modules/Test/Test";
 import Help from "./Components/Modules/Help/Help";
+import Samples from "./Components/Modules/Samples/Samples";
 import Sidebar from "./Components/Modules/Sidebar/Sidebar";
+import Test from "./Components/Modules/Test/Test";
 import Button from "./Components/Elements/Button";
 import getSampleText from "./helpers/getSampleText";
 import getRandomIndex from "./utils/getRandomIndex";
-import queryByData from "./utils/queryByData";
 
 
 function App({store}) {
+  
 
-
-  // Initial
+  // Initiate
 
   store.setData({
-    primaryFont: getRandomIndex(store.getData().fonts),
-    secondaryFont: {},
-    primarySort: "A-Z",
-    secondarySort: "Match",
-    open: false,
+    help: false,
     lock: false,
-    testTitle: getSampleText(2),
+    open: false,
+    primaryFont: getRandomIndex(store.getData().fonts),
+    primarySort: "A-Z",
+    secondaryFont: {},
+    secondarySort: "Match",
     testText: getSampleText(10),
+    testTitle: getSampleText(2),
     viewport: window.innerWidth
   });
+
+
+  // Structure
 
   const app = document.createElement('div');
   app.className = "app-container";
 
-  /* html */
-  app.innerHTML = `
-    <header class="bg-background" role="banner" data-element="top-bar">
-      <!-- Top Bar -->
-    </header>
-    <div data-element="aside-container" class="center scrollable-container aside-container">
-      <main data-element="main" class="main scrollable-container">
-        <div data-element="main-content" class="stack-3xl wrap scrollable">
-          <!-- Main Content -->
-        </div>
-        <div data-element="aside-overlay" class="aside-overlay"></div>
-      </main>
-      <aside class="aside" data-element="aside">
-        <!-- Aside -->
-      </aside>
-    </div>
-    <footer class="secondary-text secondary bg-background">
-      <div class="with-sidebar wrap">
-        <div class="not-sidebar">© xheightable ${new Date().getFullYear()}</div>
-        <div class="cluster">
-          <div data-element="theme-switch">
-            <!-- Theme Switch -->
-          </div>
-          <div data-element="help-switch">
-            <!-- Help Switch -->
-          </div>
-        </div>
-      </div>
-    </footer>
-  `;
+  app.appendChild(Header(store));
 
+  const appContainer = document.createElement('div');
+  appContainer.classList = "center scrollable-container aside-container";
+  app.appendChild(appContainer);
 
-  // Queries
+  const main = document.createElement('main');
+  main.classList = "main scrollable-container";
+  appContainer.appendChild(main);
 
-  const container = queryByData(app, "aside-container");
-  const mainContent = queryByData(app, "main-content");
-  const aside = queryByData(app, "aside");
-
-
-  // Create Elements
-
-  const sidebar = Sidebar(store);
-  const help = Help();
-
-  const themeSwitch = Button({
-    label: "Theme",
-    action: toggleTheme,
-    suffix: " "
-  });
-
-  const hideHelp = Button({
-    label: "Close",
-    action: removeHelp,
-    classes: "button slub secondary"
-  });
-
-  const showHelp = Button({
-    label: "Help",
-    action: displayHelp
-  });
-  
-
-  // Appends
-
-  queryByData(app, "top-bar").appendChild(Header());
-
-  queryByData(help, "help-hide").appendChild(hideHelp);
-  app.appendChild(help);
+  const mainContent = document.createElement('div');
+  mainContent.classList = "stack-3xl wrap scrollable";
+  main.appendChild(mainContent);
 
   mainContent.appendChild(Samples(store));
-
   mainContent.appendChild(Button({
     label: "Change Fonts",
     classes: "button slub secondary change-fonts",
     action: openAside
-  }))
-
+  }));
   mainContent.appendChild(Test(store));
-  aside.appendChild(sidebar);
+
+  const asideOverlay = document.createElement('div');
+  asideOverlay.classList = "aside-overlay";
+  mainContent.appendChild(asideOverlay);
+
+  appContainer.appendChild(Sidebar(store));
+
+  app.appendChild(Footer(store));
+  app.appendChild(Help(store));
   
-  queryByData(app, "theme-switch").appendChild(themeSwitch);
-  queryByData(app, "help-switch").appendChild(showHelp);
 
-
-  // Event Listeners
-
-  queryByData(app, "aside-overlay").addEventListener("click", function(e) {
-    store.setData({open: false});
-    container.classList.remove("is-sidebar-open");
-    document.body.classList.remove('scroll-lock');
-  });
-
-
-  // Functions
+  // Sidebar Functions
 
   function openAside() {
     store.setData({open: true});
   }
 
+  asideOverlay.addEventListener("click", function(e) {
+    store.setData({open: false});
+  });
+
   function updateAside() {
 
-    if(store.getData().open === true && !container.classList.contains("is-sidebar-open")) {
+    if(store.getData().open === true && !appContainer.classList.contains("is-sidebar-open")) {
       const viewport = store.getData().viewport;
       const isDesktop = viewport >= 1024 ? true : false;
-      container.classList.add("is-sidebar-open");
+      appContainer.classList.add("is-sidebar-open");
 
       if(!isDesktop) {
         document.body.classList.add('scroll-lock');
       }
-    } else if(store.getData().open === false && container.classList.contains("is-sidebar-open")) {
-      container.classList.remove("is-sidebar-open");
+    } else if(store.getData().open === false && appContainer.classList.contains("is-sidebar-open")) {
+      appContainer.classList.remove("is-sidebar-open");
       document.body.classList.remove('scroll-lock');
     }
   }
   
   store.subscribe(updateAside);
 
+
+  // Viewport Functions
 
   function updateViewports() {
     store.setData({
@@ -170,77 +119,6 @@ function App({store}) {
   const debouncedUpdateViewports = debounce(updateViewports, 50);
 
   window.addEventListener("resize", debouncedUpdateViewports);
-
-
-  // Theme functions
-
-  function setTheme(mode) {
-    const themeSwitchLabel = themeSwitch.querySelector(".button-suffix");
-
-    document.documentElement.setAttribute("data-theme", mode);
-    themeSwitchLabel.innerHTML = mode === "light" ? "Switch To Dark" : "Switch To Light";
-    localStorage.setItem('theme', mode);
-  }
-
-  function getDefaultTheme() {
-
-    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      setTheme("light");
-    } else if(localStorage.getItem('theme')) {
-      setTheme(localStorage.getItem('theme'))
-    } else {
-      setTheme("light");
-    }
-  }
-
-  getDefaultTheme();
-
-  function toggleTheme() {
-    
-    const html = document.documentElement;
-    const theme = html.getAttribute("data-theme");
-
-    html.classList.add("disable-transitions");
-  
-    setTimeout(() => {
-      html.classList.remove("disable-transitions");
-    }, 100);
-
-    if(theme === "dark") {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-
-  }
-
-
-  // Email
-
-  const sayHi = queryByData(app, "say-hi");
-
-  sayHi.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.location.href = "mailto:xheightable@gmail.com";
-
-  });
-
-
-  // Help
-
-  function removeHelp() {
-    localStorage.setItem('help', 'hide');
-    help.style.display = "none";
-    document.body.classList.remove("help-lock");
-  }
-
-  function displayHelp() {
-    help.style.display = "block";
-    document.body.classList.add("help-lock");
-  }
-
-
-  // Return
 
   return app;
 

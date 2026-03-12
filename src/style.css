@@ -745,17 +745,22 @@ button .icon {
 
 /* Logo */
 
-.logo {
+.branding {
   align-items: center;
   color: var(--branding);
   user-select: none;
 }
 
-.logo > h1 {
+.branding > h1 {
   padding-top: 1px;
 }
 
-.logo > svg  {
+.branding > .logo  {
+  display: flex;
+  align-items: center;
+}
+
+.branding > .logo > svg {
   width: var(--space-m);
 }
 

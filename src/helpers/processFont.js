@@ -11,7 +11,9 @@ function processFont(element, font, size, weight, leading) {
       }
   
     } else if (font.distribution === "Adobe" && font.stylesheet) {
-       return `https://use.typekit.net/${font.stylesheet}.css`;
+      return `https://use.typekit.net/${font.stylesheet}.css`;
+    } else if (font.distribution === "FontShare") {
+      return `https://api.fontshare.com/v2/css?f[]=${font.name.replace(/\s+/g, '+').toLowerCase()}@${weight}&display=swap`;
     }
   
   }
@@ -35,7 +37,7 @@ function processFont(element, font, size, weight, leading) {
         break; 
     }
   
-    if(font.distribution === "Google") {
+    if(font.distribution === "Google" || font.distribution === "FontShare") {
       return `"${idName}", ${fallback}`;
     } else if (font.distribution === "Adobe") {
       const dataName = idName.toLowerCase().replace(/\s+/g, '-');

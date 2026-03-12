@@ -5,15 +5,18 @@ function Select({action, hideLabel, label, options, value, classes}) {
   select.className = ``;
   select.dataset.umamiEvent = `Select ${label}`;
 
-  /* html */
-  select.innerHTML = `
-    <label class="${hideLabel ? "sr-only" : ""}" for=${id}>${label}</label>
-    <select class="clickable ${classes ? classes : ""}" id=${id} data-element=${id}>
-      <!-- Select Options -->
-    </select>
-  `;
+  const fieldLabel = document.createElement('label');
+  fieldLabel.className = `${hideLabel ? "sr-only" : ""}`;
+  fieldLabel.htmlFor = id;
+  fieldLabel.innerText = label;
+  select.appendChild(fieldLabel);
 
-  const field = select.querySelector('select');
+  const field = document.createElement('select');
+  field.className = `clickable ${classes ? classes : ""}`;
+  field.id = id;
+  field.dataset.element = id;
+  select.appendChild(field);
+
 
   options.forEach((item) => {
     const option = document.createElement('option');

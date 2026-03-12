@@ -13,7 +13,7 @@ async function renderApp() {
   const store = createStore(initialData);
 
   const root = document.querySelector('#app');
-  root.appendChild(App({data: initialData, store: store}));
+  root.appendChild(App({store: store}));
 
 }
 

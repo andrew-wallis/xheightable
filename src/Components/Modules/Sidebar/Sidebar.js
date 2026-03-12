@@ -2,7 +2,6 @@ import findSecondary from "../../../helpers/findSecondary";
 import highlightActiveItem from "../../../helpers/highlightActiveItem";
 import sortPrimaryFonts from "../../../helpers/sortPrimaryFonts";
 import sortSecondaryFonts from "../../../helpers/sortSecondaryFonts";
-import getPercentage from "../../../utils/getPercentage";
 import isObj from "../../../utils/isObj";
 import queryAllByData from "../../../utils/queryAllByData";
 import queryByData from "../../../utils/queryByData";
@@ -12,32 +11,34 @@ import Select from "../../Elements/Select";
 
 function Sidebar(store) {
 
-  const sidebar = document.createElement('div');
-  sidebar.className = "scrollable-container stack-l";
+  const sidebar = document.createElement('aside');
+  sidebar.className = "aside";
 
   /* html */
   sidebar.innerHTML = `
-    <div class="stack-2xs focus-padding">
-      <div data-element="switch-wrapper" class="button-group">
-        <!-- Font Switch -->
-      </div>
-      <div class="with-sidebar align-center">
-        <div class="not-sidebar" data-element="swap-wrapper">
-          <!-- Swap Button -->
+    <div class="scrollable-container stack-l">
+      <div class="stack-2xs focus-padding">
+        <div data-element="switch-wrapper" class="button-group">
+          <!-- Font Switch -->
         </div>
-        <div class="sidebar" data-element="sort-wrapper">
-          <!-- Pair Filter -->
+        <div class="with-sidebar align-center">
+          <div class="not-sidebar" data-element="swap-wrapper">
+            <!-- Swap Button -->
+          </div>
+          <div class="sidebar" data-element="sort-wrapper">
+            <!-- Pair Filter -->
+          </div>
         </div>
       </div>
-    </div>
-    <ul role="listbox" tabindex="-1" data-element="primary-list" class="scrollable focus-padding">
-      <!-- Pair List -->
-    </ul>
-    <ul role="listbox" tabindex="-1" data-element="secondary-list" class="scrollable focus-padding">
-      <!-- Pair List -->
-    </ul>
-    <div data-element="close-sidebar" class="close-button">
-      <!-- Close Sidebar -->
+      <ul role="listbox" tabindex="-1" data-element="primary-list" class="scrollable focus-padding">
+        <!-- Pair List -->
+      </ul>
+      <ul role="listbox" tabindex="-1" data-element="secondary-list" class="scrollable focus-padding">
+        <!-- Pair List -->
+      </ul>
+      <div data-element="close-sidebar" class="close-button">
+        <!-- Close Sidebar -->
+      </div>
     </div>
   `
 
@@ -259,7 +260,6 @@ function Sidebar(store) {
         store.setData({secondaryFont: newSecondary});
       }
 
-      console.log("Triggering sidebar highlight");
       highlightActiveItem(secondaryList, store.getData().secondaryFont, true, store.getData().lock);
 
       function changeSecondary(font) {
@@ -276,7 +276,6 @@ function Sidebar(store) {
 
         } else {
 
-          console.log("Triggering list highlight - inactive");
           highlightActiveItem(secondaryList, font, true, false);
 
           store.setData({
