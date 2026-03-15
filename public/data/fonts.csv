@@ -93,7 +93,7 @@ id,name,label,superclass,classification,subclass,family,vibe,distribution,weight
 92,OrpheusPro,Orpheus Pro,Serif,Contemporary,Glyphic,,Elegant,Adobe,400;400i;700;700i,400,700,22.85,34.9,0.66,0.73,0.96,1.30,1.55,https://fonts.adobe.com/fonts/orpheus,1928,sug0jcn,103
 93,Outfit,Outfit,Sans,Geometric,Neuzeit,,Friendly,Google,100..900,400,600,22.8,33.31,0.68,0.69,1.01,1.25,1.45,https://fonts.google.com/specimen/Outfit,2021,,146
 94,Overpass,Overpass,Sans,Grotesque,Franklin,,Technical,Google,100..900;100..900i,400,600,24.53,33.6,0.74,0.70,1.00,1.25,1.55,https://fonts.google.com/specimen/Overpass,2014,,144
-95,Plantin,Plantin,Serif,Old Style,Garamond,,Elegant,Adobe,300;300i;400;400i;600;600i;700;700i,400,600,21.6,32.74,0.66,0.68,1.03,1.20,1.45,https://fonts.adobe.com/fonts/plantin,1913,qjl8rgl,115
+95,Plantin,Plantin,Serif,Old Style,Garamond,,Neutral,Adobe,300;300i;400;400i;600;600i;700;700i,400,600,21.6,32.74,0.66,0.68,1.03,1.20,1.45,https://fonts.adobe.com/fonts/plantin,1913,qjl8rgl,115
 96,Playfair,Playfair,Serif,Modern,Bodoni,,Neutral,Google,300..900;300..900i,400,600,19.95,27.41,0.72,0.57,1.23,1.00,1.25,https://fonts.google.com/specimen/Playfair,2011,,65
 97,Plus Jakarta Sans,Plus Jakarta Sans,Sans,Geometric,Neuzeit,,Friendly,Google,200..800;200..800i,400,600,25.73,35.76,0.72,0.75,0.93,1.35,1.60,https://fonts.google.com/specimen/Plus+Jakarta+Sans,2020,,210
 98,Polymath,Polymath,Sans,Geometric,Neuzeit,,Friendly,Adobe,100..900;100..900i,400,600,23.95,32.68,0.74,0.68,1.03,1.25,1.50,https://fonts.adobe.com/fonts/polymath,2024,ivl6hde,205
@@ -145,46 +145,41 @@ id,name,label,superclass,classification,subclass,family,vibe,distribution,weight
 144,Mrs Eaves XL Serif,Mrs Eaves XL,Serif,Transitional,Baskerville,Eaves,Quirky,Adobe,400;700,400,700,20.74,28.8,0.72,0.60,1.17,1.10,1.30,https://fonts.adobe.com/fonts/mrs-eaves-xl,1996,egl1pve,159
 145,Mr Eaves XL Modern,Mr Eaves XL,Sans,Humanist,Johnston,Eaves,Quirky,Adobe,400;700,400,700,20.74,28.8,0.72,0.60,1.17,1.10,1.30,https://fonts.adobe.com/fonts/mr-eaves-xl,2009,wzm4lxy,155
 146,Alverata,Alverata,Sans,Humanist,Optima,,Elegant,Adobe,300;300i;400;400i;500;500i;600;600i;700;700i;900;900i,400,600,27.22,34.22,0.80,0.71,0.99,1.30,1.60,https://fonts.adobe.com/fonts/alverata,2014,lrn0wju,67
-147,Gelica,Gelica,Serif,Contemporary,Windsor,,Quirky,Adobe,400;600,400,600,24.17,32.76,0.74,0.68,1.03,1.25,1.50,https://fonts.adobe.com/fonts/gelica,2020,bim2uyh,155
-148,Granville,Granville,Sans,Humanist,Optima,,Elegant,Adobe,400;700,400,700,21.6,31.68,0.68,0.66,1.06,1.15,1.40,https://fonts.adobe.com/fonts/granville,2015,uvz5qqa,24
-149,Akzidenz Grotesk Next Pro,Akzidenz Grotesk Next,Sans,Grotesque,NeoGrotesque,,Neutral,Adobe,,400,500,23.71,33.89,0.70,0.71,0.99,1.25,1.50,https://fonts.adobe.com/fonts/akzidenz-grotesk-next,1898,vgp0smq,258
-150,Avenir Next LT Pro,Avenir Next,Sans,Geometric,Avenir,,Friendly,Adobe,,400,700,22.46,33.98,0.66,0.71,0.99,1.25,1.50,https://fonts.adobe.com/fonts/avenir-next,1988,bdb7ivo,265
-151,FF DIN Paneuropean,DIN,Sans,Geometric,DIN,,Technical,Adobe,,400,500,23.64,34.18,0.70,0.71,0.99,1.25,1.50,https://fonts.adobe.com/fonts/ff-din-paneuropean,1926,pnj1fre,311
-152,Gotham,Gotham,Sans,Geometric,Gotham,,Neutral,Adobe,,400,500,24.82,33.6,0.74,0.70,1.00,1.25,1.55,https://fonts.adobe.com/fonts/gotham,2002,jbh2vzt,274
-153,Helvetica Neue LT Pro,Helvetica Neue,Sans,Grotesque,NeoGrotesque,,Neutral,Adobe,,400,500,24.82,34.27,0.72,0.71,0.99,1.30,1.55,https://fonts.adobe.com/fonts/helvetica-neue,1957,ukd8ede,430
-154,Neue Frutiger World,Neue Frutiger,Sans,Humanist,Frutiger,,Neutral,Adobe,,400,500,24.48,33.5,0.74,0.70,1.00,1.25,1.55,https://fonts.adobe.com/fonts/neue-frutiger-world,1976,wni0pzv,262
-155,Optima Nova LT Pro,Optima Nova,Sans,Humanist,Optima,,Elegant,Adobe,,400,600,22.61,32.74,0.70,0.68,1.03,1.20,1.45,https://fonts.adobe.com/fonts/optima-nova,1954,jjy2cxn,254
-156,Sentinel,Sentinel,Serif,Slab,Slab,,Neutral,Adobe,,400,600,21.6,31.34,0.68,0.65,1.08,1.15,1.40,https://fonts.adobe.com/fonts/sentinel,2009,rnq0exm,155
-157,Univers Next Pro,Univers Next,Sans,Grotesque,NeoGrotesque,,Neutral,Adobe,,400,500,24.24,34.7,0.70,0.72,0.97,1.30,1.55,https://fonts.adobe.com/fonts/univers-next,1957,yij0qkv,255
-158,Stack Sans Text,Stack Sans,Sans,Grotesque,NeoGrotesque,,Neutral,Google,,400,600,26.85,33.53,0.80,0.70,1.00,1.28,1.57,https://fonts.google.com/specimen/Stack+Sans+Text,2025,,5
-159,Momo Trust Sans,Momo Trust Sans,Sans,Grotesque,NeoGrotesque,,Neutral,Google,,400,600,25.42,36,0.72,0.75,0.93,1.35,1.62,https://fonts.google.com/specimen/Momo+Trust+Sans,2025,,5
-160,Elms Sans,Elm Sans,Sans,Geometric,Proxima,,Neutral,Google,,400,600,23,33.6,0.68,0.70,1.00,1.24,1.49,https://fonts.google.com/specimen/Elms+Sans,2025,,5
-161,Google Sans Flex,Google Sans Flex,Sans,Geometric,Proxima,,Neutral,Google,,400,600,24.63,34.37,0.72,0.72,0.98,1.28,1.55,https://fonts.google.com/specimen/Google+Sans+Flex,2025,,100
-162,Urbanist,Urbanist,Sans,Geometric,Proxima,,Neutral,Google,,400,600,24,33.5,0.72,0.70,1.00,1.25,1.51,https://fonts.google.com/specimen/Urbanist,2021,,100
-163,Libertinus Serif,Libertinus Serif,Serif,Transitional,Baskerville,Libertinus,Elegant,Google,,400,600,20.64,31,0.66,0.65,1.08,1.14,1.36,https://fonts.google.com/specimen/Libertinus+Serif,2025,,100
-164,Epunda Slab,Epunda Slab,Serif,Slab,Slab,Epunda,Neutral,Google,,400,600,24,32,0.76,0.67,1.05,1.21,1.47,https://fonts.google.com/specimen/Epunda+Slab,2025,,100
-165,Epunda Sans,Epunda Sans,Sans,Humanist,Meta,Epunda,Neutral,Google,,400,600,24,32,0.76,0.67,1.05,1.21,1.47,https://fonts.google.com/specimen/Epunda+Sans,2025,,100
-166,Amarna,Amarna,Sans,Humanist,Optima,,Elegant,Google,,400,600,24,33.6,0.70,0.70,1.00,1.25,1.50,https://fonts.google.com/specimen/Amarna,2025,,100
-167,Libertinus Sans,Libertinus Sans,Sans,Humanist,Optima,,Elegant,Google,,400,600,20.64,31,0.66,0.65,1.08,1.14,1.36,https://fonts.google.com/specimen/Libertinus+Sans,2025,,100
-168,Ancizar Sans,Ancizar Sans,Sans,Humanist,Optima,Ancizar,Elegant,Google,,400,600,21.63,29.37,0.74,0.61,1.14,1.10,1.33,https://fonts.google.com/specimen/Ancizar+Sans,2025,,100
-169,Ancizar Serif,Ancizar Serif,Serif,Old Style,Garamond,Ancizar,Elegant,Google,,400,600,21.63,29.37,0.74,0.61,1.14,1.10,1.33,https://fonts.google.com/specimen/Ancizar+Serif,2025,,100
-170,Alpino,Alpino,Sans,Humanist,Frutiger,,Quirky,FontShare,,400,500,19.14,32.63,0.60,0.68,1.03,1.18,1.39,https://www.fontshare.com/fonts/alpino,2021,,100
-171,Amulya,Amulya,Sans,Humanist,Johnston,,Friendly,FontShare,,400,600,24.15,35.76,0.68,0.75,0.94,1.32,1.58,https://www.fontshare.com/fonts/amulya,2021,,100
-172,Bespoke Sans,Bespoke Sans,Sans,Humanist	Frutiger,,Bespoke,Neutral,FontShare,,400,500,24.28,33.60,0.72,0.70,1.00,1.26,1.52,https://www.fontshare.com/fonts/bespoke-sans,2021,,150
-173,Bespoke Serif,Bespoke Serif,Serif,Contemporary,MetaSerif,Bespoke,Neutral,FontShare,,400,500,24.28,33.60,0.72,0.70,1.00,1.26,1.52,https://www.fontshare.com/fonts/bespoke-serif,2021,,150
-174,Bespoke Slab,Bespoke Slab,Serif,Slab,Slab,Bespoke,Neutral,FontShare,,400,500,24.28,33.60,0.72,0.70,1.00,1.26,1.52,https://www.fontshare.com/fonts/bespoke-serif,2021,,150
-175,Cabinet Grotesk,Cabinet Grotesk,Sans,Grotesque,Blake,,Quirky,FontShare,,400,600,23,32.14,0.72,0.67,1.05,1.20,1.45,https://www.fontshare.com/fonts/cabinet-grotesk,2021,,100
-176,Clash Grotesk,Clash Grotesk,Sans,Grotesque,Blake,,Quirky,FontShare,,400,500,23.71,32.16,0.74,0.67,1.04,1.21,1.46,https://www.fontshare.com/fonts/clash-grotesk,2021,,100
-177,Erode,Erode,Serif,Contemporary,MetaSerif,,Elegant,FontShare,,400,600,21.49,29.00,0.74,0.60,1.16,1.09,1.32,https://www.fontshare.com/fonts/erode,2021,,100
-178,Gambetta,Gambetta,Serif,Contemporary,MetaSerif,,Elegant,FontShare,,400,600,21.61,32.53,0.66,0.68,1.03,1.20,1.43,https://www.fontshare.com/fonts/gambetta,2021,,100
-179,General Sans,General Sans,Sans,Grotesque,NeoGrotesque,,Neutral,FontShare,,400,600,25.24,34.45,0.74,0.72,0.98,1.30,1.57,https://www.fontshare.com/fonts/general-sans,2021,,100
-180,Neco,Neco,Serif,Contemporary,MetaSerif,,Quirky,FontShare,,400,600,23,33.43,0.70,0.70,1.01,1.24,1.49,https://www.fontshare.com/fonts/neco,2021,,100
-181,Plein,Plein,Sans,Humanist,Frutiger,,Neutral,FontShare,,400,600,24.25,33.60,0.72,0.70,1.00,1.26,1.52,https://www.fontshare.com/fonts/plein,2021,,100
-182,Recia,Recia,Serif,Contemporary,MetaSerif,,Neutral,FontShare,,400,600,25,36.00,0.70,0.75,0.93,1.34,1.61,https://www.fontshare.com/fonts/recia,2021,,150
-183,Rowan,Rowan,Serif,Contemporary,Glyphic,,Neutral,FontShare,,400,600,23.53,33.59,0.70,0.70,1.00,1.25,1.50,https://www.fontshare.com/fonts/rowan,2021,,100
-184,Satoshi,Satoshi,Sans,Geometric,Neuzeit,,Neutral,FontShare,,400,600,23.23,34.35,0.68,0.72,0.98,1.27,1.52,https://www.fontshare.com/fonts/satoshi,2021,,150
-185,Sentient,Sentient,Serif,Transitional,Bookman,,Neutral,FontShare,,400,600,24,32.87,0.74,0.68,1.02,1.24,1.50,https://www.fontshare.com/fonts/sentient,2021,,100
-186,Supreme,Supreme,Sans,Geometric,DIN,,Technical,FontShare,,400,600,23.6,33.60,0.70,0.70,1.00,1.25,1.50,https://www.fontshare.com/fonts/supreme,2021,,100
-187,Switzer,Switzer,Sans,Grotesque,NeoGrotesque,,Neutral,FontShare,,400,600,25.55,32.63,0.78,0.68,1.03,1.24,1.51,https://www.fontshare.com/fonts/switzer,2021,,100
-188,Synonym,Synonym,Sans,Humanist,Johnston,,Elegant,FontShare,,400,600,23.2,33.58,0.70,0.70,1.00,1.25,1.50,https://www.fontshare.com/fonts/synonym,2021,,100
-189,Zodiak,Zodiak,Serif,Slab,Slab,,Neutral,FontShare,,400,600,24.23,33.58,0.72,0.70,1.00,1.26,1.51,https://www.fontshare.com/fonts/zodiak,2021,,150
+147,Granville,Granville,Sans,Humanist,Optima,,Elegant,Adobe,400;700,400,700,21.6,31.68,0.68,0.66,1.06,1.15,1.40,https://fonts.adobe.com/fonts/granville,2015,uvz5qqa,24
+148,Akzidenz Grotesk Next Pro,Akzidenz Grotesk Next,Sans,Grotesque,NeoGrotesque,,Neutral,Adobe,,400,500,23.71,33.89,0.70,0.71,0.99,1.25,1.50,https://fonts.adobe.com/fonts/akzidenz-grotesk-next,1898,vgp0smq,258
+149,Avenir Next LT Pro,Avenir Next,Sans,Geometric,Avenir,,Friendly,Adobe,,400,700,22.46,33.98,0.66,0.71,0.99,1.25,1.50,https://fonts.adobe.com/fonts/avenir-next,1988,bdb7ivo,265
+150,FF DIN Paneuropean,DIN,Sans,Geometric,DIN,,Technical,Adobe,,400,500,23.64,34.18,0.70,0.71,0.99,1.25,1.50,https://fonts.adobe.com/fonts/ff-din-paneuropean,1926,pnj1fre,311
+151,Gotham,Gotham,Sans,Geometric,Gotham,,Neutral,Adobe,,400,500,24.82,33.6,0.74,0.70,1.00,1.25,1.55,https://fonts.adobe.com/fonts/gotham,2002,jbh2vzt,274
+152,Helvetica Neue LT Pro,Helvetica Neue,Sans,Grotesque,NeoGrotesque,,Neutral,Adobe,,400,500,24.82,34.27,0.72,0.71,0.99,1.30,1.55,https://fonts.adobe.com/fonts/helvetica-neue,1957,ukd8ede,430
+153,Neue Frutiger World,Neue Frutiger,Sans,Humanist,Frutiger,,Neutral,Adobe,,400,500,24.48,33.5,0.74,0.70,1.00,1.25,1.55,https://fonts.adobe.com/fonts/neue-frutiger-world,1976,wni0pzv,262
+154,Optima Nova LT Pro,Optima Nova,Sans,Humanist,Optima,,Elegant,Adobe,,400,600,22.61,32.74,0.70,0.68,1.03,1.20,1.45,https://fonts.adobe.com/fonts/optima-nova,1954,jjy2cxn,254
+155,Sentinel,Sentinel,Serif,Slab,Slab,,Neutral,Adobe,,400,600,21.6,31.34,0.68,0.65,1.08,1.15,1.40,https://fonts.adobe.com/fonts/sentinel,2009,rnq0exm,155
+156,Univers Next Pro,Univers Next,Sans,Grotesque,NeoGrotesque,,Neutral,Adobe,,400,500,24.24,34.7,0.70,0.72,0.97,1.30,1.55,https://fonts.adobe.com/fonts/univers-next,1957,yij0qkv,255
+157,Stack Sans Text,Stack Sans,Sans,Grotesque,NeoGrotesque,,Neutral,Google,,400,600,26.85,33.53,0.80,0.70,1.00,1.28,1.57,https://fonts.google.com/specimen/Stack+Sans+Text,2025,,5
+158,Momo Trust Sans,Momo Trust Sans,Sans,Grotesque,NeoGrotesque,,Neutral,Google,,400,600,25.42,36,0.72,0.75,0.93,1.35,1.62,https://fonts.google.com/specimen/Momo+Trust+Sans,2025,,5
+159,Elms Sans,Elm Sans,Sans,Geometric,Proxima,,Neutral,Google,,400,600,23,33.6,0.68,0.70,1.00,1.24,1.49,https://fonts.google.com/specimen/Elms+Sans,2025,,5
+160,Google Sans Flex,Google Sans Flex,Sans,Geometric,Proxima,,Neutral,Google,,400,600,24.63,34.37,0.72,0.72,0.98,1.28,1.55,https://fonts.google.com/specimen/Google+Sans+Flex,2025,,100
+161,Urbanist,Urbanist,Sans,Geometric,Proxima,,Neutral,Google,,400,600,24,33.5,0.72,0.70,1.00,1.25,1.51,https://fonts.google.com/specimen/Urbanist,2021,,100
+162,Libertinus Serif,Libertinus Serif,Serif,Transitional,Baskerville,Libertinus,Elegant,Google,,400,600,20.64,31,0.66,0.65,1.08,1.14,1.36,https://fonts.google.com/specimen/Libertinus+Serif,2025,,100
+163,Epunda Slab,Epunda Slab,Serif,Slab,Slab,Epunda,Neutral,Google,,400,600,24,32,0.76,0.67,1.05,1.21,1.47,https://fonts.google.com/specimen/Epunda+Slab,2025,,100
+164,Epunda Sans,Epunda Sans,Sans,Humanist,Meta,Epunda,Neutral,Google,,400,600,24,32,0.76,0.67,1.05,1.21,1.47,https://fonts.google.com/specimen/Epunda+Sans,2025,,100
+165,Amarna,Amarna,Sans,Humanist,Optima,,Elegant,Google,,400,600,24,33.6,0.70,0.70,1.00,1.25,1.50,https://fonts.google.com/specimen/Amarna,2025,,100
+166,Libertinus Sans,Libertinus Sans,Sans,Humanist,Optima,Libertinus,Elegant,Google,,400,600,20.64,31,0.66,0.65,1.08,1.14,1.36,https://fonts.google.com/specimen/Libertinus+Sans,2025,,100
+167,Ancizar Sans,Ancizar Sans,Sans,Humanist,Optima,Ancizar,Elegant,Google,,400,600,21.63,29.37,0.74,0.61,1.14,1.10,1.33,https://fonts.google.com/specimen/Ancizar+Sans,2025,,100
+168,Ancizar Serif,Ancizar Serif,Serif,Old Style,Garamond,Ancizar,Elegant,Google,,400,600,21.63,29.37,0.74,0.61,1.14,1.10,1.33,https://fonts.google.com/specimen/Ancizar+Serif,2025,,100
+169,Amulya,Amulya,Sans,Humanist,Johnston,,Friendly,FontShare,,400,600,24.15,35.76,0.68,0.75,0.94,1.32,1.58,https://www.fontshare.com/fonts/amulya,2021,,100
+170,Bespoke Sans,Bespoke Sans,Sans,Humanist	Frutiger,,Bespoke,Neutral,FontShare,,400,500,24.28,33.60,0.72,0.70,1.00,1.26,1.52,https://www.fontshare.com/fonts/bespoke-sans,2021,,150
+171,Bespoke Serif,Bespoke Serif,Serif,Contemporary,MetaSerif,Bespoke,Neutral,FontShare,,400,500,24.28,33.60,0.72,0.70,1.00,1.26,1.52,https://www.fontshare.com/fonts/bespoke-serif,2021,,150
+172,Bespoke Slab,Bespoke Slab,Serif,Slab,Slab,Bespoke,Neutral,FontShare,,400,500,24.28,33.60,0.72,0.70,1.00,1.26,1.52,https://www.fontshare.com/fonts/bespoke-serif,2021,,150
+173,Cabinet Grotesk,Cabinet Grotesk,Sans,Grotesque,Blake,,Quirky,FontShare,,400,500,23,32.14,0.72,0.67,1.05,1.20,1.45,https://www.fontshare.com/fonts/cabinet-grotesk,2021,,100
+174,Clash Grotesk,Clash Grotesk,Sans,Grotesque,Blake,,Quirky,FontShare,,400,600,23.71,32.16,0.74,0.67,1.04,1.21,1.46,https://www.fontshare.com/fonts/clash-grotesk,2021,,100
+175,Erode,Erode,Serif,Contemporary,Windsor,,Elegant,FontShare,,400,600,21.49,29.00,0.74,0.60,1.16,1.09,1.32,https://www.fontshare.com/fonts/erode,2021,,100
+176,General Sans,General Sans,Sans,Grotesque,NeoGrotesque,,Quirky,FontShare,,400,600,25.24,34.45,0.74,0.72,0.98,1.30,1.57,https://www.fontshare.com/fonts/general-sans,2021,,100
+177,Recia,Recia,Serif,Contemporary,MetaSerif,,Neutral,FontShare,,400,600,25,36.00,0.70,0.75,0.93,1.34,1.61,https://www.fontshare.com/fonts/recia,2021,,150
+178,Rowan,Rowan,Serif,Contemporary,Glyphic,,Neutral,FontShare,,400,600,23.53,33.59,0.70,0.70,1.00,1.25,1.50,https://www.fontshare.com/fonts/rowan,2021,,100
+179,Satoshi,Satoshi,Sans,Geometric,Neuzeit,,Quirky,FontShare,,400,600,23.23,34.35,0.68,0.72,0.98,1.27,1.52,https://www.fontshare.com/fonts/satoshi,2021,,150
+180,Sentient,Sentient,Serif,Transitional,Bookman,,Neutral,FontShare,,400,600,24,32.87,0.74,0.68,1.02,1.24,1.50,https://www.fontshare.com/fonts/sentient,2021,,100
+181,Supreme,Supreme,Sans,Geometric,DIN,,Technical,FontShare,,400,600,23.6,33.60,0.70,0.70,1.00,1.25,1.50,https://www.fontshare.com/fonts/supreme,2021,,100
+182,Switzer,Switzer,Sans,Grotesque,NeoGrotesque,,Neutral,FontShare,,400,600,25.55,32.63,0.78,0.68,1.03,1.24,1.51,https://www.fontshare.com/fonts/switzer,2021,,100
+183,Synonym,Synonym,Sans,Humanist,Johnston,,Elegant,FontShare,,400,600,23.2,33.58,0.70,0.70,1.00,1.25,1.50,https://www.fontshare.com/fonts/synonym,2021,,100
+184,Zodiak,Zodiak,Serif,Slab,Slab,,Neutral,FontShare,,400,600,24.23,33.58,0.72,0.70,1.00,1.26,1.51,https://www.fontshare.com/fonts/zodiak,2021,,150

@@ -35,11 +35,11 @@ function Samples(store) {
     const isTablet = viewport >= 768 ? true : false;
 
     if(primaryFont.label !== primary.dataset.label || parseInt(primary.dataset.viewport) !== viewport) {
-      updateFont(primaryFont, primary, "Primary");
+      updateFont(primaryFont, primary, "Primary", true);
     }
 
     if(secondaryFont.label !== secondary.dataset.label || primaryFont.label !== secondary.dataset.primary || parseInt(secondary.dataset.viewport) !== viewport) {
-      updateFont(secondaryFont, secondary, "Secondary");
+      updateFont(secondaryFont, secondary, "Secondary", !store.getData().lock);
     }
 
     if(store.getData().lock.toString() !== secondary.dataset.lock) {
@@ -54,7 +54,7 @@ function Samples(store) {
       }
     }
 
-    function updateFont(font, sample, header) {
+    function updateFont(font, sample, header, updateLabel) {
 
       if(isObj(font)) {
 
@@ -62,55 +62,12 @@ function Samples(store) {
         const labelSize = isTablet ? 1.25 : 1;
         const sampleSize = isTablet ? 3 : 2.5;
 
-
-        // Label
-
-        const sampleHeader = queryByData(sample, "sample-header");
-        const labelText = queryByData(sample, "label-text");
-        const labelLeader = queryByData(sample, "label-leader");
-    
-        sampleHeader.innerText = header;
-        labelText.innerText = font.label;
-
-        labelText.style.opacity = 0;
-        labelText.style.fontFamily = 'system-ui';
-        labelText.style.fontSize = `${labelSize}rem`;
-        labelText.style.lineHeight = `${labelSize * 1.33}rem`;
-
-        labelLeader.style.fontFamily = 'system-ui';
-        labelLeader.style.opacity = 0;
-        labelLeader.style.fontSize = `${labelSize * 1.33}rem`;
-        labelLeader.style.lineHeight = `${labelSize * 1.33}rem`;
-
-
-        // Sample
-
-        const sampleText = queryByData(sample, "sample-text");
-        const sampleLeader = queryByData(sample, "sample-leader");
-
-        sampleText.style.fontFamily = 'system-ui';
-        sampleText.style.opacity = 0;
-        sampleText.style.fontSize = `${sampleSize}rem`;
-        sampleText.style.lineHeight = `${sampleSize * 1.33}rem`;
-
-        sampleLeader.style.fontFamily = 'system-ui';
-        sampleLeader.style.opacity = 0;
-        sampleLeader.style.fontSize = `${sampleSize * 1.33}rem`;
-        sampleLeader.style.lineHeight = `${sampleSize * 1.33}rem`;
-
-        queryAllByData(sample, "sample-text-abc").forEach((abc) => {
-          abc.innerText = getABC(viewport);
-        });
+        // Update Lines
 
         queryByData(sample, "sample-text-capline").style.verticalAlign = `${capHeight}rem`;
         queryByData(sample, "sample-text-refline").style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
         queryByData(sample, "sample-text-xline").style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
-
-
-        // Data
-
-        queryByData(sample, "sample-xheight-number").innerText = `${Math.round(font.xHeightPct * 100)}`;
-
+        
         if(sample.dataset.font === "primary") {
           queryByData(sample, "sample-xheight").dataset.step = "0";
         } else {
@@ -118,25 +75,73 @@ function Samples(store) {
           queryByData(sample, "sample-xheight").dataset.step = difference > 10 ? "10" : `${difference}`;
         }
 
-        processFont(labelText, font, labelSize, font.bold, `${labelSize * 1.33}rem`);
-        processFont(sampleText, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
+        if(updateLabel) {
 
-        queryByData(sample, "x-height").innerText = `${Math.round(font.xHeightPct * 100)}%`;
-        queryByData(sample, "cap-height").innerText = `${Math.round(font.capHeightPct * 100)}%`;
+          // Label
+
+          const sampleHeader = queryByData(sample, "sample-header");
+          const labelText = queryByData(sample, "label-text");
+          const labelLeader = queryByData(sample, "label-leader");
+      
+          sampleHeader.innerText = header;
+          labelText.innerText = font.label;
+
+          labelText.style.opacity = 0;
+          labelText.style.fontFamily = 'system-ui';
+          labelText.style.fontSize = `${labelSize}rem`;
+          labelText.style.lineHeight = `${labelSize * 1.33}rem`;
+
+          labelLeader.style.fontFamily = 'system-ui';
+          labelLeader.style.opacity = 0;
+          labelLeader.style.fontSize = `${labelSize * 1.33}rem`;
+          labelLeader.style.lineHeight = `${labelSize * 1.33}rem`;
 
 
-        const getLink = queryByData(sample, "get-link");
-        getLink.href = font.link;
-        getLink.dataset.umamiEvent = "Get Font";
-        getLink.dataset.umamiEventDistribution = font.distribution;
-        getLink.dataset.umamiEventFont = font.label;
+          // Sample
 
-        const getLinkDistribution = queryByData(sample, "get-link-distribution");
-        getLinkDistribution.innerHTML = `from ${font.distribution}`;
+          const sampleText = queryByData(sample, "sample-text");
+          const sampleLeader = queryByData(sample, "sample-leader");
 
-        sample.dataset.label = font.label;
-        sample.dataset.primary = primaryFont.label;
-        sample.dataset.viewport = viewport;
+          sampleText.style.fontFamily = 'system-ui';
+          sampleText.style.opacity = 0;
+          sampleText.style.fontSize = `${sampleSize}rem`;
+          sampleText.style.lineHeight = `${sampleSize * 1.33}rem`;
+
+          sampleLeader.style.fontFamily = 'system-ui';
+          sampleLeader.style.opacity = 0;
+          sampleLeader.style.fontSize = `${sampleSize * 1.33}rem`;
+          sampleLeader.style.lineHeight = `${sampleSize * 1.33}rem`;
+
+          queryAllByData(sample, "sample-text-abc").forEach((abc) => {
+            abc.innerText = getABC(viewport);
+          });
+
+
+          // Data
+
+          queryByData(sample, "sample-xheight-number").innerText = `${Math.round(font.xHeightPct * 100)}`;
+
+          processFont(labelText, font, labelSize, font.bold, `${labelSize * 1.33}rem`);
+          processFont(sampleText, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
+
+          queryByData(sample, "x-height").innerText = `${Math.round(font.xHeightPct * 100)}%`;
+          queryByData(sample, "cap-height").innerText = `${Math.round(font.capHeightPct * 100)}%`;
+
+
+          const getLink = queryByData(sample, "get-link");
+          getLink.href = font.link;
+          getLink.dataset.umamiEvent = "Get Font";
+          getLink.dataset.umamiEventDistribution = font.distribution;
+          getLink.dataset.umamiEventFont = font.label;
+
+          const getLinkDistribution = queryByData(sample, "get-link-distribution");
+          getLinkDistribution.innerHTML = `from ${font.distribution}`;
+
+          sample.dataset.label = font.label;
+          sample.dataset.primary = primaryFont.label;
+          sample.dataset.viewport = viewport;
+          
+        }
       }
     }
   }

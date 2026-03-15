@@ -8,6 +8,7 @@ function Header() {
 
   const header = document.createElement('header');
   header.classList = "bg-background";
+  header.id = "header"
 
   const headerContainer = document.createElement('div');
   headerContainer.className = "wrap with-sidebar primary-text";

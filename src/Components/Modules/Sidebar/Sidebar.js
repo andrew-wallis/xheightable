@@ -12,7 +12,8 @@ import Select from "../../Elements/Select";
 function Sidebar(store) {
 
   const sidebar = document.createElement('aside');
-  sidebar.className = "aside";
+  sidebar.className = "aside bg-background";
+  sidebar.id = "sidebar";
 
   /* html */
   sidebar.innerHTML = `
@@ -36,9 +37,6 @@ function Sidebar(store) {
       <ul role="listbox" tabindex="-1" data-element="secondary-list" class="scrollable focus-padding">
         <!-- Pair List -->
       </ul>
-      <div data-element="close-sidebar" class="close-button">
-        <!-- Close Sidebar -->
-      </div>
     </div>
   `
 
@@ -80,20 +78,12 @@ function Sidebar(store) {
     id: "swap"
   });
 
-  const closeButton = Button({
-    label: "Close Sidebar",
-    action: changeClose,
-    id: "close",
-    classes: "button slub secondary"
-  });
-
 
   // Appends
 
   switchWrapper.appendChild(primaryButton);
   switchWrapper.appendChild(secondaryButton);
   swapWrapper.appendChild(swapButton);
-  closeSidebar.appendChild(closeButton);
 
 
   // Functions
@@ -169,10 +159,6 @@ function Sidebar(store) {
     });
   }
 
-  function changeClose() {
-    store.setData({open: false});
-  }
-
 
   // Subscribed Functions
 
@@ -212,8 +198,7 @@ function Sidebar(store) {
         store.setData({
           primaryFont: font,
           secondaryFont: store.getData().lock ? store.getData().secondaryFont : {},
-          secondarySort: store.getData().lock ? store.getData().secondarySort : "Match",
-          open: false
+          secondarySort: store.getData().lock ? store.getData().secondarySort : "Match"
         });
 
         highlightActiveItem(primaryList, store.getData().primaryFont, true);
@@ -280,7 +265,6 @@ function Sidebar(store) {
 
           store.setData({
             secondaryFont: font,
-            open: false,
             lock: false
           });
         }

@@ -48,31 +48,47 @@ function App({store}) {
   main.appendChild(mainContent);
 
   mainContent.appendChild(Samples(store));
-  mainContent.appendChild(Button({
-    label: "Change Fonts",
-    classes: "button slub secondary change-fonts",
-    action: openAside
-  }));
   mainContent.appendChild(Test(store));
-
-  const asideOverlay = document.createElement('div');
-  asideOverlay.classList = "aside-overlay";
-  mainContent.appendChild(asideOverlay);
-
   appContainer.appendChild(Sidebar(store));
 
   app.appendChild(Footer(store));
   app.appendChild(Help(store));
+
+  const asideButtonContainer = document.createElement('div');
+  asideButtonContainer.classList = "aside-button bg-background";
+  app.append(asideButtonContainer);
+
+  const asideButton = Button({
+    label: "Change Fonts",
+    classes: "button slub secondary",
+    action: toggleAside
+  })
+
+  asideButtonContainer.appendChild(asideButton);
+
+  const asideOverlay = document.createElement('div');
+  asideOverlay.classList = "aside-overlay";
+  mainContent.appendChild(asideOverlay);
   
 
   // Sidebar Functions
 
-  function openAside() {
-    store.setData({open: true});
+  function toggleAside() {
+
+    const label = asideButton.querySelector(".button-label");
+
+    if(store.getData().open === true) {
+      store.setData({open: false});
+      label.textContent = "Change Fonts"
+    } else if(store.getData().open === false) {
+      store.setData({open: true});
+      label.textContent = "Close"
+    }
   }
 
   asideOverlay.addEventListener("click", function(e) {
     store.setData({open: false});
+    label.textContent = "Change Fonts"
   });
 
   function updateAside() {
@@ -97,6 +113,27 @@ function App({store}) {
   // Viewport Functions
 
   function updateViewports() {
+
+    const getHeader = document.getElementById("header");
+    const getSamples = document.getElementById("samples");
+    const getSidebar = document.getElementById("sidebar");
+
+    const top = getHeight(getHeader) + getHeight(getSamples);
+
+    console.log(window.innerHeight, top);
+
+    if ((window.innerHeight) - top > 448) {
+      getSidebar.style.top = `calc(${top}px + 5rem)`;
+    } else {
+      getSidebar.style.top = `calc(${window.innerHeight}px - 28rem)`;
+    }
+    
+
+    function getHeight(element) {
+      const rect = element.getBoundingClientRect();
+      return rect.height;
+    }
+
     store.setData({
       viewport: window.innerWidth
     });
