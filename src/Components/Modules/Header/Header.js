@@ -1,35 +1,17 @@
 import Button from "../../Elements/Button";
-import HeaderLogo from "./HeaderLogo";
+import HeaderTemplate from "./HeaderTemplate";
 
 function Header() {
 
 
-  // Structure
+  // Template
 
-  const header = document.createElement('header');
-  header.classList = "bg-background";
-  header.id = "header"
+  const header = HeaderTemplate();
 
-  const headerContainer = document.createElement('div');
-  headerContainer.className = "wrap with-sidebar primary-text";
-  header.appendChild(headerContainer);
 
-  const branding = document.createElement('div');
-  branding.className = "not-sidebar branding cluster-s";
-  headerContainer.appendChild(branding);
+  // Elements
 
-  branding.appendChild(HeaderLogo());
-
-  const title = document.createElement('h1');
-  title.className = "slub";
-  title.innerText = "xheightable";
-  branding.appendChild(title);
-
-  const headerControls = document.createElement('div');
-  headerControls.className = "sidebar cluster align-center";
-  headerContainer.appendChild(headerControls);
-
-  headerControls.appendChild(Button({
+  header.controls.appendChild(Button({
     label: "Say Hi",
     action: sayHi,
     classes: "secondary slub"
@@ -42,7 +24,7 @@ function Header() {
   coffee.href = "https://buymeacoffee.com/xheightable";
   coffee.target = "_blank";
   coffee.rel = "noopener noreferrer"
-  headerControls.appendChild(coffee);
+  header.controls.appendChild(coffee);
 
 
   // Functions
@@ -52,7 +34,7 @@ function Header() {
   }
 
 
-  return header;
+  return header.template;
 
 }
 

@@ -117,6 +117,7 @@
   --transition-color: color .3s var(--ease-out-quad);
   --transition-opacity: opacity .2s var(--ease-out-quad);
   --transition-underline: text-underline-offset .3s var(--ease-out-quad);
+  --transition-transform: transform .3s var(--ease-out-quad);
   --transition-all: all .3s var(--ease-out-quad);
 }
 
@@ -266,6 +267,8 @@ hr {
   position: fixed;
   right: 0;
   top: 40%;
+  transform: translateY(100%);
+  transition: var(--transition-transform);
   width: 100%;
   z-index: 200;
 }
@@ -291,7 +294,7 @@ hr {
   width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
 
   .app-container {
     display: flex;
@@ -311,6 +314,7 @@ hr {
     position: static;
     flex-shrink: 0;
     height: 100%;
+    transform: translateY(0);
     padding-top: var(--space-2xl-3xl);
     padding-bottom: var(--space-2xl-3xl);
   }
@@ -319,6 +323,7 @@ hr {
     flex-grow: 1;
     width: 100%;
     position: relative;
+    transition: var(--transition-transform);
   }
 
   .aside-button {
@@ -609,11 +614,15 @@ select.tertiary:focus-visible,
   overflow: hidden;
 }
 
+.is-sidebar-open .aside {
+  transform: translateY(0);
+}
+
 .is-sidebar-open .aside-overlay {
   display: block;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
 
   .is-sidebar-open .aside-overlay {
     display: none;
@@ -747,10 +756,6 @@ button .icon {
   align-items: center;
   color: var(--branding);
   user-select: none;
-}
-
-.branding > h1 {
-  padding-top: 1px;
 }
 
 .branding > .logo  {

@@ -1,28 +1,26 @@
-import Sample from "./Sample";
-import isObj from "../../../utils/isObj";
-import queryByData from "../../../utils/queryByData";
-import queryAllByData from "../../../utils/queryAllByData";
-import getABC from "./helpers/getABC";
-import processFont from "../../../helpers/processFont";
+import Sample from "./SampleTemplate";
 import Icons from "../../Elements/Icons";
+import processFont from "../../../helpers/processFont";
+import setFontStyling from "../../../helpers/setFontStyling";
+import isObj from "../../../utils/isObj";
 
 function Samples(store) {
 
   
   // Initial 
 
-  const samples = document.createElement('div');
+  const samples = document.createElement('section');
   samples.id = "samples";
   samples.className = "grid columns-2";
 
 
   // Appends
 
-  const primary = Sample("primary", "Primary");
-  const secondary = Sample("secondary", "Secondary");
+  const primary = Sample("primary");
+  const secondary = Sample("secondary");
 
-  samples.appendChild(primary);
-  samples.appendChild(secondary);
+  samples.appendChild(primary.template);
+  samples.appendChild(secondary.template);
 
 
   // Functions
@@ -34,23 +32,22 @@ function Samples(store) {
     const viewport = store.getData().viewport;
     const isTablet = viewport >= 768 ? true : false;
 
-    if(primaryFont.label !== primary.dataset.label || parseInt(primary.dataset.viewport) !== viewport) {
+    if(primaryFont.label !== primary.template.dataset.label || parseInt(primary.template.dataset.viewport) !== viewport) {
       updateFont(primaryFont, primary, "Primary", true);
     }
 
-    if(secondaryFont.label !== secondary.dataset.label || primaryFont.label !== secondary.dataset.primary || parseInt(secondary.dataset.viewport) !== viewport) {
+    if(secondaryFont.label !== secondary.template.dataset.label || primaryFont.label !== secondary.template.dataset.primary || parseInt(secondary.template.dataset.viewport) !== viewport) {
       updateFont(secondaryFont, secondary, "Secondary", !store.getData().lock);
     }
 
-    if(store.getData().lock.toString() !== secondary.dataset.lock) {
-      const sampleLock = queryByData(secondary, "sample-lock");
-      sampleLock.innerHTML = '';
+    if(store.getData().lock.toString() !== secondary.template.dataset.lock) {
+      secondary.lock.innerHTML = '';
 
       if(store.getData().lock) {
         sampleLock.appendChild(Icons("Lock"))
-        secondary.dataset.lock = "true";
+        secondary.template.dataset.lock = "true";
       } else {
-        secondary.dataset.lock = "false";
+        secondary.template.dataset.lock = "false";
       }
     }
 
@@ -64,91 +61,74 @@ function Samples(store) {
 
         // Update Lines
 
-        queryByData(sample, "sample-text-capline").style.verticalAlign = `${capHeight}rem`;
-        queryByData(sample, "sample-text-refline").style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
-        queryByData(sample, "sample-text-xline").style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
+        sample.capline.style.verticalAlign = `${capHeight}rem`;
+        sample.refline.style.verticalAlign = `${capHeight * font.xHeightPct}rem`;
+        sample.xline.style.verticalAlign = `${capHeight * primaryFont.xHeightPct}rem`;
         
-        if(sample.dataset.font === "primary") {
-          queryByData(sample, "sample-xheight").dataset.step = "0";
-        } else {
-          const difference = Math.round(Math.abs(secondaryFont.xHeightPct - primaryFont.xHeightPct) * 100);
-          queryByData(sample, "sample-xheight").dataset.step = difference > 10 ? "10" : `${difference}`;
+        if(header === "Primary") {
+          sample.xheightCircle.dataset.step = 0;
+        } else if (header === "Secondary") {
+          const difference = Math.round(Math.abs(primaryFont.xHeightPct - secondaryFont.xHeightPct) * 100);
+          sample.xheightCircle.dataset.step = (difference > 10) ? "10" : difference;
         }
 
         if(updateLabel) {
 
           // Label
-
-          const sampleHeader = queryByData(sample, "sample-header");
-          const labelText = queryByData(sample, "label-text");
-          const labelLeader = queryByData(sample, "label-leader");
       
-          sampleHeader.innerText = header;
-          labelText.innerText = font.label;
+          sample.header.innerText = header;
+          sample.label.innerText = font.label;
 
-          labelText.style.opacity = 0;
-          labelText.style.fontFamily = 'system-ui';
-          labelText.style.fontSize = `${labelSize}rem`;
-          labelText.style.lineHeight = `${labelSize * 1.33}rem`;
+          setFontStyling(sample.label, "system-ui", labelSize, labelSize * 1.33, "0");
+          setFontStyling(sample.labelLeader, "system-ui", labelSize * 1.33, labelSize * 1.33, "0");
+          setFontStyling(sample.text, "system-ui", sampleSize, sampleSize * 1.33, "0");
+          setFontStyling(sample.textLeader, "system-ui", sampleSize * 1.33, sampleSize * 1.33, "0");
 
-          labelLeader.style.fontFamily = 'system-ui';
-          labelLeader.style.opacity = 0;
-          labelLeader.style.fontSize = `${labelSize * 1.33}rem`;
-          labelLeader.style.lineHeight = `${labelSize * 1.33}rem`;
-
-
-          // Sample
-
-          const sampleText = queryByData(sample, "sample-text");
-          const sampleLeader = queryByData(sample, "sample-leader");
-
-          sampleText.style.fontFamily = 'system-ui';
-          sampleText.style.opacity = 0;
-          sampleText.style.fontSize = `${sampleSize}rem`;
-          sampleText.style.lineHeight = `${sampleSize * 1.33}rem`;
-
-          sampleLeader.style.fontFamily = 'system-ui';
-          sampleLeader.style.opacity = 0;
-          sampleLeader.style.fontSize = `${sampleSize * 1.33}rem`;
-          sampleLeader.style.lineHeight = `${sampleSize * 1.33}rem`;
-
-          queryAllByData(sample, "sample-text-abc").forEach((abc) => {
+          sample.abcs.forEach((abc) => {
             abc.innerText = getABC(viewport);
           });
 
+          sample.xHeightNumber.innerText = Math.round(font.xHeightPct * 100);
 
-          // Data
+          sample.xHeight.innerText = Math.round(font.xHeightPct * 100);
 
-          queryByData(sample, "sample-xheight-number").innerText = `${Math.round(font.xHeightPct * 100)}`;
+          sample.capHeight.innerText = Math.round(font.capHeightPct * 100);
+          
+          sample.getLink.href = font.link;
+          sample.getLink.dataset.umamiEvent = "Get Font";
+          sample.getLink.dataset.umamiEventDistribution = font.distribution;
+          sample.getLink.dataset.umamiEventFont = font.label;
+          sample.getLinkDistribution.innerHTML = `from ${font.distribution}`;
 
-          processFont(labelText, font, labelSize, font.bold, `${labelSize * 1.33}rem`);
-          processFont(sampleText, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
+          sample.template.dataset.label = font.label;
+          sample.template.dataset.primary = primaryFont.label;
+          sample.template.dataset.viewport = viewport;
 
-          queryByData(sample, "x-height").innerText = `${Math.round(font.xHeightPct * 100)}%`;
-          queryByData(sample, "cap-height").innerText = `${Math.round(font.capHeightPct * 100)}%`;
+          processFont(sample.label, font, labelSize, font.bold, `${labelSize * 1.33}rem`);
+          processFont(sample.text, font, sampleSize, font.regular, `${sampleSize * 1.33}rem`);
 
-
-          const getLink = queryByData(sample, "get-link");
-          getLink.href = font.link;
-          getLink.dataset.umamiEvent = "Get Font";
-          getLink.dataset.umamiEventDistribution = font.distribution;
-          getLink.dataset.umamiEventFont = font.label;
-
-          const getLinkDistribution = queryByData(sample, "get-link-distribution");
-          getLinkDistribution.innerHTML = `from ${font.distribution}`;
-
-          sample.dataset.label = font.label;
-          sample.dataset.primary = primaryFont.label;
-          sample.dataset.viewport = viewport;
           
         }
       }
     }
   }
-
   store.subscribe(updateSamples);
   updateSamples();
 
+
+  // Helper functions
+
+  function getABC(viewport) {
+    if (viewport >= 0 && viewport < 512) {
+      return "ABC abc"
+    } else if (viewport >= 512 && viewport < 840) {
+      return "ABCDE abcde";
+    } else if (viewport >= 840 && viewport <= 1024) {
+      return "ABCDEFG abcdefg";
+    } else {
+      return "ABCDE abcde";
+    }
+  }
 
   // Return
 

@@ -1,57 +1,24 @@
+import SidebarTemplate from "./SidebarTemplate";
+import Button from "../../Elements/Button";
+import ListItem from "../../Elements/ListItem";
+import Select from "../../Elements/Select";
 import findSecondary from "../../../helpers/findSecondary";
 import highlightActiveItem from "../../../helpers/highlightActiveItem";
 import sortPrimaryFonts from "../../../helpers/sortPrimaryFonts";
 import sortSecondaryFonts from "../../../helpers/sortSecondaryFonts";
 import isObj from "../../../utils/isObj";
 import queryAllByData from "../../../utils/queryAllByData";
-import queryByData from "../../../utils/queryByData";
-import Button from "../../Elements/Button";
-import ListItem from "../../Elements/ListItem";
-import Select from "../../Elements/Select";
+
 
 function Sidebar(store) {
 
-  const sidebar = document.createElement('aside');
-  sidebar.className = "aside bg-background";
-  sidebar.id = "sidebar";
 
-  /* html */
-  sidebar.innerHTML = `
-    <div class="scrollable-container stack-l">
-      <div class="stack-2xs focus-padding">
-        <div data-element="switch-wrapper" class="button-group">
-          <!-- Font Switch -->
-        </div>
-        <div class="with-sidebar align-center">
-          <div class="not-sidebar" data-element="swap-wrapper">
-            <!-- Swap Button -->
-          </div>
-          <div class="sidebar" data-element="sort-wrapper">
-            <!-- Pair Filter -->
-          </div>
-        </div>
-      </div>
-      <ul role="listbox" tabindex="-1" data-element="primary-list" class="scrollable focus-padding">
-        <!-- Pair List -->
-      </ul>
-      <ul role="listbox" tabindex="-1" data-element="secondary-list" class="scrollable focus-padding">
-        <!-- Pair List -->
-      </ul>
-    </div>
-  `
+  // Template
+
+  const sidebar = SidebarTemplate();
 
 
-  // Queries
-
-  const switchWrapper = queryByData(sidebar, "switch-wrapper");
-  const swapWrapper = queryByData(sidebar, "swap-wrapper");
-  const sortWrapper = queryByData(sidebar, "sort-wrapper");
-  const primaryList = queryByData(sidebar, "primary-list");
-  const secondaryList = queryByData(sidebar, "secondary-list");
-  const closeSidebar = queryByData(sidebar, "close-sidebar");
-
-
-  // Create Elements
+  // Elements
 
   const primaryButton = Button({
     label: "Primary",
@@ -81,9 +48,9 @@ function Sidebar(store) {
 
   // Appends
 
-  switchWrapper.appendChild(primaryButton);
-  switchWrapper.appendChild(secondaryButton);
-  swapWrapper.appendChild(swapButton);
+  sidebar.switchWrapper.appendChild(primaryButton);
+  sidebar.switchWrapper.appendChild(secondaryButton);
+  sidebar.swapWrapper.appendChild(swapButton);
 
 
   // Functions
@@ -94,30 +61,29 @@ function Sidebar(store) {
     primaryButton.tabIndex = 0;
     secondaryButton.classList.remove("active");
     secondaryButton.tabIndex = 0;
-    secondaryButton.classList.remove("unselectable");
-    primaryList.style.display = "none";
-    secondaryList.style.display = "none";
+    sidebar.primaryList.style.display = "none";
+    sidebar.secondaryList.style.display = "none";
     let options = [];
     let sort = "";
 
     if(value === "primary") {
       primaryButton.classList.add("active");
       primaryButton.tabIndex = -1;
-      primaryList.style.display = "block";
+      sidebar.primaryList.style.display = "block";
       options = ["A-Z", "Rating", "X-Height"];
       sort = store.getData().primarySort;
 
     } else if(value === "secondary") {
       secondaryButton.classList.add("active");
       secondaryButton.tabIndex = -1;
-      secondaryList.style.display = "block";
+      sidebar.secondaryList.style.display = "block";
       options = ["Match", "A-Z", "Rating"];
       sort = store.getData().secondarySort;
     }
 
-    sortWrapper.innerHTML = '';
+    sidebar.sortWrapper.innerHTML = '';
 
-    sortWrapper.appendChild(Select({
+    sidebar.sortWrapper.appendChild(Select({
       action: changeSort,
       hideLabel: true,
       label: `Sort fonts`,
@@ -126,12 +92,12 @@ function Sidebar(store) {
       value: sort
     }));
 
-    sortWrapper.dataset.target = value;
+    sidebar.sortWrapper.dataset.target = value;
 
     if(value === "primary") {
-      highlightActiveItem(primaryList, store.getData().primaryFont, true);
+      highlightActiveItem(sidebar.primaryList, store.getData().primaryFont, true);
     } else if(value === "secondary") {
-      highlightActiveItem(secondaryList, store.getData().secondaryFont, true, store.getData().lock);
+      highlightActiveItem(sidebar.secondaryList, store.getData().secondaryFont, true, store.getData().lock);
     }
     
   }
@@ -139,9 +105,9 @@ function Sidebar(store) {
   changeSidebar("primary");
 
   function changeSort(value) {
-    if(sortWrapper.dataset.target === "primary") {
+    if(sidebar.sortWrapper.dataset.target === "primary") {
       store.setData({primarySort: value});
-    } else if(sortWrapper.dataset.target === "secondary") {
+    } else if(sidebar.sortWrapper.dataset.target === "secondary") {
       store.setData({secondarySort: value});
     }
   }
@@ -169,10 +135,10 @@ function Sidebar(store) {
     const sort = store.getData().primarySort;
 
     if(isObj(primaryFont) && 
-      (primaryList.dataset.primary !== primaryFont.name || primaryList.dataset.sort !== sort)
+      (sidebar.primaryList.dataset.primary !== primaryFont.name || sidebar.primaryList.dataset.sort !== sort)
     ) {
 
-      primaryList.innerHTML = '';
+      sidebar.primaryList.innerHTML = '';
 
       const sortedFonts = sortPrimaryFonts({
         fonts: fonts,
@@ -180,20 +146,20 @@ function Sidebar(store) {
       });
 
       sortedFonts.map((font, index) => {
-        primaryList.appendChild(ListItem({
+        sidebar.primaryList.appendChild(ListItem({
           font: font,
           action: changePrimary,
           target: "primary"
         }));
       });
 
-      highlightActiveItem(primaryList, store.getData().primaryFont, true);
-      primaryList.dataset.sort = sort;
-      primaryList.dataset.primary = primaryFont.name;
+      highlightActiveItem(sidebar.primaryList, store.getData().primaryFont, true);
+      sidebar.primaryList.dataset.sort = sort;
+      sidebar.primaryList.dataset.primary = primaryFont.name;
 
       function changePrimary(font) {
 
-        primaryList.dataset.primary = font.name;
+        sidebar.primaryList.dataset.primary = font.name;
 
         store.setData({
           primaryFont: font,
@@ -201,7 +167,7 @@ function Sidebar(store) {
           secondarySort: store.getData().lock ? store.getData().secondarySort : "Match"
         });
 
-        highlightActiveItem(primaryList, store.getData().primaryFont, true);
+        highlightActiveItem(sidebar.primaryList, store.getData().primaryFont, true);
 
       }
     }
@@ -218,10 +184,10 @@ function Sidebar(store) {
     const sort = store.getData().secondarySort;
 
     if(isObj(primaryFont) &&
-      (secondaryList.dataset.primary !== primaryFont.name || secondaryList.dataset.sort !== sort) 
+      (sidebar.secondaryList.dataset.primary !== primaryFont.name || sidebar.secondaryList.dataset.sort !== sort) 
     ) {
 
-      secondaryList.innerHTML = '';
+      sidebar.secondaryList.innerHTML = '';
 
       const sortedFonts = sortSecondaryFonts({
         primary: primaryFont,
@@ -230,45 +196,38 @@ function Sidebar(store) {
       });
 
       sortedFonts.map((font, index) => {
-        secondaryList.appendChild(ListItem({
+        sidebar.secondaryList.appendChild(ListItem({
           font: font,
           action: changeSecondary,
           target: "secondary"
         }));
       });
 
-      secondaryList.dataset.primary = primaryFont.name;
-      secondaryList.dataset.sort = sort;
+      sidebar.secondaryList.dataset.primary = primaryFont.name;
+      sidebar.secondaryList.dataset.sort = sort;
 
       if(!isObj(store.getData().secondaryFont)) {
         const newSecondary = findSecondary(primaryFont, sortedFonts);
         store.setData({secondaryFont: newSecondary});
       }
 
-      highlightActiveItem(secondaryList, store.getData().secondaryFont, true, store.getData().lock);
+      highlightActiveItem(sidebar.secondaryList, store.getData().secondaryFont, true, store.getData().lock);
 
       function changeSecondary(font) {
-
         if(font === store.getData().secondaryFont) {
-
           const lock = !store.getData().lock;
-
-          highlightActiveItem(secondaryList, font, true, lock);
-
+          highlightActiveItem(sidebar.secondaryList, font, true, lock);
           store.setData({
             lock: lock
           });
 
         } else {
-
-          highlightActiveItem(secondaryList, font, true, false);
-
+          highlightActiveItem(sidebar.secondaryList, font, true, false);
           store.setData({
             secondaryFont: font,
             lock: false
           });
         }
-
       }
     }
   }
@@ -279,12 +238,12 @@ function Sidebar(store) {
 
   // Event Listeners
 
-  primaryList.addEventListener("keydown", (e) => {
-    keyboardNavigation(e, primaryList);
+  sidebar.primaryList.addEventListener("keydown", (e) => {
+    keyboardNavigation(e, sidebar.primaryList);
   });
 
-  secondaryList.addEventListener("keydown", (e) => {
-    keyboardNavigation(e, secondaryList);
+  sidebar.secondaryList.addEventListener("keydown", (e) => {
+    keyboardNavigation(e, sidebar.secondaryList);
   });
 
   function keyboardNavigation(e, list) {
@@ -317,7 +276,7 @@ function Sidebar(store) {
     }
   }
 
-  return sidebar;
+  return sidebar.template;
 
 }
 

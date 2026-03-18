@@ -1,48 +1,21 @@
+import HelpTemplate from "./HelpTemplate";
 import Button from "../../Elements/Button";
-import HelpContent from "./HelpContent";
 
 function Help(store) {
 
 
-  // Initial
+  // Template
 
-  const help = document.createElement('div');
-  help.className = "imposter-outer-container";
-  help.style.display = "none";
+  const help = HelpTemplate();
 
 
-  // Create Elements
+  // Elements
 
-  const close = Button({
+  help.hide.appendChild(Button({
     label: "Close",
     action: closeHelp,
     classes: "button slub secondary"
-  });
-
-
-  // Appends
-
-  const imposterContainer = document.createElement('div');
-  imposterContainer.className = "imposter-container";
-  help.appendChild(imposterContainer);
-
-  const imposter = document.createElement('div');
-  imposter.className = "imposter stack-xl";
-  imposterContainer.appendChild(imposter);
-
-  const helpContent = document.createElement('div');
-  helpContent.className = "stack";
-  helpContent.appendChild(HelpContent());
-  imposter.appendChild(helpContent);
-
-  const helpHide = document.createElement('div');
-  helpHide.className = "insulate";
-  helpHide.appendChild(close);
-  imposter.appendChild(helpHide);
-
-  const imposterOverlay = document.createElement('div');
-  imposterOverlay.className = "imposter-overlay";
-  help.appendChild(imposterOverlay);
+  }));
 
   
   // Functions
@@ -52,11 +25,11 @@ function Help(store) {
   }
   
   function updateHelp() {
-    if(help.style.display === "none" && store.getData().help === true) {
-      help.style.display = "block";
+    if(help.template.style.display === "none" && store.getData().help === true) {
+      help.template.style.display = "block";
       document.body.classList.add("help-lock");
-    } else if(help.style.display === "block" && store.getData().help === false) {
-      help.style.display = "none";
+    } else if(help.template.style.display === "block" && store.getData().help === false) {
+      help.template.style.display = "none";
       document.body.classList.remove("help-lock");
     }
   }
@@ -64,7 +37,7 @@ function Help(store) {
   store.subscribe(updateHelp);
 
 
-  return help;
+  return help.template;
 
 }
 

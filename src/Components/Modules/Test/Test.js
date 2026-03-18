@@ -1,6 +1,7 @@
+import TestTemplate from "./TestTemplate";
 import processFont from "../../../helpers/processFont";
+import setFontStyling from "../../../helpers/setFontStyling";
 import isObj from "../../../utils/isObj";
-import queryByData from "../../../utils/queryByData";
 
 function Test(store) {
 
@@ -9,53 +10,20 @@ function Test(store) {
 
   const test = document.createElement('div');
   test.id = "test";
-  test.className = "stack-xl";
+  test.className = "stack-l";
 
-  
-  /* html */
-  test.innerHTML = `
-    <h2 class="sr-only">Test Fonts</h2>
-    <div class="stack-l">
-      <div class="stack-2xs" data-element="test-title" class="unselectable test-title" data-font="primary" data-size="1.5" data-leading="lineMin" data-weight="bold">
-        <p>
-          ${store.getData().testTitle}
-        </p>
-        <ul class="cluster">
-          <li class="desktop-only">
-            <span class="slub tertiary-text secondary" data-element="font-name"></span>
-          </li>
-          <li class="">
-            <span class="slub tertiary-text tertiary">Font Size</span> <span class="accent-text accent-tertiary-text tertiary" data-element="font-size"></span>
-          </li>
-          <li class="">
-            <span class="slub tertiary-text tertiary">Line Height</span> <span class="accent-text accent-tertiary-text tertiary" data-element="font-leading"></span>
-          </li>
-        </ul>
-      </div>
-      <div class="stack-2xs" data-element="test-paragraph" class="unselectable test-paragraph" data-font="secondary" data-size="1" data-leading="lineMax" data-weight="regular">
-        <p>
-          ${store.getData().testText}
-        </p>
-        <ul class="cluster">
-          <li class="desktop-only">
-            <span class="slub tertiary-text secondary" data-element="font-name"></span>
-          </li>
-          <li class="">
-            <span class="slub tertiary-text tertiary">Font Size</span> <span class="accent-text accent-tertiary-text tertiary" data-element="font-size"></span>
-          </li>
-          <li class="">
-            <span class="slub tertiary-text tertiary">Line Height</span> <span class="accent-text accent-tertiary-text tertiary" data-element="font-leading"></span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  `;
+  const heading = document.createElement("h2");
+  heading.className = "sr-only";
+  test.appendChild(heading);
 
-  // Queries
+  const title = TestTemplate("title", "primary", "1.5", "lineMin", "bold");
+  const paragraph = TestTemplate("paragraph", "secondary", "1", "lineMax", "regular");
 
-  const title = queryByData(test, "test-title");
-  const paragraph = queryByData(test, "test-paragraph");
+  test.appendChild(title.template);
+  test.appendChild(paragraph.template);
 
+  title.text.innerText = store.getData().testTitle;
+  paragraph.text.innerText = store.getData().testText;
 
 
   function updateTest() {
@@ -65,13 +33,13 @@ function Test(store) {
     const viewport = store.getData().viewport;
     const isTablet = viewport >= 768 ? true : false;
 
-    if(primaryFont.label !== title.dataset.label || parseInt(title.dataset.viewport) !== viewport) {
+    if(primaryFont.label !== title.template.dataset.label || parseInt(title.template.dataset.viewport) !== viewport) {
       if(isObj(primaryFont)) {
         updateFont(primaryFont, title);
       }
     }
 
-    if(secondaryFont.label !== paragraph.dataset.label || parseInt(paragraph.dataset.viewport) !== viewport) {
+    if(secondaryFont.label !== paragraph.template.dataset.label || parseInt(paragraph.template.dataset.viewport) !== viewport) {
       if(isObj(secondaryFont)) {
         updateFont(secondaryFont, paragraph);
       }
@@ -79,18 +47,13 @@ function Test(store) {
 
     function updateFont(font, example) {
     
-      const remBase = isTablet ? example.dataset.size : parseFloat(example.dataset.size) * 0.875;
-      const paragraph = example.querySelector("p");
-  
-      paragraph.style.fontFamily = 'system-ui';
-      paragraph.style.opacity = 0;
-      paragraph.style.fontSize = `${remBase}rem`;
-      paragraph.style.lineHeight = font[example.dataset.leading];
+      const remBase = isTablet ? example.template.dataset.size : parseFloat(example.template.dataset.size) * 0.875;
 
-      processFont(paragraph, font, remBase, font[example.dataset.weight], font[example.dataset.leading]);
+      setFontStyling(example.text, 'system-ui', `${remBase}rem`, font[example.template.dataset.leading], "0");
+      processFont(example.text, font, remBase, font[example.template.dataset.weight], font[example.template.dataset.leading]);
 
-      example.dataset.label = font.label;
-      example.dataset.viewport = viewport;
+      example.template.dataset.label = font.label;
+      example.template.dataset.viewport = viewport;
 
       const adjustedFontSize = (Math.round(remBase * font.capHeightAdj * 16 * 2) / 2).toFixed(1).replace(/\.0$/, '');
       const pxBase = remBase * 16;
@@ -99,9 +62,9 @@ function Test(store) {
       fontSizeLabel.push(`${adjustedFontSize}px`);
       if(adjustedFontSize != pxBase) fontSizeLabel.push(`(${pxBase}px × ${font.capHeightAdj})`);
       
-      queryByData(example, "font-name").innerText = font.label;
-      queryByData(example, "font-size").innerText = fontSizeLabel.join(" ");
-      queryByData(example, "font-leading").innerText = `${font[example.dataset.leading]}`;
+      example.fontName.innerText = font.label;
+      example.fontSize.innerText = fontSizeLabel.join(" ");
+      example.fontLeading.innerText = `${font[example.template.dataset.leading]}`;
   
     }
   }

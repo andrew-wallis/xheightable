@@ -1,7 +1,3 @@
-function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
-}
-
 function createSampler() {
   let strings = [
     "The quick brown fox jumps over the lazy dog.",
@@ -44,6 +40,10 @@ function createSampler() {
     }
     return result.join(' ');
   };
+
+  function shuffleArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
 }
 
 const getSampleText = createSampler();

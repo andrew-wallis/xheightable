@@ -7,6 +7,7 @@ import Test from "./Components/Modules/Test/Test";
 import Button from "./Components/Elements/Button";
 import getSampleText from "./helpers/getSampleText";
 import getRandomIndex from "./utils/getRandomIndex";
+import AppTemplate from "./AppTemplate";
 
 
 function App({store}) {
@@ -28,35 +29,18 @@ function App({store}) {
   });
 
 
-  // Structure
+  // Template
 
-  const app = document.createElement('div');
-  app.className = "app-container";
+  const app = AppTemplate();
 
-  app.appendChild(Header(store));
 
-  const appContainer = document.createElement('div');
-  appContainer.classList = "center scrollable-container aside-container";
-  app.appendChild(appContainer);
-
-  const main = document.createElement('main');
-  main.classList = "main scrollable-container";
-  appContainer.appendChild(main);
-
-  const mainContent = document.createElement('div');
-  mainContent.classList = "stack-3xl wrap scrollable";
-  main.appendChild(mainContent);
-
-  mainContent.appendChild(Samples(store));
-  mainContent.appendChild(Test(store));
-  appContainer.appendChild(Sidebar(store));
-
-  app.appendChild(Footer(store));
-  app.appendChild(Help(store));
+  // Elements
 
   const asideButtonContainer = document.createElement('div');
   asideButtonContainer.classList = "aside-button bg-background";
-  app.append(asideButtonContainer);
+
+  const asideOverlay = document.createElement('div');
+  asideOverlay.classList = "aside-overlay";
 
   const asideButton = Button({
     label: "Change Fonts",
@@ -64,11 +48,18 @@ function App({store}) {
     action: toggleAside
   })
 
-  asideButtonContainer.appendChild(asideButton);
 
-  const asideOverlay = document.createElement('div');
-  asideOverlay.classList = "aside-overlay";
-  mainContent.appendChild(asideOverlay);
+  // Appends
+
+  app.template.prepend(Header(store));
+  app.main.appendChild(Samples(store));
+  app.main.appendChild(Test(store));
+  app.container.appendChild(Sidebar(store));
+  app.template.appendChild(Footer(store));
+  app.template.appendChild(Help(store));
+  app.template.append(asideButtonContainer);
+  asideButtonContainer.appendChild(asideButton);
+  app.main.appendChild(asideOverlay);
   
 
   // Sidebar Functions
@@ -93,16 +84,16 @@ function App({store}) {
 
   function updateAside() {
 
-    if(store.getData().open === true && !appContainer.classList.contains("is-sidebar-open")) {
+    if(store.getData().open === true && !app.container.classList.contains("is-sidebar-open")) {
       const viewport = store.getData().viewport;
       const isDesktop = viewport >= 1024 ? true : false;
-      appContainer.classList.add("is-sidebar-open");
+      app.container.classList.add("is-sidebar-open");
 
       if(!isDesktop) {
         document.body.classList.add('scroll-lock');
       }
-    } else if(store.getData().open === false && appContainer.classList.contains("is-sidebar-open")) {
-      appContainer.classList.remove("is-sidebar-open");
+    } else if(store.getData().open === false && app.container.classList.contains("is-sidebar-open")) {
+      app.container.classList.remove("is-sidebar-open");
       document.body.classList.remove('scroll-lock');
     }
   }
@@ -119,8 +110,6 @@ function App({store}) {
     const getSidebar = document.getElementById("sidebar");
 
     const top = getHeight(getHeader) + getHeight(getSamples);
-
-    console.log(window.innerHeight, top);
 
     if ((window.innerHeight) - top > 448) {
       getSidebar.style.top = `calc(${top}px + 5rem)`;
@@ -157,7 +146,7 @@ function App({store}) {
 
   window.addEventListener("resize", debouncedUpdateViewports);
 
-  return app;
+  return app.template;
 
 }
 
